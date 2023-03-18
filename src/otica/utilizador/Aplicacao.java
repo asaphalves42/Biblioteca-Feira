@@ -1,4 +1,4 @@
-package classes.de.controle;
+package otica.utilizador;
 
 public class Aplicacao {
     public void Iniciar(){
