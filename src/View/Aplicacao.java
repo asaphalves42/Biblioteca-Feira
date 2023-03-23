@@ -1,9 +1,14 @@
 package View;
 
+import Controller.GestorLivros;
+import Model.Livro;
+
 import java.util.Scanner;
+
 
 public class Aplicacao {
     Scanner ler = new Scanner(System.in);
+
 
     public void Iniciar() {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
@@ -132,6 +137,41 @@ public class Aplicacao {
 
 
     }
+
+    /*
+
+    Gestor de livros
+
+    */
+
+    public void menuAdicionar(){
+        String titulo;
+        System.out.println("Digite o título do livro: ");
+        titulo = ler.nextLine();
+
+        String subtitulo;
+        System.out.println("Digite o subtítulo do livro: ");
+        subtitulo = ler.nextLine();
+
+
+
+
+
+
+
+
+
+
+        GestorLivros gestor = new GestorLivros();
+        gestor.adicionarLivros(titulo, subtitulo);
+    }
+
+
+
+
+
+
+
 
     public void menuAutores() {
         int opcao;
