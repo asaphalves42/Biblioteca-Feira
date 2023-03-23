@@ -1,4 +1,4 @@
-package classes.de.model;
+package Model;
 
 import java.util.Date;
 
@@ -11,12 +11,13 @@ public class Livro {
     private String faixaEtaria;
     private String editora;
     private String ISBN;
+    private String autor;
 
     public Livro(){
 
     }
 
-    public Livro(String titulo, String subtitulo, int numDePaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+    public Livro(String titulo, String subtitulo, int numDePaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN, String autor) {
         this.titulo = titulo;
         this.subtitulo = subtitulo;
         this.numDePaginas = numDePaginas;
@@ -25,6 +26,7 @@ public class Livro {
         this.faixaEtaria = faixaEtaria;
         this.editora = editora;
         this.ISBN = ISBN;
+        this.autor=autor;
     }
 
     public String getTitulo() {
@@ -89,5 +91,11 @@ public class Livro {
 
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
+    }
+    public String getAutor() {
+        return autor;
+    }
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 }

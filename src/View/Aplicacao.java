@@ -1,4 +1,4 @@
-package otica.utilizador;
+package View;
 
 import java.util.Scanner;
 
@@ -44,18 +44,21 @@ public class Aplicacao {
             System.out.println("1 - Livros");
             System.out.println("2 - Autores");
             System.out.println("3 - Reservas");
-            System.out.println("4 - Fechar");
+            System.out.println("4 - Sócios");
+            System.out.println("5 - Fechar");
 
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1://crud livros
+                case 1:menuLivros();
                     break;
-                case 2://crud autores
+                case 2:menuAutores();
                     break;
-                case 3://crud reservas
+                case 3:menuReservas();
                     break;
-                case 4://fechar/guardar ficheiros
+                case 4:menuSocios();
+                    break;
+                case 5://fechar/guardar ficheiros
             }
 
         } while (opcao != 4);
@@ -72,6 +75,42 @@ public class Aplicacao {
             System.out.println("2 - Listar livros");
             System.out.println("3 - Editar livros");
             System.out.println("4 - Remover livros");
+            System.out.println("5 - Pesquisar livros");
+            System.out.println("6 - Menu anterior");
+
+            opcao = ler.nextInt();
+
+            switch (opcao) {
+                case 1://Adicionar livros
+                    break;
+                case 2://listar livros
+                    break;
+                case 3://Editar livros
+                    break;
+                case 4://Remover livros
+                    break;
+                case 5:menuLivros2();
+                    break;
+                case 6://sair
+                    break;
+            }
+
+        } while (opcao != 5);
+
+    }
+
+    public void menuLivros2(){
+
+        int opcao;
+
+        do {
+
+            System.out.println("## Pesquisar livros por: ##");
+            System.out.println("---------------");
+            System.out.println("1 - Autor");
+            System.out.println("2 - Título");
+            System.out.println("3 - ISBN");
+            System.out.println("4 - Categoria");
             System.out.println("5 - Menu anterior");
 
             opcao = ler.nextInt();
@@ -90,6 +129,7 @@ public class Aplicacao {
             }
 
         } while (opcao != 5);
+
 
     }
 
@@ -136,7 +176,8 @@ public class Aplicacao {
             System.out.println("2 - Devolucao");
             System.out.println("3 - Listar reservas");
             System.out.println("4 - Cancelar reservas");
-            System.out.println("5 - Menu anterior");
+            System.out.println("5 - Editar reserva");
+            System.out.println("6 - Menu anterior");
 
             opcao = ler.nextInt();
 
@@ -149,7 +190,9 @@ public class Aplicacao {
                     break;
                 case 4://cancelar
                     break;
-                case 5://sair
+                case 5://editar reserva
+                    break;
+                case 6://sair
                     break;
             }
 
@@ -175,7 +218,7 @@ public class Aplicacao {
             switch (opcao) {
                 case 1://Adicionar socio
                     break;
-                case 2://Listar socios
+                case 2://Listar socios * mostrar livros reservados pelo sócio
                     break;
                 case 3://Editar socios
                     break;

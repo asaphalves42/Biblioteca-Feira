@@ -1,6 +1,6 @@
 package Main;
 
-import otica.utilizador.Aplicacao;
+import View.Aplicacao;
 
 public class MainRunner {
 
