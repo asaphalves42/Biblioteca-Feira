@@ -1,4 +1,4 @@
-package classes.de.model;
+package Main;
 
 import otica.utilizador.Aplicacao;
 
