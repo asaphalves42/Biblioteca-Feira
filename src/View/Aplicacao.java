@@ -3,17 +3,22 @@ package View;
 import Controller.GestorLivros;
 import Model.Livro;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Scanner;
 
 
 public class Aplicacao {
     Scanner ler = new Scanner(System.in);
+    GestorLivros gestor = new GestorLivros();
 
 
     public void Iniciar() {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
-        mensagemUtilizadorParaRegisto();
+        menuPrincipal();
 
     }
 
@@ -54,14 +59,19 @@ public class Aplicacao {
 
             opcao = ler.nextInt();
 
+
             switch (opcao) {
-                case 1:menuLivros();
+                case 1:
+                    menuLivros();
                     break;
-                case 2:menuAutores();
+                case 2:
+                    menuAutores();
                     break;
-                case 3:menuReservas();
+                case 3:
+                    menuReservas();
                     break;
-                case 4:menuSocios();
+                case 4:
+                    menuSocios();
                     break;
                 case 5://fechar/guardar ficheiros
             }
@@ -69,13 +79,19 @@ public class Aplicacao {
         } while (opcao != 4);
     }
 
+    /*
+
+    Gestor de livros
+
+    */
+
     public void menuLivros() {
         int opcao;
 
         do {
 
             System.out.println("## Livros ##");
-            System.out.println("---------------");
+            System.out.println("------------------------");
             System.out.println("1 - Adicionar livros");
             System.out.println("2 - Listar livros");
             System.out.println("3 - Editar livros");
@@ -84,17 +100,21 @@ public class Aplicacao {
             System.out.println("6 - Menu anterior");
 
             opcao = ler.nextInt();
+            ler.nextLine();
 
             switch (opcao) {
-                case 1://Adicionar livros
+                case 1:
+                    menuAdicionar();
                     break;
-                case 2://listar livros
+                case 2:
+                    listarTodosOsLivros();
                     break;
                 case 3://Editar livros
                     break;
-                case 4://Remover livros
+                case 4:eliminarLivroPorTitulo();
                     break;
-                case 5:menuLivros2();
+                case 5:
+                    menuLivros2();
                     break;
                 case 6://sair
                     break;
@@ -104,7 +124,7 @@ public class Aplicacao {
 
     }
 
-    public void menuLivros2(){
+    public void menuLivros2() {
 
         int opcao;
 
@@ -121,13 +141,13 @@ public class Aplicacao {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1://Adicionar livros
+                case 1://autor
                     break;
-                case 2://listar livros
+                case 2://titulo
                     break;
-                case 3://Editar livros
+                case 3://isbn
                     break;
-                case 4://Remover livros
+                case 4://categoria
                     break;
                 case 5://sair
                     break;
@@ -138,13 +158,8 @@ public class Aplicacao {
 
     }
 
-    /*
+    public void menuAdicionar() {
 
-    Gestor de livros
-
-    */
-
-    public void menuAdicionar(){
         String titulo;
         System.out.println("Digite o título do livro: ");
         titulo = ler.nextLine();
@@ -153,25 +168,54 @@ public class Aplicacao {
         System.out.println("Digite o subtítulo do livro: ");
         subtitulo = ler.nextLine();
 
+        String autor;
+        System.out.println("Digite o autor do livro: ");
+        autor = ler.nextLine();
 
+        int numPaginas;
+        System.out.println("Digite o numero de paginas do livro: ");
+        numPaginas = ler.nextInt();
+        ler.nextLine();
 
+        String categoria;
+        System.out.println("Digite a categoria do livro: ");
+        categoria = ler.nextLine();
 
+        System.out.println("Digite a data de publicação do livro: ");
+        Date dataPublicacao = LerData();
 
+        String faixaEtaria;
+        System.out.println("Digite a faixa etária do livro: ");
+        faixaEtaria = ler.nextLine();
 
+        String editora;
+        System.out.println("Digite a editora do livro: ");
+        editora = ler.nextLine();
 
+        String ISBN;
+        System.out.println("Digite o ISBN do livro: ");
+        ISBN = ler.nextLine();
 
+        System.out.println("Livro adicionado com sucesso!");
+        System.out.println(" ");
 
+        gestor.adicionarLivros(titulo, subtitulo, autor, numPaginas, categoria, dataPublicacao, faixaEtaria, editora, ISBN);
 
-        GestorLivros gestor = new GestorLivros();
-        gestor.adicionarLivros(titulo, subtitulo);
     }
 
+    public void listarTodosOsLivros() {
+        gestor.listarLivros();
+    }
 
+    public void eliminarLivroPorTitulo(){
+        
+        String tituloLivro;
+        System.out.println("Insira o título do livro: ");
+        tituloLivro = ler.nextLine();
 
+        gestor.removerLivros(tituloLivro);
 
-
-
-
+    }
 
     public void menuAutores() {
         int opcao;
@@ -179,7 +223,7 @@ public class Aplicacao {
         do {
 
             System.out.println("## Autores ##");
-            System.out.println("---------------");
+            System.out.println("------------------------");
             System.out.println("1 - Adicionar autores");
             System.out.println("2 - Listar autores");
             System.out.println("3 - Editar autores");
@@ -272,5 +316,21 @@ public class Aplicacao {
 
     }
 
+    //Metodo retirado da internet para ler datas https://stackoverflow.com/questions/27580655/how-to-set-a-date-as-input-in-java
+    private Date LerData() {
+        String date = ler.next();
+        ler.nextLine();
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date2 = null;
+        try {
+            //Parsing the String
+            date2 = dateFormat.parse(date);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return (date2);
+
+    }
 }

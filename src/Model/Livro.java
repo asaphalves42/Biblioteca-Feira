@@ -1,5 +1,6 @@
 package Model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Livro {
@@ -17,7 +18,7 @@ public class Livro {
 
     }
 
-    public Livro(String titulo, String subtitulo, int numDePaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN, String autor) {
+    public Livro(String titulo, String subtitulo,String autor, int numDePaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
         this.titulo = titulo;
         this.subtitulo = subtitulo;
         this.numDePaginas = numDePaginas;
@@ -97,5 +98,22 @@ public class Livro {
     }
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    @Override
+    public String toString() {
+        return "Livros [ " + "\n" +
+        "Título: " + titulo + "\n" +
+                "Subtitulo: " + subtitulo + "\n" +
+                "Autor: " + autor + "\n" +
+                "Número de páginas: " + numDePaginas + "\n" +
+                "Categoria: " + categoria + "\n" +
+                "Data de publicacao: " + dataDePublicacao + "\n" +
+                "Faixa etaria: " + faixaEtaria + "\n" +
+                "Editora: " + editora + "\n" +
+                "ISBN: " + ISBN + "\n" +
+                " " +
+                "-----------------------------------------------------";
+
     }
 }
