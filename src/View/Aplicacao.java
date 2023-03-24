@@ -1,6 +1,7 @@
 package View;
 
 import Controller.GestorLivros;
+import Controller.LerFicheiros;
 import Model.Livro;
 
 import java.text.ParseException;
@@ -15,10 +16,12 @@ public class Aplicacao {
     GestorLivros gestor = new GestorLivros();
 
 
+
     public void Iniciar() {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         menuPrincipal();
+        LerFicheiros.LerFicheiros();
 
     }
 
@@ -143,7 +146,7 @@ public class Aplicacao {
             switch (opcao) {
                 case 1://autor
                     break;
-                case 2://titulo
+                case 2:livroPorTitulo();
                     break;
                 case 3://isbn
                     break;
@@ -216,6 +219,16 @@ public class Aplicacao {
         gestor.removerLivros(tituloLivro);
 
     }
+
+    public void livroPorTitulo(){
+        String tituloInserido;
+        System.out.println("Insira o titulo do livro que queres pesquisar: ");
+        tituloInserido = ler.nextLine();
+
+        gestor.pesquisarLivroPorTitulo(tituloInserido);
+
+    }
+
 
     public void menuAutores() {
         int opcao;

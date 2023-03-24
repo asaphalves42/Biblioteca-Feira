@@ -27,6 +27,7 @@ public class GestorLivros {
     public void listarLivros(){
         if(livros.isEmpty()){
             System.out.println("Não existem livros registados");
+            System.out.println(" ");
         } else {
             for(Livro livro : livros){
                 System.out.println(livro);
@@ -43,6 +44,29 @@ public class GestorLivros {
         }
         return null;
     }
+
+    public int ContagemLivros(String numero) {
+        int contagem = 0;
+        for (Livro livro : livros) {
+            if (numero.equals(livro.getTitulo())) {
+                contagem = contagem + 1;
+            }
+        }
+        return contagem;
+    }
+
+    public void pesquisarLivroPorTitulo(String tituloInserido) {
+    for(Livro livro : livros){
+        if(tituloInserido.equalsIgnoreCase(livro.getTitulo())){
+            System.out.println(livro);
+        }else{
+            System.out.println("Nao foram encontrados livros com esse titulo!");
+        }
+    }
+    }
+
+
+
 
     public void removerLivros(String tituloLivro) {
         try {
