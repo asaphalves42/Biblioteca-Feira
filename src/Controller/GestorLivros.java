@@ -56,16 +56,14 @@ public class GestorLivros {
     }
 
     public void pesquisarLivroPorTitulo(String tituloInserido) {
-    for(Livro livro : livros){
-        if(tituloInserido.equalsIgnoreCase(livro.getTitulo())){
-            System.out.println(livro);
-        }else{
-            System.out.println("Nao foram encontrados livros com esse titulo!");
+        for (Livro livro : livros) {
+            if (tituloInserido.equalsIgnoreCase(livro.getTitulo())) {
+                System.out.println(livro);
+            } else {
+                System.out.println("Nao foram encontrados livros com esse titulo!");
+            }
         }
     }
-    }
-
-
 
 
     public void removerLivros(String tituloLivro) {
