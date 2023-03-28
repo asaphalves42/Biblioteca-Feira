@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.jar.JarOutputStream;
+import Utilidades.Leitura;
 
+import static Utilidades.Leitura.*;
 
 public class Aplicacao {
-    Scanner ler = new Scanner(System.in);
+
     ControllerLivros gestor = new ControllerLivros();
-
-
 
     public void Iniciar() {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
@@ -163,22 +163,13 @@ public class Aplicacao {
 
     public void menuAdicionar() {
 
-        String titulo;
-        System.out.println("Digite o título do livro: ");
-        titulo = ler.nextLine();
+        String titulo = leStr("Digite o título do livro:");
 
-        String subtitulo;
-        System.out.println("Digite o subtítulo do livro: ");
-        subtitulo = ler.nextLine();
+        String subtitulo = leStr("Digite o subtitulo do livro:");
 
-        String autor;
-        System.out.println("Digite o autor do livro: ");
-        autor = ler.nextLine();
+        String autor = leStr("Digite o autor do livro: ");
 
-        int numPaginas;
-        System.out.println("Digite o numero de paginas do livro: ");
-        numPaginas = ler.nextInt();
-        ler.nextLine();
+        int numPaginas = LeInt("Digite o numero de paginas do livro: ");
 
         String categoria;
         System.out.println("Digite a categoria do livro: ");
@@ -207,6 +198,7 @@ public class Aplicacao {
     }
 
     public void listarTodosOsLivros() {
+
         gestor.listarLivros();
     }
 
@@ -216,15 +208,18 @@ public class Aplicacao {
         System.out.println("Insira o título do livro: ");
         tituloLivro = ler.nextLine();
 
+        System.out.println("Foram encontrados esses livros com esse título:");
+
+
         gestor.removerLivros(tituloLivro);
 
     }
 
     public void livroPorTitulo(){
+
         String tituloInserido;
         System.out.println("Insira o titulo do livro que queres pesquisar: ");
         tituloInserido = ler.next();
-
 
         System.out.println(gestor.pesquisarLivroPorTitulo(tituloInserido));
 

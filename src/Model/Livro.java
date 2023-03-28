@@ -112,6 +112,7 @@ public class Livro {
                 "Faixa etaria: " + faixaEtaria + "\n" +
                 "Editora: " + editora + "\n" +
                 "ISBN: " + ISBN + "\n" +
+                "]" +
                 " " +
                 "-----------------------------------------------------";
 
