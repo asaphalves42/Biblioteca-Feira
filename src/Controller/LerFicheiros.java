@@ -15,7 +15,8 @@ import java.util.Scanner;
 
 public class LerFicheiros {
     static String pastaFicheiros = "C:\\aplicacao\\biblioteca";
-            public static void LerFicheiros() {
+
+    public static void lerFicheiros() {
             // criar uma pasta -->
             // https://www.guj.com.br/t/criando-arquivos-e-diretorios/42487/2
             File file = new File(pastaFicheiros);
@@ -27,7 +28,7 @@ public class LerFicheiros {
             // o catch mais abaixo
             try {
                 // 1. Ler o ficheiro equipas que esta na pasta
-                Scanner scanner = new Scanner(new FileReader(pastaFicheiros + "\\LivrosBiblioteca.txt")).useDelimiter("\n");
+                Scanner scanner = new Scanner(new FileReader(pastaFicheiros + "\\LivrosBiblioteca.txt"));
                 while (scanner.hasNext()) {
 
                     // 1.1 Após lido a linha vou dividir o texto pelo separador |
@@ -54,6 +55,7 @@ public class LerFicheiros {
                 System.out.println("Ocorreu um erro a ler ficheiro. \n" + ex.getMessage());
             }
         }
+
 }
 
 

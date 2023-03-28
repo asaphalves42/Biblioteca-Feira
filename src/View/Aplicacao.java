@@ -1,19 +1,19 @@
 package View;
 
-import Controller.GestorLivros;
+import Controller.ControllerLivros;
 import Controller.LerFicheiros;
-import Model.Livro;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.jar.JarOutputStream;
 
 
 public class Aplicacao {
     Scanner ler = new Scanner(System.in);
-    GestorLivros gestor = new GestorLivros();
+    ControllerLivros gestor = new ControllerLivros();
 
 
 
@@ -21,7 +21,7 @@ public class Aplicacao {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         menuPrincipal();
-        LerFicheiros.LerFicheiros();
+        LerFicheiros.lerFicheiros();
 
     }
 
@@ -223,9 +223,10 @@ public class Aplicacao {
     public void livroPorTitulo(){
         String tituloInserido;
         System.out.println("Insira o titulo do livro que queres pesquisar: ");
-        tituloInserido = ler.nextLine();
+        tituloInserido = ler.next();
 
-        gestor.pesquisarLivroPorTitulo(tituloInserido);
+
+        System.out.println(gestor.pesquisarLivroPorTitulo(tituloInserido));
 
     }
 

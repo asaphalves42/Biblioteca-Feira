@@ -5,7 +5,7 @@ import Model.Livro;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class GestorLivros {
+public class ControllerLivros {
     ArrayList<Livro> livros = new ArrayList<>();
     Livro livro = new Livro();
     public void adicionarLivros(String titulo, String subTitulo, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN){
@@ -55,14 +55,14 @@ public class GestorLivros {
         return contagem;
     }
 
-    public void pesquisarLivroPorTitulo(String tituloInserido) {
+    public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloInserido) {
+        ArrayList<Livro> livrosTitulo = new ArrayList<Livro>();
         for (Livro livro : livros) {
             if (tituloInserido.equalsIgnoreCase(livro.getTitulo())) {
-                System.out.println(livro);
-            } else {
-                System.out.println("Nao foram encontrados livros com esse titulo!");
+                livrosTitulo.add(livro);
             }
         }
+        return livrosTitulo;
     }
 
 
