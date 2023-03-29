@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.jar.JarOutputStream;
+
+import Model.Livro;
 import Utilidades.Leitura;
 
 import static Utilidades.Leitura.*;
 
 public class Aplicacao {
 
-    ControllerLivros gestor = new ControllerLivros();
 
     public void Iniciar() {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
@@ -65,16 +66,16 @@ public class Aplicacao {
 
             switch (opcao) {
                 case 1:
-                    menuLivros();
+                    //menuLivros();
                     break;
                 case 2:
-                    menuAutores();
+                    //menuAutores();
                     break;
                 case 3:
-                    menuReservas();
+                    //menuReservas();
                     break;
                 case 4:
-                    menuSocios();
+                    //menuSocios();
                     break;
                 case 5://fechar/guardar ficheiros
             }
@@ -82,256 +83,5 @@ public class Aplicacao {
         } while (opcao != 4);
     }
 
-    /*
 
-    Gestor de livros
-
-    */
-
-    public void menuLivros() {
-        int opcao;
-
-        do {
-
-            System.out.println("## Livros ##");
-            System.out.println("------------------------");
-            System.out.println("1 - Adicionar livros");
-            System.out.println("2 - Listar livros");
-            System.out.println("3 - Editar livros");
-            System.out.println("4 - Remover livros");
-            System.out.println("5 - Pesquisar livros");
-            System.out.println("6 - Menu anterior");
-
-            opcao = ler.nextInt();
-            ler.nextLine();
-
-            switch (opcao) {
-                case 1:
-                    menuAdicionar();
-                    break;
-                case 2:
-                    listarTodosOsLivros();
-                    break;
-                case 3://Editar livros
-                    break;
-                case 4:eliminarLivroPorTitulo();
-                    break;
-                case 5:
-                    menuLivros2();
-                    break;
-                case 6://sair
-                    break;
-            }
-
-        } while (opcao != 5);
-
-    }
-
-    public void menuLivros2() {
-
-        int opcao;
-
-        do {
-
-            System.out.println("## Pesquisar livros por: ##");
-            System.out.println("---------------");
-            System.out.println("1 - Autor");
-            System.out.println("2 - Título");
-            System.out.println("3 - ISBN");
-            System.out.println("4 - Categoria");
-            System.out.println("5 - Menu anterior");
-
-            opcao = ler.nextInt();
-
-            switch (opcao) {
-                case 1://autor
-                    break;
-                case 2:livroPorTitulo();
-                    break;
-                case 3://isbn
-                    break;
-                case 4://categoria
-                    break;
-                case 5://sair
-                    break;
-            }
-
-        } while (opcao != 5);
-
-
-    }
-
-    public void menuAdicionar() {
-
-        String titulo = leStr("Digite o título do livro:");
-
-        String subtitulo = leStr("Digite o subtitulo do livro:");
-
-        String autor = leStr("Digite o autor do livro: ");
-
-        int numPaginas = LeInt("Digite o numero de paginas do livro: ");
-
-        String categoria = leStr("Digite a categoria do livro: ");
-
-        System.out.println("Digite a data de publicação do livro: ");
-        Date dataPublicacao = LerData();
-
-        String faixaEtaria = leStr("Digite a faixa etária do livro: ");
-
-        String editora = leStr("Digite a editora do livro: ");
-
-        String ISBN = leStr("Digite o ISBN do livro: ");
-
-        System.out.println("Livro adicionado com sucesso!");
-        System.out.println(" ");
-
-        gestor.adicionarLivros(titulo, subtitulo, autor, numPaginas, categoria, dataPublicacao, faixaEtaria, editora, ISBN);
-
-    }
-
-    public void listarTodosOsLivros() {
-
-        gestor.listarLivros();
-
-
-    }
-
-    public void eliminarLivroPorTitulo(){
-        
-        String tituloLivro;
-        System.out.println("Insira o título do livro: ");
-        tituloLivro = ler.nextLine();
-
-        System.out.println("Foram encontrados esses livros com esse título:");
-
-
-        gestor.removerLivros(tituloLivro);
-
-    }
-
-    public void livroPorTitulo(){
-
-        String tituloInserido = leStr("Insira o título do livro:");
-
-        System.out.println(gestor.pesquisarLivroPorTitulo(tituloInserido));
-
-    }
-
-
-    public void menuAutores() {
-        int opcao;
-
-        do {
-
-            System.out.println("## Autores ##");
-            System.out.println("------------------------");
-            System.out.println("1 - Adicionar autores");
-            System.out.println("2 - Listar autores");
-            System.out.println("3 - Editar autores");
-            System.out.println("4 - Remover autores");
-            System.out.println("5 - Menu anterior");
-
-            opcao = ler.nextInt();
-
-            switch (opcao) {
-                case 1://Adicionar autores
-                    break;
-                case 2://listar autores
-                    break;
-                case 3://Editar autores
-                    break;
-                case 4://Remover autores
-                    break;
-                case 5://sair
-                    break;
-            }
-
-        } while (opcao != 5);
-
-    }
-
-    public void menuReservas() {
-        int opcao;
-
-        do {
-
-            System.out.println("## Reservas ##");
-            System.out.println("---------------");
-            System.out.println("1 - Fazer reserva");
-            System.out.println("2 - Devolucao");
-            System.out.println("3 - Listar reservas");
-            System.out.println("4 - Cancelar reservas");
-            System.out.println("5 - Editar reserva");
-            System.out.println("6 - Menu anterior");
-
-            opcao = ler.nextInt();
-
-            switch (opcao) {
-                case 1://fazer reserva
-                    break;
-                case 2://devolver
-                    break;
-                case 3://listar reservas
-                    break;
-                case 4://cancelar
-                    break;
-                case 5://editar reserva
-                    break;
-                case 6://sair
-                    break;
-            }
-
-        } while (opcao != 5);
-
-    }
-
-    public void menuSocios() {
-        int opcao;
-
-        do {
-
-            System.out.println("## Sócios ##");
-            System.out.println("---------------");
-            System.out.println("1 - Adicionar socio");
-            System.out.println("2 - Listar socios");
-            System.out.println("3 - Editar socios");
-            System.out.println("4 - Remover socios");
-            System.out.println("5 - Menu anterior");
-
-            opcao = ler.nextInt();
-
-            switch (opcao) {
-                case 1://Adicionar socio
-                    break;
-                case 2://Listar socios * mostrar livros reservados pelo sócio
-                    break;
-                case 3://Editar socios
-                    break;
-                case 4://Remover socios
-                    break;
-                case 5://sair
-                    break;
-            }
-
-        } while (opcao != 5);
-
-    }
-
-    //Metodo retirado da internet para ler datas https://stackoverflow.com/questions/27580655/how-to-set-a-date-as-input-in-java
-    private Date LerData() {
-        String date = ler.next();
-        ler.nextLine();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date2 = null;
-        try {
-            //Parsing the String
-            date2 = dateFormat.parse(date);
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return (date2);
-
-    }
 }

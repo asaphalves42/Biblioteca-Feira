@@ -25,11 +25,9 @@ public class ControllerLivros {
 
     }
 
-    public boolean listarLivros() {
-        if (livros.isEmpty()) {
-            return false;
-        }
-        return true;
+    public ArrayList<Livro> listarLivros() {
+
+        return this.livros;
 
     }
 
@@ -65,8 +63,9 @@ public class ControllerLivros {
         }*/
         return false;
 
-
     }
+
+
 }
 
 

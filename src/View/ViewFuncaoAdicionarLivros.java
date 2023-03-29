@@ -1,0 +1,41 @@
+package View;
+
+import Controller.ControllerLivros;
+
+import java.util.Date;
+
+import static Utilidades.Leitura.*;
+import static Utilidades.Leitura.ler;
+
+public class ViewFuncaoAdicionarLivros {
+
+    ControllerLivros gestor = new ControllerLivros();
+    public void menuAdicionarLivros() {
+
+        String titulo = leStr("Digite o título do livro:");
+
+        String subtitulo = leStr("Digite o subtitulo do livro:");
+
+        String autor = leStr("Digite o autor do livro: ");
+
+        int numPaginas = LeInt("Digite o numero de paginas do livro: ");
+
+        String categoria = leStr("Digite a categoria do livro: ");
+
+        System.out.println("Digite a data de publicação do livro: ");
+        String date = ler.next();
+        ler.nextLine();
+
+        String faixaEtaria = leStr("Digite a faixa etária do livro: ");
+
+        String editora = leStr("Digite a editora do livro: ");
+
+        String ISBN = leStr("Digite o ISBN do livro: ");
+
+        System.out.println("Livro adicionado com sucesso!");
+        System.out.println(" ");
+
+        gestor.adicionarLivros(titulo, subtitulo, autor, numPaginas, categoria, date, faixaEtaria, editora, ISBN);
+
+    }
+}

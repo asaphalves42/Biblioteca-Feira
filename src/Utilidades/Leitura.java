@@ -1,4 +1,7 @@
 package Utilidades;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Leitura {
@@ -14,6 +17,7 @@ public class Leitura {
             ler = new Scanner(System.in);
             return ler.nextLine();
         }
+
 
     }
 
