@@ -171,24 +171,16 @@ public class Aplicacao {
 
         int numPaginas = LeInt("Digite o numero de paginas do livro: ");
 
-        String categoria;
-        System.out.println("Digite a categoria do livro: ");
-        categoria = ler.nextLine();
+        String categoria = leStr("Digite a categoria do livro: ");
 
         System.out.println("Digite a data de publicação do livro: ");
         Date dataPublicacao = LerData();
 
-        String faixaEtaria;
-        System.out.println("Digite a faixa etária do livro: ");
-        faixaEtaria = ler.nextLine();
+        String faixaEtaria = leStr("Digite a faixa etária do livro: ");
 
-        String editora;
-        System.out.println("Digite a editora do livro: ");
-        editora = ler.nextLine();
+        String editora = leStr("Digite a editora do livro: ");
 
-        String ISBN;
-        System.out.println("Digite o ISBN do livro: ");
-        ISBN = ler.nextLine();
+        String ISBN = leStr("Digite o ISBN do livro: ");
 
         System.out.println("Livro adicionado com sucesso!");
         System.out.println(" ");
@@ -200,6 +192,8 @@ public class Aplicacao {
     public void listarTodosOsLivros() {
 
         gestor.listarLivros();
+
+
     }
 
     public void eliminarLivroPorTitulo(){
@@ -217,9 +211,7 @@ public class Aplicacao {
 
     public void livroPorTitulo(){
 
-        String tituloInserido;
-        System.out.println("Insira o titulo do livro que queres pesquisar: ");
-        tituloInserido = ler.next();
+        String tituloInserido = leStr("Insira o título do livro:");
 
         System.out.println(gestor.pesquisarLivroPorTitulo(tituloInserido));
 

@@ -25,17 +25,14 @@ public class ControllerLivros {
 
     }
 
-    public void listarLivros() {
+    public boolean listarLivros() {
         if (livros.isEmpty()) {
-            System.out.println("Não existem livros registados");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livros) {
-                System.out.println(livro);
-            }
+            return false;
         }
+        return true;
 
     }
+
 
     public int ContagemLivros(String numero) {
         int contagem = 0;
