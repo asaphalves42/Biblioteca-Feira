@@ -1,17 +1,6 @@
 package View;
 
-import Controller.ControllerLivros;
-import Controller.LerFicheiros;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
-import java.util.jar.JarOutputStream;
-
-import Model.Livro;
-import Utilidades.Leitura;
+import Controller.LerFicheirosLivros;
 
 import static Utilidades.Leitura.*;
 
@@ -22,7 +11,7 @@ public class Aplicacao {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         menuPrincipal();
-        LerFicheiros.lerFicheiros();
+        LerFicheirosLivros.lerFicheiros();
 
     }
 

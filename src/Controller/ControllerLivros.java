@@ -54,13 +54,12 @@ public class ControllerLivros {
 
     public boolean removerLivros(String tituloLivro) {
 
-        /*
-        * ArrayList<Livro> encontrado = pesquisarLivroPorTitulo(tituloLivro);*/
+        ArrayList<Livro> encontrado = pesquisarLivroPorTitulo(tituloLivro);
 
-       /*if (encontrado != null) {
+       
 
 
-        }*/
+
         return false;
 
     }
