@@ -5,7 +5,6 @@ import Controller.ControllerLivros;
 import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoPesquisarLivros {
-
     ControllerLivros gestor = new ControllerLivros();
     public void livroPorTitulo(){
 

@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ControllerLivros;
+import Utilidades.ValidacaoData;
 
 import java.util.Date;
 
@@ -26,6 +27,9 @@ public class ViewFuncaoAdicionarLivros {
         String date = ler.next();
         ler.nextLine();
 
+        ValidacaoData validarData = new ValidacaoData();
+        Date dataDePublicacao = validarData.LerData(date);
+
         String faixaEtaria = leStr("Digite a faixa etária do livro: ");
 
         String editora = leStr("Digite a editora do livro: ");
@@ -35,7 +39,7 @@ public class ViewFuncaoAdicionarLivros {
         System.out.println("Livro adicionado com sucesso!");
         System.out.println(" ");
 
-        gestor.adicionarLivros(titulo, subtitulo, autor, numPaginas, categoria, date, faixaEtaria, editora, ISBN);
+        gestor.adicionarLivros(titulo, subtitulo, autor, numPaginas, categoria, dataDePublicacao, faixaEtaria, editora, ISBN);
 
     }
 }
