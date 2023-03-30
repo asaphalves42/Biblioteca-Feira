@@ -28,7 +28,6 @@ public class ViewFuncaoAdicionarLivros {
         ler.nextLine();
 
         ValidacaoData validarData = new ValidacaoData();
-
         Date dataDePublicacao = validarData.LerData(date);
 
         String faixaEtaria = leStr("Digite a faixa etária do livro: ");
