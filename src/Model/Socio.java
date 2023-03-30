@@ -21,6 +21,7 @@ public class Socio extends Pessoa {
         super(nome, morada, dataDeNascimento);
         this.telefone = telefone;
         this.numMecanografico = numMecanografico;
+
     }
 
     public String getTelefone() {

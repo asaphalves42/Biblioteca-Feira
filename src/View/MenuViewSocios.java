@@ -1,8 +1,16 @@
 package View;
 
+
+import Controller.ControllerSocios;
+import View.ViewFuncaoAdicionarSocios;
+
+import java.util.Date;
+
 import static Utilidades.Leitura.ler;
 
+
 public class MenuViewSocios {
+
     public void menuSocios() {
         int opcao;
 
@@ -20,6 +28,7 @@ public class MenuViewSocios {
 
             switch (opcao) {
                 case 1://Adicionar socio
+                    //MenuAdicionarSocios();
                     break;
                 case 2://Listar socios * mostrar livros reservados pelo sócio
                     break;
@@ -34,4 +43,8 @@ public class MenuViewSocios {
         } while (opcao != 5);
 
     }
+
+
 }
+
+
