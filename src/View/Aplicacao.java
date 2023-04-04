@@ -1,6 +1,7 @@
 package View;
 
 import Controller.LerFicheirosLivros;
+import ViewLivros.MenuViewLivros;
 
 import static Utilidades.Leitura.*;
 
@@ -13,6 +14,7 @@ public class Aplicacao {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         menuPrincipal();
+
 
     }
 
@@ -57,7 +59,7 @@ public class Aplicacao {
             switch (opcao) {
                 case 1:
                     MenuViewLivros mostrarMenu = new MenuViewLivros();
-                            mostrarMenu.menuLivros();
+                    mostrarMenu.menuLivros();
                     break;
                 case 2:
                     //menuAutores();

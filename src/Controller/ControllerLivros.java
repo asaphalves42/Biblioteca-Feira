@@ -10,7 +10,7 @@ public class ControllerLivros {
 
     public void adicionarLivros(String titulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
 
-        Livro livro = new Livro(titulo,subTitulo,quantidade,autor,numPaginas,categoria,dataDePublicacao,faixaEtaria,editora,ISBN);
+        Livro livro = new Livro(titulo, subTitulo, quantidade, autor, numPaginas, categoria, dataDePublicacao, faixaEtaria, editora, ISBN);
 
         livro.setTitulo(titulo);
         livro.setSubtitulo(subTitulo);
@@ -31,6 +31,7 @@ public class ControllerLivros {
         return this.livros;
 
     }
+
     public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloInserido) {
         ArrayList<Livro> livrosTitulo = new ArrayList<>();
         for (Livro livro : livros) {
@@ -45,9 +46,9 @@ public class ControllerLivros {
 
         for (Livro livro : livros) {
             if (idLivroRemover == livro.getId()) {
-                if(livro.getQuantidade() - 1 > 0 ){
+                if (livro.getQuantidade() - 1 > 0) {
                     livro.setQuantidade(livro.getQuantidade() - 1);
-                }else{
+                } else {
                     livros.remove(livro);
                 }
                 return true;
@@ -57,8 +58,49 @@ public class ControllerLivros {
 
     }
 
+    public boolean editarLivros(int idLivroEditar, String novoTitulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+        for (Livro livro : livros) {
+            if (idLivroEditar == livro.getId()) {
+                livro.setTitulo(novoTitulo);
+                livro.setSubtitulo(subTitulo);
+                livro.setQuantidade(quantidade);
+                livro.setAutor(autor);
+                livro.setNumDePaginas(numPaginas);
+                livro.setCategoria(categoria);
+                livro.setDataDePublicacao(dataDePublicacao);
+                livro.setFaixaEtaria(faixaEtaria);
+                livro.setEditora(editora);
+                livro.setISBN(ISBN);
 
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean editarTituloDoLivro(int idEditarTitulo, String tituloNovo) {
+        for (Livro livro : livros) {
+            if (idEditarTitulo == livro.getId()) {
+                livro.setTitulo(tituloNovo);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean editarSubTituloDoLivro(int idEditarTitulo, String subTituloNovo) {
+        for (Livro livro : livros) {
+            if (idEditarTitulo == livro.getId()) {
+                livro.setSubtitulo(subTituloNovo);
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
+
+
 
 
 
