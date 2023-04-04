@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Livro {
+    private static int proximoId = 1;
+    private int id;
     private String titulo;
     private String subtitulo;
+    private int quantidade;
     private int numDePaginas;
     private String categoria;
     private Date dataDePublicacao;
@@ -14,20 +17,22 @@ public class Livro {
     private String ISBN;
     private String autor;
 
-    public Livro(){
+    public Livro() {
 
     }
 
-    public Livro(String titulo, String subtitulo,String autor, int numDePaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+    public Livro(String titulo, String subtitulo, int quantidade, String autor, int numDePaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+        this.id = proximoId++;
         this.titulo = titulo;
         this.subtitulo = subtitulo;
+        this.quantidade = quantidade;
         this.numDePaginas = numDePaginas;
         this.categoria = categoria;
         this.dataDePublicacao = dataDePublicacao;
         this.faixaEtaria = faixaEtaria;
         this.editora = editora;
         this.ISBN = ISBN;
-        this.autor=autor;
+        this.autor = autor;
     }
 
     public String getTitulo() {
@@ -93,28 +98,43 @@ public class Livro {
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
+
     public String getAutor() {
         return autor;
     }
+
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
     public String toString() {
         return "Livros [ " + "\n" +
-        "Título: " + titulo + "\n" +
-                "Subtitulo: " + subtitulo + "\n" +
-                "Autor: " + autor + "\n" +
-                "Número de páginas: " + numDePaginas + "\n" +
-                "Categoria: " + categoria + "\n" +
-                "Data de publicacao: " + dataDePublicacao + "\n" +
-                "Faixa etaria: " + faixaEtaria + "\n" +
-                "Editora: " + editora + "\n" +
-                "ISBN: " + ISBN + "\n" +
-                "]" +
-                " " +
-                "-----------------------------------------------------";
+                "ID: " + this.id + "\n" +
+                "Quantidade: " + this.quantidade + "\n" +
+                "Título: " + this.titulo + "\n" +
+                "Subtitulo: " + this.subtitulo + "\n" +
+                "Autor: " + this.autor + "\n" +
+                "Número de páginas: " + this.numDePaginas + "\n" +
+                "Categoria: " + this.categoria + "\n" +
+                "Data de publicacao: " + this.dataDePublicacao + "\n" +
+                "Faixa etaria: " + this.faixaEtaria + "\n" +
+                "Editora: " + this.editora + "\n" +
+                "ISBN: " + this.ISBN + "]"+ "\n" +
+                " " + "----------------------------------------------------";
 
     }
 }
+

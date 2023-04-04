@@ -1,8 +1,16 @@
 package View;
 
+import Controller.ControllerLivros;
+
+import java.util.ArrayList;
+
 import static Utilidades.Leitura.ler;
 
 public class MenuViewLivros {
+    ViewFuncaoAdicionarLivros adicionar = new ViewFuncaoAdicionarLivros();
+    ViewFuncaoListarLivros mostrar = new ViewFuncaoListarLivros();
+    ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
+    ControllerLivros gestor = new ControllerLivros();
     public void menuLivros2() {
 
         int opcao;
@@ -38,6 +46,7 @@ public class MenuViewLivros {
     }
 
     public void menuLivros() {
+
         int opcao;
 
         do {
@@ -56,17 +65,18 @@ public class MenuViewLivros {
 
             switch (opcao) {
                 case 1:
-                    //menuAdicionarLivros();
+                    adicionar.menuAdicionarLivros(gestor);
                     break;
                 case 2:
-                    //listarTodosOsLivros();
+                    mostrar.listarTodosOsLivros(gestor);
                     break;
-                case 3://Editar livros
+                case 3://Editar livro
                     break;
-                case 4://eliminarLivroPorTitulo();
+                case 4:
+                    eliminar.eliminarLivroPorTitulo(gestor);
                     break;
                 case 5:
-                    //menuLivros2();
+                    this.menuLivros2();
                     break;
                 case 6://sair
                     break;

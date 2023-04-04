@@ -8,10 +8,11 @@ public class Aplicacao {
 
 
     public void Iniciar() {
+        LerFicheirosLivros ler = new LerFicheirosLivros();
+        ler.lerFicheiros();
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         menuPrincipal();
-        LerFicheirosLivros.lerFicheiros();
 
     }
 
@@ -55,7 +56,8 @@ public class Aplicacao {
 
             switch (opcao) {
                 case 1:
-                    //menuLivros();
+                    MenuViewLivros mostrarMenu = new MenuViewLivros();
+                            mostrarMenu.menuLivros();
                     break;
                 case 2:
                     //menuAutores();

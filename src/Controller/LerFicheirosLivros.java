@@ -6,26 +6,48 @@ import Model.Livro;
 import java.io.File;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.BufferedReader;
 
 public class LerFicheirosLivros {
     static String pastaFicheiros = "C:\\aplicacao\\biblioteca";
 
-    public static void lerFicheiros() {
-            // criar uma pasta -->
-            // https://www.guj.com.br/t/criando-arquivos-e-diretorios/42487/2
-            File file = new File(pastaFicheiros);
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-            // esta dentro de um try porque vai tentar ler o ficheiro, se der erro salta
-            // ate
-            // o catch mais abaixo
+    public void lerFicheiros() {
+        ArrayList<Livro> listaLivros = new ArrayList<>();
+
             try {
+
+                File myObj = new File(pastaFicheiros + "\\LivrosBiblioteca.txt");
+                if (myObj.exists()) {
+                    System.out.println("File name: " + myObj.getName());
+                    System.out.println("Absolute path: " + myObj.getAbsolutePath());
+                    System.out.println("Writeable: " + myObj.canWrite());
+                    System.out.println("Readable " + myObj.canRead());
+                    System.out.println("File size in bytes " + myObj.length());
+
+                    BufferedReader bf = new BufferedReader(
+                            new FileReader(pastaFicheiros + "\\LivrosBiblioteca.txt"));
+
+                    // read entire line as string
+                    String line = bf.readLine();
+                    System.out.println(line);
+
+                    // checking for end of file
+                    while (line != null) {
+                        line = bf.readLine();
+                        System.out.println(line);
+                    }
+
+                } else {
+                    System.out.println("The file does not exist.");
+                }
+                /*
                 // 1. Ler o ficheiro equipas que esta na pasta
                 Scanner scanner = new Scanner(new FileReader(pastaFicheiros + "\\LivrosBiblioteca.txt"));
+                System.out.println("----3----");
                 while (scanner.hasNext()) {
-
+                    System.out.println("----4----");
                     // 1.1 Após lido a linha vou dividir o texto pelo separador |
                     String[] linhaLivro = scanner.next().split("\\|");
 
@@ -44,8 +66,10 @@ public class LerFicheirosLivros {
                     novo.setEditora(linhaLivro[7]);
                     novo.setISBN(linhaLivro[8]);
 
+                    listaLivros.add(novo);
 
                 }
+                */
             } catch (Exception ex) {
                 System.out.println("Ocorreu um erro a ler ficheiro. \n" + ex.getMessage());
             }

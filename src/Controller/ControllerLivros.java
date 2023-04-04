@@ -7,12 +7,14 @@ import java.util.Date;
 
 public class ControllerLivros {
     ArrayList<Livro> livros = new ArrayList<>();
-    Livro livro = new Livro();
 
-    public void adicionarLivros(String titulo, String subTitulo, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+    public void adicionarLivros(String titulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+
+        Livro livro = new Livro(titulo,subTitulo,quantidade,autor,numPaginas,categoria,dataDePublicacao,faixaEtaria,editora,ISBN);
 
         livro.setTitulo(titulo);
         livro.setSubtitulo(subTitulo);
+        livro.setQuantidade(quantidade);
         livro.setAutor(autor);
         livro.setNumDePaginas(numPaginas);
         livro.setCategoria(categoria);
@@ -26,22 +28,9 @@ public class ControllerLivros {
     }
 
     public ArrayList<Livro> listarLivros() {
-
         return this.livros;
 
     }
-
-
-    public int ContagemLivros(String numero) {
-        int contagem = 0;
-        for (Livro livro : livros) {
-            if (numero.equals(livro.getTitulo())) {
-                contagem = contagem + 1;
-            }
-        }
-        return contagem;
-    }
-
     public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloInserido) {
         ArrayList<Livro> livrosTitulo = new ArrayList<>();
         for (Livro livro : livros) {
@@ -52,14 +41,18 @@ public class ControllerLivros {
         return livrosTitulo;
     }
 
-    public boolean removerLivros(String tituloLivro) {
+    public boolean removerLivros(int idLivroRemover) {
 
-        ArrayList<Livro> encontrado = pesquisarLivroPorTitulo(tituloLivro);
-
-
-
-
-
+        for (Livro livro : livros) {
+            if (idLivroRemover == livro.getId()) {
+                if(livro.getQuantidade() - 1 > 0 ){
+                    livro.setQuantidade(livro.getQuantidade() - 1);
+                }else{
+                    livros.remove(livro);
+                }
+                return true;
+            }
+        }
         return false;
 
     }

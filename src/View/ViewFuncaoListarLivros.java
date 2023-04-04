@@ -7,17 +7,16 @@ import java.util.ArrayList;
 
 public class ViewFuncaoListarLivros {
 
-    public void listarTodosOsLivros() {
+    public void listarTodosOsLivros(ControllerLivros gestor) {
 
-        ControllerLivros listarLivros = new ControllerLivros();
-
-        ArrayList<Livro> livrosListados =  listarLivros.listarLivros();
+        ArrayList<Livro> livrosListados = gestor.listarLivros();
 
         if(livrosListados.isEmpty()){
             System.out.println("Nao existem livros no stock!");
+            System.out.println(" ");
         } else{
-            for(Livro livros : livrosListados){
-                System.out.println(livrosListados);
+            for(Livro livro : livrosListados){
+                System.out.println(livro);
             }
         }
     }
