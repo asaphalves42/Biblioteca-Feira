@@ -1,11 +1,11 @@
 package Main;
 
-import View.Aplicacao;
+import View.ViewAplicacao;
 
 public class MainRunner {
 
         public static void main(String[] args) {
-            Aplicacao run = new Aplicacao();
+            ViewAplicacao run = new ViewAplicacao();
             run.Iniciar();
 
         }
