@@ -2,7 +2,7 @@ package View;
 
 import Controller.LerFicheirosLivros;
 
-import static Utilidades.Leitura.*;
+import static Utilidades.Leitura.ler;
 
 public class Aplicacao {
 
@@ -58,10 +58,11 @@ public class Aplicacao {
                     //menuLivros();
                     break;
                 case 2:
-                    //menuAutores();
+                    MenuViewAutores gestaoAutores = new MenuViewAutores();
+                    gestaoAutores.menuAutores();
                     break;
                 case 3:
-                    //menuReservas();
+                    //menuReservas()
                     break;
                 case 4:
                     //menuSocios();
