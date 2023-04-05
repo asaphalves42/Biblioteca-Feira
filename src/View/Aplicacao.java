@@ -22,8 +22,9 @@ public class Aplicacao {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         // Iniciar o sistema
-        menuPrincipal(livros);
         mensagemUtilizadorParaRegisto();
+        menuPrincipal(livros);
+
         // Criar instância do ControllerLogin
         controllerLogin = new ControllerLogin(new ViewLogin());
 
