@@ -2,10 +2,9 @@
 
 import Controller.ControllerLogin;
 import Controller.LerEgravarFicheirosLivros;
-import View.ViewLogin;
 import Model.Livro;
 import static Utilidades.Leitura.*;
-import ViewLivros.MenuViewLivros;
+import View.Livros.MenuViewLivros;
 import java.util.ArrayList;
 
 public class Aplicacao {
@@ -22,8 +21,8 @@ public class Aplicacao {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         // Iniciar o sistema
+        //mensagemUtilizadorParaRegisto();
         menuPrincipal(livros);
-        mensagemUtilizadorParaRegisto();
         // Criar instância do ControllerLogin
         controllerLogin = new ControllerLogin(new ViewLogin());
 

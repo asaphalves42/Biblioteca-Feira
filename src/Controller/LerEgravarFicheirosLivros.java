@@ -59,7 +59,6 @@ public class LerEgravarFicheirosLivros {
 
     public void gravarFicheiroLivros(ArrayList<Livro> livros){
 
-
             try {
                 File myObj = new File(pastaFicheiros + "\\LivrosBiblioteca.txt");
                 if (myObj.createNewFile()) {

@@ -1,10 +1,9 @@
-package ViewLivros;
+package View.Livros;
 
 import Controller.ControllerLivros;
 import Model.Livro;
 import View.Aplicacao;
 
-import javax.swing.text.View;
 import java.util.ArrayList;
 
 import static Utilidades.Leitura.ler;
@@ -128,9 +127,9 @@ public class MenuViewLivros {
                     break;
                 case 3:editar.editarLivrosPorSubTitulo(gestor);
                     break;
-                case 4:
+                case 4:editar.editarQuantidade(gestor);
                     break;
-                case 5:
+                case 5:editar.editarAutor(gestor);
                     break;
                 case 6:
                     break;

@@ -130,6 +130,26 @@ public class ControllerLivros {
         }
         return false;
     }
+
+    public boolean editarQuantidade(int idEditarTitulo, int novaQuantidade) {
+        for (Livro livro : livros) {
+            if (idEditarTitulo == livro.getId()) {
+                livro.setQuantidade(novaQuantidade);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean editarAutor(int idEditarTitulo, String novoAutor) {
+        for (Livro livro : livros) {
+            if (idEditarTitulo == livro.getId()) {
+                livro.setAutor(novoAutor);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 
 
