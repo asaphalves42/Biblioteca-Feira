@@ -1,30 +1,32 @@
  package View;
 
 import Controller.ControllerLogin;
-import Controller.LerFicheirosLivros;
+import Controller.LerEgravarFicheirosLivros;
 import View.ViewLogin;
+import Model.Livro;
 import static Utilidades.Leitura.*;
+import ViewLivros.MenuViewLivros;
+import java.util.ArrayList;
 
 public class Aplicacao {
+    LerEgravarFicheirosLivros lerFicheiros = new LerEgravarFicheirosLivros();
+
     public Aplicacao() {
         controllerLogin = new ControllerLogin(new ViewLogin());
     }
-
     private ControllerLogin controllerLogin;
 
 
     public void Iniciar() {
+        ArrayList<Livro> livros = lerFicheiros.lerFicheiros();
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
-
+        // Iniciar o sistema
+        menuPrincipal(livros);
         mensagemUtilizadorParaRegisto();
-
         // Criar instância do ControllerLogin
         controllerLogin = new ControllerLogin(new ViewLogin());
 
-        // Iniciar o sistema
-        menuPrincipal();
-        LerFicheirosLivros.lerFicheiros();
     }
 
     public void mensagemUtilizadorParaRegisto() {
@@ -43,7 +45,7 @@ public class Aplicacao {
                 case 1:controllerLogin = new ControllerLogin(new ViewLogin());
                     boolean loginSucesso = controllerLogin.iniciar();
                     if (loginSucesso) {
-                        menuPrincipal();
+                        menuPrincipal(lerFicheiros.lerFicheiros());
                     }
                     break;
                 case 2:
@@ -57,7 +59,7 @@ public class Aplicacao {
         } while (opcao != 3);
     }
 
-    public void menuPrincipal() {
+    public void menuPrincipal(ArrayList<Livro> livros) {
         int opcao;
         do {
             System.out.println("## Menu principal ##");
@@ -73,7 +75,8 @@ public class Aplicacao {
 
             switch (opcao) {
                 case 1:
-                    //menuLivros();
+                    MenuViewLivros mostrarMenu = new MenuViewLivros();
+                    mostrarMenu.menuLivros(livros);
                     break;
                 case 2:
                     //menuAutores();
@@ -85,9 +88,11 @@ public class Aplicacao {
                     //menuSocios();
                     break;
                 case 5://fechar/guardar ficheiros
+                    lerFicheiros.gravarFicheiroLivros(livros);
+                    break;
             }
 
-        } while (opcao != 4);
+        } while (opcao != 5);
     }
 
 
