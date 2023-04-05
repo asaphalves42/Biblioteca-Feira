@@ -1,21 +1,30 @@
 package View;
 
+import Controller.ControllerLogin;
 import Controller.LerFicheirosLivros;
-import ViewLivros.MenuViewLivros;
-
+import View.ViewLogin;
 import static Utilidades.Leitura.*;
 
 public class Aplicacao {
+    public Aplicacao() {
+        controllerLogin = new ControllerLogin(new ViewLogin());
+    }
+
+    private ControllerLogin controllerLogin;
 
 
     public void Iniciar() {
-        LerFicheirosLivros ler = new LerFicheirosLivros();
-        ler.lerFicheiros();
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
+
+        mensagemUtilizadorParaRegisto();
+
+        // Criar instância do ControllerLogin
+        controllerLogin = new ControllerLogin(new ViewLogin());
+
+        // Iniciar o sistema
         menuPrincipal();
-
-
+        LerFicheirosLivros.lerFicheiros();
     }
 
     public void mensagemUtilizadorParaRegisto() {
@@ -31,9 +40,15 @@ public class Aplicacao {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1://Efetuar login
+                case 1:controllerLogin = new ControllerLogin(new ViewLogin());
+                    boolean loginSucesso = controllerLogin.iniciar();
+                    if (loginSucesso) {
+                        menuPrincipal();
+                    }
                     break;
-                case 2://efetuar registo
+                case 2:
+                    controllerLogin.registar();
+
                     break;
                 case 3://sair
                     break;
@@ -58,8 +73,7 @@ public class Aplicacao {
 
             switch (opcao) {
                 case 1:
-                    MenuViewLivros mostrarMenu = new MenuViewLivros();
-                    mostrarMenu.menuLivros();
+                    //menuLivros();
                     break;
                 case 2:
                     //menuAutores();

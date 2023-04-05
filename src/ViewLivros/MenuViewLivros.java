@@ -1,6 +1,11 @@
 package ViewLivros;
 
 import Controller.ControllerLivros;
+import Model.Livro;
+import View.Aplicacao;
+
+import javax.swing.text.View;
+import java.util.ArrayList;
 
 import static Utilidades.Leitura.ler;
 
@@ -10,6 +15,8 @@ public class MenuViewLivros {
     ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
     ViewFuncaoEditarLivros editar = new ViewFuncaoEditarLivros();
     ControllerLivros gestor = new ControllerLivros();
+    ViewFuncaoPesquisarLivros pesquisar = new ViewFuncaoPesquisarLivros();
+    Aplicacao app = new Aplicacao();
 
     public void menuLivros2() {
 
@@ -28,15 +35,18 @@ public class MenuViewLivros {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1://autor
+                case 1:
+                    pesquisar.livrosPorAutor(gestor);
                     break;
-                case 2://livroPorTitulo();
+                case 2:
+                    pesquisar.livroPorTitulo(gestor);
                     break;
-                case 3://isbn
+                case 3:pesquisar.livrosPorISBN(gestor);
                     break;
-                case 4://categoria
+                case 4:pesquisar.livrosPorCategoria(gestor);
                     break;
-                case 5://sair
+                case 5:
+                    this.menuLivros(gestor.livros);
                     break;
             }
 
@@ -45,12 +55,12 @@ public class MenuViewLivros {
 
     }
 
-    public void menuLivros() {
+    public void menuLivros(ArrayList<Livro> livros) {
 
         int opcao;
 
         do {
-
+            gestor.livros = livros;
             System.out.println("## Livros ##");
             System.out.println("------------------------");
             System.out.println("1 - Adicionar livros");
@@ -80,10 +90,11 @@ public class MenuViewLivros {
                     this.menuLivros2();
                     break;
                 case 6://sair
+                    app.menuPrincipal(gestor.livros);
                     break;
             }
 
-        } while (opcao != 5);
+        } while (opcao != 6);
 
     }
 

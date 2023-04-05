@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ControllerLivros {
-    ArrayList<Livro> livros = new ArrayList<>();
+    public ArrayList<Livro> livros = new ArrayList<>();
 
     public void adicionarLivros(String titulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
 
@@ -40,6 +40,39 @@ public class ControllerLivros {
             }
         }
         return livrosTitulo;
+    }
+
+    public ArrayList<Livro> pesquisarLivroPorAutor(String autorInserido){
+        ArrayList<Livro> livrosDoAutor = new ArrayList<>();
+        for (Livro autor : livros) {
+            if (autorInserido.equalsIgnoreCase(autor.getAutor())) {
+                livrosDoAutor.add(autor);
+            }
+        }
+        return livrosDoAutor;
+
+    }
+
+    public ArrayList<Livro> pesquisarLivroCategoria(String categoriaInserida){
+        ArrayList<Livro> categoriaLivros = new ArrayList<>();
+        for (Livro categoria : livros) {
+            if (categoriaInserida.equalsIgnoreCase(categoria.getCategoria())) {
+                categoriaLivros.add(categoria);
+            }
+        }
+        return categoriaLivros;
+
+    }
+
+    public ArrayList<Livro> pesquisarLivroISBN(String ISBNinserido){
+        ArrayList<Livro> ISBNLivros = new ArrayList<>();
+        for (Livro ISBN : livros) {
+            if (ISBNinserido.equalsIgnoreCase(ISBN.getISBN())) {
+                ISBNLivros.add(ISBN);
+            }
+        }
+        return ISBNLivros;
+
     }
 
     public boolean removerLivros(int idLivroRemover) {

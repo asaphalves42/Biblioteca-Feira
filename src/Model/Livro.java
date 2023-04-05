@@ -121,7 +121,7 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Livros [ " + "\n" +
+        return "Livro [ " + "\n" +
                 "ID: " + this.id + "\n" +
                 "Quantidade: " + this.quantidade + "\n" +
                 "Título: " + this.titulo + "\n" +
