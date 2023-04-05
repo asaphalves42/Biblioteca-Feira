@@ -13,7 +13,7 @@ public class ViewFuncaoEditarLivros {
 
     public void editarLivros(ControllerLivros gestor) {
 
-        String tituloLivro = leStr("Insira o título do livro que quer editar:");
+        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
         ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
 
         if (livrosParaEditar.isEmpty()) {
@@ -27,17 +27,17 @@ public class ViewFuncaoEditarLivros {
 
         int idLivroEditar = LeInt("Insira o id do livro que quer editar: ");
 
-            String novoTitulo = leStr("Insira o novo titulo do livro:");
+            String novoTitulo = LeStr("Insira o novo titulo do livro:");
 
-            String subTitulo = leStr("Insira o novo subtitulo:");
+            String subTitulo = LeStr("Insira o novo subtitulo:");
 
             int quantidade = LeInt("Insira a nova quantidade:");
 
-            String autor = leStr("Insira o novo autor do livro:");
+            String autor = LeStr("Insira o novo autor do livro:");
 
             int numPaginas = LeInt("Insira o novo número de páginas:");
 
-            String categoria = leStr("Insira a nova categoria do livro:");
+            String categoria = LeStr("Insira a nova categoria do livro:");
 
             System.out.println("Digite a nova data de publicação do livro: ");
             String date = ler.next();
@@ -45,13 +45,13 @@ public class ViewFuncaoEditarLivros {
             ValidacaoData validarData = new ValidacaoData();
             Date dataDePublicacao = validarData.LerData(date);
 
-            String faixaEtaria = leStr("Insira a nova faixa etária do livro:");
+            String faixaEtaria = LeStr("Insira a nova faixa etária do livro:");
 
-            String editora = leStr("Insira a nova editora do livro:");
+            String editora = LeStr("Insira a nova editora do livro:");
 
-            String ISBN = leStr("Insira o novo ISBN do livro:");
+            String ISBN = LeStr("Insira o novo ISBN do livro:");
 
-            boolean editado = gestor.editarLivros(idLivroEditar, novoTitulo, subTitulo, quantidade, autor, numPaginas, categoria, dataDePublicacao,faixaEtaria,editora,ISBN);
+            boolean editado = gestor.editarLivro(idLivroEditar, novoTitulo, subTitulo, quantidade, autor, numPaginas, categoria, dataDePublicacao,faixaEtaria,editora,ISBN);
 
             if(editado){
                 System.out.println("Livro editado com sucesso!");
@@ -64,7 +64,7 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarLivrosPorTitulo(ControllerLivros gestor){
-        String tituloLivro = leStr("Insira o título do livro que quer editar:");
+        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
         ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
 
         if (livrosParaEditar.isEmpty()) {
@@ -77,7 +77,7 @@ public class ViewFuncaoEditarLivros {
         }
 
         int idEditarTitulo = LeInt("Insira o id do livro que quer editar: ");
-        String tituloNovo = leStr("Insira o novo título:");
+        String tituloNovo = LeStr("Insira o novo título:");
 
         boolean tituloEditado = gestor.editarTituloDoLivro(idEditarTitulo, tituloNovo);
 
@@ -91,7 +91,7 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarLivrosPorSubTitulo(ControllerLivros gestor){
-        String tituloLivro = leStr("Insira o título do livro que quer editar:");
+        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
         ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
 
         if (livrosParaEditar.isEmpty()) {
@@ -104,7 +104,7 @@ public class ViewFuncaoEditarLivros {
         }
 
         int idEditarSubTitulo = LeInt("Insira o id do livro que quer editar: ");
-        String subTituloNovo = leStr("Insira o novo título:");
+        String subTituloNovo = LeStr("Insira o novo título:");
 
         boolean tituloEditado = gestor.editarSubTituloDoLivro(idEditarSubTitulo, subTituloNovo);
 

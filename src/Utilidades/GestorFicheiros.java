@@ -1,21 +1,54 @@
-package Controller;
+package Utilidades;
 
-import Model.Livro;
-
-
-import java.io.File;
-import java.io.FileReader;
-import java.text.SimpleDateFormat;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
-import java.io.BufferedReader;
-import java.io.FileWriter;   // Import the FileWriter class
-import java.io.IOException;
 
-public class LerEgravarFicheirosLivros {
+public class GestorFicheiros {
+
+
+    public static boolean GravarFicheiro (String diretorio, String nomeFicheiro, String conteudo)
+    {
+        try {
+            FileWriter myWriter = new FileWriter(diretorio + "\\" + nomeFicheiro);
+            myWriter.write(conteudo);
+            myWriter.close();
+            System.out.println("Guardado com sucesso.");
+            return true;
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro.");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static ArrayList<String> LerFicheiro (String diretorio, String nomeFicheiro)
+    {
+        ArrayList<String> linhas = new ArrayList<String>();
+        try {
+            File myObj = new File(diretorio + "\\" +nomeFicheiro);
+            if (myObj.exists()) {
+                BufferedReader bf = new BufferedReader(
+                        new FileReader(diretorio + "\\" +nomeFicheiro));
+
+                String st;
+                while ((st = bf.readLine()) != null){
+                    linhas.add(st);
+                }
+
+            } else {
+                System.out.println("O ficheiro nao existe!.");
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Ocorreu um erro a ler ficheiro. \n" + ex.getMessage());
+        }
+        return linhas;
+    }
+
+
+    /*
     static String pastaFicheiros = "C:\\aplicacao\\biblioteca";
-
-    public ArrayList<Livro> lerFicheiros() {
+    public ArrayList<Livro> LerLivros() {
         ArrayList<Livro> listaLivros = new ArrayList<>();
 
             try {
@@ -55,8 +88,6 @@ public class LerEgravarFicheirosLivros {
 
             return listaLivros;
         }
-
-
     public void gravarFicheiroLivros(ArrayList<Livro> livros){
 
 
@@ -93,7 +124,7 @@ public class LerEgravarFicheirosLivros {
                 e.printStackTrace();
             }
     }
-
+    */
 }
 
 

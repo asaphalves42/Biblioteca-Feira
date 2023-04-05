@@ -1,11 +1,7 @@
 package ViewLivros;
 
 import Controller.ControllerLivros;
-import Model.Livro;
 import View.Aplicacao;
-
-import javax.swing.text.View;
-import java.util.ArrayList;
 
 import static Utilidades.Leitura.ler;
 
@@ -41,12 +37,12 @@ public class MenuViewLivros {
                 case 2:
                     pesquisar.livroPorTitulo(gestor);
                     break;
-                case 3:pesquisar.livrosPorISBN(gestor);
+                case 3:pesquisar.livroPorISBN(gestor);
                     break;
                 case 4:pesquisar.livrosPorCategoria(gestor);
                     break;
                 case 5:
-                    this.menuLivros(gestor.livros);
+                    this.menuLivros();
                     break;
             }
 
@@ -55,12 +51,13 @@ public class MenuViewLivros {
 
     }
 
-    public void menuLivros(ArrayList<Livro> livros) {
+    public void menuLivros() {
 
         int opcao;
 
         do {
-            gestor.livros = livros;
+            gestor.lerLivrosDeFicheiro();
+
             System.out.println("## Livros ##");
             System.out.println("------------------------");
             System.out.println("1 - Adicionar livros");
@@ -90,7 +87,8 @@ public class MenuViewLivros {
                     this.menuLivros2();
                     break;
                 case 6://sair
-                    app.menuPrincipal(gestor.livros);
+                    gestor.gravarLivrosParaFicheiro();
+                    app.menuPrincipal();
                     break;
             }
 
