@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 
 public class ControllerLivros {
     public ArrayList<Livro> livros = new ArrayList<>();
-
     public void lerLivrosDeFicheiro(){
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("livros.txt");
         if (!linhas.isEmpty()) {
@@ -52,6 +51,7 @@ public class ControllerLivros {
 
     public void adicionarLivros(String titulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
         Livro livro = new Livro(titulo, subTitulo, quantidade, autor, numPaginas, categoria, dataDePublicacao, faixaEtaria, editora, ISBN);
+
         this.livros.add(livro);
     }
 
@@ -63,7 +63,7 @@ public class ControllerLivros {
         ArrayList<Livro> livrosTitulo = new ArrayList<>();
         for (Livro livro : livros) {
             if (tituloInserido.equalsIgnoreCase(livro.getTitulo())) {
-                livrosTitulo.add(livro);
+               livrosTitulo.add(livro);
             }
         }
         return livrosTitulo;

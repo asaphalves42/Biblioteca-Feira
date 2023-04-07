@@ -129,7 +129,7 @@ public class Livro {
                 "Faixa etaria: " + this.faixaEtaria + "\n" +
                 "Editora: " + this.editora + "\n" +
                 "ISBN: " + this.ISBN + "]"+ "\n" +
-                " " + "----------------------------------------------------";
+                " " + "----------------------------------------------------" + "\n";
 
     }
 }

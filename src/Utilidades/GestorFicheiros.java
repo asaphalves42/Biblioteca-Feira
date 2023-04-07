@@ -24,7 +24,7 @@ public class GestorFicheiros {
 
     public static ArrayList<String> LerFicheiro (String nomeFicheiro)
     {
-        ArrayList<String> linhas = new ArrayList<String>();
+        ArrayList<String> linhas = new ArrayList<>();
         try {
             File myObj = new File(diretorioBase + "\\" +nomeFicheiro);
             if (myObj.exists()) {
