@@ -8,13 +8,14 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 public class Utilizador {
-    private String email;
-    private String password;
 
     public Utilizador(String email, String password) {
         this.email = email;
         this.password = password;
     }
+
+    private String email;
+    private String password;
 
     public String getEmail() {
         return email;
