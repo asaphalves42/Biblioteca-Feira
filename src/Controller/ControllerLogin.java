@@ -5,7 +5,6 @@ import View.ViewLogin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class ControllerLogin {
@@ -30,9 +29,6 @@ public class ControllerLogin {
             }
         }
     }
-
-
-
 
     public void registar() {
         String email = viewLogin.getEmail();

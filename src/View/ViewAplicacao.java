@@ -1,13 +1,13 @@
  package View;
 
  import Controller.ControllerLogin;
- import ViewLivros.MenuViewLivros;
+ import View.Livros.MenuViewLivros;
 
  import static Utilidades.Leitura.ler;
 
-public class Aplicacao {
+public class ViewAplicacao {
 
-    public Aplicacao() {
+    public ViewAplicacao() {
         controllerLogin = new ControllerLogin(new ViewLogin());
     }
     private ControllerLogin controllerLogin;
@@ -17,8 +17,8 @@ public class Aplicacao {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         // Iniciar o sistema
-        menuPrincipal();
         mensagemUtilizadorParaRegisto();
+        menuPrincipal();
         // Criar instância do ControllerLogin
         controllerLogin = new ControllerLogin(new ViewLogin());
 
@@ -40,12 +40,11 @@ public class Aplicacao {
                 case 1:controllerLogin = new ControllerLogin(new ViewLogin());
                     boolean loginSucesso = controllerLogin.iniciar();
                     if (loginSucesso) {
-                        //
+                        menuPrincipal();
                     }
                     break;
                 case 2:
                     controllerLogin.registar();
-
                     break;
                 case 3://sair
                     break;

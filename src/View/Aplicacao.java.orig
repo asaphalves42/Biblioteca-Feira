@@ -2,11 +2,11 @@
 
 <<<<<<< HEAD
 import Controller.ControllerLogin;
-import Controller.LerEgravarFicheirosLivros;
+import Utilidades.LerEgravarFicheirosLivros;
 import View.ViewLogin;
 import Model.Livro;
 import static Utilidades.Leitura.*;
-import ViewLivros.MenuViewLivros;
+import View.Livros.MenuViewLivros;
 import java.util.ArrayList;
 =======
 import static Utilidades.Leitura.ler;

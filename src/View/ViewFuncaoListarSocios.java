@@ -1,4 +1,4 @@
-package ViewLivros;
+package View;
 
 public class ViewFuncaoListarSocios {
 }
