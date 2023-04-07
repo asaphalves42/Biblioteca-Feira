@@ -10,7 +10,7 @@ import static Utilidades.Leitura.*;
 public class ViewFuncaoRemoverLivros {
     public void eliminarLivroPorTitulo(ControllerLivros gestor){
 
-        String tituloLivro = leStr("Insira o título do livro: ");
+        String tituloLivro = LeStr("Insira o título do livro: ");
         ArrayList<Livro> livrosParaRemover = gestor.pesquisarLivroPorTitulo(tituloLivro);
 
         if(livrosParaRemover.isEmpty()){
@@ -24,7 +24,7 @@ public class ViewFuncaoRemoverLivros {
 
         int idLivroRemover = LeInt("Insira o id do livro que quer remover: ");
 
-        boolean removido =  gestor.removerLivros(idLivroRemover);
+        boolean removido =  gestor.removerLivro(idLivroRemover);
 
         if(removido){
             System.out.println("Livro removido com sucesso");

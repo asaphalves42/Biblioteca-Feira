@@ -1,33 +1,38 @@
  package View;
 
-<<<<<<< HEAD
+<<<<<<< HEAD:src/View/Aplicacao.java
 import Controller.ControllerLogin;
-import Utilidades.LerEgravarFicheirosLivros;
-import View.ViewLogin;
+import Controller.LerEgravarFicheirosLivros;
 import Model.Livro;
 import static Utilidades.Leitura.*;
 import View.Livros.MenuViewLivros;
 import java.util.ArrayList;
 =======
-import static Utilidades.Leitura.ler;
->>>>>>> c7e0154ac54ea9a78b222dfb8d188f9167ff55ad
+ import Controller.ControllerLogin;
+ import View.Livros.MenuViewLivros;
+>>>>>>> 1a55f3a7b367b7fe1834963b12b4f64e8d103a6c:src/View/ViewAplicacao.java
 
-public class Aplicacao {
-    LerEgravarFicheirosLivros lerFicheiros = new LerEgravarFicheirosLivros();
+ import static Utilidades.Leitura.ler;
 
-    public Aplicacao() {
+public class ViewAplicacao {
+
+    public ViewAplicacao() {
         controllerLogin = new ControllerLogin(new ViewLogin());
     }
     private ControllerLogin controllerLogin;
 
 
     public void Iniciar() {
-        ArrayList<Livro> livros = lerFicheiros.lerFicheiros();
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         // Iniciar o sistema
+<<<<<<< HEAD:src/View/Aplicacao.java
+        //mensagemUtilizadorParaRegisto();
         menuPrincipal(livros);
+=======
         mensagemUtilizadorParaRegisto();
+        menuPrincipal();
+>>>>>>> 1a55f3a7b367b7fe1834963b12b4f64e8d103a6c:src/View/ViewAplicacao.java
         // Criar instância do ControllerLogin
         controllerLogin = new ControllerLogin(new ViewLogin());
 
@@ -49,12 +54,11 @@ public class Aplicacao {
                 case 1:controllerLogin = new ControllerLogin(new ViewLogin());
                     boolean loginSucesso = controllerLogin.iniciar();
                     if (loginSucesso) {
-                        menuPrincipal(lerFicheiros.lerFicheiros());
+                        menuPrincipal();
                     }
                     break;
                 case 2:
                     controllerLogin.registar();
-
                     break;
                 case 3://sair
                     break;
@@ -63,7 +67,7 @@ public class Aplicacao {
         } while (opcao != 3);
     }
 
-    public void menuPrincipal(ArrayList<Livro> livros) {
+    public void menuPrincipal() {
         int opcao;
         do {
             System.out.println("## Menu principal ##");
@@ -76,24 +80,21 @@ public class Aplicacao {
 
             opcao = ler.nextInt();
 
-
             switch (opcao) {
                 case 1:
                     MenuViewLivros mostrarMenu = new MenuViewLivros();
-                    mostrarMenu.menuLivros(livros);
+                    mostrarMenu.menuLivros();
                     break;
                 case 2:
-                    MenuViewAutores gestaoAutores = new MenuViewAutores();
-                    gestaoAutores.menuAutores();
+                    //menuAutores();
                     break;
                 case 3:
-                    //menuReservas()
+                    //menuReservas();
                     break;
                 case 4:
                     //menuSocios();
                     break;
                 case 5://fechar/guardar ficheiros
-                    lerFicheiros.gravarFicheiroLivros(livros);
                     break;
             }
 

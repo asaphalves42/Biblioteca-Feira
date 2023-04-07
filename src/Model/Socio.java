@@ -3,6 +3,12 @@ package Model;
 import java.util.Date;
 
 public class Socio extends Pessoa {
+
+    public Socio(String nome, String morada, Date dataDeNascimento, String telefone, String numMecanografico) {
+        super(nome, morada, dataDeNascimento);
+        this.telefone = telefone;
+        this.numMecanografico = numMecanografico;
+    }
     private String telefone;
     private String numMecanografico;
 
@@ -12,16 +18,6 @@ public class Socio extends Pessoa {
 
     public void setNumMecanografico(String numMecanografico) {
         this.numMecanografico = numMecanografico;
-    }
-
-    public Socio(){
-
-    }
-    public Socio(String nome, String morada, Date dataDeNascimento, String telefone, String numMecanografico) {
-        super(nome, morada, dataDeNascimento);
-        this.telefone = telefone;
-        this.numMecanografico = numMecanografico;
-
     }
 
     public String getTelefone() {
