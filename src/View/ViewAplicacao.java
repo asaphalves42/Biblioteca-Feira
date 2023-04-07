@@ -1,30 +1,26 @@
- package View;
+package View;
 
+import Controller.ControllerLivros;
 import Controller.ControllerLogin;
-import Controller.LerEgravarFicheirosLivros;
-import View.ViewLogin;
-import Model.Livro;
-import static Utilidades.Leitura.*;
-import ViewLivros.MenuViewLivros;
-import java.util.ArrayList;
+import Utilidades.GestorFicheiros;
+import View.Livros.MenuViewLivros;
 
-public class Aplicacao {
-    LerEgravarFicheirosLivros lerFicheiros = new LerEgravarFicheirosLivros();
+import static Utilidades.Leitura.ler;
 
-    public Aplicacao() {
+public class ViewAplicacao {
+
+    public ViewAplicacao() {
         controllerLogin = new ControllerLogin(new ViewLogin());
     }
     private ControllerLogin controllerLogin;
 
 
     public void Iniciar() {
-        ArrayList<Livro> livros = lerFicheiros.lerFicheiros();
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         // Iniciar o sistema
         mensagemUtilizadorParaRegisto();
-        menuPrincipal(livros);
-
+        menuPrincipal();
         // Criar instância do ControllerLogin
         controllerLogin = new ControllerLogin(new ViewLogin());
 
@@ -46,12 +42,11 @@ public class Aplicacao {
                 case 1:controllerLogin = new ControllerLogin(new ViewLogin());
                     boolean loginSucesso = controllerLogin.iniciar();
                     if (loginSucesso) {
-                        menuPrincipal(lerFicheiros.lerFicheiros());
+                        menuPrincipal();
                     }
                     break;
                 case 2:
                     controllerLogin.registar();
-
                     break;
                 case 3://sair
                     break;
@@ -60,7 +55,7 @@ public class Aplicacao {
         } while (opcao != 3);
     }
 
-    public void menuPrincipal(ArrayList<Livro> livros) {
+    public void menuPrincipal() {
         int opcao;
         do {
             System.out.println("## Menu principal ##");
@@ -73,11 +68,10 @@ public class Aplicacao {
 
             opcao = ler.nextInt();
 
-
             switch (opcao) {
                 case 1:
                     MenuViewLivros mostrarMenu = new MenuViewLivros();
-                    mostrarMenu.menuLivros(livros);
+                    mostrarMenu.menuLivros();
                     break;
                 case 2:
                     //menuAutores();
@@ -88,8 +82,8 @@ public class Aplicacao {
                 case 4:
                     //menuSocios();
                     break;
-                case 5://fechar/guardar ficheiros
-                    lerFicheiros.gravarFicheiroLivros(livros);
+                case 5:
+
                     break;
             }
 

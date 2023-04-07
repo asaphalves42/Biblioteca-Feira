@@ -1,25 +1,8 @@
 package Model;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Livro {
-    private static int proximoId = 1;
-    private int id;
-    private String titulo;
-    private String subtitulo;
-    private int quantidade;
-    private int numDePaginas;
-    private String categoria;
-    private Date dataDePublicacao;
-    private String faixaEtaria;
-    private String editora;
-    private String ISBN;
-    private String autor;
-
-    public Livro() {
-
-    }
 
     public Livro(String titulo, String subtitulo, int quantidade, String autor, int numDePaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
         this.id = proximoId++;
@@ -34,6 +17,19 @@ public class Livro {
         this.ISBN = ISBN;
         this.autor = autor;
     }
+
+    private static int proximoId = 1;
+    private int id;
+    private String titulo;
+    private String subtitulo;
+    private int quantidade;
+    private int numDePaginas;
+    private String categoria;
+    private Date dataDePublicacao;
+    private String faixaEtaria;
+    private String editora;
+    private String ISBN;
+    private String autor;
 
     public String getTitulo() {
         return titulo;
@@ -133,7 +129,7 @@ public class Livro {
                 "Faixa etaria: " + this.faixaEtaria + "\n" +
                 "Editora: " + this.editora + "\n" +
                 "ISBN: " + this.ISBN + "]"+ "\n" +
-                " " + "----------------------------------------------------";
+                " " + "----------------------------------------------------" + "\n";
 
     }
 }

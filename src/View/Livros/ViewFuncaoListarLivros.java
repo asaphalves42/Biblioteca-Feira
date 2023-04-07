@@ -1,4 +1,4 @@
-package ViewLivros;
+package View.Livros;
 
 import Controller.ControllerLivros;
 import Model.Livro;

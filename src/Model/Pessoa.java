@@ -3,19 +3,16 @@ package Model;
 import java.util.Date;
 
 public class Pessoa {
-    private String nome;
-    private String morada;
-    private Date dataDeNascimento;
 
-
-    public Pessoa (){
-
-    }
     public Pessoa(String nome, String morada, Date dataDeNascimento) {
         this.nome = nome;
         this.morada = morada;
         this.dataDeNascimento = dataDeNascimento;
     }
+
+    private String nome;
+    private String morada;
+    private Date dataDeNascimento;
 
     public String getNome() {
         return nome;

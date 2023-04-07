@@ -20,18 +20,23 @@ public class ViewLogin {
     }
 
     public void mostrarMensagemDeLoginComSucesso() {
+
         System.out.println("Login realizado com sucesso!");
+        System.out.println(" ");
     }
 
     public void mostrarMensagemDeLoginFalhado() {
         System.out.println("Email ou password incorretos. Tente novamente.");
+        System.out.println(" ");
     }
 
     public void mostrarMensagemDeRegistoComSucesso() {
         System.out.println("Registo realizado com sucesso!");
+        System.out.println(" ");
     }
 
     public void mostrarMensagemDeRegistoFalhado() {
         System.out.println("Já existe um utilizador registado com este email. Tente novamente.");
+        System.out.println(" ");
     }
 }

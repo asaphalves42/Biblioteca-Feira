@@ -19,9 +19,13 @@ public class MenuViewAutores {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1://Adicionar autores
+                case 1:
+                    ViewFuncaoAdicionarAutores gestaoAutores = new ViewFuncaoAdicionarAutores();
+                    gestaoAutores.menuAdicionarAutores();
                     break;
-                case 2://listar autores
+                case 2:
+                    ViewFuncaoListarAutores listarAutores = new ViewFuncaoListarAutores();
+                    listarAutores.listarTodosOsAutores();
                     break;
                 case 3://Editar autores
                     break;

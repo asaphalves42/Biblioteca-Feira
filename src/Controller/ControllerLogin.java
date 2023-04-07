@@ -31,9 +31,6 @@ public class ControllerLogin {
         }
     }
 
-
-
-
     public void registar() {
         String email = viewLogin.getEmail();
         String password = viewLogin.getPassword();

@@ -1,22 +1,18 @@
-package ViewLivros;
+package View.Livros;
 
 import Controller.ControllerLivros;
-import Model.Livro;
-import View.Aplicacao;
-
-import javax.swing.text.View;
-import java.util.ArrayList;
+import View.ViewAplicacao;
 
 import static Utilidades.Leitura.ler;
 
 public class MenuViewLivros {
+    ControllerLivros gestor = new ControllerLivros();
     ViewFuncaoAdicionarLivros adicionar = new ViewFuncaoAdicionarLivros();
     ViewFuncaoListarLivros mostrar = new ViewFuncaoListarLivros();
     ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
     ViewFuncaoEditarLivros editar = new ViewFuncaoEditarLivros();
-    ControllerLivros gestor = new ControllerLivros();
     ViewFuncaoPesquisarLivros pesquisar = new ViewFuncaoPesquisarLivros();
-    Aplicacao app = new Aplicacao();
+    ViewAplicacao app = new ViewAplicacao();
 
     public void menuLivros2() {
 
@@ -41,12 +37,12 @@ public class MenuViewLivros {
                 case 2:
                     pesquisar.livroPorTitulo(gestor);
                     break;
-                case 3:pesquisar.livrosPorISBN(gestor);
+                case 3:pesquisar.livroPorISBN(gestor);
                     break;
                 case 4:pesquisar.livrosPorCategoria(gestor);
                     break;
                 case 5:
-                    this.menuLivros(gestor.livros);
+                    this.menuLivros();
                     break;
             }
 
@@ -55,12 +51,13 @@ public class MenuViewLivros {
 
     }
 
-    public void menuLivros(ArrayList<Livro> livros) {
+    public void menuLivros() {
 
         int opcao;
 
         do {
-            gestor.livros = livros;
+            gestor.lerLivrosDeFicheiro();
+
             System.out.println("## Livros ##");
             System.out.println("------------------------");
             System.out.println("1 - Adicionar livros");
@@ -90,7 +87,8 @@ public class MenuViewLivros {
                     this.menuLivros2();
                     break;
                 case 6://sair
-                    app.menuPrincipal(gestor.livros);
+                    gestor.gravarLivrosParaFicheiro();
+                    app.menuPrincipal();
                     break;
             }
 
@@ -128,23 +126,24 @@ public class MenuViewLivros {
                     break;
                 case 3:editar.editarLivrosPorSubTitulo(gestor);
                     break;
-                case 4:
+                case 4:editar.editarQuantidade(gestor);
                     break;
-                case 5:
+                case 5:editar.editarLivrosPorAutor(gestor);
                     break;
-                case 6:
+                case 6:editar.editarNumPaginas(gestor);
                     break;
-                case 7:
+                case 7:editar.editarPorCategoria(gestor);
                     break;
-                case 8:
+                case 8:editar.editarPorData(gestor);
                     break;
-                case 9:
+                case 9:editar.editarFaixaEtaria(gestor);
                     break;
-                case 10:
+                case 10:editar.editarEditora(gestor);
                     break;
-                case 11:
+                case 11:editar.editarISBN(gestor);
                     break;
-                case 12:
+                case 12: gestor.gravarLivrosParaFicheiro();
+                    this.menuLivros();
                     break;
 
             }
