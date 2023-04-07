@@ -1,35 +1,62 @@
 package Controller;
 
 import Model.Livro;
+import Utilidades.GestorFicheiros;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class ControllerLivros {
     public ArrayList<Livro> livros = new ArrayList<>();
 
+    public void lerLivrosDeFicheiro(){
+        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("livros.txt");
+        if (!linhas.isEmpty()) {
+            for (String linha : linhas) {
+                String[] value_split = linha.split("\\|");
+                Livro aux = new Livro(value_split[0],
+                        value_split[1],
+                        Integer.parseInt(value_split[2]),
+                        value_split[3],
+                        Integer.parseInt(value_split[4]),
+                        value_split[5],
+                        new Date(value_split[6]),
+                        value_split[7],
+                        value_split[8],
+                        value_split[9]);
+                livros.add(aux);
+            }
+        }
+    }
+    public void gravarLivrosParaFicheiro(){
+
+        String conteudo = "";
+        for (Livro aux : livros){
+            SimpleDateFormat DateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String formated_date = DateFormat.format(aux.getDataDePublicacao());
+
+            conteudo += aux.getTitulo() + "|" ;
+            conteudo += aux.getSubtitulo() + "|" ;
+            conteudo += aux.getQuantidade() + "|" ;
+            conteudo += aux.getAutor() + "|" ;
+            conteudo += aux.getNumDePaginas() + "|" ;
+            conteudo += aux.getCategoria() + "|" ;
+            conteudo += formated_date + "|" ;
+            conteudo += aux.getFaixaEtaria() + "|" ;
+            conteudo += aux.getEditora() + "|" ;
+            conteudo += aux.getISBN() +  "\n";
+        }
+        GestorFicheiros.GravarFicheiro("livros.txt", conteudo);
+    }
+
     public void adicionarLivros(String titulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
-
         Livro livro = new Livro(titulo, subTitulo, quantidade, autor, numPaginas, categoria, dataDePublicacao, faixaEtaria, editora, ISBN);
-
-        livro.setTitulo(titulo);
-        livro.setSubtitulo(subTitulo);
-        livro.setQuantidade(quantidade);
-        livro.setAutor(autor);
-        livro.setNumDePaginas(numPaginas);
-        livro.setCategoria(categoria);
-        livro.setDataDePublicacao(dataDePublicacao);
-        livro.setFaixaEtaria(faixaEtaria);
-        livro.setEditora(editora);
-        livro.setISBN(ISBN);
-
         this.livros.add(livro);
-
     }
 
     public ArrayList<Livro> listarLivros() {
         return this.livros;
-
     }
 
     public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloInserido) {
@@ -64,19 +91,16 @@ public class ControllerLivros {
 
     }
 
-    public ArrayList<Livro> pesquisarLivroISBN(String ISBNinserido){
-        ArrayList<Livro> ISBNLivros = new ArrayList<>();
-        for (Livro ISBN : livros) {
-            if (ISBNinserido.equalsIgnoreCase(ISBN.getISBN())) {
-                ISBNLivros.add(ISBN);
+    public Livro pesquisarLivroISBN(String ISBNinserido){
+        for (Livro livro : livros) {
+            if (ISBNinserido.equalsIgnoreCase(livro.getISBN())) {
+                return livro;
             }
         }
-        return ISBNLivros;
-
+        return null;
     }
 
-    public boolean removerLivros(int idLivroRemover) {
-
+    public boolean removerLivro(int idLivroRemover) {
         for (Livro livro : livros) {
             if (idLivroRemover == livro.getId()) {
                 if (livro.getQuantidade() - 1 > 0) {
@@ -88,10 +112,9 @@ public class ControllerLivros {
             }
         }
         return false;
-
     }
 
-    public boolean editarLivros(int idLivroEditar, String novoTitulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+    public boolean editarLivro(int idLivroEditar, String novoTitulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
         for (Livro livro : livros) {
             if (idLivroEditar == livro.getId()) {
                 livro.setTitulo(novoTitulo);
@@ -111,9 +134,9 @@ public class ControllerLivros {
         return false;
     }
 
-    public boolean editarTituloDoLivro(int idEditarTitulo, String tituloNovo) {
+    public boolean editarTituloDoLivro(int idLivroEditar, String tituloNovo) {
         for (Livro livro : livros) {
-            if (idEditarTitulo == livro.getId()) {
+            if (idLivroEditar == livro.getId()) {
                 livro.setTitulo(tituloNovo);
                 return true;
             }
@@ -121,9 +144,9 @@ public class ControllerLivros {
         return false;
     }
 
-    public boolean editarSubTituloDoLivro(int idEditarTitulo, String subTituloNovo) {
+    public boolean editarSubTituloDoLivro(int idLivroEditar, String subTituloNovo) {
         for (Livro livro : livros) {
-            if (idEditarTitulo == livro.getId()) {
+            if (idLivroEditar == livro.getId()) {
                 livro.setSubtitulo(subTituloNovo);
                 return true;
             }
