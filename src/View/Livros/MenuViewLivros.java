@@ -126,23 +126,24 @@ public class MenuViewLivros {
                     break;
                 case 3:editar.editarLivrosPorSubTitulo(gestor);
                     break;
-                case 4:
+                case 4:editar.editarQuantidade(gestor);
                     break;
-                case 5:
+                case 5:editar.editarLivrosPorAutor(gestor);
                     break;
-                case 6:
+                case 6:editar.editarNumPaginas(gestor);
                     break;
-                case 7:
+                case 7:editar.editarPorCategoria(gestor);
                     break;
-                case 8:
+                case 8:editar.editarPorData(gestor);
                     break;
-                case 9:
+                case 9:editar.editarFaixaEtaria(gestor);
                     break;
-                case 10:
+                case 10:editar.editarEditora(gestor);
                     break;
-                case 11:
+                case 11:editar.editarISBN(gestor);
                     break;
-                case 12:
+                case 12: gestor.gravarLivrosParaFicheiro();
+                    this.menuLivros();
                     break;
 
             }

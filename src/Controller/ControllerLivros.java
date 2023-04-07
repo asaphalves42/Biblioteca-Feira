@@ -173,6 +173,65 @@ public class ControllerLivros {
         return false;
     }
 
+    public boolean editarNumPaginas(int idEditarTitulo, int numPaginas) {
+        for (Livro livro : livros) {
+            if (idEditarTitulo == livro.getId()) {
+                livro.setNumDePaginas(numPaginas);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean editarCategoria(int idEditarTitulo, String novaCategoria) {
+        for (Livro livro : livros) {
+            if (idEditarTitulo == livro.getId()) {
+                livro.setCategoria(novaCategoria);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean editarDataDePubli(int idEditarTitulo, Date novaData) {
+        for (Livro livro : livros) {
+            if (idEditarTitulo == livro.getId()) {
+                livro.setDataDePublicacao(novaData);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean editarFaixaEtaria(int idEditarTitulo, String novaFaixaEtaria) {
+        for (Livro livro : livros) {
+            if (idEditarTitulo == livro.getId()) {
+                livro.setFaixaEtaria(novaFaixaEtaria);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean editarEditora(int idEditarTitulo, String novaEditora) {
+        for (Livro livro : livros) {
+            if (idEditarTitulo == livro.getId()) {
+                livro.setEditora(novaEditora);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean editarISBN(int idEditarTitulo, String novoISBN) {
+        for (Livro livro : livros) {
+            if (idEditarTitulo == livro.getId()) {
+                livro.setISBN(novoISBN);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 
 
