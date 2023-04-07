@@ -1,18 +1,18 @@
-package ViewLivros;
+package View.Livros;
 
 import Controller.ControllerLivros;
-import View.Aplicacao;
+import View.ViewAplicacao;
 
 import static Utilidades.Leitura.ler;
 
 public class MenuViewLivros {
+    ControllerLivros gestor = new ControllerLivros();
     ViewFuncaoAdicionarLivros adicionar = new ViewFuncaoAdicionarLivros();
     ViewFuncaoListarLivros mostrar = new ViewFuncaoListarLivros();
     ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
     ViewFuncaoEditarLivros editar = new ViewFuncaoEditarLivros();
-    ControllerLivros gestor = new ControllerLivros();
     ViewFuncaoPesquisarLivros pesquisar = new ViewFuncaoPesquisarLivros();
-    Aplicacao app = new Aplicacao();
+    ViewAplicacao app = new ViewAplicacao();
 
     public void menuLivros2() {
 
