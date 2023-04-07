@@ -1,10 +1,7 @@
 package View.Livros;
 
 import Controller.ControllerLivros;
-import Model.Livro;
-import View.Aplicacao;
-
-import java.util.ArrayList;
+import View.ViewAplicacao;
 
 import static Utilidades.Leitura.ler;
 
@@ -14,7 +11,6 @@ public class MenuViewLivros {
     ViewFuncaoListarLivros mostrar = new ViewFuncaoListarLivros();
     ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
     ViewFuncaoEditarLivros editar = new ViewFuncaoEditarLivros();
-  ControllerLivros gestor = new ControllerLivros();
     ViewFuncaoPesquisarLivros pesquisar = new ViewFuncaoPesquisarLivros();
     ViewAplicacao app = new ViewAplicacao();
 
@@ -41,12 +37,12 @@ public class MenuViewLivros {
                 case 2:
                     pesquisar.livroPorTitulo(gestor);
                     break;
-                case 3:pesquisar.livrosPorISBN(gestor);
+                case 3:pesquisar.livroPorISBN(gestor);
                     break;
                 case 4:pesquisar.livrosPorCategoria(gestor);
                     break;
                 case 5:
-                    this.menuLivros(gestor.livros);
+                    this.menuLivros();
                     break;
             }
 
@@ -130,9 +126,9 @@ public class MenuViewLivros {
                     break;
                 case 3:editar.editarLivrosPorSubTitulo(gestor);
                     break;
-                case 4:editar.editarQuantidade(gestor);
+                case 4:
                     break;
-                case 5:editar.editarAutor(gestor);
+                case 5:
                     break;
                 case 6:
                     break;
