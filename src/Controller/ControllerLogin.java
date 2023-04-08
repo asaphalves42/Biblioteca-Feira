@@ -5,6 +5,7 @@ import View.ViewLogin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -34,13 +35,14 @@ public class ControllerLogin {
     public void registar() {
         String email = viewLogin.getEmail();
         String password = viewLogin.getPassword();
-        Utilizador user = obterUtilizadorPorEmail(email);
+        try {
+            PrintWriter writer = new PrintWriter(new FileOutputStream(new File("utilizadores.txt"), true));
 
-        if (user == null) {
-            user = new Utilizador(email, password);
-            user.guardarEmFicheiro();
+            writer.println(email + "," + password);
+            writer.close();
             viewLogin.mostrarMensagemDeRegistoComSucesso();
-        } else {
+        } catch (FileNotFoundException e) {
+            System.out.println("Erro ao guardar utilizador em ficheiro.");
             viewLogin.mostrarMensagemDeRegistoFalhado();
         }
     }

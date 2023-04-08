@@ -18,10 +18,10 @@ public class ViewAplicacao {
     public void Iniciar() {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
-        // Iniciar o sistema
+        
         mensagemUtilizadorParaRegisto();
         menuPrincipal();
-        // Criar instância do ControllerLogin
+
         controllerLogin = new ControllerLogin(new ViewLogin());
 
     }
