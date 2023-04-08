@@ -25,13 +25,6 @@ public class Utilizador {
         return password;
     }
 
-    public void guardarEmFicheiro() {
-        try {
-            PrintWriter writer = new PrintWriter(new File("utilizadores.txt"));
-            writer.println(email + "," + password);
-            writer.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Erro ao guardar utilizador em ficheiro.");
-        }
-    }
+
+
 }
