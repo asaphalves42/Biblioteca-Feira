@@ -1,8 +1,7 @@
 package View;
 
-import Controller.ControllerLivros;
 import Controller.ControllerLogin;
-import Utilidades.GestorFicheiros;
+import View.Autores.MenuViewAutores;
 import View.Livros.MenuViewLivros;
 
 import static Utilidades.Leitura.ler;
@@ -74,7 +73,8 @@ public class ViewAplicacao {
                     mostrarMenu.menuLivros();
                     break;
                 case 2:
-                    //menuAutores();
+                    MenuViewAutores mostraMenu = new MenuViewAutores();
+                    mostraMenu.menuAutores();
                     break;
                 case 3:
                     //menuReservas();
