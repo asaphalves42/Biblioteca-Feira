@@ -4,12 +4,13 @@ import java.util.Date;
 
 public class Pessoa {
 
-    public Pessoa(String nome, String morada, Date dataDeNascimento) {
+    public Pessoa(String id,String nome, String morada, Date dataDeNascimento) {
+        this.id = id;
         this.nome = nome;
         this.morada = morada;
         this.dataDeNascimento = dataDeNascimento;
     }
-
+    private String id;
     private String nome;
     private String morada;
     private Date dataDeNascimento;
@@ -38,5 +39,6 @@ public class Pessoa {
         this.dataDeNascimento = dataDeNascimento;
     }
 
-
+    public String getId() {return id;}
+    public void setId (String id) { this.id = id;}
 }

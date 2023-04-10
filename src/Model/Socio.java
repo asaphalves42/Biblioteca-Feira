@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Socio extends Pessoa {
 
-    public Socio(String nome, String morada, Date dataDeNascimento, String telefone, String numMecanografico) {
-        super(nome, morada, dataDeNascimento);
+    public Socio(String id, String nome, String morada, Date dataDeNascimento, String telefone, String numMecanografico) {
+        super(id, nome, morada, dataDeNascimento);
         this.telefone = telefone;
         this.numMecanografico = numMecanografico;
     }

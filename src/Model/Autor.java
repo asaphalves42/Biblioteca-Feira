@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Autor extends Pessoa {
 
-    public Autor(String nome, String morada, Date dataDeNascimento) {
-        super(nome, morada, dataDeNascimento);
+    public Autor(String id, String nome, String morada, Date dataDeNascimento) {
+        super(id, nome, morada, dataDeNascimento);
     }
 
  }
