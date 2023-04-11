@@ -1,4 +1,4 @@
-package View;
+package View.Reservas;
 
 import static Utilidades.Leitura.ler;
 

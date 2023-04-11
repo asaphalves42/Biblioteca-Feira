@@ -52,11 +52,11 @@ public class MenuViewLivros {
     }
 
     public void menuLivros() {
-
+        gestor.lerLivrosDeFicheiro();
         int opcao;
 
         do {
-            gestor.lerLivrosDeFicheiro();
+
 
             System.out.println("## Livros ##");
             System.out.println("------------------------");

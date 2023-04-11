@@ -1,9 +1,10 @@
 package View;
 
-import Controller.ControllerLivros;
+
 import Controller.ControllerLogin;
-import Utilidades.GestorFicheiros;
+
 import View.Livros.MenuViewLivros;
+import View.Reservas.MenuViewReservas;
 
 import static Utilidades.Leitura.ler;
 
@@ -18,10 +19,10 @@ public class ViewAplicacao {
     public void Iniciar() {
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
-        
+        // Iniciar o sistema
         mensagemUtilizadorParaRegisto();
         menuPrincipal();
-
+        // Criar instância do ControllerLogin
         controllerLogin = new ControllerLogin(new ViewLogin());
 
     }
@@ -56,6 +57,7 @@ public class ViewAplicacao {
     }
 
     public void menuPrincipal() {
+
         int opcao;
         do {
             System.out.println("## Menu principal ##");
@@ -77,7 +79,8 @@ public class ViewAplicacao {
                     //menuAutores();
                     break;
                 case 3:
-                    //menuReservas();
+                    MenuViewReservas mostrarMenuReservas = new MenuViewReservas();
+                    mostrarMenuReservas.menuReservas();
                     break;
                 case 4:
                     //menuSocios();
