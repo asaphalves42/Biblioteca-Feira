@@ -3,6 +3,7 @@ package View.Socios;
 import Controller.ControllerSocios;
 import Utilidades.ValidacaoData;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static Utilidades.Leitura.*;
@@ -18,7 +19,7 @@ public class ViewFuncaoAdicionarSocios {
         ler.nextLine();
 
         ValidacaoData validarData = new ValidacaoData();
-        Date dataDeNascimento = validarData.LerData(date);
+        LocalDate dataDeNascimento = validarData.LerData2();
 
         String telefone =LeStr("Introduza o nr de telefone: ");
 

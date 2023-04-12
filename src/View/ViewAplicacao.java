@@ -3,6 +3,7 @@ package View;
 
 import Controller.ControllerLogin;
 
+import View.Autores.MenuViewAutores;
 import View.Livros.MenuViewLivros;
 import View.Reservas.MenuViewReservas;
 import View.Socios.MenuViewSocios;
