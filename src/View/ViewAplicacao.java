@@ -5,6 +5,7 @@ import Controller.ControllerLogin;
 
 import View.Livros.MenuViewLivros;
 import View.Reservas.MenuViewReservas;
+import View.Socios.MenuViewSocios;
 
 import static Utilidades.Leitura.ler;
 
@@ -83,7 +84,8 @@ public class ViewAplicacao {
                     mostrarMenuReservas.menuReservas();
                     break;
                 case 4:
-                    //menuSocios();
+                    MenuViewSocios menuSocios = new MenuViewSocios();
+                    menuSocios.menuSocios();
                     break;
                 case 5:
 

@@ -1,10 +1,15 @@
 package View.Socios;
 
 
+import Controller.ControllerSocios;
+
 import static Utilidades.Leitura.ler;
 
 
 public class MenuViewSocios {
+    ControllerSocios gestorSocio=new ControllerSocios();
+    ViewFuncaoAdicionarSocios adSocio=new ViewFuncaoAdicionarSocios();
+    ViewFuncaoListarSocios listarSocio= new ViewFuncaoListarSocios();
 
     public void menuSocios() {
         int opcao;
@@ -22,10 +27,9 @@ public class MenuViewSocios {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1://Adicionar socio
-                    //MenuAdicionarSocios();
+                case 1:adSocio.adicionarsocios(gestorSocio);
                     break;
-                case 2://Listar socios * mostrar livros reservados pelo sócio
+                case 2:listarSocio.listarTodosOsSocios(gestorSocio);
                     break;
                 case 3://Editar socios
                     break;

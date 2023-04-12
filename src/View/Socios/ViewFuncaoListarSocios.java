@@ -8,16 +8,16 @@ import Model.Socio;
 import java.util.ArrayList;
 public class ViewFuncaoListarSocios {
 
-    public void listartodososlivros(){
-        ControllerSocios  listarsocios = new ControllerSocios();
-        ArrayList<Socio> socioslistados =  listarsocios.listarsocios();
+    public void listarTodosOsSocios(ControllerSocios gestorSocios){
 
-        if (socioslistados.isEmpty()){
+        ArrayList<Socio> sociosListados = gestorSocios.listarSocio();
+
+        if (sociosListados.isEmpty()){
             System.out.println("Não existem sócios registados!");
         }
         else{
-            for (Socio socios : socioslistados){
-                System.out.println();
+            for (Socio socio : sociosListados){
+                System.out.println(socio);
             }
         }
 

@@ -8,8 +8,9 @@ import java.util.Date;
 import static Utilidades.Leitura.*;
 
 public class ViewFuncaoAdicionarSocios {
-    ControllerSocios adicionar = new ControllerSocios();
-    public void menuadicionarsocios(){
+
+    public void adicionarsocios(ControllerSocios gestorSocio){
+
         String nome =LeStr("Introduza o nome: ");
         String morada =LeStr("Introduza morada: ");
         System.out.println("Introduza a data de data de nascimento: ");
@@ -20,7 +21,12 @@ public class ViewFuncaoAdicionarSocios {
         Date dataDeNascimento = validarData.LerData(date);
 
         String telefone =LeStr("Introduza o nr de telefone: ");
-        //Gerar numeromecanografico
+
+        System.out.println(" ");
+        System.out.println("Sócio adicionado com sucesso!");
+        System.out.println(" ");
+
+        gestorSocio.adicionarSocio(nome,morada,dataDeNascimento,telefone);
 
 
     }
