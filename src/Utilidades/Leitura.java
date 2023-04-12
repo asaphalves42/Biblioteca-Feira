@@ -1,5 +1,7 @@
 package Utilidades;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Leitura {
@@ -15,6 +17,18 @@ public class Leitura {
             ler = new Scanner(System.in);
             return ler.nextLine();
         }
+
+    public static LocalDate LeData() {
+        try {
+            LocalDate data;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            data = LocalDate.parse(ler.nextLine(), formatter);
+            return data;
+        } catch (Exception ex) {
+            System.out.println("Data invalida, insira uma data com o formato (dd/MM/aaaa):");
+            return LeData();
+        }
+    }
 
 
     }

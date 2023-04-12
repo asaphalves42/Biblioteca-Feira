@@ -1,8 +1,13 @@
 package View;
 
+<<<<<<< HEAD
 
 import Controller.ControllerLogin;
 
+=======
+import Controller.ControllerLogin;
+import View.Autores.MenuViewAutores;
+>>>>>>> ee97fb1caeb75ae8f24c56199346189ec85e11b7
 import View.Livros.MenuViewLivros;
 import View.Reservas.MenuViewReservas;
 import View.Socios.MenuViewSocios;

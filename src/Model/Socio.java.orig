@@ -1,13 +1,21 @@
 package Model;
 
-import java.time.LocalDate;
+<<<<<<< HEAD
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 public class Socio extends Pessoa {
 
-    public Socio(String nome, String morada, LocalDate dataDeNascimento, String telefone) {
+    public Socio(String nome, String morada, Date dataDeNascimento, String telefone) {
+=======
+import java.time.LocalDate;
+
+public class Socio extends Pessoa {
+
+    public Socio(String nome, String morada, LocalDate dataDeNascimento, String telefone, String numMecanografico) {
+>>>>>>> ee97fb1caeb75ae8f24c56199346189ec85e11b7
         super(nome, morada, dataDeNascimento);
         this.telefone = telefone;
         this.numMecanografico = gerarNumMecanografico();

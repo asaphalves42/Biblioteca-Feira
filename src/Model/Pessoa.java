@@ -1,18 +1,17 @@
 package Model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Pessoa {
 
-    public Pessoa(String nome, String morada, Date dataDeNascimento) {
+    public Pessoa(String nome, String morada, LocalDate dataDeNascimento) {
         this.nome = nome;
         this.morada = morada;
         this.dataDeNascimento = dataDeNascimento;
     }
-
     private String nome;
     private String morada;
-    private Date dataDeNascimento;
+    private LocalDate dataDeNascimento;
 
     public String getNome() {
         return nome;
@@ -22,7 +21,7 @@ public class Pessoa {
         return morada;
     }
 
-    public Date getDataDeNascimento() {
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 
@@ -34,9 +33,8 @@ public class Pessoa {
         this.morada = morada;
     }
 
-    public void setDataDeNascimento(Date dataDeNascimento) {
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
-
 
 }
