@@ -1,10 +1,5 @@
-package View;
+package View.Socios;
 
-
-import Controller.ControllerSocios;
-import View.ViewFuncaoAdicionarSocios;
-
-import java.util.Date;
 
 import static Utilidades.Leitura.ler;
 
