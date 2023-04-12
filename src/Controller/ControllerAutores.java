@@ -3,8 +3,8 @@ package Controller;
 import Model.Autor;
 import Utilidades.GestorFicheiros;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ControllerAutores {
 
@@ -31,7 +31,7 @@ public class ControllerAutores {
     }
 
 
-    public void adicionarAutores(String id, String nome, String morada, Date dataDeNascimento) {
+    public void adicionarAutores(int id, String nome, String morada, LocalDate dataDeNascimento) {
         Autor autor = new Autor(id, nome, morada, dataDeNascimento);
         this.autores.add(autor);
 
@@ -43,9 +43,10 @@ public class ControllerAutores {
 
     }
 
-    public boolean editarAutor (String id, String nome, String morada, Date dataDeNascimento) {
+    public boolean editarAutor (int id, String nome, String morada, LocalDate dataDeNascimento) {
         for (Autor autor : autores) {
-            if (id.equals(autor.getId())) {
+            if (id == autor.getId()) {
+                autor.setId(id);
                 autor.setNome(nome);
                 autor.setMorada(morada);
                 autor.setDataDeNascimento(dataDeNascimento);
@@ -65,24 +66,27 @@ public class ControllerAutores {
         return nomeAutor;
     }
 
-    public ArrayList<Autor> pesquisarAutorPorId (String idInserido) {
-        ArrayList<Autor> idAutor = new ArrayList<>();
-            for (Autor id : autores) {
-                if (idInserido.equalsIgnoreCase(id.getId())){
-                    idAutor.add(id);
-                }
+    public Autor pesquisarAutorPorId (int idInserido) {
+        for (Autor autor : autores) {
+            if (idInserido == autor.getId()){
+                return autor;
             }
-        return idAutor;
+        }
+        return null;
     }
 
-    public boolean removerAutor(String idAutor) {
+    public boolean removerAutor(String nomeAutor) {
         for (Autor autor : autores) {
-            if (idAutor.equals(autor.getId())) {
+            if (nomeAutor.equals(autor.getNome())) {
                 autores.remove(autor);
                 return true;
             }
         }
-        System.out.println("Não existe autor com o ID inserido");
+        System.out.println("Não existe autor(a) com o nome inserido");
+        return false;
+    }
+
+    public boolean editarAutor(String novoNome, String novaMorada) {
         return false;
     }
 }
