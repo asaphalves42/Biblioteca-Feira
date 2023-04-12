@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class ViewFuncaoListarAutores {
 
-    public void listarTodosOsAutores() {
+    public void listarTodosOsAutores(ControllerAutores gestor) {
 
         ControllerAutores listarAutores = new ControllerAutores();
 
-        ArrayList<Autor> autoresListados = listarAutores.listarAutores();
+        ArrayList <Autor> autoresListados = gestor.listarAutores();
 
        if (autoresListados.isEmpty()) {
             System.out.println("Não existem autores listados");
