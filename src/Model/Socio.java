@@ -1,11 +1,11 @@
 package Model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Socio extends Pessoa {
 
-    public Socio(String id, String nome, String morada, Date dataDeNascimento, String telefone, String numMecanografico) {
-        super(id, nome, morada, dataDeNascimento);
+    public Socio(String nome, String morada, LocalDate dataDeNascimento, String telefone, String numMecanografico) {
+        super(nome, morada, dataDeNascimento);
         this.telefone = telefone;
         this.numMecanografico = numMecanografico;
     }
