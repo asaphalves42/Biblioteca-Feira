@@ -2,7 +2,6 @@ package View.Autores;
 
 import Controller.ControllerAutores;
 import Utilidades.Leitura;
-
 import java.time.LocalDate;
 
 import static Utilidades.Leitura.*;
@@ -10,16 +9,20 @@ import static Utilidades.Leitura.*;
 public class ViewFuncaoAdicionarAutor {
 
     public void menuAdicionarAutores(ControllerAutores gestor) {
+        int id;
+        String nome, morada;
 
-        int id = LeInt("Insira o Id do(a) Autor(a)");
+        do {
+            id = LeInt("Insira o Id do(a) Autor(a)");
+        } while (id <= 0);
 
-        String nome = LeStr("Insira o nome do(a) autor(a)");
+        do {
+            nome = LeStr("Insira o nome do(a) autor(a)");
+        } while (nome.trim().isEmpty());
 
-        String morada = LeStr("Insira a morada do(a) autor(a)");
-
-        System.out.println("Insira a data de nascimento do(a) autor(a)");
-        String date = ler.next();
-        ler.nextLine();
+        do {
+            morada = LeStr("Insira a morada do(a) autor(a)");
+        } while (morada.trim().isEmpty());
 
         LocalDate dataDeNascimento = Leitura.LeData();
 
