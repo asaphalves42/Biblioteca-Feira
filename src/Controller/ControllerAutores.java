@@ -1,44 +1,62 @@
 package Controller;
 
 import Model.Autor;
+import Model.Livro;
 import Utilidades.GestorFicheiros;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ControllerAutores {
-
     ArrayList<Autor> autores = new ArrayList<>();
-
- /*   public void lerAutorDeFicheiro() {
+   public void lerAutorDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Autores.txt");
-        if (!linhas.isEmpty()) {
+
             for (String linha : linhas) {
+                if (linha.isEmpty() == false) {
                 String[] value_split = linha.split("\\|");
-                Autor aux = new Autor(value_split[0],
-                        Integer.parseInt(value_split[1]),
-                        value_split[2],
-                        value_split[3];
-                        new Date(value_split[4]),;
-                autores.add(aux);
+                if(value_split.length !=0){
+                    Autor aux = new Autor(Integer.parseInt(value_split[0]),
+                            value_split[1],
+                            value_split[2],
+                    LocalDate.parse(value_split[3]));
+                    autores.add(aux);
+                }
+
             }
         }
     }
-*/
+
     public void gravarAutorParaFicheiro() {
         String conteudo = "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         for (Autor aux : autores) {
+            String formated_date = aux.getDataDeNascimento().format(formatter);
+
             conteudo += aux.getId() + "|";
             conteudo += aux.getNome() + "|";
             conteudo += aux.getMorada() + "|";
-            conteudo += aux.getDataDeNascimento() + "|";
+            conteudo += formated_date +  "\n";
         }
         GestorFicheiros.GravarFicheiro("Autores.txt", conteudo);
     }
 
+    public int verificarIdAutor(){
+        int max = 0;
+        for(Autor id : autores){
+            if(id.getId() > max){
+                max = id.getId();
+            }
+        }
+        return max;
 
-    public void adicionarAutores(int id, String nome, String morada, LocalDate dataDeNascimento) {
-        Autor autor = new Autor(id, nome, morada, dataDeNascimento);
+    }
+
+
+    public void adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
+       this.verificarIdAutor();
+        Autor autor = new Autor(nome, morada, dataDeNascimento);
         this.autores.add(autor);
 
     }

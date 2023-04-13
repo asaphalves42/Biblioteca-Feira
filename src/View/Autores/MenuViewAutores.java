@@ -6,7 +6,6 @@ import View.ViewAplicacao;
 import static Utilidades.Leitura.ler;
 
 public class MenuViewAutores {
-
     ControllerAutores gestor = new ControllerAutores();
     ViewFuncaoAdicionarAutor adicionar = new ViewFuncaoAdicionarAutor();
     ViewFuncaoListarAutores listar = new ViewFuncaoListarAutores();
@@ -15,7 +14,7 @@ public class MenuViewAutores {
     ViewFuncaoPesquisarAutor pesquisar = new ViewFuncaoPesquisarAutor();
     ViewAplicacao app = new ViewAplicacao();
     public void menuAutores() {
-        //gestor.lerAutorDeFicheiro();
+        gestor.lerAutorDeFicheiro();
         int opcao;
 
         do {
@@ -27,7 +26,8 @@ public class MenuViewAutores {
             System.out.println("3 - Pesquisar autor");
             System.out.println("4 - Editar autores");
             System.out.println("5 - Remover autores");
-            System.out.println("6 - Menu anterior");
+            System.out.println("6 - Gravar");
+            System.out.println("7 - Menu anterior");
 
             opcao = ler.nextInt();
 
@@ -49,6 +49,8 @@ public class MenuViewAutores {
                     break;
                 case 6:
                     gestor.gravarAutorParaFicheiro();
+                    break;
+                case 7:
                     app.menuPrincipal();
                     break;
             }

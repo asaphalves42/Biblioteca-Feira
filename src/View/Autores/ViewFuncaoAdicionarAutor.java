@@ -2,6 +2,8 @@ package View.Autores;
 
 import Controller.ControllerAutores;
 import Utilidades.Leitura;
+import Utilidades.ValidacaoData;
+
 import java.time.LocalDate;
 
 import static Utilidades.Leitura.*;
@@ -9,26 +11,19 @@ import static Utilidades.Leitura.*;
 public class ViewFuncaoAdicionarAutor {
 
     public void menuAdicionarAutores(ControllerAutores gestor) {
-        int id;
-        String nome, morada;
 
-        do {
-            id = LeInt("Insira o Id do(a) Autor(a)");
-        } while (id <= 0);
+        String nome = LeStr("Insira o nome do(a) autor(a)");
 
-        do {
-            nome = LeStr("Insira o nome do(a) autor(a)");
-        } while (nome.trim().isEmpty());
+        String morada = LeStr("Insira a morada do(a) autor(a)");
 
-        do {
-            morada = LeStr("Insira a morada do(a) autor(a)");
-        } while (morada.trim().isEmpty());
+        System.out.println("Digite a data de nascimento do autor: ");
+        ValidacaoData validarData = new ValidacaoData();
+        LocalDate dataDeNascimento = validarData.LerData2();
 
-        LocalDate dataDeNascimento = Leitura.LeData();
+        System.out.println("Autor(a) " + nome + " adicionado(a) com sucesso!");
+        System.out.println(" ");
 
-        System.out.println("Autor(a) " + nome + " adicionado(a) com sucesso");
-
-        gestor.adicionarAutores(id, nome, morada, dataDeNascimento);
+        gestor.adicionarAutores(nome, morada, dataDeNascimento);
 
     }
 
