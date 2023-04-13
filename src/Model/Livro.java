@@ -1,11 +1,12 @@
 package Model;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class Livro {
 
-    public Livro(String titulo, String subtitulo, int quantidade, String autor, int numDePaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
-        this.id = proximoId++;
+    public Livro(String titulo, String subtitulo, int quantidade, String autor, int numDePaginas, String categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+        this.id = ++proximoId;
         this.titulo = titulo;
         this.subtitulo = subtitulo;
         this.quantidade = quantidade;
@@ -18,14 +19,31 @@ public class Livro {
         this.autor = autor;
     }
 
-    private static int proximoId = 1;
+    public Livro(int id, String titulo, String subtitulo, int quantidade, String autor, int numDePaginas, String categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+        this.id = id;
+        this.titulo = titulo;
+        this.subtitulo = subtitulo;
+        this.quantidade = quantidade;
+        this.numDePaginas = numDePaginas;
+        this.categoria = categoria;
+        this.dataDePublicacao = dataDePublicacao;
+        this.faixaEtaria = faixaEtaria;
+        this.editora = editora;
+        this.ISBN = ISBN;
+        this.autor = autor;
+
+        if(id>proximoId){
+            proximoId = id;
+        }
+    }
+    private static int proximoId = 0;
     private int id;
     private String titulo;
     private String subtitulo;
     private int quantidade;
     private int numDePaginas;
     private String categoria;
-    private Date dataDePublicacao;
+    private LocalDate dataDePublicacao;
     private String faixaEtaria;
     private String editora;
     private String ISBN;
@@ -47,7 +65,7 @@ public class Livro {
         return categoria;
     }
 
-    public Date getDataDePublicacao() {
+    public LocalDate getDataDePublicacao() {
         return dataDePublicacao;
     }
 
@@ -79,7 +97,7 @@ public class Livro {
         this.categoria = categoria;
     }
 
-    public void setDataDePublicacao(Date dataDePublicacao) {
+    public void setDataDePublicacao(LocalDate dataDePublicacao) {
         this.dataDePublicacao = dataDePublicacao;
     }
 
