@@ -10,12 +10,17 @@ public class ControllerAutores {
 
     ArrayList<Autor> autores = new ArrayList<>();
 
-    /*public class lerAutorDeFicheiro() {
+ /*   public void lerAutorDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Autores.txt");
         if (!linhas.isEmpty()) {
             for (String linha : linhas) {
                 String[] value_split = linha.split("\\|");
-                //Autor aux = new Autor(value_split[0], )
+                Autor aux = new Autor(value_split[0],
+                        Integer.parseInt(value_split[1]),
+                        value_split[2],
+                        value_split[3];
+                        new Date(value_split[4]),;
+                autores.add(aux);
             }
         }
     }
@@ -23,6 +28,7 @@ public class ControllerAutores {
     public void gravarAutorParaFicheiro() {
         String conteudo = "";
         for (Autor aux : autores) {
+            conteudo += aux.getId() + "|";
             conteudo += aux.getNome() + "|";
             conteudo += aux.getMorada() + "|";
             conteudo += aux.getDataDeNascimento() + "|";
@@ -66,13 +72,14 @@ public class ControllerAutores {
         return nomeAutor;
     }
 
-    public Autor pesquisarAutorPorId (int idInserido) {
+    public ArrayList<Autor> pesquisarAutorPorId (int idInserido) {
+        ArrayList<Autor> autoresEncontrados = new ArrayList<>();
         for (Autor autor : autores) {
             if (idInserido == autor.getId()){
-                return autor;
+                autoresEncontrados.add(autor);
             }
         }
-        return null;
+        return autoresEncontrados;
     }
 
     public boolean removerAutor(String nomeAutor) {
