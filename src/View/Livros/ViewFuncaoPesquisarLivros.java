@@ -36,19 +36,22 @@ public class ViewFuncaoPesquisarLivros {
 
     }
 
-    public void livrosPorCategoria(ControllerLivros gestor){
-
+    public void livrosPorCategoria(ControllerLivros gestor) {
         String categoriaInserida = LeStr("Insira a categoria do livro:");
-
         ArrayList<Livro> livros = gestor.pesquisarLivroCategoria(categoriaInserida);
 
-        if(livros.isEmpty()){
-            System.out.println("Categoria nao existente!");
-        }else{
-            System.out.println(livros);
+        if (livros.isEmpty()) {
+            System.out.println("Não há livros cadastrados nesta categoria!");
+            System.out.println(" ");
+        } else {
+            System.out.println("Livros encontrados na categoria " + categoriaInserida + ":");
+            System.out.println(" ");
+            for (Livro livro : livros) {
+                System.out.println(livro.toString());
+            }
         }
-
     }
+
 
     public void livroPorISBN(ControllerLivros gestor){
 

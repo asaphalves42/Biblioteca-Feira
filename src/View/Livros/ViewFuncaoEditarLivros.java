@@ -4,8 +4,8 @@ import Controller.ControllerLivros;
 import Model.Livro;
 import Utilidades.ValidacaoData;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static Utilidades.Leitura.*;
 
@@ -43,7 +43,7 @@ public class ViewFuncaoEditarLivros {
         String date = ler.next();
         ler.nextLine();
         ValidacaoData validarData = new ValidacaoData();
-        Date dataDePublicacao = validarData.LerData(date);
+        LocalDate dataDePublicacao = validarData.LerData2();
 
         String faixaEtaria = LeStr("Insira a nova faixa etária do livro:");
 
@@ -197,32 +197,34 @@ public class ViewFuncaoEditarLivros {
         }
     }
 
-    public void editarPorCategoria(ControllerLivros gestor){
-        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+    public void editarPorCategoria(ControllerLivros gestor) {
+        String categoriaInserida = LeStr("Insira a categoria do livro:");
 
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
+        ArrayList<Livro> livros = gestor.pesquisarLivroCategoria(categoriaInserida);
+
+        if (livros.isEmpty()) {
+            System.out.println("Não existem livros nesta categoria!");
             System.out.println(" ");
         } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+            for (Livro livro : livros) {
+                System.out.println(livro.toString());
+            }
+
+            int idLivro = LeInt("Insira o id do livro que deseja editar a categoria:");
+            Livro livroParaEditar = gestor.pesquisarLivroPorId(idLivro);
+
+            if (livroParaEditar == null) {
+                System.out.println("Livro não encontrado!");
+                System.out.println(2 );
+            } else {
+                String novaCategoria = LeStr("Insira a nova categoria:");
+                livroParaEditar.setCategoria(novaCategoria);
+                System.out.println("Categoria editada com sucesso!");
+                System.out.println(" ");
             }
         }
-
-        int idEditarCategoria = LeInt("Insira o id do livro que quer editar: ");
-        String novaCategoria = LeStr("Insira a nova categoria:");
-
-        boolean categoriaEditada = gestor.editarCategoria(idEditarCategoria, novaCategoria);
-
-        if(categoriaEditada){
-            System.out.println("Livro editado com sucesso!");
-            System.out.println(" ");
-        } else{
-            System.out.println("Livro não encontrado!");
-            System.out.println(" ");
-        }
     }
+
 
     public void editarPorData(ControllerLivros gestor){
         String tituloLivro = LeStr("Insira o título do livro que quer editar:");
@@ -239,10 +241,8 @@ public class ViewFuncaoEditarLivros {
 
         int idEditarData = LeInt("Insira o id do livro que quer editar: ");
         System.out.println("Digite a nova data de publicação do livro: ");
-        String date = ler.next();
-        ler.nextLine();
         ValidacaoData validarData = new ValidacaoData();
-        Date novaDataDePublicacao = validarData.LerData(date);
+        LocalDate novaDataDePublicacao = validarData.LerData2();
 
         boolean dataEditada = gestor.editarDataDePubli(idEditarData, novaDataDePublicacao);
 

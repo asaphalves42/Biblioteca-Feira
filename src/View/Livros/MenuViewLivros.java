@@ -57,7 +57,6 @@ public class MenuViewLivros {
 
         do {
 
-
             System.out.println("## Livros ##");
             System.out.println("------------------------");
             System.out.println("1 - Adicionar livros");
@@ -65,7 +64,8 @@ public class MenuViewLivros {
             System.out.println("3 - Editar livros");
             System.out.println("4 - Remover livros");
             System.out.println("5 - Pesquisar livros");
-            System.out.println("6 - Menu anterior");
+            System.out.println("6 - Gravar");
+            System.out.println("7 - Menu anterior");
 
             opcao = ler.nextInt();
             ler.nextLine();
@@ -86,13 +86,15 @@ public class MenuViewLivros {
                 case 5:
                     this.menuLivros2();
                     break;
-                case 6://sair
+                case 6:
                     gestor.gravarLivrosParaFicheiro();
+                    break;
+                case 7:
                     app.menuPrincipal();
                     break;
             }
 
-        } while (opcao != 6);
+        } while (opcao != 7);
 
     }
 
@@ -114,7 +116,8 @@ public class MenuViewLivros {
             System.out.println("9 - Faixa etaria");
             System.out.println("10 - Editora");
             System.out.println("11 - ISBN");
-            System.out.println("12 - Menu anterior");
+            System.out.println("12 - Gravar");
+            System.out.println("13 - Menu anterior");
 
             opcao = ler.nextInt();
             ler.nextLine();
@@ -143,11 +146,13 @@ public class MenuViewLivros {
                 case 11:editar.editarISBN(gestor);
                     break;
                 case 12: gestor.gravarLivrosParaFicheiro();
+                    break;
+                    case 13:
                     this.menuLivros();
                     break;
 
             }
-        } while (opcao != 12);
+        } while (opcao != 13);
 
 
     }

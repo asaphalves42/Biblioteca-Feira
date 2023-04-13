@@ -16,7 +16,7 @@ public class ViewFuncaoListarLivros {
             System.out.println(" ");
         } else{
             for(Livro livro : livrosListados){
-                System.out.println(livro);
+                System.out.println(livro.toString());
             }
         }
     }
