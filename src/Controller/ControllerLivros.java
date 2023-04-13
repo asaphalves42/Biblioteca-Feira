@@ -3,38 +3,45 @@ package Controller;
 import Model.Livro;
 import Utilidades.GestorFicheiros;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.text.SimpleDateFormat;
+
 
 public class ControllerLivros {
     public ArrayList<Livro> livros = new ArrayList<>();
     public void lerLivrosDeFicheiro(){
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("livros.txt");
-        if (!linhas.isEmpty()) {
+
             for (String linha : linhas) {
+                if(linha.isEmpty() == false){
                 String[] value_split = linha.split("\\|");
-                Livro aux = new Livro(value_split[0],
-                        value_split[1],
-                        Integer.parseInt(value_split[2]),
-                        value_split[3],
-                        Integer.parseInt(value_split[4]),
-                        value_split[5],
-                        new Date(value_split[6]),
-                        value_split[7],
-                        value_split[8],
-                        value_split[9]);
-                livros.add(aux);
-            }
+                if(value_split.length != 0) {
+                    Livro aux = new Livro(Integer.parseInt(value_split[0]),
+                            value_split[1],
+                            value_split[2],
+                            Integer.parseInt(value_split[3]),
+                            value_split[4],
+                            Integer.parseInt(value_split[5]),
+                            value_split[6],
+                            LocalDate.parse(value_split[7]),
+                            value_split[8],
+                            value_split[9],
+                            value_split[10]);
+                    livros.add(aux);
+                }
+                }
+
         }
+
     }
     public void gravarLivrosParaFicheiro(){
-
         String conteudo = "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         for (Livro aux : livros){
-            SimpleDateFormat DateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String formated_date = DateFormat.format(aux.getDataDePublicacao());
+            String formated_date = aux.getDataDePublicacao().format(formatter);
 
+            conteudo += aux.getId() + "|";
             conteudo += aux.getTitulo() + "|" ;
             conteudo += aux.getSubtitulo() + "|" ;
             conteudo += aux.getQuantidade() + "|" ;
@@ -48,8 +55,18 @@ public class ControllerLivros {
         }
         GestorFicheiros.GravarFicheiro("livros.txt", conteudo);
     }
+    public int verificarId(){
+        int max = 0;
+        for(Livro id : livros){
+            if(id.getId() > max){
+                max = id.getId();
+            }
+        }
+        return max;
 
-    public void adicionarLivros(String titulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+    }
+    public void adicionarLivros(String titulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+        this.verificarId();
         Livro livro = new Livro(titulo, subTitulo, quantidade, autor, numPaginas, categoria, dataDePublicacao, faixaEtaria, editora, ISBN);
 
         this.livros.add(livro);
@@ -114,7 +131,7 @@ public class ControllerLivros {
         return false;
     }
 
-    public boolean editarLivro(int idLivroEditar, String novoTitulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, Date dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+    public boolean editarLivro(int idLivroEditar, String novoTitulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
         for (Livro livro : livros) {
             if (idLivroEditar == livro.getId()) {
                 livro.setTitulo(novoTitulo);
@@ -193,7 +210,7 @@ public class ControllerLivros {
         return false;
     }
 
-    public boolean editarDataDePubli(int idEditarTitulo, Date novaData) {
+    public boolean editarDataDePubli(int idEditarTitulo, LocalDate novaData) {
         for (Livro livro : livros) {
             if (idEditarTitulo == livro.getId()) {
                 livro.setDataDePublicacao(novaData);
@@ -230,6 +247,15 @@ public class ControllerLivros {
             }
         }
         return false;
+    }
+
+    public Livro pesquisarLivroPorId(int id) {
+        for (Livro livro : livros) {
+            if (livro.getId() == id) {
+                return livro;
+            }
+        }
+        return null;
     }
 
 }
