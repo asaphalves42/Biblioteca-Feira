@@ -5,6 +5,7 @@ import Model.Autor;
 import Utilidades.Leitura;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static Utilidades.Leitura.LeInt;
 import static Utilidades.Leitura.LeStr;
@@ -14,14 +15,21 @@ public class ViewFuncaoEditarAutor {
     public void editarAutor(ControllerAutores gestor) {
 
         int idAutor = LeInt("Insira o Id do(a) autor(a) que quer editar");
-        Autor autorEditar = gestor.pesquisarAutorPorId(idAutor);
+        ArrayList<Autor> autorEditar = gestor.pesquisarAutorPorId(idAutor);
 
         if (autorEditar == null) {
             System.out.println("Não existem autores com esse Id");
             System.out.println(" ");
         }else {
-            String novoNome = LeStr("insira o novo nome do(a) autor(a)");
-            String novaMorada = LeStr("insira a nova morada");
+            String novoNome = "";
+            while (novoNome.trim().equals("")) {
+                novoNome = LeStr("Insira o novo nome do(a) autor(a)");
+            }
+
+            String novaMorada = "";
+            while (novaMorada.trim().equals("")) {
+                novaMorada = LeStr("Insira a nova morada");
+            }
             LocalDate novaDataDeNascimento = Leitura.LeData();
 
             boolean editado = gestor.editarAutor(idAutor, novoNome, novaMorada, novaDataDeNascimento);
@@ -32,6 +40,7 @@ public class ViewFuncaoEditarAutor {
             } else {
                 System.out.println("Autor não editado");
                 System.out.println(" ");
+                gestor.gravarAutorParaFicheiro();
             }
         }
    }
