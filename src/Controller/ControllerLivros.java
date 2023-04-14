@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Livro;
 import Utilidades.GestorFicheiros;
+import View.Categorias.Categorias;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -219,7 +220,6 @@ public class ControllerLivros {
         }
         return false;
     }
-
     public boolean editarFaixaEtaria(int idEditarTitulo, String novaFaixaEtaria) {
         for (Livro livro : livros) {
             if (idEditarTitulo == livro.getId()) {

@@ -1,8 +1,6 @@
 package Model;
 
 import java.time.LocalDate;
-
-
 public class Livro {
 
     public Livro(String titulo, String subtitulo, int quantidade, String autor, int numDePaginas, String categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {

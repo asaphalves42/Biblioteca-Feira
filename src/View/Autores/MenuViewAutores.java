@@ -79,9 +79,6 @@ public class MenuViewAutores {
                 case 2:
                     pesquisar.pesquisarAutorPorNome(gestor);
                     break;
-                case 3:
-                    this.menuAutores();
-                    break;
             }
         } while (opcao !=3);
     }

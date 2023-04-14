@@ -3,6 +3,7 @@ package View.Autores;
 import Controller.ControllerAutores;
 import Model.Autor;
 import Utilidades.Leitura;
+import Utilidades.ValidacaoData;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,7 +31,9 @@ public class ViewFuncaoEditarAutor {
             while (novaMorada.trim().equals("")) {
                 novaMorada = LeStr("Insira a nova morada");
             }
-            LocalDate novaDataDeNascimento = Leitura.LeData();
+            System.out.println("Digite a data de nascimento do autor: ");
+            ValidacaoData validarData = new ValidacaoData();
+            LocalDate novaDataDeNascimento = validarData.LerData2();
 
             boolean editado = gestor.editarAutor(idAutor, novoNome, novaMorada, novaDataDeNascimento);
 

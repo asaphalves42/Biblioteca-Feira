@@ -3,6 +3,7 @@ package View.Livros;
 import Controller.ControllerLivros;
 import Model.Livro;
 import Utilidades.ValidacaoData;
+import View.Categorias.Categorias;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class ViewFuncaoEditarLivros {
             System.out.println(" ");
         } else {
             for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+                System.out.println(livro.toString());
             }
         }
 
@@ -40,8 +41,6 @@ public class ViewFuncaoEditarLivros {
         String categoria = LeStr("Insira a nova categoria do livro:");
 
         System.out.println("Digite a nova data de publicação do livro: ");
-        String date = ler.next();
-        ler.nextLine();
         ValidacaoData validarData = new ValidacaoData();
         LocalDate dataDePublicacao = validarData.LerData2();
 
@@ -64,17 +63,23 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarLivrosPorTitulo(ControllerLivros gestor){
-        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+        ArrayList<Livro> livrosParaEditar;
 
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+        while (true) {
+            String tituloLivro = LeStr("Insira o título do livro que quer editar:");
+            livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+
+            if (livrosParaEditar.isEmpty()) {
+                System.out.println("Não existem livros com este título!");
+                System.out.println(" ");
+            } else {
+                for (Livro livro : livrosParaEditar) {
+                    System.out.println(livro);
+                }
+                break;
             }
         }
+
 
         int idEditarTitulo = LeInt("Insira o id do livro que quer editar: ");
         String tituloNovo = LeStr("Insira o novo título:");
@@ -91,20 +96,25 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarLivrosPorSubTitulo(ControllerLivros gestor){
-        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+        ArrayList<Livro> livrosParaEditar;
 
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+        while (true) {
+            String tituloLivro = LeStr("Insira o título do livro que quer editar:");
+            livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+
+            if (livrosParaEditar.isEmpty()) {
+                System.out.println("Não existem livros com este título!");
+                System.out.println(" ");
+            } else {
+                for (Livro livro : livrosParaEditar) {
+                    System.out.println(livro);
+                }
+                break;
             }
         }
 
         int idEditarSubTitulo = LeInt("Insira o id do livro que quer editar: ");
-        String subTituloNovo = LeStr("Insira o novo título:");
+        String subTituloNovo = LeStr("Insira o novo subtítulo:");
 
         boolean tituloEditado = gestor.editarSubTituloDoLivro(idEditarSubTitulo, subTituloNovo);
 
@@ -118,15 +128,20 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarQuantidade(ControllerLivros gestor){
-        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+        ArrayList<Livro> livrosParaEditar;
 
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+        while (true) {
+            String tituloLivro = LeStr("Insira o título do livro que quer editar:");
+            livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+
+            if (livrosParaEditar.isEmpty()) {
+                System.out.println("Não existem livros com este título!");
+                System.out.println(" ");
+            } else {
+                for (Livro livro : livrosParaEditar) {
+                    System.out.println(livro);
+                }
+                break;
             }
         }
 
@@ -144,15 +159,20 @@ public class ViewFuncaoEditarLivros {
         }
     }
     public void editarLivrosPorAutor(ControllerLivros gestor){
-        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+        ArrayList<Livro> livrosParaEditar;
 
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+        while (true) {
+            String tituloLivro = LeStr("Insira o título do livro que quer editar:");
+            livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+
+            if (livrosParaEditar.isEmpty()) {
+                System.out.println("Não existem livros com este título!");
+                System.out.println(" ");
+            } else {
+                for (Livro livro : livrosParaEditar) {
+                    System.out.println(livro);
+                }
+                break;
             }
         }
 
@@ -171,15 +191,20 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarNumPaginas(ControllerLivros gestor){
-        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+        ArrayList<Livro> livrosParaEditar;
 
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+        while (true) {
+            String tituloLivro = LeStr("Insira o título do livro que quer editar:");
+            livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+
+            if (livrosParaEditar.isEmpty()) {
+                System.out.println("Não existem livros com este título!");
+                System.out.println(" ");
+            } else {
+                for (Livro livro : livrosParaEditar) {
+                    System.out.println(livro);
+                }
+                break;
             }
         }
 
@@ -198,44 +223,78 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarPorCategoria(ControllerLivros gestor) {
-        String categoriaInserida = LeStr("Insira a categoria do livro:");
+        ArrayList<Livro> livros;
+        do {
+            String tituloInserido = LeStr("Insira o título do livro: ");
+            livros = gestor.pesquisarLivroPorTitulo(tituloInserido);
 
-        ArrayList<Livro> livros = gestor.pesquisarLivroCategoria(categoriaInserida);
+            if (livros.isEmpty()) {
+                System.out.println("Não existem livros com esse título!");
+                System.out.println(" ");
+            } else {
+                for (Livro livro : livros) {
+                    System.out.println(livro.toString());
+                }
+            }
+        } while (livros.isEmpty());
 
-        if (livros.isEmpty()) {
-            System.out.println("Não existem livros nesta categoria!");
+        int idLivro = LeInt("Insira o id do livro que deseja editar a categoria:");
+        Livro livroParaEditar = gestor.pesquisarLivroPorId(idLivro);
+
+        if (livroParaEditar == null) {
+            System.out.println("Livro não encontrado!");
             System.out.println(" ");
         } else {
-            for (Livro livro : livros) {
-                System.out.println(livro.toString());
+            System.out.println("Escolha a nova categoria:");
+            Categorias escolherCat = new Categorias();
+            int opcaoCategoria = escolherCat.escolherCategorias();
+
+            String novaCategoria;
+            switch (opcaoCategoria) {
+                case 1:
+                    novaCategoria = "Artes";
+                    break;
+                case 2:
+                    novaCategoria = "Ciencia";
+                    break;
+                case 3:
+                    novaCategoria = "Matematica";
+                    break;
+                case 4:
+                    novaCategoria = "Psicologia";
+                    break;
+                case 5:
+                    novaCategoria = "Tecnologia";
+                    break;
+                default:
+                    novaCategoria = "";
+                    break;
             }
 
-            int idLivro = LeInt("Insira o id do livro que deseja editar a categoria:");
-            Livro livroParaEditar = gestor.pesquisarLivroPorId(idLivro);
-
-            if (livroParaEditar == null) {
-                System.out.println("Livro não encontrado!");
-                System.out.println(2 );
-            } else {
-                String novaCategoria = LeStr("Insira a nova categoria:");
-                livroParaEditar.setCategoria(novaCategoria);
+            if (gestor.editarCategoria(idLivro, novaCategoria)) {
                 System.out.println("Categoria editada com sucesso!");
                 System.out.println(" ");
+            } else {
+                System.out.println("Livro não encontrado!");
             }
         }
     }
 
-
     public void editarPorData(ControllerLivros gestor){
-        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+        ArrayList<Livro> livrosParaEditar;
 
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+        while (true) {
+            String tituloLivro = LeStr("Insira o título do livro que quer editar:");
+            livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+
+            if (livrosParaEditar.isEmpty()) {
+                System.out.println("Não existem livros com este título!");
+                System.out.println(" ");
+            } else {
+                for (Livro livro : livrosParaEditar) {
+                    System.out.println(livro);
+                }
+                break;
             }
         }
 
@@ -256,15 +315,20 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarFaixaEtaria(ControllerLivros gestor){
-        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+        ArrayList<Livro> livrosParaEditar;
 
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+        while (true) {
+            String tituloLivro = LeStr("Insira o título do livro que quer editar:");
+            livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+
+            if (livrosParaEditar.isEmpty()) {
+                System.out.println("Não existem livros com este título!");
+                System.out.println(" ");
+            } else {
+                for (Livro livro : livrosParaEditar) {
+                    System.out.println(livro);
+                }
+                break;
             }
         }
 
@@ -283,15 +347,20 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarEditora(ControllerLivros gestor){
-        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+        ArrayList<Livro> livrosParaEditar;
 
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+        while (true) {
+            String tituloLivro = LeStr("Insira o título do livro que quer editar:");
+            livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+
+            if (livrosParaEditar.isEmpty()) {
+                System.out.println("Não existem livros com este título!");
+                System.out.println(" ");
+            } else {
+                for (Livro livro : livrosParaEditar) {
+                    System.out.println(livro);
+                }
+                break;
             }
         }
 
@@ -310,15 +379,20 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarISBN(ControllerLivros gestor){
-        String tituloLivro = LeStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+        ArrayList<Livro> livrosParaEditar;
 
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro);
+        while (true) {
+            String tituloLivro = LeStr("Insira o título do livro que quer editar:");
+            livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+
+            if (livrosParaEditar.isEmpty()) {
+                System.out.println("Não existem livros com este título!");
+                System.out.println(" ");
+            } else {
+                for (Livro livro : livrosParaEditar) {
+                    System.out.println(livro);
+                }
+                break;
             }
         }
 

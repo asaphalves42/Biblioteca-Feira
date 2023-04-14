@@ -1,5 +1,6 @@
 package View.Livros;
 
+import Controller.ControllerAutores;
 import Controller.ControllerLivros;
 import View.ViewAplicacao;
 
@@ -147,10 +148,6 @@ public class MenuViewLivros {
                     break;
                 case 12: gestor.gravarLivrosParaFicheiro();
                     break;
-                    case 13:
-                    this.menuLivros();
-                    break;
-
             }
         } while (opcao != 13);
 
