@@ -2,6 +2,7 @@ package View.Socios;
 
 
 import Controller.ControllerSocios;
+import View.ViewAplicacao;
 
 import static Utilidades.Leitura.ler;
 
@@ -10,6 +11,10 @@ public class MenuViewSocios {
     ControllerSocios gestorSocio=new ControllerSocios();
     ViewFuncaoAdicionarSocios adSocio=new ViewFuncaoAdicionarSocios();
     ViewFuncaoListarSocios listarSocio= new ViewFuncaoListarSocios();
+    ViewFuncaoEditarSocios editarSocios= new ViewFuncaoEditarSocios();
+    ViewFunçãoRemoverSocios removerSocios= new ViewFunçãoRemoverSocios();
+    ViewFunçãoPesquisarSocio pesquisarSocio= new ViewFunçãoPesquisarSocio();
+    ViewAplicacao app = new ViewAplicacao();
 
     public void menuSocios() {
         int opcao;
@@ -33,16 +38,40 @@ public class MenuViewSocios {
                     break;
                 case 3://Editar socios
                     break;
-                case 4://Remover socios
+                case 4:
+                    removerSocios.removerSocioPorNumMecanografico((gestorSocio));
                     break;
-                case 5://sair
+                case 5:
+                    app.menuPrincipal();
                     break;
             }
 
         } while (opcao != 5);
 
     }
+    public void menuPesquisarSocios() {
 
+        int opcao;
+
+        do {
+            System.out.println("## Pesquisar sócio por: ##");
+            System.out.println("---------------");
+            System.out.println("1 - Numero mecanográfico");
+            System.out.println("2 - Nome");
+            System.out.println("3 - Menu anterior");
+
+            opcao = ler.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    pesquisarSocio.pesquisarSocioPorNumMecanografico(gestorSocio);
+                    break;
+                case 2:
+                    pesquisarSocio.pesquisarSocioPorNome(gestorSocio);
+                    break;
+            }
+        } while (opcao !=3);
+    }
 
 }
 
