@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Autor;
-import Model.Livro;
 import Utilidades.GestorFicheiros;
 
 import java.time.LocalDate;

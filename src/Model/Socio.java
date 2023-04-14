@@ -7,12 +7,12 @@ import java.util.Set;
 
 public class Socio extends Pessoa {
 
-    public Socio(String nome, String morada, LocalDate dataDeNascimento, String telefone) {
+    public Socio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
         super(nome, morada, dataDeNascimento);
         this.telefone = telefone;
         this.numMecanografico = gerarNumMecanografico();
     }
-    private String telefone;
+    private int telefone;
     private String numMecanografico;
 
     public String getNumMecanografico() {
@@ -44,13 +44,14 @@ public class Socio extends Pessoa {
         return numMecanografico;
     }
 
-    public String getTelefone() {
+    public int getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(int telefone) {
         this.telefone = telefone;
     }
+
 
     @Override
     public String toString() {
