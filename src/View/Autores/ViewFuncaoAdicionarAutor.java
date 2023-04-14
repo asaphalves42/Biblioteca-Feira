@@ -1,22 +1,33 @@
 package View.Autores;
 
 import Controller.ControllerAutores;
-import Utilidades.Leitura;
 import Utilidades.ValidacaoData;
 
 import java.time.LocalDate;
 
-import static Utilidades.Leitura.*;
+import static Utilidades.Leitura.LeStr;
 
 public class ViewFuncaoAdicionarAutor {
 
     public void menuAdicionarAutores(ControllerAutores gestor) {
 
-        String nome = LeStr("Insira o nome do(a) autor(a)");
+        String nome = "";
+        while (nome.trim().isEmpty()) {
+            nome = LeStr("Insira o nome do(a) autor(a)");
+            if (nome.trim().isEmpty()) {
+                System.out.println("Por favor, introduza um valor válido para o nome!");
+            }
+        }
 
-        String morada = LeStr("Insira a morada do(a) autor(a)");
+        String morada = "";
+        while (morada.trim().isEmpty()) {
+            morada = LeStr("Insira a morada do(a) autor(a)");
+            if (morada.trim().isEmpty()) {
+                System.out.println("Por favor, introduza um valor válido para a morada!");
+            }
+        }
 
-        System.out.println("Digite a data de nascimento do autor: ");
+        System.out.println("Insira a data de nascimento do autor: ");
         ValidacaoData validarData = new ValidacaoData();
         LocalDate dataDeNascimento = validarData.LerData2();
 
