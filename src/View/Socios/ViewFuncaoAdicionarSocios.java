@@ -28,9 +28,6 @@ public class ViewFuncaoAdicionarSocios {
 
         LocalDate dataDeNascimento = null;
         while (dataDeNascimento == null) {
-            System.out.println("Introduza a data de data de nascimento: ");
-            String date = ler.next();
-            ler.nextLine();
 
             System.out.println("Insira a data de nascimento do sócio");
             ValidacaoData validarData = new ValidacaoData();
