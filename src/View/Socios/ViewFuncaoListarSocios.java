@@ -14,6 +14,7 @@ public class ViewFuncaoListarSocios {
 
         if (sociosListados.isEmpty()){
             System.out.println("Não existem sócios registados!");
+            System.out.println(" ");
         }
         else{
             for (Socio socio : sociosListados){

@@ -7,7 +7,7 @@ import static Utilidades.Leitura.ler;
 
 
 public class MenuViewSocios {
-    ControllerSocios gestorSocio=new ControllerSocios();
+    ControllerSocios gestorSocio = new ControllerSocios();
     ViewFuncaoAdicionarSocios adSocio=new ViewFuncaoAdicionarSocios();
     ViewFuncaoListarSocios listarSocio= new ViewFuncaoListarSocios();
 
@@ -22,7 +22,8 @@ public class MenuViewSocios {
             System.out.println("2 - Listar socios");
             System.out.println("3 - Editar socios");
             System.out.println("4 - Remover socios");
-            System.out.println("5 - Menu anterior");
+            System.out.println("5 - Gravar");
+            System.out.println("6 - Menu anterior");
 
             opcao = ler.nextInt();
 
@@ -35,9 +36,11 @@ public class MenuViewSocios {
                     break;
                 case 4://Remover socios
                     break;
+                case 5:gestorSocio.gravarSociosParaFicheiro();
+                    break;
             }
 
-        } while (opcao != 5);
+        } while (opcao != 6);
 
     }
 

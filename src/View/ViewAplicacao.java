@@ -5,6 +5,7 @@ import Controller.ControllerAutores;
 import Controller.ControllerLivros;
 import Controller.ControllerLogin;
 
+import Controller.ControllerSocios;
 import View.Autores.MenuViewAutores;
 import View.Livros.MenuViewLivros;
 import View.Reservas.MenuViewReservas;
@@ -13,17 +14,18 @@ import View.Socios.MenuViewSocios;
 import static Utilidades.Leitura.ler;
 
 public class ViewAplicacao {
-
     public ViewAplicacao() {
         controllerLogin = new ControllerLogin(new ViewLogin());
     }
     private ControllerLogin controllerLogin;
     ControllerLivros lerEgravarLivros = new ControllerLivros();
     ControllerAutores lerEgravarAutores = new ControllerAutores();
+    ControllerSocios lerEgravarSocios = new ControllerSocios();
     public void Iniciar() {
         //Ler os ficheiros
         lerEgravarLivros.lerLivrosDeFicheiro();
         lerEgravarAutores.lerAutorDeFicheiro();
+        lerEgravarSocios.lerSociosDoFicheiro();
 
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
@@ -100,6 +102,7 @@ public class ViewAplicacao {
                 case 5:
                     lerEgravarLivros.gravarLivrosParaFicheiro();
                     lerEgravarAutores.gravarAutorParaFicheiro();
+                    lerEgravarSocios.gravarSociosParaFicheiro();
                     System.exit(0);
                 break;
             }

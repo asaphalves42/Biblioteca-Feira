@@ -26,7 +26,7 @@ public class ViewFuncaoAdicionarSocios {
             }
         }
 
-            System.out.println("Insira a data de nascimento do sócio");
+            System.out.println("Insira a data de nascimento do sócio:");
             ValidacaoData validarData = new ValidacaoData();
             LocalDate dataDeNascimento = validarData.LerData2();
 
@@ -39,7 +39,7 @@ public class ViewFuncaoAdicionarSocios {
             }
         }
 
-        System.out.println("Sócio" + nome + "adicionado com sucesso!");
+        System.out.println("Sócio " + nome + " adicionado com sucesso!");
         System.out.println(" ");
 
         gestorSocio.adicionarSocio(nome, morada, dataDeNascimento, telefone);

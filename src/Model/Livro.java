@@ -133,6 +133,10 @@ public class Livro {
         this.quantidade = quantidade;
     }
 
+    //public static boolean estaDisponivel(){
+        //return quantidade > 0;
+    //}
+
     public int getId() {
         return id;
     }
@@ -150,8 +154,7 @@ public class Livro {
                 "Data de publicacao: " + this.dataDePublicacao + "\n" +
                 "Faixa etaria: " + this.faixaEtaria + "\n" +
                 "Editora: " + this.editora + "\n" +
-                "ISBN: " + this.ISBN + "]"+ "\n" +
-                " " + "----------------------------------------------------" + "\n";
+                "ISBN: " + this.ISBN + "]"+ "\n" + "----------------------------------------------------";
 
     }
 }

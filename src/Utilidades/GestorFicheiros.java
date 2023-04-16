@@ -13,9 +13,11 @@ public class GestorFicheiros {
             myWriter.write(conteudo);
             myWriter.close();
             System.out.println("Guardado com sucesso.");
+            System.out.println(" ");
             return true;
         } catch (IOException e) {
             System.out.println("Ocorreu um erro.");
+            System.out.println(" ");
             e.printStackTrace();
         }
         return false;
@@ -37,11 +39,13 @@ public class GestorFicheiros {
                 }
 
             } else {
-                System.out.println("O ficheiro nao existe!.");
+                System.out.println("O ficheiro nao existe!");
+                System.out.println(" ");
             }
 
         } catch (Exception ex) {
             System.out.println("Ocorreu um erro a ler ficheiro. \n" + ex.getMessage());
+            System.out.println(" ");
         }
         return linhas;
     }

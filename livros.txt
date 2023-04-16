@@ -1,2 +1,3 @@
 1|Capitães de areia|-|1|Asaph Alves|235|Artes|2010-04-05|+18|Porto editora|1234567891
 2|Harry Potter|E a pedra filosofal|2|Asaph Alves|548|Matematica|2008-05-04|+12|Veja editora|121545545
+3|A cabana|-|1|Asaph Alves|365|Ciencias|1990-08-10|+18|fla|234324
