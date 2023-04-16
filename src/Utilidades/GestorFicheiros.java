@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class GestorFicheiros {
-    //public static final String diretorioBase = "C:\\aplicacao\\biblioteca\\";
 
     public static boolean GravarFicheiro (String nomeFicheiro, String conteudo)
     {

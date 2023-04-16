@@ -10,7 +10,6 @@ import static Utilidades.Leitura.leStr;
 
 public class ViewFunçãoPesquisarSocio {
 
-
     public void pesquisarSocioPorNome(ControllerSocios gestor) {
 
         String nome = leStr("Insira o nome do sócio");

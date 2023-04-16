@@ -2,7 +2,7 @@ package View.Livros;
 
 import Controller.ControllerLivros;
 import Controller.ControllerLivrosEautores;
-import View.ViewAplicacao;
+
 
 import static Utilidades.Leitura.ler;
 
@@ -14,7 +14,6 @@ public class MenuViewLivros {
     ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
     ViewFuncaoEditarLivros editar = new ViewFuncaoEditarLivros();
     ViewFuncaoPesquisarLivros pesquisar = new ViewFuncaoPesquisarLivros();
-    ViewAplicacao app = new ViewAplicacao();
 
     public void menuLivros2() {
 
@@ -90,9 +89,6 @@ public class MenuViewLivros {
                     break;
                 case 6:
                     gestor.gravarLivrosParaFicheiro();
-                    break;
-                case 7:
-                    app.menuPrincipal();
                     break;
             }
 

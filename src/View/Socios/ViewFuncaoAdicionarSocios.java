@@ -9,7 +9,7 @@ import static Utilidades.Leitura.*;
 
 public class ViewFuncaoAdicionarSocios {
 
-    public void adicionarsocios(ControllerSocios gestorSocio) {
+    public void adicionarSocios(ControllerSocios gestorSocio) {
         String nome = "";
         while (nome.trim().isEmpty()) {
             nome = leStr("Introduza o nome: ");
@@ -26,13 +26,10 @@ public class ViewFuncaoAdicionarSocios {
             }
         }
 
-        LocalDate dataDeNascimento = null;
-        while (dataDeNascimento == null) {
-
             System.out.println("Insira a data de nascimento do sócio");
             ValidacaoData validarData = new ValidacaoData();
-            dataDeNascimento = validarData.LerData2();
-        }
+            LocalDate dataDeNascimento = validarData.LerData2();
+
 
         int telefone = 0;
         while (telefone < 100000000 || telefone > 999999999) {
@@ -42,8 +39,7 @@ public class ViewFuncaoAdicionarSocios {
             }
         }
 
-        System.out.println(" ");
-        System.out.println("Sócio adicionado com sucesso!");
+        System.out.println("Sócio" + nome + "adicionado com sucesso!");
         System.out.println(" ");
 
         gestorSocio.adicionarSocio(nome, morada, dataDeNascimento, telefone);

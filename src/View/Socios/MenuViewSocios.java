@@ -27,15 +27,13 @@ public class MenuViewSocios {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1:adSocio.adicionarsocios(gestorSocio);
+                case 1:adSocio.adicionarSocios(gestorSocio);
                     break;
                 case 2:listarSocio.listarTodosOsSocios(gestorSocio);
                     break;
                 case 3://Editar socios
                     break;
                 case 4://Remover socios
-                    break;
-                case 5://sair
                     break;
             }
 

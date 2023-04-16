@@ -59,7 +59,7 @@ public class ControllerSocios {
                 return true;
             }
         }
-        System.out.println("Não existe autor(a) com o nome inserido");
+        System.out.println("Não existe sócio com o nome inserido");
         return false;
     }
 }

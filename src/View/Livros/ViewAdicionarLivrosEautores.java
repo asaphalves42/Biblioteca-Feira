@@ -120,8 +120,7 @@ public class ViewAdicionarLivrosEautores {
             }
         }
 
-        System.out.println(" ");
-        System.out.println("Livro adicionado com sucesso!");
+        System.out.println("Livro " + titulo + " adicionado com sucesso!");
         System.out.println(" ");
 
         gestorAutor.adicionarLivrosComAutores(titulo,subtitulo,quantidade, numDePaginas,autorAdicionado, categorias, dataDePublicacao,faixaEtaria,editora,ISBN);

@@ -18,24 +18,22 @@ public class ViewAplicacao {
         controllerLogin = new ControllerLogin(new ViewLogin());
     }
     private ControllerLogin controllerLogin;
-
-
+    ControllerLivros lerEgravarLivros = new ControllerLivros();
+    ControllerAutores lerEgravarAutores = new ControllerAutores();
     public void Iniciar() {
-        ControllerLivros ler = new ControllerLivros();
-        ler.lerLivrosDeFicheiro();
-
-        ControllerAutores lerAutores = new ControllerAutores();
-        lerAutores.lerAutorDeFicheiro();
+        //Ler os ficheiros
+        lerEgravarLivros.lerLivrosDeFicheiro();
+        lerEgravarAutores.lerAutorDeFicheiro();
 
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
+
         // Iniciar o sistema
         mensagemUtilizadorParaRegisto();
         menuPrincipal();
+
         // Criar instância do ControllerLogin
         controllerLogin = new ControllerLogin(new ViewLogin());
-
-
 
     }
 
@@ -78,7 +76,7 @@ public class ViewAplicacao {
             System.out.println("2 - Autores");
             System.out.println("3 - Reservas");
             System.out.println("4 - Sócios");
-            System.out.println("5 - Fechar");
+            System.out.println("5 - Fechar e gravar");
 
             opcao = ler.nextInt();
 
@@ -100,11 +98,13 @@ public class ViewAplicacao {
                     menuSocios.menuSocios();
                     break;
                 case 5:
-
-                    break;
+                    lerEgravarLivros.gravarLivrosParaFicheiro();
+                    lerEgravarAutores.gravarAutorParaFicheiro();
+                    System.exit(0);
+                break;
             }
 
-        } while (opcao != 5);
+        } while (opcao != 6);
     }
 
 
