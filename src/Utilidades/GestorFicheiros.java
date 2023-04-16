@@ -4,12 +4,13 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class GestorFicheiros {
-    public static final String diretorioBase = "C:\\aplicacao\\biblioteca\\";
+    //public static final String diretorioBase = "C:\\aplicacao\\biblioteca\\";
 
     public static boolean GravarFicheiro (String nomeFicheiro, String conteudo)
     {
         try {
-            FileWriter myWriter = new FileWriter(diretorioBase + "\\" + nomeFicheiro);
+            String caminhoCompleto = System.getProperty("user.dir") + "\\" + nomeFicheiro;
+            FileWriter myWriter = new FileWriter(caminhoCompleto);
             myWriter.write(conteudo);
             myWriter.close();
             System.out.println("Guardado com sucesso.");
@@ -25,10 +26,11 @@ public class GestorFicheiros {
     {
         ArrayList<String> linhas = new ArrayList<>();
         try {
-            File myObj = new File(diretorioBase + "\\" +nomeFicheiro);
+            String caminhoCompleto = System.getProperty("user.dir") + "\\" + nomeFicheiro;
+            File myObj = new File(caminhoCompleto);
             if (myObj.exists()) {
                 BufferedReader bf = new BufferedReader(
-                        new FileReader(diretorioBase + "\\" +nomeFicheiro));
+                        new FileReader(caminhoCompleto));
 
                 String st;
                 while ((st = bf.readLine()) != null){
