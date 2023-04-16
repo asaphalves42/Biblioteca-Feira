@@ -12,7 +12,7 @@ public class ViewFuncaoAdicionarSocios {
     public void adicionarsocios(ControllerSocios gestorSocio) {
         String nome = "";
         while (nome.trim().isEmpty()) {
-            nome = LeStr("Introduza o nome: ");
+            nome = leStr("Introduza o nome: ");
             if (nome.trim().isEmpty()) {
                 System.out.println("Por favor, introduza um nome válido!");
             }
@@ -20,7 +20,7 @@ public class ViewFuncaoAdicionarSocios {
 
         String morada = "";
         while (morada.trim().isEmpty()) {
-            morada = LeStr("Introduza morada: ");
+            morada = leStr("Introduza morada: ");
             if (morada.trim().isEmpty()) {
                 System.out.println("Por favor, introduza uma morada válida!");
             }
@@ -36,7 +36,7 @@ public class ViewFuncaoAdicionarSocios {
 
         int telefone = 0;
         while (telefone < 100000000 || telefone > 999999999) {
-            telefone = LeInt("Introduza o nr de telefone (9 dígitos): ");
+            telefone = leint("Introduza o nr de telefone (9 dígitos): ");
             if (telefone < 100000000 || telefone > 999999999) {
                 System.out.println("Por favor, introduza um número de telefone com 9 dígitos!");
             }

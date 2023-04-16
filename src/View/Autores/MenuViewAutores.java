@@ -14,7 +14,7 @@ public class MenuViewAutores {
     ViewFuncaoPesquisarAutor pesquisar = new ViewFuncaoPesquisarAutor();
     ViewAplicacao app = new ViewAplicacao();
     public void menuAutores() {
-        gestor.lerAutorDeFicheiro();
+
         int opcao;
 
         do {

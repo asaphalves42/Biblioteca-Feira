@@ -1,6 +1,7 @@
 package View;
 
 
+import Controller.ControllerAutores;
 import Controller.ControllerLivros;
 import Controller.ControllerLogin;
 
@@ -20,6 +21,12 @@ public class ViewAplicacao {
 
 
     public void Iniciar() {
+        ControllerLivros ler = new ControllerLivros();
+        ler.lerLivrosDeFicheiro();
+
+        ControllerAutores lerAutores = new ControllerAutores();
+        lerAutores.lerAutorDeFicheiro();
+
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
         // Iniciar o sistema
@@ -27,6 +34,8 @@ public class ViewAplicacao {
         menuPrincipal();
         // Criar instância do ControllerLogin
         controllerLogin = new ControllerLogin(new ViewLogin());
+
+
 
     }
 

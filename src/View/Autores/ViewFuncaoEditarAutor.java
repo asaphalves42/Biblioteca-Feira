@@ -2,20 +2,19 @@ package View.Autores;
 
 import Controller.ControllerAutores;
 import Model.Autor;
-import Utilidades.Leitura;
 import Utilidades.ValidacaoData;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static Utilidades.Leitura.LeInt;
-import static Utilidades.Leitura.LeStr;
+import static Utilidades.Leitura.leint;
+import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoEditarAutor {
 
     public void editarAutor(ControllerAutores gestor) {
 
-        int idAutor = LeInt("Insira o Id do(a) autor(a) que quer editar");
+        int idAutor = leint("Insira o Id do(a) autor(a) que quer editar");
         ArrayList<Autor> autorEditar = gestor.pesquisarAutorPorId(idAutor);
 
         if (autorEditar == null) {
@@ -24,12 +23,12 @@ public class ViewFuncaoEditarAutor {
         }else {
             String novoNome = "";
             while (novoNome.trim().equals("")) {
-                novoNome = LeStr("Insira o novo nome do(a) autor(a)");
+                novoNome = leStr("Insira o novo nome do(a) autor(a)");
             }
 
             String novaMorada = "";
             while (novaMorada.trim().equals("")) {
-                novaMorada = LeStr("Insira a nova morada");
+                novaMorada = leStr("Insira a nova morada");
             }
             System.out.println("Digite a data de nascimento do autor: ");
             ValidacaoData validarData = new ValidacaoData();

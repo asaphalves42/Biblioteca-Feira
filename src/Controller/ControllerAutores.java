@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ControllerAutores {
-    ArrayList<Autor> autores = new ArrayList<>();
+    static ArrayList<Autor> autores = new ArrayList<>();
    public void lerAutorDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Autores.txt");
 

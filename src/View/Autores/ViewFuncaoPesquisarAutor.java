@@ -4,15 +4,15 @@ import Controller.ControllerAutores;
 import Model.Autor;
 
 import java.util.ArrayList;
-import static Utilidades.Leitura.LeInt;
+import static Utilidades.Leitura.leint;
 
-import static Utilidades.Leitura.LeStr;
+import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoPesquisarAutor {
 
     public void pesquisarAutorPorNome (ControllerAutores gestor) {
 
-        String nome = LeStr("Insira o nome do(a) autor(a)");
+        String nome = leStr("Insira o nome do(a) autor(a)");
 
         ArrayList<Autor> autor = gestor.pesquisarAutorPorNome(nome);
 
@@ -25,7 +25,7 @@ public class ViewFuncaoPesquisarAutor {
 
     public void pesquisarAutorPorId (ControllerAutores gestor) {
 
-        int id = LeInt("Insira o Id do(a) autor(a)");
+        int id = leint("Insira o Id do(a) autor(a)");
 
         ArrayList <Autor> autor = gestor.pesquisarAutorPorId(id);
 

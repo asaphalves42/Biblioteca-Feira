@@ -5,13 +5,13 @@ import Model.Livro;
 
 import java.util.ArrayList;
 
-import static Utilidades.Leitura.LeStr;
+import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoPesquisarLivros {
 
     public void livroPorTitulo(ControllerLivros gestor){
 
-        String tituloInserido = LeStr("Insira o título do livro:");
+        String tituloInserido = leStr("Insira o título do livro:");
 
         ArrayList<Livro> livros = gestor.pesquisarLivroPorTitulo(tituloInserido);
 
@@ -24,7 +24,7 @@ public class ViewFuncaoPesquisarLivros {
 
     public void livrosPorAutor(ControllerLivros gestor){
 
-        String autorInserido = LeStr("Insira o autor do livro:");
+        String autorInserido = leStr("Insira o autor do livro:");
 
         ArrayList<Livro> livros = gestor.pesquisarLivroPorAutor(autorInserido);
 
@@ -37,7 +37,7 @@ public class ViewFuncaoPesquisarLivros {
     }
 
     public void livrosPorCategoria(ControllerLivros gestor) {
-        String categoriaInserida = LeStr("Insira a categoria do livro:");
+        String categoriaInserida = leStr("Insira a categoria do livro:");
         ArrayList<Livro> livros = gestor.pesquisarLivroCategoria(categoriaInserida);
 
         if (livros.isEmpty()) {
@@ -55,7 +55,7 @@ public class ViewFuncaoPesquisarLivros {
 
     public void livroPorISBN(ControllerLivros gestor){
 
-        String ISBNinserido = LeStr("Insira o ISBN do livro:");
+        String ISBNinserido = leStr("Insira o ISBN do livro:");
 
         Livro livro = gestor.pesquisarLivroISBN(ISBNinserido);
 

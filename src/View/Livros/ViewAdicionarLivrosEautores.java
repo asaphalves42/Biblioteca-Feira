@@ -1,8 +1,8 @@
 package View.Livros;
 
 
-import Controller.ControllerLivros;
-
+import Controller.ControllerLivrosEautores;
+import Model.Autor;
 import Utilidades.ValidacaoData;
 import View.Categorias.Categorias;
 
@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 import static Utilidades.Leitura.*;
 
-public class ViewFuncaoAdicionarLivros {
+public class ViewAdicionarLivrosEautores {
     ArrayList<String> categorias = new ArrayList<>();
-    public void menuAdicionarLivros(ControllerLivros gestor) {
+    public void menuAdicionarLivros(ControllerLivrosEautores gestorAutor) {
 
         String titulo = "";
         while (titulo.trim().isEmpty()) {
-            titulo = LeStr("Introduza o titulo: ");
+            titulo = leStr("Introduza o titulo: ");
             if (titulo.trim().isEmpty()) {
                 System.out.println("Por favor, introduza um titulo válido!");
             }
@@ -25,35 +25,50 @@ public class ViewFuncaoAdicionarLivros {
 
         String subtitulo = "";
         while (subtitulo.trim().isEmpty()) {
-            subtitulo = LeStr("Introduza o subtitulo: ");
+            subtitulo = leStr("Introduza o subtitulo: ");
             if (subtitulo.trim().isEmpty()) {
                 System.out.println("Por favor, introduza um subtitulo válido!");
             }
         }
 
-        int quantidade = 0;
-        while (quantidade < 1000000000 || quantidade > 999999999) {
-            quantidade = LeInt("Introduza a quantidade: ");
-            if (quantidade < 1000000000 || quantidade > 999999999) {
-                System.out.println("Por favor, introduza um número de quantidade com 9 dígitos!");
+        int quantidade = leIntPositivo("Introduza a quantidade: ");
+
+        int numDePaginas = leIntPositivo("Introduza o número de páginas: ");
+
+        ArrayList<Autor> adicionarAutorExistente;
+        String nomeAutor;
+        while (true) {
+            nomeAutor = leStr("Insira o autor:");
+            adicionarAutorExistente = gestorAutor.pesquisarAutorPorNome(nomeAutor);
+
+            if (adicionarAutorExistente.isEmpty()) {
+                System.out.println("Não existem autores com esse nome!");
+                System.out.println(" ");
+            } else {
+                for (Autor autor : adicionarAutorExistente) {
+                    System.out.println(autor.toString());
+                }
+                break;
             }
         }
 
-        String autor = "";
-        while (autor.trim().isEmpty()) {
-            autor = LeStr("Introduza o autor: ");
-            if (autor.trim().isEmpty()) {
-                System.out.println("Por favor, introduza um autor válido!");
+        int idAdicionarAutor = leint("Insira o id do autor que quer adicionar: ");
+
+        Autor autorAdicionado = null;
+        for (Autor autor : adicionarAutorExistente) {
+            if (autor.getId() == idAdicionarAutor) {
+                autorAdicionado = autor;
+                break;
             }
         }
 
-        int numPaginas = 0;
-        while (numPaginas < 1000000000 || numPaginas > 999999999) {
-            numPaginas = LeInt("Introduza o número de páginas: ");
-            if (numPaginas < 1000000000 || numPaginas > 999999999) {
-                System.out.println("Por favor, introduza um número de quantidade com 9 dígitos!");
-            }
+        if (autorAdicionado != null) {
+            gestorAutor.adicionarAutor(String.valueOf(autorAdicionado));
+
+            System.out.println("Autor adicionado com sucesso!");
+            System.out.println(" ");
         }
+
         Categorias escolherCat = new Categorias();
         int opcaoCategoria = escolherCat.escolherCategorias();
 
@@ -83,7 +98,7 @@ public class ViewFuncaoAdicionarLivros {
 
         String faixaEtaria = "";
         while (faixaEtaria.trim().isEmpty()) {
-            faixaEtaria = LeStr("Introduza a faixa etaria: ");
+            faixaEtaria = leStr("Introduza a faixa etaria: ");
             if (faixaEtaria.trim().isEmpty()) {
                 System.out.println("Por favor, introduza uma faixa etaria válida");
             }
@@ -91,7 +106,7 @@ public class ViewFuncaoAdicionarLivros {
 
         String editora = "";
         while (editora.trim().isEmpty()) {
-            editora = LeStr("Introduza a editora: ");
+            editora = leStr("Introduza a editora: ");
             if (editora.trim().isEmpty()) {
                 System.out.println("Por favor, introduza uma editora válido!");
             }
@@ -99,17 +114,18 @@ public class ViewFuncaoAdicionarLivros {
 
         String ISBN = "";
         while (ISBN.trim().isEmpty()) {
-            ISBN = LeStr("Introduza o ISBN: ");
+            ISBN = leStr("Introduza o ISBN: ");
             if (ISBN.trim().isEmpty()) {
                 System.out.println("Por favor, introduza um ISBN válido!");
             }
         }
 
-
         System.out.println(" ");
         System.out.println("Livro adicionado com sucesso!");
         System.out.println(" ");
 
-        gestor.adicionarLivros(titulo, faixaEtaria, numPaginas, faixaEtaria, numPaginas, String.valueOf(categorias), dataDePublicacao, faixaEtaria, editora, ISBN);
+        gestorAutor.adicionarLivrosComAutores(titulo,subtitulo,quantidade, numDePaginas,autorAdicionado, categorias, dataDePublicacao,faixaEtaria,editora,ISBN);
     }
-}
+
+    }
+

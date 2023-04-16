@@ -1,35 +1,40 @@
 package Utilidades;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Leitura {
         public static Scanner ler = new Scanner(System.in);
-
-        public static int LeInt(String msg) {
-            System.out.println(msg);
+        public static int leint(String mensagem) {
+            System.out.println(mensagem);
             return ler.nextInt();
         }
-
-        public static String LeStr(String msg) {
-            System.out.println(msg);
+        public static String leStr(String mensagem) {
+            System.out.println(mensagem);
             ler = new Scanner(System.in);
             return ler.nextLine();
         }
+    public static int leIntPositivo(String mensagem) {
+        int valor = 0;
+        boolean entradaValida = false;
+        while (!entradaValida) {
+            try {
+                System.out.print(mensagem);
+                valor = Integer.parseInt(ler.nextLine());
 
-    public static LocalDate LeData() {
-        try {
-            LocalDate data;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            data = LocalDate.parse(ler.nextLine(), formatter);
-            return data;
-        } catch (Exception ex) {
-            System.out.println("Data invalida, insira uma data com o formato (dd/MM/aaaa):");
-            return LeData();
+                if (valor <= 0) {
+                    System.out.println("O número deve ser positivo!");
+                } else {
+                    entradaValida = true;
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida! Insira um número inteiro positivo.");
+            }
         }
+        return valor;
     }
 
+}
 
-    }
+
 

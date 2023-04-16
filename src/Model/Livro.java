@@ -1,20 +1,25 @@
 package Model;
 
 import java.time.LocalDate;
-public class Livro {
+import java.util.ArrayList;
 
-    public Livro(String titulo, String subtitulo, int quantidade, String autor, int numDePaginas, String categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+public class Livro {
+    public Livro(String autor){
+        this.autor = autor;
+
+    }
+    public Livro(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor autorAdicionado, ArrayList<String> categorias, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
         this.id = ++proximoId;
         this.titulo = titulo;
         this.subtitulo = subtitulo;
         this.quantidade = quantidade;
         this.numDePaginas = numDePaginas;
-        this.categoria = categoria;
+        this.autor = autorAdicionado.getNome();
+        this.categoria = categorias.get(0);
         this.dataDePublicacao = dataDePublicacao;
         this.faixaEtaria = faixaEtaria;
         this.editora = editora;
         this.ISBN = ISBN;
-        this.autor = autor;
     }
 
     public Livro(int id, String titulo, String subtitulo, int quantidade, String autor, int numDePaginas, String categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
@@ -46,6 +51,7 @@ public class Livro {
     private String editora;
     private String ISBN;
     private String autor;
+
 
     public String getTitulo() {
         return titulo;

@@ -6,14 +6,14 @@ import Model.Socio;
 
 import java.util.ArrayList;
 
-import static Utilidades.Leitura.LeStr;
+import static Utilidades.Leitura.leStr;
 
 public class ViewFunçãoPesquisarSocio {
 
 
     public void pesquisarSocioPorNome(ControllerSocios gestor) {
 
-        String nome = LeStr("Insira o nome do sócio");
+        String nome = leStr("Insira o nome do sócio");
 
         ArrayList<Socio> socio = gestor.pesquisarSocioPorNome(nome);
 
@@ -26,7 +26,7 @@ public class ViewFunçãoPesquisarSocio {
 
     public void pesquisarSocioPorNumMecanografico(ControllerSocios gestor) {
 
-        String numMecanografico = LeStr("Insira o Id do(a) autor(a)");
+        String numMecanografico = leStr("Insira o Id do(a) autor(a)");
 
         ArrayList<Socio> socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 

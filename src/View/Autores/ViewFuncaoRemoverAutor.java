@@ -5,11 +5,11 @@ import Model.Autor;
 
 import java.util.ArrayList;
 
-import static Utilidades.Leitura.LeStr;
+import static Utilidades.Leitura.leStr;
 public class ViewFuncaoRemoverAutor {
     public void removerAutorPorNome(ControllerAutores gestor) {
 
-        String nome = LeStr("Insira o nome do(a) autor(a)");
+        String nome = leStr("Insira o nome do(a) autor(a)");
         ArrayList<Autor> autorParaRemover = gestor.pesquisarAutorPorNome(nome);
 
         if (autorParaRemover.isEmpty()) {
@@ -31,7 +31,7 @@ public class ViewFuncaoRemoverAutor {
             }
         }
 
-        String nomeAutor = LeStr("Insira o nome do(a) autor(a) que quer remover");
+        String nomeAutor = leStr("Insira o nome do(a) autor(a) que quer remover");
 
         boolean removido = gestor.removerAutor(nomeAutor);
 
