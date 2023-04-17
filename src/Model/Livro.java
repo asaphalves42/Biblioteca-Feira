@@ -52,7 +52,11 @@ public class Livro {
     private String ISBN;
     private String autor;
 
-
+    public void decrementarQuantidade(){
+        if(quantidade > 0){
+            quantidade--;
+        }
+    }
     public String getTitulo() {
         return titulo;
     }
@@ -132,10 +136,6 @@ public class Livro {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-
-    //public static boolean estaDisponivel(){
-        //return quantidade > 0;
-    //}
 
     public int getId() {
         return id;
