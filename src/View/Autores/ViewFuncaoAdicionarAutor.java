@@ -5,7 +5,7 @@ import Utilidades.ValidacaoData;
 
 import java.time.LocalDate;
 
-import static Utilidades.Leitura.LeStr;
+import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoAdicionarAutor {
 
@@ -13,7 +13,7 @@ public class ViewFuncaoAdicionarAutor {
 
         String nome = "";
         while (nome.trim().isEmpty()) {
-            nome = LeStr("Insira o nome do(a) autor(a)");
+            nome = leStr("Insira o nome do(a) autor(a)");
             if (nome.trim().isEmpty()) {
                 System.out.println("Por favor, introduza um valor válido para o nome!");
             }
@@ -21,7 +21,7 @@ public class ViewFuncaoAdicionarAutor {
 
         String morada = "";
         while (morada.trim().isEmpty()) {
-            morada = LeStr("Insira a morada do(a) autor(a)");
+            morada = leStr("Insira a morada do(a) autor(a)");
             if (morada.trim().isEmpty()) {
                 System.out.println("Por favor, introduza um valor válido para a morada!");
             }

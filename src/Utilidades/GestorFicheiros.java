@@ -4,18 +4,20 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class GestorFicheiros {
-    public static final String diretorioBase = "C:\\aplicacao\\biblioteca\\";
 
     public static boolean GravarFicheiro (String nomeFicheiro, String conteudo)
     {
         try {
-            FileWriter myWriter = new FileWriter(diretorioBase + "\\" + nomeFicheiro);
+            String caminhoCompleto = System.getProperty("user.dir") + "\\" + nomeFicheiro;
+            FileWriter myWriter = new FileWriter(caminhoCompleto);
             myWriter.write(conteudo);
             myWriter.close();
             System.out.println("Guardado com sucesso.");
+            System.out.println(" ");
             return true;
         } catch (IOException e) {
             System.out.println("Ocorreu um erro.");
+            System.out.println(" ");
             e.printStackTrace();
         }
         return false;
@@ -25,10 +27,11 @@ public class GestorFicheiros {
     {
         ArrayList<String> linhas = new ArrayList<>();
         try {
-            File myObj = new File(diretorioBase + "\\" +nomeFicheiro);
+            String caminhoCompleto = System.getProperty("user.dir") + "\\" + nomeFicheiro;
+            File myObj = new File(caminhoCompleto);
             if (myObj.exists()) {
                 BufferedReader bf = new BufferedReader(
-                        new FileReader(diretorioBase + "\\" +nomeFicheiro));
+                        new FileReader(caminhoCompleto));
 
                 String st;
                 while ((st = bf.readLine()) != null){
@@ -36,11 +39,13 @@ public class GestorFicheiros {
                 }
 
             } else {
-                System.out.println("O ficheiro nao existe!.");
+                System.out.println("O ficheiro nao existe!");
+                System.out.println(" ");
             }
 
         } catch (Exception ex) {
             System.out.println("Ocorreu um erro a ler ficheiro. \n" + ex.getMessage());
+            System.out.println(" ");
         }
         return linhas;
     }

@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Livro;
 import Utilidades.GestorFicheiros;
-import View.Categorias.Categorias;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 
 
 public class ControllerLivros {
-    public ArrayList<Livro> livros = new ArrayList<>();
+    public static ArrayList<Livro> livros = new ArrayList<>();
     public void lerLivrosDeFicheiro(){
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("livros.txt");
 
@@ -55,22 +54,6 @@ public class ControllerLivros {
             conteudo += aux.getISBN() +  "\n";
         }
         GestorFicheiros.GravarFicheiro("livros.txt", conteudo);
-    }
-    public int verificarId(){
-        int max = 0;
-        for(Livro id : livros){
-            if(id.getId() > max){
-                max = id.getId();
-            }
-        }
-        return max;
-
-    }
-    public void adicionarLivros(String titulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
-        this.verificarId();
-        Livro livro = new Livro(titulo, subTitulo, quantidade, autor, numPaginas, categoria, dataDePublicacao, faixaEtaria, editora, ISBN);
-
-        this.livros.add(livro);
     }
 
     public ArrayList<Livro> listarLivros() {

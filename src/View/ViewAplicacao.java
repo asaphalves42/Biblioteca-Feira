@@ -1,9 +1,11 @@
 package View;
 
 
+import Controller.ControllerAutores;
 import Controller.ControllerLivros;
 import Controller.ControllerLogin;
 
+import Controller.ControllerSocios;
 import View.Autores.MenuViewAutores;
 import View.Livros.MenuViewLivros;
 import View.Reservas.MenuViewReservas;
@@ -12,19 +14,26 @@ import View.Socios.MenuViewSocios;
 import static Utilidades.Leitura.ler;
 
 public class ViewAplicacao {
-
     public ViewAplicacao() {
         controllerLogin = new ControllerLogin(new ViewLogin());
     }
     private ControllerLogin controllerLogin;
-
-
+    ControllerLivros lerEgravarLivros = new ControllerLivros();
+    ControllerAutores lerEgravarAutores = new ControllerAutores();
+    ControllerSocios lerEgravarSocios = new ControllerSocios();
     public void Iniciar() {
+        //Ler os ficheiros
+        lerEgravarLivros.lerLivrosDeFicheiro();
+        lerEgravarAutores.lerAutorDeFicheiro();
+        lerEgravarSocios.lerSociosDoFicheiro();
+
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
+
         // Iniciar o sistema
         mensagemUtilizadorParaRegisto();
         menuPrincipal();
+
         // Criar instância do ControllerLogin
         controllerLogin = new ControllerLogin(new ViewLogin());
 
@@ -69,7 +78,7 @@ public class ViewAplicacao {
             System.out.println("2 - Autores");
             System.out.println("3 - Reservas");
             System.out.println("4 - Sócios");
-            System.out.println("5 - Fechar");
+            System.out.println("5 - Fechar e gravar");
 
             opcao = ler.nextInt();
 
@@ -91,11 +100,14 @@ public class ViewAplicacao {
                     menuSocios.menuSocios();
                     break;
                 case 5:
-
-                    break;
+                    lerEgravarLivros.gravarLivrosParaFicheiro();
+                    lerEgravarAutores.gravarAutorParaFicheiro();
+                    lerEgravarSocios.gravarSociosParaFicheiro();
+                    System.exit(0);
+                break;
             }
 
-        } while (opcao != 5);
+        } while (opcao != 6);
     }
 
 

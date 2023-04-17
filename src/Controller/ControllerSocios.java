@@ -2,13 +2,47 @@ package Controller;
 
 
 import Model.Socio;
+import Utilidades.GestorFicheiros;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ControllerSocios {
+    public static ArrayList<Socio> socios = new ArrayList<>();
 
-    ArrayList<Socio> socios = new ArrayList<>();
+    public void lerSociosDoFicheiro() {
+        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("socios.txt");
+        for (String linha : linhas) {
+            if (linha.isEmpty() == false) {
+                String[] value_split = linha.split("\\|");
+                if (value_split.length != 0) {
+                    Socio aux = new Socio(value_split[0],
+                            value_split[1],
+                            value_split[2],
+                            LocalDate.parse(value_split[3]),
+                            Integer.parseInt(value_split[4]));
+                    socios.add(aux);
+                }
+            }
+        }
+    }
+
+    public void gravarSociosParaFicheiro(){
+        String conteudo = "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        for (Socio aux : socios){
+            String formated_date = aux.getDataDeNascimento().format(formatter);
+
+            conteudo += aux.getNumMecanografico() + "|";
+            conteudo += aux.getNome() + "|" ;
+            conteudo += aux.getMorada() + "|" ;
+            conteudo += formated_date + "|" ;
+            conteudo += aux.getTelefone() + "|" + "\n";
+        }
+        GestorFicheiros.GravarFicheiro("socios.txt", conteudo);
+    }
+
 
     public void adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone){
     Socio socio= new Socio (nome,morada,dataDeNascimento,telefone);
@@ -59,7 +93,7 @@ public class ControllerSocios {
                 return true;
             }
         }
-        System.out.println("Não existe autor(a) com o nome inserido");
+        System.out.println("Não existe sócio com o nome inserido");
         return false;
     }
 }

@@ -1,19 +1,19 @@
 package View.Livros;
 
-import Controller.ControllerAutores;
 import Controller.ControllerLivros;
-import View.ViewAplicacao;
+import Controller.ControllerLivrosEautores;
+
 
 import static Utilidades.Leitura.ler;
 
 public class MenuViewLivros {
     ControllerLivros gestor = new ControllerLivros();
-    ViewFuncaoAdicionarLivros adicionar = new ViewFuncaoAdicionarLivros();
+    ControllerLivrosEautores gestorAutor = new ControllerLivrosEautores();
+    ViewAdicionarLivrosEautores adicionar = new ViewAdicionarLivrosEautores();
     ViewFuncaoListarLivros mostrar = new ViewFuncaoListarLivros();
     ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
     ViewFuncaoEditarLivros editar = new ViewFuncaoEditarLivros();
     ViewFuncaoPesquisarLivros pesquisar = new ViewFuncaoPesquisarLivros();
-    ViewAplicacao app = new ViewAplicacao();
 
     public void menuLivros2() {
 
@@ -53,7 +53,7 @@ public class MenuViewLivros {
     }
 
     public void menuLivros() {
-        gestor.lerLivrosDeFicheiro();
+
         int opcao;
 
         do {
@@ -73,7 +73,7 @@ public class MenuViewLivros {
 
             switch (opcao) {
                 case 1:
-                    adicionar.menuAdicionarLivros(gestor);
+                    adicionar.menuAdicionarLivros(gestorAutor);
                     break;
                 case 2:
                     mostrar.listarTodosOsLivros(gestor);
@@ -89,9 +89,6 @@ public class MenuViewLivros {
                     break;
                 case 6:
                     gestor.gravarLivrosParaFicheiro();
-                    break;
-                case 7:
-                    app.menuPrincipal();
                     break;
             }
 

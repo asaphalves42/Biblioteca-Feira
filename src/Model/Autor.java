@@ -41,8 +41,8 @@ public class Autor extends Pessoa {
                 "ID: " + getId() + "\n" +
                 "Nome: " + getNome() + "\n" +
                 "Morada: " + getMorada() + "\n" +
-                "Data de nascimento: " + getDataDeNascimento() + "]" + "\n" +
-                " " + "----------------------------------------------------" + "\n";
+                "Data de nascimento: " + getDataDeNascimento() + "]" + "\n"
+                + "----------------------------------------------------";
 
     }
  }

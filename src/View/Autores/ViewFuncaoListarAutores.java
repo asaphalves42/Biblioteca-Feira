@@ -12,7 +12,7 @@ public class ViewFuncaoListarAutores {
         ArrayList <Autor> autoresListados = gestor.listarAutores();
 
        if (autoresListados.isEmpty()) {
-            System.out.println("Não existem autores listados");
+            System.out.println("Não existem autores registados");
             } else {
                for (Autor autor : autoresListados) {
             System.out.println(autor.toString());

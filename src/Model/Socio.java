@@ -7,6 +7,12 @@ import java.util.Set;
 
 public class Socio extends Pessoa {
 
+    public Socio(String numMecanografico, String nome, String morada, LocalDate dataDeNascimento, int telefone){
+        super(nome, morada, dataDeNascimento);
+        this.numMecanografico = numMecanografico;
+        this.telefone = telefone;
+    }
+
     public Socio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
         super(nome, morada, dataDeNascimento);
         this.telefone = telefone;
@@ -32,13 +38,6 @@ public class Socio extends Pessoa {
             numMecanografico += rand.nextInt(10);
         }
 
-        while (numerosUtilizados.contains(numMecanografico)) {
-            numMecanografico = "";
-            while (numMecanografico.length() < 6) {
-                numMecanografico += rand.nextInt(10);
-            }
-        }
-
         numerosUtilizados.add(numMecanografico);
 
         return numMecanografico;
@@ -56,12 +55,11 @@ public class Socio extends Pessoa {
     @Override
     public String toString() {
         return "Sócio [ " + "\n" +
+                "Número mecanográfico: " + this.numMecanografico + "\n" +
                 "Nome: " + this.getNome() + "\n" +
                 "Morada: " + this.getMorada() + "\n" +
                 "Telefone: " + this.telefone + "\n" +
-                "Data de nascimento: " + this.getDataDeNascimento() + "\n" +
-                "Número mecanográfico: " + this.numMecanografico +
-                "]" + "\n" +
-                " " + "\n" + "----------------------------------------------";
+                "Data de nascimento: " + this.getDataDeNascimento() + "]" +
+                "\n" + "----------------------------------------------";
     }
 }
