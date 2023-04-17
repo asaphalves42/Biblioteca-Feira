@@ -1,17 +1,16 @@
 package View.Socios;
 
-
 import Controller.ControllerSocios;
 import Model.Socio;
 
 import java.util.ArrayList;
 
-import static Utilidades.Leitura.LeStr;
+import static Utilidades.Leitura.leStr;
 
 public class ViewFunçãoRemoverSocios {
     public void removerSocioPorNumMecanografico(ControllerSocios gestor) {
 
-        String numMecanografico = LeStr("Insira número mecanográfico do socio");
+        String numMecanografico = leStr("Insira número mecanográfico do socio");
         ArrayList<Socio> socioParaRemover = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
         if (socioParaRemover.isEmpty()) {
@@ -33,18 +32,18 @@ public class ViewFunçãoRemoverSocios {
             }
         }
 
-        String numSocio= LeStr("Insira o número mecanografico do sócio que quer remover");
+        String numSocio = leStr("Insira o número mecanografico do sócio que quer remover");
 
-        boolean removido = gestor.removerSocio(numMecanografico);
+        boolean removido = gestor.removerSocio(numSocio);
 
         if (removido) {
-            System.out.println("Autor(a) eliminado com sucesso");
+            System.out.println("Sócio eliminado com sucesso");
             System.out.println("");
         } else {
-            System.out.println("Autor(a) não encontrado(a)");
+            System.out.println("Sócio não encontrado(a)");
             System.out.println("");
         }
     }
 
 }
-}
+

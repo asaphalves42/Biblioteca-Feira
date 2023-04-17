@@ -30,6 +30,7 @@ public class ViewFuncaoEditarAutor {
             while (novaMorada.trim().equals("")) {
                 novaMorada = leStr("Insira a nova morada");
             }
+
             System.out.println("Digite a data de nascimento do autor: ");
             ValidacaoData validarData = new ValidacaoData();
             LocalDate novaDataDeNascimento = validarData.LerData2();

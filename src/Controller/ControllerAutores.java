@@ -49,7 +49,6 @@ public class ControllerAutores {
             }
         }
         return max;
-
     }
 
 

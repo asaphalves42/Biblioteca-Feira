@@ -32,11 +32,11 @@ public class MenuViewSocios {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1:adSocio.adicionarsocios(gestorSocio);
+                case 1:adSocio.adicionarSocios(gestorSocio);
                     break;
                 case 2:listarSocio.listarTodosOsSocios(gestorSocio);
                     break;
-                case 3://Editar socios
+                case 3:editarSocios.editarSocio(gestorSocio);
                     break;
                 case 4:
                     removerSocios.removerSocioPorNumMecanografico((gestorSocio));

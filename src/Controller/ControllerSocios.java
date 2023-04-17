@@ -43,19 +43,28 @@ public class ControllerSocios {
         GestorFicheiros.GravarFicheiro("socios.txt", conteudo);
     }
 
+    public String verificarNumMecanografico() {
+        String max = "";
+        for (Socio id : socios) {
+            if (id.getNumMecanografico().compareTo(max) > 0) {
+                max = id.getNumMecanografico();
+            }
+        }
+        return max;
+    }
 
     public void adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone){
-    Socio socio= new Socio (nome,morada,dataDeNascimento,telefone);
-
+        this.verificarNumMecanografico();
+        Socio socio = new Socio (nome, morada,dataDeNascimento,telefone);
         this.socios.add(socio);
     }
     public ArrayList<Socio> listarSocio(){
         return this.socios;
 
     }
-    public boolean editarSocio (String nome, String morada, LocalDate dataDeNascimento, int telefone, String numMecanografico) {
+    public boolean editarSocio (String numMecanografico , String nome, String morada, LocalDate dataDeNascimento, int telefone) {
         for (Socio socio : socios) {
-            if ( numMecanografico== socio.getNumMecanografico()) {
+            if (numMecanografico.equals(socio.getNumMecanografico())) {
                 socio.setNome(nome);
                 socio.setMorada(morada);
                 socio.setDataDeNascimento(dataDeNascimento);
