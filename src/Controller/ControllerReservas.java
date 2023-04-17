@@ -15,6 +15,8 @@ public class ControllerReservas {
     public void efetuarReserva(Socio socioSelecionado, Livro livroSelecionado, LocalDate dataDaReserva){
         LivroReservado livroReservado = new LivroReservado(socioSelecionado, livroSelecionado, dataDaReserva);
         this.livrosReservados.add(livroReservado);
+        livroSelecionado.decrementarQuantidade();
+        socioSelecionado.aumentarQuantidade();
 
     }
     public ArrayList<LivroReservado> listarLivrosReservados() {
@@ -31,10 +33,10 @@ public class ControllerReservas {
             return socioListado;
         }
 
-    public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloDolivro) {
+    public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloDoLivro) {
         ArrayList<Livro> livrosTitulo = new ArrayList<>();
         for (Livro livro : livros) {
-            if (tituloDolivro.equalsIgnoreCase(livro.getTitulo())) {
+            if (tituloDoLivro.equalsIgnoreCase(livro.getTitulo())) {
                 livrosTitulo.add(livro);
             }
         }
@@ -43,4 +45,6 @@ public class ControllerReservas {
 
 
 }
+
+
 

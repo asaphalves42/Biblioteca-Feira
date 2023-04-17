@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -11,6 +12,7 @@ public class Socio extends Pessoa {
         super(nome, morada, dataDeNascimento);
         this.numMecanografico = numMecanografico;
         this.telefone = telefone;
+        this.livrosReservados = 0;
     }
 
     public Socio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
@@ -18,8 +20,21 @@ public class Socio extends Pessoa {
         this.telefone = telefone;
         this.numMecanografico = gerarNumMecanografico();
     }
+    private int livrosReservados;
     private int telefone;
     private String numMecanografico;
+
+    public void aumentarQuantidade(){
+        livrosReservados++;
+    }
+
+    public int getLivrosReservados() {
+        return livrosReservados;
+    }
+
+    public void setLivrosReservados(int livrosReservados) {
+        this.livrosReservados = livrosReservados;
+    }
 
     public String getNumMecanografico() {
         return numMecanografico;
@@ -51,7 +66,6 @@ public class Socio extends Pessoa {
         this.telefone = telefone;
     }
 
-
     @Override
     public String toString() {
         return "Sócio [ " + "\n" +
@@ -62,4 +76,5 @@ public class Socio extends Pessoa {
                 "Data de nascimento: " + this.getDataDeNascimento() + "]" +
                 "\n" + "----------------------------------------------";
     }
+
 }
