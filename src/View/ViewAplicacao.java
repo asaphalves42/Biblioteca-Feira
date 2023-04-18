@@ -8,6 +8,7 @@ import Controller.ControllerLogin;
 import Controller.ControllerSocios;
 import View.Autores.MenuViewAutores;
 import View.Livros.MenuViewLivros;
+import View.Login.ViewLogin;
 import View.Reservas.MenuViewReservas;
 import View.Socios.MenuViewSocios;
 
@@ -55,13 +56,16 @@ public class ViewAplicacao {
                 case 1:controllerLogin = new ControllerLogin(new ViewLogin());
                     boolean loginSucesso = controllerLogin.iniciar();
                     if (loginSucesso) {
+                        ViewLogin.mostrarMensagemDeLoginComSucesso();
                         menuPrincipal();
+                    } else {
+                        ViewLogin.mostrarMensagemDeLoginFalhado();
                     }
                     break;
                 case 2:
                     controllerLogin.registar();
                     break;
-                case 3://sair
+                case 3:System.exit(0);
                     break;
             }
 
