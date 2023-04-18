@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import static Utilidades.Leitura.leStr;
 
-public class ViewFunçãoRemoverSocios {
+public class ViewFuncaoRemoverSocios {
     public void removerSocioPorNumMecanografico(ControllerSocios gestor) {
 
         String numMecanografico = leStr("Insira número mecanográfico do socio");
@@ -38,10 +38,10 @@ public class ViewFunçãoRemoverSocios {
 
         if (removido) {
             System.out.println("Sócio eliminado com sucesso");
-            System.out.println("");
+            System.out.println(" ");
         } else {
             System.out.println("Sócio não encontrado(a)");
-            System.out.println("");
+            System.out.println(" ");
         }
     }
 

@@ -12,56 +12,6 @@ import static Utilidades.Leitura.*;
 
 public class ViewFuncaoEditarLivros {
 
-    public void editarLivros(ControllerLivros gestor) {
-
-        String tituloLivro = leStr("Insira o título do livro que quer editar:");
-        ArrayList<Livro> livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
-
-        if (livrosParaEditar.isEmpty()) {
-            System.out.println("Não existem livros com este título!");
-            System.out.println(" ");
-        } else {
-            for (Livro livro : livrosParaEditar) {
-                System.out.println(livro.toString());
-            }
-        }
-
-        int idLivroEditar = leint("Insira o id do livro que quer editar: ");
-
-        String novoTitulo = leStr("Insira o novo titulo do livro:");
-
-        String subTitulo = leStr("Insira o novo subtitulo:");
-
-        int quantidade = leint("Insira a nova quantidade:");
-
-        String autor = leStr("Insira o novo autor do livro:");
-
-        int numPaginas = leint("Insira o novo número de páginas:");
-
-        String categoria = leStr("Insira a nova categoria do livro:");
-
-        System.out.println("Digite a nova data de publicação do livro: ");
-        ValidacaoData validarData = new ValidacaoData();
-        LocalDate dataDePublicacao = validarData.LerData2();
-
-        String faixaEtaria = leStr("Insira a nova faixa etária do livro:");
-
-        String editora = leStr("Insira a nova editora do livro:");
-
-        String ISBN = leStr("Insira o novo ISBN do livro:");
-
-        boolean editado = gestor.editarLivro(idLivroEditar, novoTitulo, subTitulo, quantidade, autor, numPaginas, categoria, dataDePublicacao,faixaEtaria,editora,ISBN);
-
-        if(editado){
-            System.out.println("Livro editado com sucesso!");
-            System.out.println(" ");
-        } else{
-            System.out.println("Livro não encontrado!");
-            System.out.println(" ");
-        }
-
-    }
-
     public void editarLivrosPorTitulo(ControllerLivros gestor){
         ArrayList<Livro> livrosParaEditar;
 

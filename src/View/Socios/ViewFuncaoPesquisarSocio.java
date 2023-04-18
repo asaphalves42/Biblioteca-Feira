@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import static Utilidades.Leitura.leStr;
 
-public class ViewFunçãoPesquisarSocio {
+public class ViewFuncaoPesquisarSocio {
 
     public void pesquisarSocioPorNome(ControllerSocios gestor) {
 
