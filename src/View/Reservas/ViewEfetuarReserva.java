@@ -9,7 +9,6 @@ import Utilidades.ValidacaoData;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static Controller.ControllerLivros.livros;
 import static Utilidades.Leitura.leStr;
 import static Utilidades.Leitura.leint;
 
@@ -25,6 +24,7 @@ public class ViewEfetuarReserva {
 
             if (socioExistente.isEmpty()) {
                 System.out.println("Não existem sócios com esse nome!");
+                System.out.println(" ");
             } else {
                 for (Socio socio : socioExistente) {
                     System.out.println(socio.toString());
@@ -40,11 +40,11 @@ public class ViewEfetuarReserva {
                     }
                 }
             }
-            assert socioSelecionado != null;
-            if(socioSelecionado.getLivrosReservados() == 3){//data de reserva tambem tem que ser a mesma
+            if(socioSelecionado != null && socioSelecionado.getLivrosReservados() == 3){
                 System.out.println("Ja atingiu o número máximo de reservas");
+                System.out.println(" ");
+                return;
             }
-            return;
         }
 
         ArrayList<Livro> livroExistente;
@@ -56,6 +56,7 @@ public class ViewEfetuarReserva {
 
             if (livroExistente.isEmpty()) {
                 System.out.println("Não existem livros com esse nome!");
+                System.out.println(" ");
             } else {
                 for (Livro livro : livroExistente) {
                     System.out.println(livro.toString());
@@ -75,7 +76,12 @@ public class ViewEfetuarReserva {
         System.out.println("Data da reserva: ");
 
         ValidacaoData validarData = new ValidacaoData();
-        LocalDate dataDaReserva = validarData.LerData2();
+        LocalDate dataDaReserva = null;
+        try {
+            dataDaReserva = validarData.LerData2();
+        } catch (Exception e) {
+            System.out.println("Erro ao ler data da reserva: " + e.getMessage());
+        }
 
         if(livroSelecionado.getQuantidade() == 0){
             System.out.println("Não existem mais exemplares desse livro no estoque!");
@@ -84,8 +90,12 @@ public class ViewEfetuarReserva {
             System.out.println("Livro reservado com sucesso!");
             System.out.println(" ");
         }
-        gerirReservas.efetuarReserva(socioSelecionado, livroSelecionado, dataDaReserva);
 
+        try {
+            gerirReservas.efetuarReserva(socioSelecionado, livroSelecionado, dataDaReserva);
+        } catch (Exception e) {
+            System.out.println("Erro ao efetuar reserva: " + e.getMessage());
+        }
     }
 
 }
