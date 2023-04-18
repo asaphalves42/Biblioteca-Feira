@@ -1,13 +1,15 @@
 package Controller;
 
 import Model.Utilizador;
-import View.ViewLogin;
+import View.Login.ViewLogin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
+
+import static Utilidades.Leitura.ler;
 
 public class ControllerLogin {
     private ViewLogin viewLogin;
@@ -18,33 +20,55 @@ public class ControllerLogin {
 
 
     public boolean iniciar() {
-        while (true) {
+        boolean loginSucesso = false;
+        while (!loginSucesso) {
             String email = viewLogin.getEmail();
             String password = viewLogin.getPassword();
-            Utilizador user = obterUtilizadorPorEmail(email);
 
-            if (user != null && user.getPassword().equals(password)) {
-                viewLogin.mostrarMensagemDeLoginComSucesso();
-                return true;
+            if (validarEmail(email) && obterUtilizadorPorEmail(email) != null && obterUtilizadorPorEmail(email).getPassword().equals(password)) {
+                loginSucesso = true;
             } else {
-                viewLogin.mostrarMensagemDeLoginFalhado();
+                viewLogin.tentativaEmail();
+                if (!ler.next().equalsIgnoreCase("S")) {
+                    break;
+                }
             }
         }
+        return loginSucesso;
     }
 
-    public void registar() {
-        String email = viewLogin.getEmail();
-        String password = viewLogin.getPassword();
-        try {
-            PrintWriter writer = new PrintWriter(new FileOutputStream(new File("utilizadores.txt"), true));
+    private boolean validarEmail(String email) {
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        return email.matches(regex);
+    }
 
-            writer.println(email + "," + password);
-            writer.close();
-            viewLogin.mostrarMensagemDeRegistoComSucesso();
-        } catch (FileNotFoundException e) {
-            System.out.println("Erro ao guardar utilizador em ficheiro.");
-            viewLogin.mostrarMensagemDeRegistoFalhado();
+    public boolean registar() {
+        boolean registoBemSucedido = false;
+
+        while (!registoBemSucedido) {
+            String email = viewLogin.getEmail();
+            String password = viewLogin.getPassword();
+
+            if (!validarEmail(email)) {
+                viewLogin.tentativaEmail();
+                String resposta = ler.next();
+                if (!resposta.equalsIgnoreCase("S")) {
+                    break;
+                }
+                continue;
+            }
+
+            try {
+                PrintWriter writer = new PrintWriter(new FileOutputStream(new File("utilizadores.txt"), true));
+                writer.println(email + "," + password);
+                writer.close();
+                registoBemSucedido = true;
+            } catch (FileNotFoundException e) {
+                registoBemSucedido = false;
+            }
         }
+
+        return registoBemSucedido;
     }
 
     private Utilizador obterUtilizadorPorEmail(String email) {
@@ -62,13 +86,11 @@ public class ControllerLogin {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Ficheiro de utilizadores não encontrado.");
+            viewLogin.erroFicheiroNaoEncontrado();
+
         }
         return null;
     }
 
-    public void apagarFicheiro() {
-        File file = new File("utilizadores.txt");
-        file.delete();
-    }
+
 }
