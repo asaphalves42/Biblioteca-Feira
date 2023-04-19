@@ -135,9 +135,9 @@ public class ControllerLivros {
         return false;
     }
 
-    public boolean editarQuantidade(int idEditarTitulo, int novaQuantidade) {
+    public boolean editarQuantidade(int idEditarQuantidade, int novaQuantidade) {
         for (Livro livro : livros) {
-            if (idEditarTitulo == livro.getId()) {
+            if (idEditarQuantidade == livro.getId()) {
                 livro.setQuantidade(novaQuantidade);
                 return true;
             }

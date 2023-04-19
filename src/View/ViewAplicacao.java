@@ -1,11 +1,8 @@
 package View;
 
 
-import Controller.ControllerAutores;
-import Controller.ControllerLivros;
-import Controller.ControllerLogin;
+import Controller.*;
 
-import Controller.ControllerSocios;
 import View.Autores.MenuViewAutores;
 import View.Livros.MenuViewLivros;
 import View.Login.ViewLogin;
@@ -22,8 +19,10 @@ public class ViewAplicacao {
     ControllerLivros lerEgravarLivros = new ControllerLivros();
     ControllerAutores lerEgravarAutores = new ControllerAutores();
     ControllerSocios lerEgravarSocios = new ControllerSocios();
+    ControllerReservas lerEGravarReservas = new ControllerReservas(lerEgravarSocios,lerEgravarLivros);
     public void Iniciar() {
         //Ler os ficheiros
+        lerEGravarReservas.lerLivrosDeFicheiroReserva();
         lerEgravarLivros.lerLivrosDeFicheiro();
         lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();

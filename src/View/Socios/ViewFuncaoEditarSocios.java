@@ -5,17 +5,16 @@ import Model.Socio;
 import Utilidades.ValidacaoData;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-import static Utilidades.Leitura.leStr;
 import static Utilidades.Leitura.leInt;
+import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoEditarSocios {
 
    public void editarSocio(ControllerSocios gestor) {
 
         String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
-        ArrayList<Socio> socioEditar = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+        Socio socioEditar = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
         if (socioEditar == null) {
             System.out.println("Não existem sócios com esse número");

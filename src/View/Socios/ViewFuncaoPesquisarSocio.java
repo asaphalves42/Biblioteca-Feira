@@ -27,9 +27,9 @@ public class ViewFuncaoPesquisarSocio {
 
         String numMecanografico = leStr("Insira o Id do(a) sócio(a)");
 
-        ArrayList<Socio> socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+        Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
-        if (socio.isEmpty()) {
+        if (socio == null) {
             System.out.println("Socio(a) inexistente!");
         } else {
             System.out.println(gestor.pesquisarSocioPorNumMecanografico(numMecanografico));
