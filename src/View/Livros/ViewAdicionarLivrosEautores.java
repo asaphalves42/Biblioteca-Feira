@@ -49,13 +49,18 @@ public class ViewAdicionarLivrosEautores {
                 break;
             }
             int quantidade = leIntPositivo("Introduza a quantidade: ");
+            System.out.println("");
 
             int numDePaginas = leIntPositivo("Introduza o número de páginas: ");
+            System.out.println("");
 
             ArrayList<Autor> adicionarAutorExistente;
             String nomeAutor;
             while (true) {
-                nomeAutor = leStr("Insira o autor:");
+                nomeAutor = leStr("Insira o nome do(a) autor(a):");
+                if (nomeAutor.equalsIgnoreCase("sair")) {
+                    return;
+                }
                 adicionarAutorExistente = gestorAutor.pesquisarAutorPorNome(nomeAutor);
 
                 if (adicionarAutorExistente.isEmpty()) {
@@ -69,20 +74,45 @@ public class ViewAdicionarLivrosEautores {
                 }
             }
 
-            int idAdicionarAutor = leInt("Insira o id do autor que quer adicionar: ");
+
+            int idAdicionarAutor = 0;
+            while (true) {
+                String inputId = leStr("Insira o Id do(a) autor(a) que quer adicionar: ");
+
+                if (inputId.equalsIgnoreCase("sair")) {
+                    break;
+                } else {
+                    try {
+                        idAdicionarAutor = Integer.parseInt(inputId);
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Por favor, insira um número inteiro.");
+                    }
+                }
+            }
 
             Autor autorAdicionado = null;
-            for (Autor autor : adicionarAutorExistente) {
-                if (autor.getId() == idAdicionarAutor) {
-                    autorAdicionado = autor;
-                    break;
+            if (idAdicionarAutor > 0) {
+                autorAdicionado = null;
+                for (Autor autor : adicionarAutorExistente) {
+                    if (autor.getId() == idAdicionarAutor) {
+                        autorAdicionado = autor;
+                        break;
+                    }
+                }
+
+                if (autorAdicionado != null) {
+                    gestorAutor.adicionarAutor(String.valueOf(autorAdicionado));
+
+                    System.out.println("Autor(a) adicionado(a) com sucesso!");
+                    System.out.println(" ");
                 }
             }
 
             if (autorAdicionado != null) {
                 gestorAutor.adicionarAutor(String.valueOf(autorAdicionado));
 
-                System.out.println("Autor adicionado com sucesso!");
+                System.out.println("Autor(a) adicionado(a) com sucesso!");
                 System.out.println(" ");
             }
 

@@ -35,7 +35,7 @@ public class MenuViewReservas {
                 case 2:
                     devolver.devolverLivro(gerirReservas);
                     break;
-                case 3:listar.listarTodosOsLivros(gerirReservas);
+                case 3:listar.listarTodasAsReservas(gerirReservas);
                     break;
                 case 4://cancelar
                     break;

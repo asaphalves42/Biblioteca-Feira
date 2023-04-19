@@ -13,7 +13,7 @@ import static Controller.ControllerLivros.livros;
 import static Controller.ControllerSocios.socios;
 
 public class ControllerReservas {
-    public ArrayList<Reserva> reservas = new ArrayList<>();
+    public static ArrayList<Reserva> reservas = new ArrayList<>();
     public ControllerSocios controllerSocios;
      public ControllerLivros controllerLivros;
 
@@ -117,11 +117,9 @@ public class ControllerReservas {
                 reservaEncontrada.getLivros().removeIf(livro -> IdDoLivro == livro.getId());
                 if (reservaEncontrada.getLivros().isEmpty()) {
                     reservas.remove(reservaEncontrada);
-                } else {
-                    reservaEncontrada.getSocio().decrementarQuantidade();
-
-                    editarQuantidadeReserva(IdDoLivro,  1);
                 }
+                editarQuantidadeReserva(IdDoLivro,  1);
+                reservaEncontrada.getSocio().decrementarQuantidade();
                 break;
             }
         }

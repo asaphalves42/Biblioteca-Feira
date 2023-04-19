@@ -6,12 +6,12 @@ import Model.Reserva;
 import java.util.ArrayList;
 
 public class ViewListarReserva {
-    public void listarTodosOsLivros(ControllerReservas gerirReservas) {
+    public void listarTodasAsReservas(ControllerReservas gerirReservas) {
 
         ArrayList<Reserva> livrosReservadosListados = gerirReservas.listarReservas();
 
         if(livrosReservadosListados.isEmpty()){
-            System.out.println("Nao existem livros reservados!");
+            System.out.println("Nao existem reservas!");
             System.out.println(" ");
         } else{
             for(Reserva livroReservado : livrosReservadosListados){

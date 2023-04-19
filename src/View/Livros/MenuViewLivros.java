@@ -123,7 +123,7 @@ public class MenuViewLivros {
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 12);
+        } while (opcao != 13);
     }
 
 }

@@ -27,12 +27,12 @@ public class ViewAplicacao {
     ControllerReservas lerEGravarReservas = new ControllerReservas(lerEgravarSocios,lerEgravarLivros);
     public void Iniciar() {
         //Ler os ficheiros
-        lerEGravarReservas.lerLivrosDeFicheiroReserva();
-        lerEgravarLivros.lerLivrosDeFicheiro();
         lerEgravarAutores.lerAutorDeFicheiro();
+        lerEgravarLivros.lerLivrosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
-
+        lerEGravarReservas.lerLivrosDeFicheiroReserva();
         MensagemBoasVindas.textoInicial();
+        MensagemBoasVindas.mensagemBoasVindas();
 
 
         // Iniciar o sistema

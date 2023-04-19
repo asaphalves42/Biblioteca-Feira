@@ -13,6 +13,10 @@ public class ValidacaoData {
             LocalDate data;
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             data = LocalDate.parse(ler.nextLine(), formatter);
+            if (data.isAfter(LocalDate.now())) {
+                System.out.println("Data invalida, insira uma data anterior a hoje (" + LocalDate.now().format(formatter) + "):");
+                return LerData2();
+            }
             return data;
         } catch (Exception ex) {
             System.out.println("Data invalida, insira uma data com o formato (dd/MM/aaaa):");
@@ -20,4 +24,3 @@ public class ValidacaoData {
         }
     }
 }
-
