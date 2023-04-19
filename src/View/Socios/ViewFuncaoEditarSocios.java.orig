@@ -5,22 +5,30 @@ import Model.Socio;
 import Utilidades.ValidacaoData;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-import static Utilidades.Leitura.leStr;
 import static Utilidades.Leitura.leInt;
+import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoEditarSocios {
 
     public void editarSocioPorNumMecTodosOsCampos(ControllerSocios gestor) {
 
+       boolean sair = false;
+       do{
+
         String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
-        ArrayList<Socio> socioEditar = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+        Socio socioEditar = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
         if (socioEditar == null) {
             System.out.println("Não existem sócios com esse número");
             System.out.println(" ");
+<<<<<<< HEAD
+        }else {
+            System.out.println("Caso pretenda sair, digite 'sair'");
+        }
+=======
         } else {
+>>>>>>> ad3942d01aad7efafeb6c4980d33e8326628f2f9
             String novoNome = "";
             while (novoNome.trim().equals("")) {
                 novoNome = leStr("Insira o novo nome do sócio");
@@ -29,6 +37,13 @@ public class ViewFuncaoEditarSocios {
             String novaMorada = "";
             while (novaMorada.trim().equals("")) {
                 novaMorada = leStr("Insira a nova morada do sócio");
+                if(novaMorada.equalsIgnoreCase("sair")) {
+                    sair = true;
+                    break;
+                }
+            }
+            if (sair) {
+                break;
             }
 
             System.out.println("Digite a data de nascimento do sócio: ");
@@ -49,6 +64,8 @@ public class ViewFuncaoEditarSocios {
             } else {
                 System.out.println("Sócio não editado");
                 System.out.println(" ");
+<<<<<<< HEAD
+=======
 
             }
 
@@ -75,8 +92,10 @@ public class ViewFuncaoEditarSocios {
                 System.out.println("Sócio não editado");
                 System.out.println(" ");
 
+>>>>>>> ad3942d01aad7efafeb6c4980d33e8326628f2f9
             }
-        }
+
+        }while (!sair);
     }
 
     public void editarMoradaSocioPorNumMecanografico(ControllerSocios gestor) {

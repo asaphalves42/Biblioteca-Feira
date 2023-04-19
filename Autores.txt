@@ -1,3 +1,12 @@
-1|Asaph Alves|Rua 3 da feira|1999-02-04
-2|J.K.Rowling|Rua Maria das neves|1974-03-03
-3|David Fernandes|Rua do Cavaco|1990-08-04
+1|George Orwell|Motihari, Bihar, Índia|1903-06-25
+2|Milan Kundera|Brno, Morávia, Tchecoslováquia|1929-04-01
+3|JRR Tolkien|Bloemfontein, Estado Livre de Orange, África do Sul|1892-01-03
+4|Dan Brown|Exeter, New Hampshire, Estados Unidos|1964-06-22
+5|JK Rowling|Yate, Gloucestershire, Inglaterra|1965-07-31
+6|Jack London|San Francisco, Califórnia, Estados Unidos|1876-01-12
+7|Antoine de Saint-Exupéry|Lyon França|1900-06-29
+8|Umberto Eco|Alessandria, Itália|1932-01-05
+9|J.R.R. Tolkien|Bloemfontein, Estado Livre de Orange, África do Sul|1892-01-03
+10|Charles Darwin|Shrewsbury, Shropshire, Inglaterra|1809-02-12
+11|Victor Hugo|Besançon, França|1802-02-26
+12|Ray Bradbury|Waukegan, Illinois, Estados Unidos|1920-08-22

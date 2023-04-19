@@ -1,4 +1,5 @@
 975258|Asaph|Rua 4|1999-02-04|933016011|
+<<<<<<< HEAD
 211056|Pedro Silva Valente|Rua de Ovar|1998-08-05|933045897|
 456009|Sofia Santos|Rua do Campo Alegre|1995-08-23|933017726|
 432780|João Pereira|Rua do Amial|1988-06-10|933044038|
@@ -20,3 +21,7 @@
 487605|João Santos|Rua do Rosário|2002-03-20|933036512|
 261349|Sofia Alves|Rua do Sol|1997-09-29|933018103|
 953874|Luís Rodrigues|Rua da Constituição|1987-12-16|933015832|
+=======
+211056|Pedro Valente|Rua de Ovar|1998-08-05|933045897|
+311664|Marley Alves|Rua 3 hospital,98|1976-08-04|910333444|
+>>>>>>> 2032928468d8f93fbf76e575efabc17a837784ee

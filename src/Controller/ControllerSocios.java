@@ -75,6 +75,45 @@ public class ControllerSocios {
         return false;
     }
 
+    public boolean editarSocioPorNome (String numMecanografico , String nome) {
+        for (Socio socio : socios) {
+            if (numMecanografico.equals(socio.getNumMecanografico())) {
+                socio.setNome(nome);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean editarSocioPorMorada (String numMecanografico , String novaMorada) {
+        for (Socio socio : socios) {
+            if (numMecanografico.equals(socio.getNumMecanografico())) {
+                socio.setMorada(novaMorada);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean editarSocioPorDataDeNascimento (String numMecanografico, LocalDate novaDataDeNascimento) {
+        for (Socio socio : socios) {
+            if (numMecanografico.equals(socio.getNumMecanografico())) {
+                socio.setDataDeNascimento(novaDataDeNascimento);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean editarSocioPorTelefone (String numMecanografico, int novaTelefone) {
+        for (Socio socio : socios) {
+            if (numMecanografico.equals(socio.getNumMecanografico())) {
+                socio.setTelefone(novaTelefone);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
     public ArrayList<Socio> pesquisarSocioPorNome(String nomeInserido) {
         ArrayList<Socio> nomeSocio = new ArrayList<>();
         for (Socio nome : socios) {
@@ -101,7 +140,6 @@ public class ControllerSocios {
                 return true;
             }
         }
-        System.out.println("Não existe sócio com o nome inserido");
         return false;
     }
 
