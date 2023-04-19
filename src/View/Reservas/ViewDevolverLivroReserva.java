@@ -1,38 +1,31 @@
 package View.Reservas;
 
 import Controller.ControllerReservas;
-import Model.LivroReservado;
+import Model.Reserva;
 
-import java.util.ArrayList;
-
-import static Utilidades.Leitura.ler;
+import static Utilidades.Leitura.leInt;
+import static Utilidades.Leitura.leStr;
 
 public class ViewDevolverLivroReserva {
     public void devolverLivro(ControllerReservas controllerReservas) {
-        ArrayList<LivroReservado> livrosReservados = controllerReservas.listarLivrosReservados();
-        if (livrosReservados.isEmpty()) {
-            System.out.println("Não há livros reservados.");
-            return;
+
+        String idDaReserva = leStr("Qual o ID da reserva que deseja devolver?");
+        Reserva reserva = controllerReservas.pesquisarReservaPorId(idDaReserva);
+        if(reserva != null){
+            System.out.println(reserva);
+        }else{
+            System.out.println("Reserva não encontrada");
+            System.out.println(" ");
         }
 
-        System.out.println("----- Devolver Livro -----");
-        System.out.print("Digite o nome do livro que deseja devolver: ");
-        String tituloDoLivro = ler.next();
+        int idDoLivro = leInt("Qual o ID do livro que deseja devolver?");
 
-        LivroReservado livroReservado = null;
-        for (LivroReservado livro : livrosReservados) {
-            if (livro.getLivro().getTitulo().equals(tituloDoLivro)) {
-                livroReservado = livro;
-                break;
-            }
-        }
 
-        if (livroReservado == null) {
-            System.out.println("Não foi possível encontrar um livro reservado com o nome inserido.");
-            return;
-        }
+        controllerReservas.devolverLivro(idDaReserva, idDoLivro);
 
-        controllerReservas.devolverLivro(livroReservado);
-        System.out.println("Livro devolvido com sucesso.");
+        System.out.println("Livro devolvido com sucesso");
+        System.out.println(" ");
+
     }
 }
+

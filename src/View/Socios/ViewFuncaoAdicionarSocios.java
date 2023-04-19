@@ -33,7 +33,7 @@ public class ViewFuncaoAdicionarSocios {
 
         int telefone = 0;
         while (telefone < 100000000 || telefone > 999999999) {
-            telefone = leint("Introduza o nr de telefone (9 dígitos): ");
+            telefone = leInt("Introduza o nr de telefone (9 dígitos): ");
             if (telefone < 100000000 || telefone > 999999999) {
                 System.out.println("Por favor, introduza um número de telefone com 9 dígitos!");
             }

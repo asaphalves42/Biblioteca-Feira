@@ -7,14 +7,14 @@ import Utilidades.ValidacaoData;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static Utilidades.Leitura.leint;
+import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoEditarAutor {
 
     public void editarAutor(ControllerAutores gestor) {
 
-        int idAutor = leint("Insira o Id do(a) autor(a) que quer editar");
+        int idAutor = leInt("Insira o Id do(a) autor(a) que quer editar");
         ArrayList<Autor> autorEditar = gestor.pesquisarAutorPorId(idAutor);
 
         if (autorEditar == null) {

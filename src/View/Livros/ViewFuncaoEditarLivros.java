@@ -31,7 +31,7 @@ public class ViewFuncaoEditarLivros {
         }
 
 
-        int idEditarTitulo = leint("Insira o id do livro que quer editar: ");
+        int idEditarTitulo = leInt("Insira o id do livro que quer editar: ");
         String tituloNovo = leStr("Insira o novo título:");
 
         boolean tituloEditado = gestor.editarTituloDoLivro(idEditarTitulo, tituloNovo);
@@ -63,7 +63,7 @@ public class ViewFuncaoEditarLivros {
             }
         }
 
-        int idEditarSubTitulo = leint("Insira o id do livro que quer editar: ");
+        int idEditarSubTitulo = leInt("Insira o id do livro que quer editar: ");
         String subTituloNovo = leStr("Insira o novo subtítulo:");
 
         boolean tituloEditado = gestor.editarSubTituloDoLivro(idEditarSubTitulo, subTituloNovo);
@@ -95,7 +95,7 @@ public class ViewFuncaoEditarLivros {
             }
         }
 
-        int idEditarQuantidade = leint("Insira o id do livro que quer editar: ");
+        int idEditarQuantidade = leInt("Insira o id do livro que quer editar: ");
         int novaQuantidade = leIntPositivo("Insira a nova quantidade:");
 
         boolean quantidadeEditada = gestor.editarQuantidade(idEditarQuantidade, novaQuantidade);
@@ -126,7 +126,7 @@ public class ViewFuncaoEditarLivros {
             }
         }
 
-        int idEditarAutor = leint("Insira o id do livro que quer editar: ");
+        int idEditarAutor = leInt("Insira o id do livro que quer editar: ");
         String novoAutor = leStr("Insira o novo autor:");
 
         boolean autorEditado = gestor.editarAutor(idEditarAutor, novoAutor);
@@ -158,7 +158,7 @@ public class ViewFuncaoEditarLivros {
             }
         }
 
-        int idEditarNumPaginas = leint("Insira o id do livro que quer editar: ");
+        int idEditarNumPaginas = leInt("Insira o id do livro que quer editar: ");
         int novaQuantidade = leIntPositivo("Insira o novo numero de paginas:");
 
         boolean quantidadeEditada = gestor.editarNumPaginas(idEditarNumPaginas, novaQuantidade);
@@ -188,7 +188,7 @@ public class ViewFuncaoEditarLivros {
             }
         } while (livros.isEmpty());
 
-        int idLivro = leint("Insira o id do livro que deseja editar a categoria:");
+        int idLivro = leInt("Insira o id do livro que deseja editar a categoria:");
         Livro livroParaEditar = gestor.pesquisarLivroPorId(idLivro);
 
         if (livroParaEditar == null) {
@@ -248,7 +248,7 @@ public class ViewFuncaoEditarLivros {
             }
         }
 
-        int idEditarData = leint("Insira o id do livro que quer editar: ");
+        int idEditarData = leInt("Insira o id do livro que quer editar: ");
         System.out.println("Digite a nova data de publicação do livro: ");
         ValidacaoData validarData = new ValidacaoData();
         LocalDate novaDataDePublicacao = validarData.LerData2();
@@ -282,7 +282,7 @@ public class ViewFuncaoEditarLivros {
             }
         }
 
-        int idEditarFaixa = leint("Insira o id do livro que quer editar: ");
+        int idEditarFaixa = leInt("Insira o id do livro que quer editar: ");
         String novaFaixaEtaria = leStr("Insira a nova faixa etaria:");
 
         boolean faixaEditada = gestor.editarFaixaEtaria(idEditarFaixa, novaFaixaEtaria);
@@ -314,7 +314,7 @@ public class ViewFuncaoEditarLivros {
             }
         }
 
-        int idEditarEditora = leint("Insira o id do livro que quer editar: ");
+        int idEditarEditora = leInt("Insira o id do livro que quer editar: ");
         String novaEditora = leStr("Insira a nova editora:");
 
         boolean editoraEditada = gestor.editarEditora(idEditarEditora, novaEditora);
@@ -346,7 +346,7 @@ public class ViewFuncaoEditarLivros {
             }
         }
 
-        int idEditarISBN = leint("Insira o id do livro que quer editar: ");
+        int idEditarISBN = leInt("Insira o id do livro que quer editar: ");
         String novoISBN = leStr("Insira o novo ISBN");
 
         boolean editadoISBN = gestor.editarISBN(idEditarISBN, novoISBN);

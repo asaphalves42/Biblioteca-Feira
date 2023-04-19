@@ -5,18 +5,19 @@ import Model.Livro;
 import Model.Socio;
 import Utilidades.ValidacaoData;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
-import static Utilidades.Leitura.leint;
 
 public class ViewEfetuarReserva {
 
     public void efetuarReserva(ControllerReservas gerirReservas) {
         ArrayList<Socio> socioExistente;
         Socio socioSelecionado = null;
+
+
 
         while (socioSelecionado == null) {
             String nomeSocio = leStr("Insira o nome do sócio:");
@@ -40,67 +41,72 @@ public class ViewEfetuarReserva {
                     }
                 }
             }
-            if(socioSelecionado != null && socioSelecionado.getLivrosReservados() == 3){
+            if (socioSelecionado != null && socioSelecionado.getLivrosReservados() == 3) {
                 System.out.println("Ja atingiu o número máximo de reservas");
                 System.out.println(" ");
-                return;
+                break;
             }
         }
 
-        ArrayList<Livro> livroExistente;
-        Livro livroSelecionado = null;
+        boolean continuarReservando = true; // variável para controlar se o sócio deseja continuar reservando livros
 
-        while (livroSelecionado == null) {
-            String tituloDolivro = leStr("Digite o título do livro:");
-            livroExistente = gerirReservas.pesquisarLivroPorTitulo(tituloDolivro);
+        while (continuarReservando) { // loop para permitir que o sócio reserve mais de um livro
+            ArrayList<Livro> livroExistente;
+            Livro livroSelecionado = null;
 
-            if (livroExistente.isEmpty()) {
-                System.out.println("Não existem livros com esse nome!");
-                System.out.println(" ");
-            } else {
-                for (Livro livro : livroExistente) {
-                    System.out.println(livro.toString());
-                }
+                while (livroSelecionado == null) {
+                    String tituloDolivro = leStr("Digite o título do livro:");
+                    livroExistente = gerirReservas.pesquisarLivroPorTitulo(tituloDolivro);
 
-                int IdLivro = leint("Insira o id do livro que deseja reservar:");
+                    if (livroExistente.isEmpty()) {
+                        System.out.println("Não existem livros com esse nome!");
+                        System.out.println(" ");
+                    } else {
+                        for (Livro livro : livroExistente) {
+                            System.out.println(livro.toString());
+                        }
 
-                for (Livro livro : livroExistente) {
-                    if (livro.getId() == IdLivro) {
-                        livroSelecionado = livro;
-                        break;
+                        int IdLivro = leInt("Insira o id do livro que deseja reservar:");
+
+                        for (Livro livro : livroExistente) {
+                            if (livro.getId() == IdLivro) {
+                                livroSelecionado = livro;
+                                break;
+                            }
+                        }
                     }
                 }
+                while (livroSelecionado == null) ;
+
+                System.out.println("Data da reserva: ");
+
+                ValidacaoData validarData = new ValidacaoData();
+                LocalDate dataDaReserva = null;
+                try {
+                    dataDaReserva = validarData.LerData2();
+                } catch (Exception e) {
+                    System.out.println("Erro ao ler data da reserva: " + e.getMessage());
+                }
+
+                if (livroSelecionado.getQuantidade() == 0) {
+                    System.out.println("Não existem mais exemplares desse livro no estoque!");
+                    System.out.println(" ");
+                } else {
+                    System.out.println("Livro reservado com sucesso!");
+                    System.out.println(" ");
+                }
+
+                try {
+                    gerirReservas.efetuarReserva(socioSelecionado,livroSelecionado, dataDaReserva);
+
+                } catch (Exception e) {
+                    System.out.println("Erro ao efetuar reserva: " + e.getMessage());
+
+                }
+                String continuar = leStr("Deseja continuar reservar o livro? (S/N): ");
+                if (!continuar.equalsIgnoreCase("s") && (!continuar.equalsIgnoreCase("sim"))) {
+                    continuarReservando = false;
+                }
             }
         }
-
-        System.out.println("Data da reserva: ");
-
-        ValidacaoData validarData = new ValidacaoData();
-        LocalDate dataDaReserva = null;
-        try {
-            dataDaReserva = validarData.LerData2();
-        } catch (Exception e) {
-            System.out.println("Erro ao ler data da reserva: " + e.getMessage());
-        }
-
-        if(livroSelecionado.getQuantidade() == 0){
-            System.out.println("Não existem mais exemplares desse livro no estoque!");
-            System.out.println(" ");
-        }else{
-            System.out.println("Livro reservado com sucesso!");
-            System.out.println(" ");
-        }
-
-        try {
-            gerirReservas.efetuarReserva(socioSelecionado, livroSelecionado, dataDaReserva);
-        } catch (Exception e) {
-            System.out.println("Erro ao efetuar reserva: " + e.getMessage());
-        }
     }
-
-}
-
-
-
-
-

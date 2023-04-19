@@ -52,7 +52,7 @@ public class ViewAdicionarLivrosEautores {
             }
         }
 
-        int idAdicionarAutor = leint("Insira o id do autor que quer adicionar: ");
+        int idAdicionarAutor = leInt("Insira o id do autor que quer adicionar: ");
 
         Autor autorAdicionado = null;
         for (Autor autor : adicionarAutorExistente) {

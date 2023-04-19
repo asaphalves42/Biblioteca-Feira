@@ -21,7 +21,8 @@ public class MenuViewReservas {
             System.out.println("3 - Listar reservas");
             System.out.println("4 - Cancelar reservas");
             System.out.println("5 - Editar reserva");
-            System.out.println("6 - Menu anterior");
+            System.out.println("6 - Pesquisar reserva");
+            System.out.println("7 - Menu anterior");
 
             opcao = ler.nextInt();
 
@@ -38,11 +39,12 @@ public class MenuViewReservas {
                     break;
                 case 5://editar reserva
                     break;
-                case 6://sair
+                case 6://pesquisar
                     break;
+
             }
 
-        } while (opcao != 6);
+        } while (opcao != 7);
 
     }
 }
