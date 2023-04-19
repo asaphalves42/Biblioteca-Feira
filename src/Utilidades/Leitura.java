@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Leitura {
         public static Scanner ler = new Scanner(System.in);
-        public static int leint(String mensagem) {
+        public static int leInt(String mensagem) {
             System.out.println(mensagem);
             return ler.nextInt();
         }

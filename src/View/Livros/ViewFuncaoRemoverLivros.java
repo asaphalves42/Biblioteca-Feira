@@ -22,7 +22,7 @@ public class ViewFuncaoRemoverLivros {
             }
         }
 
-        int idLivroRemover = leint("Insira o id do livro que quer remover: ");
+        int idLivroRemover = leInt("Insira o id do livro que quer remover: ");
 
         boolean removido =  gestor.removerLivro(idLivroRemover);
 

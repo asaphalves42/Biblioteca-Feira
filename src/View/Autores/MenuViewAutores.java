@@ -12,7 +12,6 @@ public class MenuViewAutores {
     ViewFuncaoEditarAutor editar = new ViewFuncaoEditarAutor();
     ViewFuncaoRemoverAutor remover = new ViewFuncaoRemoverAutor();
     ViewFuncaoPesquisarAutor pesquisar = new ViewFuncaoPesquisarAutor();
-    ViewAplicacao app = new ViewAplicacao();
     public void menuAutores() {
 
         int opcao;
@@ -32,30 +31,15 @@ public class MenuViewAutores {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1:
-                    adicionar.menuAdicionarAutores(gestor);
-                    break;
-                case 2:
-                    listar.listarTodosOsAutores(gestor);
-                    break;
-                case 3:
-                    menuPesquisarAutores();
-                    break;
-                case 4:
-                    editar.editarAutor(gestor);
-                    break;
-                case 5:
-                    remover.removerAutorPorNome(gestor);
-                    break;
-                case 6:
-                    gestor.gravarAutorParaFicheiro();
-                    break;
-                case 7:
-                    app.menuPrincipal();
-                    break;
+                case 1 -> adicionar.menuAdicionarAutores(gestor);
+                case 2 -> listar.listarTodosOsAutores(gestor);
+                case 3 -> menuPesquisarAutores();
+                case 4 -> editar.editarAutor(gestor);
+                case 5 -> remover.removerAutorPorNome(gestor);
+                case 6 -> gestor.gravarAutorParaFicheiro();
             }
 
-        } while (opcao != 5);
+        } while (opcao != 7);
 
     }
 
@@ -73,12 +57,8 @@ public class MenuViewAutores {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1:
-                    pesquisar.pesquisarAutorPorId(gestor);
-                    break;
-                case 2:
-                    pesquisar.pesquisarAutorPorNome(gestor);
-                    break;
+                case 1 -> pesquisar.pesquisarAutorPorId(gestor);
+                case 2 -> pesquisar.pesquisarAutorPorNome(gestor);
             }
         } while (opcao !=3);
     }

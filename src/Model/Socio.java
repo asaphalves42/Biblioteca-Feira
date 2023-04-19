@@ -1,7 +1,6 @@
 package Model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -26,6 +25,11 @@ public class Socio extends Pessoa {
 
     public void aumentarQuantidade(){
         livrosReservados++;
+    }
+    public void decrementarQuantidade(){
+        if(livrosReservados > 0){
+            livrosReservados--;
+        }
     }
 
     public int getLivrosReservados() {
