@@ -14,6 +14,9 @@ public class ViewFuncaoEditarSocios {
 
    public void editarSocio(ControllerSocios gestor) {
 
+       boolean sair = false;
+       do{
+
         String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
         ArrayList<Socio> socioEditar = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
@@ -21,6 +24,8 @@ public class ViewFuncaoEditarSocios {
             System.out.println("Não existem sócios com esse número");
             System.out.println(" ");
         }else {
+            System.out.println("Caso pretenda sair, digite 'sair'");
+        }
             String novoNome = "";
             while (novoNome.trim().equals("")) {
                 novoNome = leStr("Insira o novo nome do sócio");
@@ -29,6 +34,13 @@ public class ViewFuncaoEditarSocios {
             String novaMorada = "";
             while (novaMorada.trim().equals("")) {
                 novaMorada = leStr("Insira a nova morada do sócio");
+                if(novaMorada.equalsIgnoreCase("sair")) {
+                    sair = true;
+                    break;
+                }
+            }
+            if (sair) {
+                break;
             }
 
             System.out.println("Digite a data de nascimento do sócio: ");
@@ -49,8 +61,8 @@ public class ViewFuncaoEditarSocios {
             } else {
                 System.out.println("Sócio não editado");
                 System.out.println(" ");
-                //gestor.gravarAutorParaFicheiro();
             }
-        }
+
+        }while (!sair);
     }
 }
