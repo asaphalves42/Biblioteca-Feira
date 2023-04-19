@@ -19,6 +19,14 @@ public class ControllerReservas {
         socioSelecionado.aumentarQuantidade();
 
     }
+    public void devolverLivro(LivroReservado livroReservado) {
+        Socio socio = livroReservado.getSocio();
+        Livro livro = livroReservado.getLivro();
+
+        socio.decrementarQuantidade();
+        livro.incrementarQuantidade();
+        livrosReservados.remove(livroReservado);
+    }
     public ArrayList<LivroReservado> listarLivrosReservados() {
         return this.livrosReservados;
     }
