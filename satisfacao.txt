@@ -1,0 +1,4 @@
+Satisfacao: 2
+Satisfacao: 1
+Satisfacao: 2
+Satisfacao: 1

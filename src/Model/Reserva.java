@@ -14,6 +14,9 @@ public class Reserva {
     public String getIdDaReserva() {
         return idDaReserva;
     }
+    public void setIdDaReserva(String idDaReserva) {
+        this.idDaReserva = idDaReserva;
+    }
 
     public Reserva(){
 
@@ -22,9 +25,10 @@ public class Reserva {
         int id = aleatorio.nextInt(99999999);
         this.idDaReserva = String.format("%08d", id);
     }
-    public Reserva(Socio socio, Livro livro, LocalDate dataReserva) {
+    public Reserva(String idReserva, Socio socio, ArrayList<Livro> livros, LocalDate dataReserva) {
+        this.idDaReserva = idReserva;
         this.socio = socio;
-        this.livros.add(livro);
+        this.livros = livros;
         this.dataReserva = dataReserva;
     }
 

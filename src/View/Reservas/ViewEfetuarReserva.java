@@ -103,7 +103,7 @@ public class ViewEfetuarReserva {
                     System.out.println("Erro ao efetuar reserva: " + e.getMessage());
 
                 }
-                String continuar = leStr("Deseja continuar reservar o livro? (S/N): ");
+                String continuar = leStr("Deseja continuar reservar outro livro? (S/N): ");
                 if (!continuar.equalsIgnoreCase("s") && (!continuar.equalsIgnoreCase("sim"))) {
                     continuarReservando = false;
                 }

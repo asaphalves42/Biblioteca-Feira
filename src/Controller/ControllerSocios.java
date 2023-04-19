@@ -124,14 +124,13 @@ public class ControllerSocios {
         return nomeSocio;
     }
 
-    public ArrayList<Socio> pesquisarSocioPorNumMecanografico (String numMecanografico) {
-        ArrayList<Socio> socioEncontrado = new ArrayList<>();
+    public Socio pesquisarSocioPorNumMecanografico (String numMecanografico) {
         for (Socio socio : socios) {
-            if (numMecanografico == socio.getNumMecanografico()){
-                socioEncontrado.add(socio);
+            if (numMecanografico.equals(socio.getNumMecanografico())) {
+                return socio;
             }
         }
-        return socioEncontrado;
+        return null;
     }
 
     public boolean removerSocio(String numMecanografico) {
@@ -143,4 +142,5 @@ public class ControllerSocios {
         }
         return false;
     }
+
 }

@@ -3,22 +3,21 @@ package View.Socios;
 import Controller.ControllerSocios;
 import Model.Socio;
 
-import java.util.ArrayList;
-
+import static Controller.ControllerSocios.socios;
 import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoRemoverSocios {
     public void removerSocioPorNumMecanografico(ControllerSocios gestor) {
 
         String numMecanografico = leStr("Insira número mecanográfico do socio");
-        ArrayList<Socio> socioParaRemover = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+        Socio socioParaRemover = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
-        if (socioParaRemover.isEmpty()) {
+        if (socioParaRemover==null) {
             System.out.println("Não existem sócios listados");
             System.out.println(" ");
         } else {
             boolean socioEncontrado = false;
-            for (Socio socio : socioParaRemover) {
+            for (Socio socio : socios) {
                 if (socio.getNumMecanografico().equals(numMecanografico)) {
                     System.out.println(socio);
                     socioEncontrado = true;

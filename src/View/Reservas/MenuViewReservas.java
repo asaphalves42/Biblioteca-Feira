@@ -8,6 +8,7 @@ public class MenuViewReservas {
     ControllerReservas gerirReservas = new ControllerReservas();
     ViewEfetuarReserva efetuar = new ViewEfetuarReserva();
     ViewListarReserva listar = new ViewListarReserva();
+    ViewPesquisarReservaPorId pesquisar = new ViewPesquisarReservaPorId();
     ViewDevolverLivroReserva devolver = new ViewDevolverLivroReserva();
     public void menuReservas() {
         int opcao;
@@ -22,7 +23,8 @@ public class MenuViewReservas {
             System.out.println("4 - Cancelar reservas");
             System.out.println("5 - Editar reserva");
             System.out.println("6 - Pesquisar reserva");
-            System.out.println("7 - Menu anterior");
+            System.out.println("7 - Gravar");
+            System.out.println("8 - Menu anterior");
 
             opcao = ler.nextInt();
 
@@ -39,12 +41,13 @@ public class MenuViewReservas {
                     break;
                 case 5://editar reserva
                     break;
-                case 6://pesquisar
+                case 6:pesquisar.pesquisarReservaPorId(gerirReservas);
                     break;
-
+                case 7:gerirReservas.gravarReservasParaFicheiro();
+                    break;
             }
 
-        } while (opcao != 7);
+        } while (opcao != 8);
 
     }
 }

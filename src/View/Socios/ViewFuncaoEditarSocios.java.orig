@@ -13,13 +13,22 @@ public class ViewFuncaoEditarSocios {
 
     public void editarSocioPorNumMecTodosOsCampos(ControllerSocios gestor) {
 
-        String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
-        Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+       boolean sair = false;
+       do{
 
-        if (socio == null) {
+        String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
+        Socio socioEditar = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+
+        if (socioEditar == null) {
             System.out.println("Não existem sócios com esse número");
             System.out.println(" ");
+<<<<<<< HEAD
+        }else {
+            System.out.println("Caso pretenda sair, digite 'sair'");
+        }
+=======
         } else {
+>>>>>>> ad3942d01aad7efafeb6c4980d33e8326628f2f9
             String novoNome = "";
             while (novoNome.trim().equals("")) {
                 novoNome = leStr("Insira o novo nome do sócio");
@@ -28,6 +37,13 @@ public class ViewFuncaoEditarSocios {
             String novaMorada = "";
             while (novaMorada.trim().equals("")) {
                 novaMorada = leStr("Insira a nova morada do sócio");
+                if(novaMorada.equalsIgnoreCase("sair")) {
+                    sair = true;
+                    break;
+                }
+            }
+            if (sair) {
+                break;
             }
 
             System.out.println("Digite a data de nascimento do sócio: ");
@@ -48,6 +64,8 @@ public class ViewFuncaoEditarSocios {
             } else {
                 System.out.println("Sócio não editado");
                 System.out.println(" ");
+<<<<<<< HEAD
+=======
 
             }
 
@@ -56,9 +74,9 @@ public class ViewFuncaoEditarSocios {
 
     public void editarNomeSocioPorNumMecanografico(ControllerSocios gestor) {
         String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
-        Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+        ArrayList<Socio> socioEditar = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
-        if (socio == null) {
+        if (socioEditar == null) {
             System.out.println("Não existem sócios com esse número");
             System.out.println(" ");
         } else {
@@ -74,15 +92,17 @@ public class ViewFuncaoEditarSocios {
                 System.out.println("Sócio não editado");
                 System.out.println(" ");
 
+>>>>>>> ad3942d01aad7efafeb6c4980d33e8326628f2f9
             }
-        }
+
+        }while (!sair);
     }
 
     public void editarMoradaSocioPorNumMecanografico(ControllerSocios gestor) {
         String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
-        Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+        ArrayList<Socio> socioEditarMorada = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
         String novaMorada;
-        if (socio == null) {
+        if (socioEditarMorada == null) {
             System.out.println("Não existem sócios com esse número");
             System.out.println(" ");
             return;
@@ -104,10 +124,10 @@ public class ViewFuncaoEditarSocios {
 
     public void editarDataDeNascimentoSocioPorNumMecanografico(ControllerSocios gestor) {
         String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
-        Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+        ArrayList<Socio> socioEditarDataDeNascimento = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
         LocalDate novaDataDeNascimento;
-        if (socio == null) {
+        if (socioEditarDataDeNascimento == null) {
             System.out.println("Não existem sócios com esse número");
             System.out.println(" ");
             return;
@@ -129,10 +149,10 @@ public class ViewFuncaoEditarSocios {
 
     public void editarTelefoneSocioPorNumMecanografico(ControllerSocios gestor) {
         String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
-        Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+        ArrayList<Socio> socioEditarTelefone = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
         int novoTelefone = 0;
-        if (socio == null) {
+        if (socioEditarTelefone == null) {
             System.out.println("Não existem sócios com esse número");
             System.out.println(" ");
         } else {

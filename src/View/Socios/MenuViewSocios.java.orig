@@ -2,13 +2,15 @@ package View.Socios;
 
 
 import Controller.ControllerSocios;
-import View.ViewAplicacao;
+
+import java.util.InputMismatchException;
+
+import java.util.InputMismatchException;
 
 import static Utilidades.Leitura.ler;
 
 
 public class MenuViewSocios {
-<<<<<<< HEAD
     ControllerSocios gestorSocio = new ControllerSocios();
     ViewFuncaoAdicionarSocios adSocio = new ViewFuncaoAdicionarSocios();
     ViewFuncaoListarSocios listarSocio = new ViewFuncaoListarSocios();
@@ -16,38 +18,58 @@ public class MenuViewSocios {
     ViewFuncaoRemoverSocios removerSocios = new ViewFuncaoRemoverSocios();
     ViewFuncaoPesquisarSocio pesquisarSocio = new ViewFuncaoPesquisarSocio();
     ViewAplicacao app = new ViewAplicacao();
-=======
-    ControllerSocios gestorSocio=new ControllerSocios();
-    ViewFuncaoAdicionarSocios adSocio=new ViewFuncaoAdicionarSocios();
-    ViewFuncaoListarSocios listarSocio= new ViewFuncaoListarSocios();
-    ViewFuncaoEditarSocios editarSocios= new ViewFuncaoEditarSocios();
-    ViewFuncaoRemoverSocios removerSocios= new ViewFuncaoRemoverSocios();
-    ViewFuncaoPesquisarSocio pesquisarSocio= new ViewFuncaoPesquisarSocio();
->>>>>>> 2032928468d8f93fbf76e575efabc17a837784ee
 
     public void menuSocios() {
         int opcao;
 
         do {
+<<<<<<< HEAD
 
+            try {
+                System.out.println("## Sócios ##");
+                System.out.println("---------------");
+                System.out.println("1 - Adicionar socio");
+                System.out.println("2 - Listar socios");
+                System.out.println("3 - Editar socios");
+                System.out.println("4 - Remover socios");
+                System.out.println("5 - Pesquisar sócios");
+                System.out.println("6 - Gravar");
+                System.out.println("7 - Menu anterior");
+
+                opcao = ler.nextInt();
+
+                switch (opcao) {
+                    case 1 -> adSocio.adicionarSocios(gestorSocio);
+                    case 2 -> listarSocio.listarTodosOsSocios(gestorSocio);
+                    case 3 -> editarSocios.editarSocio(gestorSocio);
+                    case 4 -> removerSocios.removerSocioPorNumMecanografico((gestorSocio));
+                    case 5 -> this.menuPesquisarSocios();
+                    case 6 -> gestorSocio.gravarSociosParaFicheiro();
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Insira um número válido!");
+                opcao = 0;
+            }
+=======
             System.out.println("## Sócios ##");
             System.out.println("---------------");
             System.out.println("1 - Adicionar socio");
             System.out.println("2 - Listar socios");
             System.out.println("3 - Editar socios");
             System.out.println("4 - Remover socios");
-<<<<<<< HEAD
             System.out.println("5 - Pesquisar socios");
-=======
-            System.out.println("5 - Pesquisar sócios");
->>>>>>> 2032928468d8f93fbf76e575efabc17a837784ee
             System.out.println("6 - Gravar");
             System.out.println("7 - Menu anterior");
 
-            opcao = ler.nextInt();
+            try {
+                opcao = ler.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira apenas números inteiros.");
+                ler.next();
+                opcao = 0;
+            }
 
             switch (opcao) {
-<<<<<<< HEAD
                 case 1:
                     adSocio.adicionarSocios(gestorSocio);
                     break;
@@ -66,18 +88,9 @@ public class MenuViewSocios {
                 case 6:
                     gestorSocio.gravarSociosParaFicheiro();
                     break;
-=======
-                case 1 -> adSocio.adicionarSocios(gestorSocio);
-                case 2 -> listarSocio.listarTodosOsSocios(gestorSocio);
-                case 3 -> editarSocios.editarSocio(gestorSocio);
-                case 4 -> removerSocios.removerSocioPorNumMecanografico((gestorSocio));
-                case 5 -> this.menuPesquisarSocios();
-                case 6 -> gestorSocio.gravarSociosParaFicheiro();
->>>>>>> 2032928468d8f93fbf76e575efabc17a837784ee
             }
-
+>>>>>>> ad3942d01aad7efafeb6c4980d33e8326628f2f9
         } while (opcao != 7);
-
     }
 
     public void menuPesquisarSocios() {
@@ -85,21 +98,50 @@ public class MenuViewSocios {
         int opcao;
 
         do {
+<<<<<<< HEAD
+            try {
+                System.out.println("## Pesquisar sócio por: ##");
+                System.out.println("-----------------------------");
+                System.out.println("1 - Numero mecanográfico");
+                System.out.println("2 - Nome");
+                System.out.println("3 - Menu anterior");
+
+                opcao = ler.nextInt();
+
+                switch (opcao) {
+                    case 1 -> pesquisarSocio.pesquisarSocioPorNumMecanografico(gestorSocio);
+                    case 2 -> pesquisarSocio.pesquisarSocioPorNome(gestorSocio);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Insira uma número válido!");
+                opcao = 0;
+                ler.nextLine();
+=======
             System.out.println("## Pesquisar sócio por: ##");
-            System.out.println("-----------------------------");
+            System.out.println("---------------");
             System.out.println("1 - Numero mecanográfico");
             System.out.println("2 - Nome");
             System.out.println("3 - Menu anterior");
 
-            opcao = ler.nextInt();
+            try {
+                opcao = ler.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira apenas números inteiros.");
+                ler.next();
+                opcao = 0;
+            }
 
             switch (opcao) {
-                case 1 -> pesquisarSocio.pesquisarSocioPorNumMecanografico(gestorSocio);
-                case 2 -> pesquisarSocio.pesquisarSocioPorNome(gestorSocio);
+                case 1:
+                    pesquisarSocio.pesquisarSocioPorNumMecanografico(gestorSocio);
+                    break;
+                case 2:
+                    pesquisarSocio.pesquisarSocioPorNome(gestorSocio);
+                    break;
+>>>>>>> ad3942d01aad7efafeb6c4980d33e8326628f2f9
             }
         } while (opcao != 3);
     }
-
     public void menuEditarSociosPorNumMecanografico() {
         int opcao;
 
@@ -113,8 +155,13 @@ public class MenuViewSocios {
             System.out.println("5 - Telefone");
             System.out.println("6 - Menu anterior");
 
-
-            opcao = ler.nextInt();
+            try {
+                opcao = ler.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Opção inválida. Por favor selecione um número válido.");
+                ler.nextLine(); // Limpa o buffer de entrada
+                opcao = 0; // Atribui um valor inválido para que o loop continue
+            }
 
             switch (opcao) {
                 case 1:
@@ -131,6 +178,11 @@ public class MenuViewSocios {
                     break;
                 case 5:
                     editarSocios.editarTelefoneSocioPorNumMecanografico(gestorSocio);
+                    break;
+                case 6:
+                    break;
+                default:
+                    System.out.println("Opção inválida. Por favor selecione uma opção válida.");
                     break;
             }
         } while (opcao != 6);
