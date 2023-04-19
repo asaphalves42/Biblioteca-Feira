@@ -12,7 +12,7 @@ public class ViewFuncaoPesquisarSocio {
 
     public void pesquisarSocioPorNome(ControllerSocios gestor) {
 
-        String nome = leStr("Insira o nome do sócio");
+        String nome = leStr("Insira o nome do sócio(a): ");
 
         ArrayList<Socio> socio = gestor.pesquisarSocioPorNome(nome);
 
@@ -25,12 +25,20 @@ public class ViewFuncaoPesquisarSocio {
 
     public void pesquisarSocioPorNumMecanografico(ControllerSocios gestor) {
 
+<<<<<<< HEAD
+        String numMecanografico = leStr("Insira o Id do(a) sócio(a): ");
+=======
         String numMecanografico = leStr("Insira o Id do(a) sócio(a)");
+>>>>>>> 2032928468d8f93fbf76e575efabc17a837784ee
 
         ArrayList<Socio> socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
         if (socio.isEmpty()) {
+<<<<<<< HEAD
+            System.out.println("Sócio(a) inexistente!");
+=======
             System.out.println("Socio(a) inexistente!");
+>>>>>>> 2032928468d8f93fbf76e575efabc17a837784ee
         } else {
             System.out.println(gestor.pesquisarSocioPorNumMecanografico(numMecanografico));
         }

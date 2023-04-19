@@ -38,10 +38,10 @@ public class ViewFuncaoRemoverSocios {
 
         if (removido) {
             System.out.println("Sócio eliminado com sucesso");
-            System.out.println("");
+            System.out.println(" ");
         } else {
             System.out.println("Sócio não encontrado(a)");
-            System.out.println("");
+            System.out.println(" ");
         }
     }
 

@@ -8,13 +8,22 @@ import static Utilidades.Leitura.ler;
 
 
 public class MenuViewSocios {
+<<<<<<< HEAD
     ControllerSocios gestorSocio = new ControllerSocios();
+    ViewFuncaoAdicionarSocios adSocio = new ViewFuncaoAdicionarSocios();
+    ViewFuncaoListarSocios listarSocio = new ViewFuncaoListarSocios();
+    ViewFuncaoEditarSocios editarSocios = new ViewFuncaoEditarSocios();
+    ViewFuncaoRemoverSocios removerSocios = new ViewFuncaoRemoverSocios();
+    ViewFuncaoPesquisarSocio pesquisarSocio = new ViewFuncaoPesquisarSocio();
+    ViewAplicacao app = new ViewAplicacao();
+=======
+    ControllerSocios gestorSocio=new ControllerSocios();
     ViewFuncaoAdicionarSocios adSocio=new ViewFuncaoAdicionarSocios();
     ViewFuncaoListarSocios listarSocio= new ViewFuncaoListarSocios();
     ViewFuncaoEditarSocios editarSocios= new ViewFuncaoEditarSocios();
-    ViewFunçãoRemoverSocios removerSocios= new ViewFunçãoRemoverSocios();
-    ViewFunçãoPesquisarSocio pesquisarSocio= new ViewFunçãoPesquisarSocio();
-    ViewAplicacao app = new ViewAplicacao();
+    ViewFuncaoRemoverSocios removerSocios= new ViewFuncaoRemoverSocios();
+    ViewFuncaoPesquisarSocio pesquisarSocio= new ViewFuncaoPesquisarSocio();
+>>>>>>> 2032928468d8f93fbf76e575efabc17a837784ee
 
     public void menuSocios() {
         int opcao;
@@ -27,40 +36,57 @@ public class MenuViewSocios {
             System.out.println("2 - Listar socios");
             System.out.println("3 - Editar socios");
             System.out.println("4 - Remover socios");
-            System.out.println("5 - Gravar");
-            System.out.println("6 - Menu anterior");
+<<<<<<< HEAD
+            System.out.println("5 - Pesquisar socios");
+=======
+            System.out.println("5 - Pesquisar sócios");
+>>>>>>> 2032928468d8f93fbf76e575efabc17a837784ee
+            System.out.println("6 - Gravar");
+            System.out.println("7 - Menu anterior");
 
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1:adSocio.adicionarSocios(gestorSocio);
+<<<<<<< HEAD
+                case 1:
+                    adSocio.adicionarSocios(gestorSocio);
                     break;
-                case 2:listarSocio.listarTodosOsSocios(gestorSocio);
+                case 2:
+                    listarSocio.listarTodosOsSocios(gestorSocio);
                     break;
-                case 3://Editar socios
+                case 3:
+                    this.menuEditarSociosPorNumMecanografico();
                     break;
                 case 4:
                     removerSocios.removerSocioPorNumMecanografico((gestorSocio));
                     break;
-<<<<<<< HEAD
                 case 5:
-                    app.menuPrincipal();
-=======
-                case 5:gestorSocio.gravarSociosParaFicheiro();
->>>>>>> 90fb5bb8d6322f244bcaa6e68a48b5b2cd7e163d
+                    this.menuPesquisarSocios();
                     break;
+                case 6:
+                    gestorSocio.gravarSociosParaFicheiro();
+                    break;
+=======
+                case 1 -> adSocio.adicionarSocios(gestorSocio);
+                case 2 -> listarSocio.listarTodosOsSocios(gestorSocio);
+                case 3 -> editarSocios.editarSocio(gestorSocio);
+                case 4 -> removerSocios.removerSocioPorNumMecanografico((gestorSocio));
+                case 5 -> this.menuPesquisarSocios();
+                case 6 -> gestorSocio.gravarSociosParaFicheiro();
+>>>>>>> 2032928468d8f93fbf76e575efabc17a837784ee
             }
 
-        } while (opcao != 6);
+        } while (opcao != 7);
 
     }
+
     public void menuPesquisarSocios() {
 
         int opcao;
 
         do {
             System.out.println("## Pesquisar sócio por: ##");
-            System.out.println("---------------");
+            System.out.println("-----------------------------");
             System.out.println("1 - Numero mecanográfico");
             System.out.println("2 - Nome");
             System.out.println("3 - Menu anterior");
@@ -68,16 +94,48 @@ public class MenuViewSocios {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1:
-                    pesquisarSocio.pesquisarSocioPorNumMecanografico(gestorSocio);
-                    break;
-                case 2:
-                    pesquisarSocio.pesquisarSocioPorNome(gestorSocio);
-                    break;
+                case 1 -> pesquisarSocio.pesquisarSocioPorNumMecanografico(gestorSocio);
+                case 2 -> pesquisarSocio.pesquisarSocioPorNome(gestorSocio);
             }
-        } while (opcao !=3);
+        } while (opcao != 3);
     }
 
+    public void menuEditarSociosPorNumMecanografico() {
+        int opcao;
+
+        do {
+            System.out.println("## Que campos do sócio(a) quer editar através do número Mecanográfico: ##");
+            System.out.println("---------------");
+            System.out.println("1 - Todos os campos do sócio(a)");
+            System.out.println("2 - Nome");
+            System.out.println("3 - Morada");
+            System.out.println("4 - Data de Nascimento");
+            System.out.println("5 - Telefone");
+            System.out.println("6 - Menu anterior");
+
+
+            opcao = ler.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    editarSocios.editarSocioPorNumMecTodosOsCampos(gestorSocio);
+                    break;
+                case 2:
+                    editarSocios.editarNomeSocioPorNumMecanografico(gestorSocio);
+                    break;
+                case 3:
+                    editarSocios.editarMoradaSocioPorNumMecanografico(gestorSocio);
+                    break;
+                case 4:
+                    editarSocios.editarDataDeNascimentoSocioPorNumMecanografico(gestorSocio);
+                    break;
+                case 5:
+                    editarSocios.editarTelefoneSocioPorNumMecanografico(gestorSocio);
+                    break;
+            }
+        } while (opcao != 6);
+    }
 }
+
 
 

@@ -115,26 +115,6 @@ public class ControllerLivros {
         return false;
     }
 
-    public boolean editarLivro(int idLivroEditar, String novoTitulo, String subTitulo, int quantidade, String autor, int numPaginas, String categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
-        for (Livro livro : livros) {
-            if (idLivroEditar == livro.getId()) {
-                livro.setTitulo(novoTitulo);
-                livro.setSubtitulo(subTitulo);
-                livro.setQuantidade(quantidade);
-                livro.setAutor(autor);
-                livro.setNumDePaginas(numPaginas);
-                livro.setCategoria(categoria);
-                livro.setDataDePublicacao(dataDePublicacao);
-                livro.setFaixaEtaria(faixaEtaria);
-                livro.setEditora(editora);
-                livro.setISBN(ISBN);
-
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean editarTituloDoLivro(int idLivroEditar, String tituloNovo) {
         for (Livro livro : livros) {
             if (idLivroEditar == livro.getId()) {

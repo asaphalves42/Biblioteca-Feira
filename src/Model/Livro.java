@@ -52,6 +52,9 @@ public class Livro {
     private String ISBN;
     private String autor;
 
+    public void incrementarQuantidade(){
+        quantidade++;
+    }
     public void decrementarQuantidade(){
         if(quantidade > 0){
             quantidade--;

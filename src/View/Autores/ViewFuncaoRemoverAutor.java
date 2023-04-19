@@ -37,10 +37,10 @@ public class ViewFuncaoRemoverAutor {
 
         if (removido) {
             System.out.println("Autor(a) eliminado com sucesso");
-            System.out.println("");
+            System.out.println(" ");
         } else {
             System.out.println("Autor(a) não encontrado(a)");
-            System.out.println("");
+            System.out.println(" ");
         }
     }
 

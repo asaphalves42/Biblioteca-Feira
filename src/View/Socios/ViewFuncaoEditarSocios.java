@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static Utilidades.Leitura.leStr;
-import static Utilidades.Leitura.leint;
+import static Utilidades.Leitura.leInt;
 
 public class ViewFuncaoEditarSocios {
 
@@ -37,7 +37,7 @@ public class ViewFuncaoEditarSocios {
 
             int novoTelefone = 0;
             while (novoTelefone < 100000000 || novoTelefone > 999999999) {
-                novoTelefone = leint("Insira o novo número de telefone");
+                novoTelefone = leInt("Insira o novo número de telefone");
             }
 
 

@@ -32,19 +32,11 @@ public class MenuViewLivros {
             opcao = ler.nextInt();
 
             switch (opcao) {
-                case 1:
-                    pesquisar.livrosPorAutor(gestor);
-                    break;
-                case 2:
-                    pesquisar.livroPorTitulo(gestor);
-                    break;
-                case 3:pesquisar.livroPorISBN(gestor);
-                    break;
-                case 4:pesquisar.livrosPorCategoria(gestor);
-                    break;
-                case 5:
-                    this.menuLivros();
-                    break;
+                case 1 -> pesquisar.livrosPorAutor(gestor);
+                case 2 -> pesquisar.livroPorTitulo(gestor);
+                case 3 -> pesquisar.livroPorISBN(gestor);
+                case 4 -> pesquisar.livrosPorCategoria(gestor);
+
             }
 
         } while (opcao != 5);
@@ -72,24 +64,12 @@ public class MenuViewLivros {
             ler.nextLine();
 
             switch (opcao) {
-                case 1:
-                    adicionar.menuAdicionarLivros(gestorAutor);
-                    break;
-                case 2:
-                    mostrar.listarTodosOsLivros(gestor);
-                    break;
-                case 3:
-                    this.menuLivros3();
-                    break;
-                case 4:
-                    eliminar.eliminarLivroPorTitulo(gestor);
-                    break;
-                case 5:
-                    this.menuLivros2();
-                    break;
-                case 6:
-                    gestor.gravarLivrosParaFicheiro();
-                    break;
+                case 1 -> adicionar.menuAdicionarLivros(gestorAutor);
+                case 2 -> mostrar.listarTodosOsLivros(gestor);
+                case 3 -> this.menuLivros3();
+                case 4 -> eliminar.eliminarLivroPorTitulo(gestor);
+                case 5 -> this.menuLivros2();
+                case 6 -> gestor.gravarLivrosParaFicheiro();
             }
 
         } while (opcao != 7);
@@ -103,51 +83,35 @@ public class MenuViewLivros {
 
             System.out.println("## Editar livros por: ##");
             System.out.println("------------------------");
-            System.out.println("1 - Todos os campos");
-            System.out.println("2 - Titulo");
-            System.out.println("3 - Subtitulo");
-            System.out.println("4 - Quantidade");
-            System.out.println("5 - Autor");
-            System.out.println("6 - Numero de páginas");
-            System.out.println("7 - Categoria");
-            System.out.println("8 - Data de publicacao");
-            System.out.println("9 - Faixa etaria");
-            System.out.println("10 - Editora");
-            System.out.println("11 - ISBN");
-            System.out.println("12 - Gravar");
-            System.out.println("13 - Menu anterior");
+            System.out.println("1 - Titulo");
+            System.out.println("2 - Subtitulo");
+            System.out.println("3 - Quantidade");
+            System.out.println("4 - Autor");
+            System.out.println("5 - Numero de páginas");
+            System.out.println("6 - Categoria");
+            System.out.println("7 - Data de publicacao");
+            System.out.println("8 - Faixa etaria");
+            System.out.println("9 - Editora");
+            System.out.println("10 - ISBN");
+            System.out.println("11 - Gravar");
+            System.out.println("12 - Menu anterior");
 
             opcao = ler.nextInt();
             ler.nextLine();
 
             switch (opcao) {
-                case 1:editar.editarLivros(gestor);
-                    break;
-                case 2:editar.editarLivrosPorTitulo(gestor);
-                    break;
-                case 3:editar.editarLivrosPorSubTitulo(gestor);
-                    break;
-                case 4:editar.editarQuantidade(gestor);
-                    break;
-                case 5:editar.editarLivrosPorAutor(gestor);
-                    break;
-                case 6:editar.editarNumPaginas(gestor);
-                    break;
-                case 7:editar.editarPorCategoria(gestor);
-                    break;
-                case 8:editar.editarPorData(gestor);
-                    break;
-                case 9:editar.editarFaixaEtaria(gestor);
-                    break;
-                case 10:editar.editarEditora(gestor);
-                    break;
-                case 11:editar.editarISBN(gestor);
-                    break;
-                case 12: gestor.gravarLivrosParaFicheiro();
-                    break;
+                case 1 -> editar.editarLivrosPorTitulo(gestor);
+                case 2 -> editar.editarLivrosPorSubTitulo(gestor);
+                case 3 -> editar.editarQuantidade(gestor);
+                case 4 -> editar.editarLivrosPorAutor(gestor);
+                case 5 -> editar.editarNumPaginas(gestor);
+                case 6 -> editar.editarPorCategoria(gestor);
+                case 7 -> editar.editarPorData(gestor);
+                case 8 -> editar.editarFaixaEtaria(gestor);
+                case 9 -> editar.editarEditora(gestor);
+                case 10 -> editar.editarISBN(gestor);
+                case 11 -> gestor.gravarLivrosParaFicheiro();
             }
-        } while (opcao != 13);
-
-
+        } while (opcao != 12);
     }
 }
