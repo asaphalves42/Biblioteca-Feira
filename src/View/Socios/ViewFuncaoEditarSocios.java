@@ -139,7 +139,7 @@ public class ViewFuncaoEditarSocios {
         } else {
             novoTelefone = 0;
             while (novoTelefone < 100000000 || novoTelefone > 999999999) {
-                novoTelefone = leint("Insira o novo número de telefone");
+                novoTelefone = leInt("Insira o novo número de telefone");
             }
         }
         boolean editado = gestor.editarSocioPorTelefone(numMecanografico, novoTelefone);

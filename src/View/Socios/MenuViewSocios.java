@@ -4,6 +4,8 @@ package View.Socios;
 import Controller.ControllerSocios;
 import View.ViewAplicacao;
 
+import java.util.InputMismatchException;
+
 import static Utilidades.Leitura.ler;
 
 
@@ -20,7 +22,6 @@ public class MenuViewSocios {
         int opcao;
 
         do {
-
             System.out.println("## Sócios ##");
             System.out.println("---------------");
             System.out.println("1 - Adicionar socio");
@@ -31,7 +32,13 @@ public class MenuViewSocios {
             System.out.println("6 - Gravar");
             System.out.println("7 - Menu anterior");
 
-            opcao = ler.nextInt();
+            try {
+                opcao = ler.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira apenas números inteiros.");
+                ler.next();
+                opcao = 0;
+            }
 
             switch (opcao) {
                 case 1:
@@ -53,9 +60,7 @@ public class MenuViewSocios {
                     gestorSocio.gravarSociosParaFicheiro();
                     break;
             }
-
         } while (opcao != 7);
-
     }
 
     public void menuPesquisarSocios() {
@@ -69,7 +74,13 @@ public class MenuViewSocios {
             System.out.println("2 - Nome");
             System.out.println("3 - Menu anterior");
 
-            opcao = ler.nextInt();
+            try {
+                opcao = ler.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira apenas números inteiros.");
+                ler.next();
+                opcao = 0;
+            }
 
             switch (opcao) {
                 case 1:
@@ -81,7 +92,6 @@ public class MenuViewSocios {
             }
         } while (opcao != 3);
     }
-
     public void menuEditarSociosPorNumMecanografico() {
         int opcao;
 
@@ -95,8 +105,13 @@ public class MenuViewSocios {
             System.out.println("5 - Telefone");
             System.out.println("6 - Menu anterior");
 
-
-            opcao = ler.nextInt();
+            try {
+                opcao = ler.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Opção inválida. Por favor selecione um número válido.");
+                ler.nextLine(); // Limpa o buffer de entrada
+                opcao = 0; // Atribui um valor inválido para que o loop continue
+            }
 
             switch (opcao) {
                 case 1:
@@ -113,6 +128,11 @@ public class MenuViewSocios {
                     break;
                 case 5:
                     editarSocios.editarTelefoneSocioPorNumMecanografico(gestorSocio);
+                    break;
+                case 6:
+                    break;
+                default:
+                    System.out.println("Opção inválida. Por favor selecione uma opção válida.");
                     break;
             }
         } while (opcao != 6);
