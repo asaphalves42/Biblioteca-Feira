@@ -46,7 +46,7 @@ public class MenuViewAutores {
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 7);
+        } while (opcao != 8);
     }
 
     public void menuPesquisarAutores() {

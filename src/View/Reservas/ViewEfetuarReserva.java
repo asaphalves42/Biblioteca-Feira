@@ -48,9 +48,9 @@ public class ViewEfetuarReserva {
             }
         }
 
-        boolean continuarReservando = true; // variável para controlar se o sócio deseja continuar reservando livros
+        boolean continuarReservando = true;
 
-        while (continuarReservando) { // loop para permitir que o sócio reserve mais de um livro
+        while (continuarReservando) {
             ArrayList<Livro> livroExistente;
             Livro livroSelecionado = null;
 
