@@ -3,8 +3,11 @@ package View.Livros;
 import Controller.ControllerLivros;
 import Controller.ControllerLivrosEautores;
 
+<<<<<<< HEAD
+=======
 import java.util.InputMismatchException;
 
+>>>>>>> 3e00100c160a7944805da4c97dc5d3e6f719ae46
 import static Utilidades.Leitura.ler;
 
 public class MenuViewLivros {
@@ -46,6 +49,14 @@ public class MenuViewLivros {
         } while (opcao != 5);
     }
 
+<<<<<<< HEAD
+
+
+
+
+
+    
+=======
     public void menuLivros() {
         int opcao;
 
@@ -79,6 +90,7 @@ public class MenuViewLivros {
             }
         } while (opcao != 7);
     }
+>>>>>>> 3e00100c160a7944805da4c97dc5d3e6f719ae46
 
     public void menuLivros3() {
         int opcao;
