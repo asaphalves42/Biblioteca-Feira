@@ -126,7 +126,7 @@ public class ControllerSocios {
 
     public Socio pesquisarSocioPorNumMecanografico (String numMecanografico) {
         for (Socio socio : socios) {
-            if (numMecanografico == socio.getNumMecanografico()){
+            if (numMecanografico.equals(socio.getNumMecanografico())) {
                 return socio;
             }
         }

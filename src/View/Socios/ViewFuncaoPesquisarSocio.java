@@ -32,7 +32,7 @@ public class ViewFuncaoPesquisarSocio {
         if (socio == null) {
             System.out.println("Socio(a) inexistente!");
         } else {
-            System.out.println(gestor.pesquisarSocioPorNumMecanografico(numMecanografico));
+            System.out.println(socio);
         }
 
     }

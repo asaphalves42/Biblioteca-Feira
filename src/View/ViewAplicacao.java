@@ -5,6 +5,7 @@ import Controller.*;
 import Controller.ControllerAutores;
 import Controller.ControllerLivros;
 import Controller.ControllerLogin;
+import Utilidades.MensagemBoasVindas;
 import View.Autores.MenuViewAutores;
 import View.Livros.MenuViewLivros;
 import View.Login.ViewLogin;
@@ -31,8 +32,7 @@ public class ViewAplicacao {
         lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
 
-        System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
-        System.out.println(" ");
+        MensagemBoasVindas.mensagemBoasVindas();
 
         // Iniciar o sistema
         mensagemUtilizadorParaRegisto();
