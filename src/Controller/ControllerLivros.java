@@ -53,7 +53,7 @@ public class ControllerLivros {
             conteudo += aux.getEditora() + "|" ;
             conteudo += aux.getISBN() +  "\n";
         }
-        GestorFicheiros.GravarFicheiro("livros.txt", conteudo);
+        GestorFicheiros.gravarFicheiro("livros.txt", conteudo);
     }
 
     public ArrayList<Livro> listarLivros() {

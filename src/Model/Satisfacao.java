@@ -10,5 +10,6 @@ public class Satisfacao {
     public int getSatisfacao() {
         return satisfacao;
     }
+
 }
 

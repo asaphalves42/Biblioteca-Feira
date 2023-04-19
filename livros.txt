@@ -11,3 +11,4 @@
 11|A Origem das Espécies|-|3|Charles Darwin|592|Artes|1859-11-24|Adulto|Editora Unesp|9788571390434
 12|Os Miseráveis|-|5|Victor Hugo|1504|Artes|1862-04-01|Adulto|Martin Claret|9788544003809
 13|Fahrenheit 451|-|4|Ray Bradbury|208|Artes|1953-10-19|Adulto|Biblioteca Azul|9788525056843
+14|Biblia|-|1|Umberto Eco|9458|Psicologia|2020-02-10|Adulto|JJ|238478472

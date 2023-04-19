@@ -40,7 +40,7 @@ public class ControllerSocios {
             conteudo += formated_date + "|" ;
             conteudo += aux.getTelefone() + "|" + "\n";
         }
-        GestorFicheiros.GravarFicheiro("socios.txt", conteudo);
+        GestorFicheiros.gravarFicheiro("socios.txt", conteudo);
     }
 
     public String verificarNumMecanografico() {
@@ -126,7 +126,7 @@ public class ControllerSocios {
 
     public Socio pesquisarSocioPorNumMecanografico (String numMecanografico) {
         for (Socio socio : socios) {
-            if (numMecanografico == socio.getNumMecanografico()){
+            if (numMecanografico.equals(socio.getNumMecanografico())){
                 return socio;
             }
         }

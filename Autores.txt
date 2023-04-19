@@ -6,7 +6,6 @@
 6|Jack London|San Francisco, Califórnia, Estados Unidos|1876-01-12
 7|Antoine de Saint-Exupéry|Lyon França|1900-06-29
 8|Umberto Eco|Alessandria, Itália|1932-01-05
-9|J.R.R. Tolkien|Bloemfontein, Estado Livre de Orange, África do Sul|1892-01-03
 10|Charles Darwin|Shrewsbury, Shropshire, Inglaterra|1809-02-12
 11|Victor Hugo|Besançon, França|1802-02-26
 12|Ray Bradbury|Waukegan, Illinois, Estados Unidos|1920-08-22
