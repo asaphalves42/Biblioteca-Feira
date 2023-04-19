@@ -3,7 +3,6 @@ package View.Livros;
 import Controller.ControllerLivros;
 import Controller.ControllerLivrosEautores;
 
-
 import static Utilidades.Leitura.ler;
 
 public class MenuViewLivros {
@@ -44,37 +43,12 @@ public class MenuViewLivros {
 
     }
 
-    public void menuLivros() {
 
-        int opcao;
 
-        do {
 
-            System.out.println("## Livros ##");
-            System.out.println("------------------------");
-            System.out.println("1 - Adicionar livros");
-            System.out.println("2 - Listar livros");
-            System.out.println("3 - Editar livros");
-            System.out.println("4 - Remover livros");
-            System.out.println("5 - Pesquisar livros");
-            System.out.println("6 - Gravar");
-            System.out.println("7 - Menu anterior");
 
-            opcao = ler.nextInt();
-            ler.nextLine();
 
-            switch (opcao) {
-                case 1 -> adicionar.menuAdicionarLivros(gestorAutor);
-                case 2 -> mostrar.listarTodosOsLivros(gestor);
-                case 3 -> this.menuLivros3();
-                case 4 -> eliminar.eliminarLivroPorTitulo(gestor);
-                case 5 -> this.menuLivros2();
-                case 6 -> gestor.gravarLivrosParaFicheiro();
-            }
-
-        } while (opcao != 7);
-
-    }
+    
 
     public void menuLivros3() {
         int opcao;

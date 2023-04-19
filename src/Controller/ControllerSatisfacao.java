@@ -26,10 +26,12 @@ public class ControllerSatisfacao {
         try {
             FileWriter writer = new FileWriter("satisfacao.txt", true);
             int avaliacao = satisfacao.getSatisfacao();
-            writer.write("Satisfacao: " + avaliacao + "\n");
+            writer.write("Satisfacao: " + avaliacao + "\n" );
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }

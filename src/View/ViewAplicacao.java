@@ -52,9 +52,13 @@ public class ViewAplicacao {
             System.out.println("1 - Login");
             System.out.println("Se não, efetue o registo!");
             System.out.println("2 - Efetuar registo");
+            System.out.println("3 - Sair do Programa");
 
             opcao = ler.nextInt();
+ {
 
+
+}
             switch (opcao) {
                 case 1:controllerLogin = new ControllerLogin(new ViewLogin());
                     boolean loginSucesso = controllerLogin.iniciar();
