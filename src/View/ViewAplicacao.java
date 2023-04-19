@@ -1,15 +1,14 @@
 package View;
 
 
-import Controller.ControllerAutores;
-import Controller.ControllerLivros;
-import Controller.ControllerLogin;
+import Controller.*;
 
-import Controller.ControllerSocios;
+import Model.Satisfacao;
 import View.Autores.MenuViewAutores;
 import View.Livros.MenuViewLivros;
 import View.Login.ViewLogin;
 import View.Reservas.MenuViewReservas;
+import View.Satisfacao.ViewSatisfacao;
 import View.Socios.MenuViewSocios;
 
 import static Utilidades.Leitura.ler;
@@ -18,6 +17,9 @@ public class ViewAplicacao {
     public ViewAplicacao() {
         controllerLogin = new ControllerLogin(new ViewLogin());
     }
+    Satisfacao satisfacao = new Satisfacao();
+    ViewSatisfacao view = new ViewSatisfacao();
+    ControllerSatisfacao controllersatisfacao = new ControllerSatisfacao(satisfacao, view);
     private ControllerLogin controllerLogin;
     ControllerLivros lerEgravarLivros = new ControllerLivros();
     ControllerAutores lerEgravarAutores = new ControllerAutores();
@@ -28,14 +30,15 @@ public class ViewAplicacao {
         lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
 
+
         System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
         System.out.println(" ");
 
-        // Iniciar o sistema
+//        controllersatisfacao.executar();
         mensagemUtilizadorParaRegisto();
         menuPrincipal();
 
-        // Criar instância do ControllerLogin
+
         controllerLogin = new ControllerLogin(new ViewLogin());
 
     }

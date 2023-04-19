@@ -1,34 +1,29 @@
 package View.Satisfacao;
 
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ViewSatisfacao {
+    private Scanner scanner;
 
-    ArrayList<String> escolhas = new ArrayList<>();
-
-    public void satisfacao(){
-        Satisfacao satisfacao = new Satisfacao();
-        int escolha = satisfacao.escolherSatisfacao();
-
-        switch (escolha) {
-            case 1:
-                escolhas.add("Muito Ruim");
-                break;
-            case 2:
-                escolhas.add("ruim");
-                break;
-            case 3:
-                escolhas.add("regular");
-                break;
-            case 4:
-                escolhas.add("bom");
-                break;
-            case 5:
-                escolhas.add("muito bom");
-                break;
-            default:
-                break;
-        }
-
+    public ViewSatisfacao() {
+        scanner = new Scanner(System.in);
     }
+
+    public void mostrarMensagem() {
+        System.out.println("Avaliação salva com sucesso!");
+    }
+
+    public int obterSatisfacao() {
+        System.out.print("Por favor, avalie de 1 a 5 em que : " +"\n");
+        System.out.print("                       1 - Muito Mau"+ "\n");
+        System.out.print("                       2 - Mau      "+ "\n");
+        System.out.print("                       3 - Razoavel "+ "\n");
+        System.out.print("                       4 - Bom      "+ "\n");
+        System.out.print("                       5 - Muito Mau"+ "\n");
+
+        int satisfacao = scanner.nextInt();
+        return satisfacao;
+    }
+
+
 }
