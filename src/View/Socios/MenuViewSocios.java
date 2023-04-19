@@ -109,8 +109,8 @@ public class MenuViewSocios {
                 opcao = ler.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Opção inválida. Por favor selecione um número válido.");
-                ler.nextLine(); // Limpa o buffer de entrada
-                opcao = 0; // Atribui um valor inválido para que o loop continue
+                ler.nextLine();
+                opcao = 0;
             }
 
             switch (opcao) {
