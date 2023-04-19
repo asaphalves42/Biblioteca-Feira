@@ -1,3 +1,15 @@
-1|Asaph Alves|Rua 3 da feira|1999-02-04
-2|J.K.Rowling|Rua Maria das neves|1974-03-03
-3|David Fernandes|Rua do Cavaco|1990-08-04
+1|J.R.R. Tolkien|Rua da Fantasia, 123|1892-01-03
+2|Machado de Assis|Avenida da Ficção, 456|1839-06-21
+3|Antoine de Saint-Exupéry|Rue du Petit Prince, 789|1900-06-29
+4|George Orwell|Baker Street, 221B|1903-06-25
+5|Rick Riordan|Olimpo, 1|1964-06-05
+6|Isaac Asimov|Rua da Ficção Científica, 789|1920-01-02
+7|Patrick Rothfuss|Estrada do Rei Matador, 12|1973-06-06
+8|George R. R. Martin|Castelo de Winterfell, 1|1948-09-20
+9|Yuval Noah Harari|Rua da História, 456|1976-02-24
+10|Dan Brown|Harvard Square, 1|1964-06-22
+11|C. S. Lewis|Rua do Leão, 123|1898-11-29
+12|Robert Louis Stevenson|Rua do Tesouro, 789|1850-11-13
+13|Markus Zusak|Rua do Ladrão, 456|1975-06-23
+14|Davi Lago|Rua do Homem Honesto, 123|1980-03-15
+15|Abdias do Nascimento|Rua da Luta, 456|1914-03-14

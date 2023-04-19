@@ -1,3 +1,15 @@
-1|Capitães de areia|-|1|Asaph Alves|235|Artes|2010-04-05|+18|Porto editora|1234567891
-2|Harry Potter|E a pedra filosofal|2|Asaph Alves|548|Matematica|2008-05-04|+12|Veja editora|121545545
-3|A cabana|-|1|Asaph Alves|365|Ciencias|1990-08-10|+18|fla|234324
+1|O Hobbit|Lá e de Volta Outra Vez|10|300|J.R.R. Tolkien|Fantasia|1937-09-21|Juvenil|HarperCollins|9780007440832|
+2|Dom Casmurro||5|256|Machado de Assis|Ficção|1899-01-01|Adulto|Martin Claret|9788572323225|
+3|O Pequeno Príncipe||20|96|Antoine de Saint-Exupéry|Infantil|1943-04-06|Infantil|Gallimard|9782070612758|
+4|1984||15|336|George Orwell|Ficção|1949-06-08|Adulto|Penguin Random House|9780451524935|
+5|Percy Jackson e o Ladrão de Raios|Série Percy Jackson e os Olimpianos, Livro 1|12|416|Rick Riordan|Fantasia|2005-06-28|Juvenil|Editora Intrínseca|9781936206054|
+6|Fundação|Série Fundação, Livro 1|8|224|Isaac Asimov|Ficção Científica|1951-05-01|Adulto|Editora Aleph|9788576571279|
+7|O Nome do Vento|Série Crônica do Matador do Rei, Livro 1|7|656|Patrick Rothfuss|Fantasia|2007-04-01|Adulto|DAW Books|9780756404741|
+8|A Guerra dos Tronos|Série As Crônicas de Gelo e Fogo, Livro 1|6|592|George R. R. Martin|Fantasia|1996-08-01|Adulto|Bantam Spectra|9780553573404|
+9|Sapiens|Uma Breve História da Humanidade||464|Yuval Noah Harari|História|2011-01-01|Adulto|L&PM Editores|9788535924648|
+10|Código Da Vinci|Robert Langdon, Livro 2|9|480|Dan Brown|Ficção|2003-03-18|Adulto|Doubleday|9780385504201|
+11|Crônicas de Nárnia|As Crônicas de Nárnia, Livro 1|18|208|C. S. Lewis|Fantasia|1950-10-16|Infantil|Geoffrey Bles|9780064471046|
+12|A Ilha do Tesouro||14|304|Robert Louis Stevenson|Aventura|1883-11-14|Juvenil|Penguin Random House|9780143107504|
+13|A Menina que Roubava Livros||7|480|Markus Zusak|Ficção|2005-03-14|Juvenil|Intrínseca|9788535910276|
+14|O Código dos Homens Honestos||5|256|Davi Lago|Autoajuda|2018-09-06|Adulto|Buzz Editora|9788582770764|
+15|O Genocídio do Negro Brasileiro||3|224|Abdias do Nascimento|História|1978-01-01|Adulto|Perspectiva|9788527300422|

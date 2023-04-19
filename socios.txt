@@ -1,2 +1,22 @@
 975258|Asaph|Rua 4|1999-02-04|933016011|
-211056|Pedro Valente|Rua de Ovar|1998-08-05|933045897|
+211056|Pedro Silva Valente|Rua de Ovar|1998-08-05|933045897|
+456009|Sofia Santos|Rua do Campo Alegre|1995-08-23|933017726|
+432780|João Pereira|Rua do Amial|1988-06-10|933044038|
+143856|Inês Costa|Rua do Pinheiro Manso|1993-05-04|933029498|
+820613|André Ferreira|Avenida do Mar|1984-02-09|933037234|
+980201|Mariana Almeida|Praça da República|1999-09-17|933012290|
+246810|Luís Oliveira|Rua de São Bento|1986-12-28|933013221|
+312567|Ana Rodrigues|Rua do Paraíso|1997-01-19|933038347|
+745832|Tiago Fernandes|Avenida da Boavista|1990-08-05|933049856|
+609438|Sofia Sousa|Rua de Cedofeita|1998-03-21|933014879|
+275916|Pedro Costa|Praça do Comércio|1991-06-15|933035223|
+593724|Inês Pereira|Rua das Flores|1996-11-30|933046016|
+831475|João Fernandes|Rua de São Roque da Lameira|2000-05-08|933019873|
+173894|Maria Oliveira|Avenida dos Aliados|1983-04-03|933048665|
+578410|André Silva|Rua de Miragaia|1992-10-22|933024677|
+921457|Laura Martins|Rua de Cedofeita|1995-12-01|933041039|
+364207|Rui Pereira|Avenida da Liberdade|1994-07-09|933027468|
+657283|Ana Ferreira|Rua do Bonjardim|1989-01-12|933043056|
+487605|João Santos|Rua do Rosário|2002-03-20|933036512|
+261349|Sofia Alves|Rua do Sol|1997-09-29|933018103|
+953874|Luís Rodrigues|Rua da Constituição|1987-12-16|933015832|

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import static Utilidades.Leitura.leStr;
 
-public class ViewFunçãoRemoverSocios {
+public class ViewFuncaoRemoverSocios {
     public void removerSocioPorNumMecanografico(ControllerSocios gestor) {
 
         String numMecanografico = leStr("Insira número mecanográfico do socio");
