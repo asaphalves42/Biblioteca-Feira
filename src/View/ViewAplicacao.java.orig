@@ -1,15 +1,11 @@
 package View;
 
 
-<<<<<<< HEAD
 import Controller.*;
-
-=======
 import Controller.ControllerAutores;
 import Controller.ControllerLivros;
 import Controller.ControllerLogin;
-import Controller.ControllerSocios;
->>>>>>> 5e6159d18c274061be434ae4472941ac847a4ae2
+import Utilidades.MensagemBoasVindas;
 import View.Autores.MenuViewAutores;
 import View.Livros.MenuViewLivros;
 import View.Login.ViewLogin;
@@ -36,8 +32,12 @@ public class ViewAplicacao {
         lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
 
-        System.out.println("Bem vindo a biblioteca municipal de Santa Maria da Feira");
-        System.out.println(" ");
+<<<<<<< HEAD
+        MensagemBoasVindas.textoInicial();
+
+=======
+        MensagemBoasVindas.mensagemBoasVindas();
+>>>>>>> a1b032e091f473c151863b4cad8ab61b44f57fee
 
         // Iniciar o sistema
         mensagemUtilizadorParaRegisto();
