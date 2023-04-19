@@ -48,7 +48,7 @@ public class ViewAplicacao {
 
         do {
 
-            System.out.println("Se ja estas cadastrado no sistema, selecione a opcao 1 para efetuar o login");
+            System.out.println("Se ja estas registado no sistema, selecione a opcao 1 para efetuar o login");
             System.out.println("1 - Login");
             System.out.println("Se não, efetue o registo!");
             System.out.println("2 - Efetuar registo");
