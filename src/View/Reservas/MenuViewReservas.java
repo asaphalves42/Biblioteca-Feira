@@ -8,6 +8,7 @@ public class MenuViewReservas {
     ControllerReservas gerirReservas = new ControllerReservas();
     ViewEfetuarReserva efetuar = new ViewEfetuarReserva();
     ViewListarReserva listar = new ViewListarReserva();
+    ViewDevolverLivroReserva devolver = new ViewDevolverLivroReserva();
     public void menuReservas() {
         int opcao;
 
@@ -28,7 +29,8 @@ public class MenuViewReservas {
                 case 1:
                     efetuar.efetuarReserva(gerirReservas);
                     break;
-                case 2://devolver
+                case 2:
+                    devolver.devolverLivro(gerirReservas);
                     break;
                 case 3:listar.listarTodosOsLivros(gerirReservas);
                     break;
