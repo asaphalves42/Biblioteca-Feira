@@ -6,3 +6,4 @@ Satisfacao: 4
 Satisfacao: 2
 Satisfacao: 1
 Socio número: null
+Satisfacao: 3

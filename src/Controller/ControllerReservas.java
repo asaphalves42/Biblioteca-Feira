@@ -86,7 +86,6 @@ public class ControllerReservas {
         }else{
             reservaAux.getLivros().add(livroSelecionado);
         }
-
         livroSelecionado.decrementarQuantidade();
         socioSelecionado.aumentarQuantidade();
 
