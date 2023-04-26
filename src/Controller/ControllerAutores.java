@@ -38,7 +38,7 @@ public class ControllerAutores {
             conteudo += aux.getMorada() + "|";
             conteudo += formated_date +  "\n";
         }
-        GestorFicheiros.GravarFicheiro("Autores.txt", conteudo);
+        GestorFicheiros.gravarFicheiro("Autores.txt", conteudo);
     }
 
     public int verificarIdAutor(){

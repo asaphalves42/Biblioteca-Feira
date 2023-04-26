@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class GestorFicheiros {
 
-    public static boolean GravarFicheiro (String nomeFicheiro, String conteudo)
+    public static boolean gravarFicheiro(String nomeFicheiro, String conteudo)
     {
         try {
             String caminhoCompleto = System.getProperty("user.dir") + "\\" + nomeFicheiro;

@@ -1,7 +1,8 @@
 package View.Autores;
 
 import Controller.ControllerAutores;
-import View.ViewAplicacao;
+
+import java.util.InputMismatchException;
 
 import static Utilidades.Leitura.ler;
 
@@ -18,29 +19,34 @@ public class MenuViewAutores {
 
         do {
 
-            System.out.println("## Autores ##");
-            System.out.println("------------------------");
-            System.out.println("1 - Adicionar autores");
-            System.out.println("2 - Listar autores");
-            System.out.println("3 - Pesquisar autor");
-            System.out.println("4 - Editar autores");
-            System.out.println("5 - Remover autores");
-            System.out.println("6 - Gravar");
-            System.out.println("7 - Menu anterior");
+            try {
 
-            opcao = ler.nextInt();
+                System.out.println("## Autores ##");
+                System.out.println("------------------------");
+                System.out.println("1 - Adicionar autores");
+                System.out.println("2 - Listar autores");
+                System.out.println("3 - Pesquisar autor");
+                System.out.println("4 - Editar autores");
+                System.out.println("5 - Remover autores");
+                System.out.println("6 - Gravar");
+                System.out.println("7 - Menu anterior");
 
-            switch (opcao) {
-                case 1 -> adicionar.menuAdicionarAutores(gestor);
-                case 2 -> listar.listarTodosOsAutores(gestor);
-                case 3 -> menuPesquisarAutores();
-                case 4 -> editar.editarAutor(gestor);
-                case 5 -> remover.removerAutorPorNome(gestor);
-                case 6 -> gestor.gravarAutorParaFicheiro();
+                opcao = ler.nextInt();
+
+                switch (opcao) {
+                    case 1 -> adicionar.menuAdicionarAutores(gestor);
+                    case 2 -> listar.listarTodosOsAutores(gestor);
+                    case 3 -> menuPesquisarAutores();
+                    case 4 -> editar.editarAutor(gestor);
+                    case 5 -> remover.removerAutorPorNome(gestor);
+                    case 6 -> gestor.gravarAutorParaFicheiro();
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira uma opção válida numérica.");
+                opcao = 0;
+                ler.nextLine();
             }
-
-        } while (opcao != 7);
-
+        } while (opcao != 8);
     }
 
     public void menuPesquisarAutores() {
@@ -48,19 +54,26 @@ public class MenuViewAutores {
         int opcao;
 
         do {
-            System.out.println("## Pesquisar autor por: ##");
-            System.out.println("---------------");
-            System.out.println("1 - Id");
-            System.out.println("2 - Nome");
-            System.out.println("3 - Menu anterior");
+            try {
+                System.out.println("## Pesquisar autor por: ##");
+                System.out.println("---------------");
+                System.out.println("1 - Id");
+                System.out.println("2 - Nome");
+                System.out.println("3 - Menu anterior");
 
-            opcao = ler.nextInt();
+                opcao = ler.nextInt();
 
-            switch (opcao) {
-                case 1 -> pesquisar.pesquisarAutorPorId(gestor);
-                case 2 -> pesquisar.pesquisarAutorPorNome(gestor);
+                switch (opcao) {
+                    case 1 -> pesquisar.pesquisarAutorPorId(gestor);
+                    case 2 -> pesquisar.pesquisarAutorPorNome(gestor);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira uma opção válida numérica.");
+                opcao = 0;
+                ler.nextLine();
             }
-        } while (opcao !=3);
+        } while (opcao != 3);
+
     }
 
 }

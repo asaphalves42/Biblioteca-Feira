@@ -1,12 +1,19 @@
 package View.Reservas;
 
 import Controller.ControllerReservas;
+import Controller.ControllerSatisfacao;
 import Model.Reserva;
+import Model.Satisfacao;
+import View.Satisfacao.ViewSatisfacao;
 
 import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewDevolverLivroReserva {
+    Satisfacao satisfacao = new Satisfacao();
+    ViewSatisfacao view = new ViewSatisfacao();
+    ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao,view);
+
     public void devolverLivro(ControllerReservas controllerReservas) {
         String idDaReserva;
         int idDoLivro;
@@ -30,10 +37,18 @@ public class ViewDevolverLivroReserva {
 
             idDoLivro = leInt("Qual o ID do livro que deseja devolver?");
             controllerReservas.devolverLivro(idDaReserva, idDoLivro);
+
+
+            String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
+            System.out.println("Todas as respostas serão anônimas!!");
+            if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
+                controller.executar();
+            }
+
+        }
             System.out.println("Livro devolvido com sucesso!");
             System.out.println(" ");
         }
     }
 
-}
 

@@ -15,6 +15,7 @@ public class ControllerSatisfacao {
         this.view = view;
     }
 
+
     public void executar() {
         int avaliacao = view.obterSatisfacao();
         satisfacao.setSatisfacao(avaliacao);
@@ -32,6 +33,7 @@ public class ControllerSatisfacao {
             e.printStackTrace();
         }
     }
+
 
 
 }

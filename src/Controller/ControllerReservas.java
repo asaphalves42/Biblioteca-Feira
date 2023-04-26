@@ -13,7 +13,7 @@ import static Controller.ControllerLivros.livros;
 import static Controller.ControllerSocios.socios;
 
 public class ControllerReservas {
-    public ArrayList<Reserva> reservas = new ArrayList<>();
+    public static ArrayList<Reserva> reservas = new ArrayList<>();
     public ControllerSocios controllerSocios;
      public ControllerLivros controllerLivros;
 
@@ -21,6 +21,7 @@ public class ControllerReservas {
         this.controllerSocios = controllerSocios;
         this.controllerLivros = controllerLivros;
     }
+
     public ControllerReservas() {
 
     }
@@ -28,14 +29,15 @@ public class ControllerReservas {
     public void lerLivrosDeFicheiroReserva() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("reservas.txt");
 
+        this.reservas = new ArrayList<>();
+
         for (String linha : linhas) {
             if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
-                if (value_split.length >= 6) {
-                    this.reservas = new ArrayList<>();
+                if (value_split.length !=0) {
                     Socio socio = controllerSocios.pesquisarSocioPorNumMecanografico(value_split[1]);
                     String[] idLivros = value_split[2].split(",");
-                    ArrayList<Livro> livros = new ArrayList();
+                    ArrayList<Livro> livros = new ArrayList<>();
                     for(String idLivro : idLivros){
                         Livro livro = controllerLivros.pesquisarLivroPorId(Integer.parseInt(idLivro));
                         livros.add(livro);
@@ -62,8 +64,9 @@ public class ControllerReservas {
             conteudo += idLivros+ "|" ;
             conteudo += formated_date + "|\n" ;
         }
-        GestorFicheiros.GravarFicheiro("reservas.txt", conteudo);
+        GestorFicheiros.gravarFicheiro("reservas.txt", conteudo);
     }
+
 
     public void efetuarReserva(Socio socioSelecionado, Livro livroSelecionado, LocalDate dataDaReserva){
         boolean reservaExiste = false;
@@ -83,7 +86,6 @@ public class ControllerReservas {
         }else{
             reservaAux.getLivros().add(livroSelecionado);
         }
-
         livroSelecionado.decrementarQuantidade();
         socioSelecionado.aumentarQuantidade();
 
@@ -114,11 +116,9 @@ public class ControllerReservas {
                 reservaEncontrada.getLivros().removeIf(livro -> IdDoLivro == livro.getId());
                 if (reservaEncontrada.getLivros().isEmpty()) {
                     reservas.remove(reservaEncontrada);
-                } else {
-                    reservaEncontrada.getSocio().decrementarQuantidade();
-
-                    editarQuantidadeReserva(IdDoLivro,  1);
                 }
+                editarQuantidadeReserva(IdDoLivro,  1);
+                reservaEncontrada.getSocio().decrementarQuantidade();
                 break;
             }
         }

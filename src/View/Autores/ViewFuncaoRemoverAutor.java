@@ -13,7 +13,7 @@ public class ViewFuncaoRemoverAutor {
         ArrayList<Autor> autorParaRemover = gestor.pesquisarAutorPorNome(nome);
 
         if (autorParaRemover.isEmpty()) {
-            System.out.println("Não existem autores listados");
+            System.out.println("Não existem autores com esse nome!");
             System.out.println(" ");
         } else {
             boolean autorEncontrado = false;
