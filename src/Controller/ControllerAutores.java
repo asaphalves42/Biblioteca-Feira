@@ -1,11 +1,14 @@
 package Controller;
 
 import Model.Autor;
+import Model.Livro;
 import Utilidades.GestorFicheiros;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import static Controller.ControllerLivros.livros;
 
 public class ControllerAutores {
     static ArrayList<Autor> autores = new ArrayList<>();
@@ -98,19 +101,25 @@ public class ControllerAutores {
         return autoresEncontrados;
     }
 
-    public boolean removerAutor(String nomeAutor) {
-        for (Autor autor : autores) {
-            if (nomeAutor.equals(autor.getNome())) {
-                autores.remove(autor);
-                return true;
+    public boolean removerAutor(int idAutor) {
+        boolean encontrouLivro = false;
+        for (Livro livro : livros) {
+            if (livro.getAutor().equals(autores.get(idAutor).getNome())) {
+                encontrouLivro = true;
+                break;
             }
         }
-        System.out.println("Não existe autor(a) com o nome inserido");
-        return false;
+
+        if (encontrouLivro) {
+            return false;
+        } else {
+            autores.remove(idAutor);
+            return true;
+        }
     }
 
-    public boolean editarAutor(String novoNome, String novaMorada) {
-        return false;
-    }
+
 }
+
+
 

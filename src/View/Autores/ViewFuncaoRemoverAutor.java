@@ -5,6 +5,7 @@ import Model.Autor;
 
 import java.util.ArrayList;
 
+import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 public class ViewFuncaoRemoverAutor {
     public void removerAutorPorNome(ControllerAutores gestor) {
@@ -21,7 +22,6 @@ public class ViewFuncaoRemoverAutor {
                 if (autor.getNome().equals(nome)) {
                     System.out.println(autor);
                     autorEncontrado = true;
-                    break;
                 }
             }
             if (!autorEncontrado) {
@@ -31,15 +31,15 @@ public class ViewFuncaoRemoverAutor {
             }
         }
 
-        String nomeAutor = leStr("Insira o nome do(a) autor(a) que quer remover");
+        int idAutor = leInt("Insira o Id do(a) autor(a) que quer remover");
 
-        boolean removido = gestor.removerAutor(nomeAutor);
+        boolean removido = gestor.removerAutor(idAutor);
 
         if (removido) {
             System.out.println("Autor(a) eliminado com sucesso");
             System.out.println(" ");
         } else {
-            System.out.println("Autor(a) não encontrado(a)");
+            System.out.println("Não é possível remover o(a) autor(a), pois está ligado a pelo menos um livro.");
             System.out.println(" ");
         }
     }
