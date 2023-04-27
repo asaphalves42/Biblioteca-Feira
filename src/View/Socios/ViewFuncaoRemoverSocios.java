@@ -5,6 +5,7 @@ import Model.Socio;
 
 import java.util.ArrayList;
 
+import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoRemoverSocios {
@@ -23,7 +24,7 @@ public class ViewFuncaoRemoverSocios {
            }
         }
 
-        String numSocio = leStr("Insira o número mecanografico do sócio que quer remover:");
+        int numSocio = leInt("Insira o número mecanografico do sócio que quer remover:");
 
         boolean removido = gestor.removerSocio(numSocio);
 

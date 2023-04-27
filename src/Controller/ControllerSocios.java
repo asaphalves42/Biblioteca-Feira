@@ -138,11 +138,11 @@ public class ControllerSocios {
         return null;
     }
 
-    public boolean removerSocio(String numMecanografico) {
+    public boolean removerSocio(int numMecanografico) {
         boolean encontrouReserva = false;
         // percorrer as reservas para ver se encontra alguma reserva associada ao sócio
         for (Reserva reserva : ControllerReservas.reservas) {
-            if (numMecanografico.equals(reserva.getSocio().getNumMecanografico())) {
+            if (numMecanografico == reserva.getSocio().getNumMecanografico()) {
                 encontrouReserva = true;
             }
         }
@@ -150,7 +150,7 @@ public class ControllerSocios {
         if (!encontrouReserva) {
             // percorrer os sócios para encontrar o sócio a ser removido
             //função sugerida pelo intelij que usa a função lambda "removeIf" para remover os sócios que não possuem reservas
-            socios.removeIf(socio -> numMecanografico.equals(socio.getNumMecanografico()));
+            socios.removeIf(socio -> numMecanografico == (socio.getNumMecanografico()));
         }
         return encontrouReserva;
     }
