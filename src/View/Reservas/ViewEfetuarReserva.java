@@ -17,19 +17,21 @@ public class ViewEfetuarReserva {
         ArrayList<Socio> socioExistente;
         Socio socioSelecionado = null;
 
-
-
+        //enquanto meu socio não estiver selecionado
         while (socioSelecionado == null) {
             String nomeSocio = leStr("Insira o nome do sócio:");
             socioExistente = gerirReservas.pesquisarSocioPorNome(nomeSocio);
 
+            //se nao existir...
             if (socioExistente.isEmpty()) {
                 System.out.println("Não existem sócios com esse nome!");
                 System.out.println(" ");
             } else {
+                //se existir...
                 for (Socio socio : socioExistente) {
-                    System.out.println(socio.toString());
+                    System.out.println(socio.toString());//listo o sócio
                 }
+
                 String numMecanografico = leStr("Insira o número mecanográfico do sócio:");
 
                 for (Socio idSocio : socioExistente) {
@@ -41,6 +43,7 @@ public class ViewEfetuarReserva {
                     }
                 }
             }
+
             if (socioSelecionado != null && socioSelecionado.getLivrosReservados() == 3) {
                 System.out.println("Ja atingiu o número máximo de reservas");
                 System.out.println(" ");
@@ -76,7 +79,6 @@ public class ViewEfetuarReserva {
                     }
                 }
             }
-            while (livroSelecionado == null) ;
 
             System.out.println("Data da reserva: ");
 
