@@ -7,21 +7,25 @@ import java.util.Set;
 
 public class Socio extends Pessoa {
 
-    public Socio(String numMecanografico, String nome, String morada, LocalDate dataDeNascimento, int telefone){
+    public Socio(String nome, String morada, LocalDate dataDeNascimento, int telefone){
         super(nome, morada, dataDeNascimento);
-        this.numMecanografico = numMecanografico;
+        this.numMecanografico = ++ultimoNumMecanografico;
         this.telefone = telefone;
         this.livrosReservados = 0;
     }
 
-    public Socio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
+    public Socio(int numMecanografico,String nome, String morada, LocalDate dataDeNascimento, int telefone) {
         super(nome, morada, dataDeNascimento);
         this.telefone = telefone;
-        this.numMecanografico = gerarNumMecanografico();
+        this.numMecanografico = numMecanografico;
+        if (numMecanografico >ultimoNumMecanografico) {
+            ultimoNumMecanografico = numMecanografico;
+        }
     }
     private int livrosReservados;
     private int telefone;
-    private String numMecanografico;
+    private int numMecanografico;
+    private static int ultimoNumMecanografico=0;
 
     public void aumentarQuantidade(){
         livrosReservados++;
@@ -40,27 +44,15 @@ public class Socio extends Pessoa {
         this.livrosReservados = livrosReservados;
     }
 
-    public String getNumMecanografico() {
+    public int getNumMecanografico() {
         return numMecanografico;
     }
 
-    public void setNumMecanografico(String numMecanografico) {
+    public void setNumMecanografico(int numMecanografico) {
         this.numMecanografico = numMecanografico;
     }
 
-    private String gerarNumMecanografico() {
-        String numMecanografico = "";
-        Set<String> numerosUtilizados = new HashSet<>();
-        Random rand = new Random();
 
-        while (numMecanografico.length() < 6) {
-            numMecanografico += rand.nextInt(10);
-        }
-
-        numerosUtilizados.add(numMecanografico);
-
-        return numMecanografico;
-    }
 
     public int getTelefone() {
         return telefone;
