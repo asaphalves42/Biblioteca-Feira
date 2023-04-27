@@ -18,7 +18,7 @@ public class ControllerSocios {
             if (linha.isEmpty() == false) {
                 String[] value_split = linha.split("\\|");
                 if (value_split.length != 0) {
-                    Socio aux = new Socio(value_split[0],
+                    Socio aux = new Socio(Integer.parseInt(value_split[0]),
                             value_split[1],
                             value_split[2],
                             LocalDate.parse(value_split[3]),
@@ -44,10 +44,10 @@ public class ControllerSocios {
         GestorFicheiros.gravarFicheiro("socios.txt", conteudo);
     }
 
-    public String verificarNumMecanografico() {
-        String max = "";
+    public int verificarNumMecanografico() {
+        int max = 0;
         for (Socio id : socios) {
-            if (id.getNumMecanografico().compareTo(max) > 0) {
+            if (id.getNumMecanografico() > max) {
                 max = id.getNumMecanografico();
             }
         }
@@ -149,6 +149,7 @@ public class ControllerSocios {
         // não encontrou o sócio a ser removido
         if (!encontrouReserva) {
             // percorrer os sócios para encontrar o sócio a ser removido
+            //função sugerida pelo intelij que usa a função lambda "removeIf" para remover os sócios que não possuem reservas
             socios.removeIf(socio -> numMecanografico.equals(socio.getNumMecanografico()));
         }
         return encontrouReserva;
