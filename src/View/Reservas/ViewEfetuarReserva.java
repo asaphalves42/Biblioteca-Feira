@@ -44,11 +44,11 @@ public class ViewEfetuarReserva {
                 }
             }
 
-            if (socioSelecionado != null && socioSelecionado.getLivrosReservados() == 3) {
-                System.out.println("Ja atingiu o número máximo de reservas");
-                System.out.println(" ");
-                break;
-            }
+        }
+
+        if (socioSelecionado != null && socioSelecionado.getLivrosReservados() == 3) {
+            System.out.println("Ja atingiu o número máximo de reservas");
+            System.out.println(" ");
         }
 
         boolean continuarReservando = true;

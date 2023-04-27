@@ -115,11 +115,15 @@ public class ControllerLivros {
                 }
             //se encontrar remove
             if (!encontrou) {
-               for(Livro livro: livros){
-                   if(idLivroRemover == livro.getId()){
-                       livros.remove(livro);
-                   }
-               }
+                //for(Livro livro: livros){
+                //    if(idLivroRemover == livro.getId()){
+                //        livros.remove(livro);
+                //       }
+                //     }
+                //   }
+
+                //função sugerida pelo intelij usando lambda para e o "removeIf" para remover, facilitando o uso dos loops
+                livros.removeIf(livro -> idLivroRemover == livro.getId());
             }
 
         return encontrou;
