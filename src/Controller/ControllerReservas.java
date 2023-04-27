@@ -15,7 +15,7 @@ import static Controller.ControllerSocios.socios;
 public class ControllerReservas {
     public static ArrayList<Reserva> reservas = new ArrayList<>();
     public ControllerSocios controllerSocios;
-     public ControllerLivros controllerLivros;
+    public ControllerLivros controllerLivros;
 
     public ControllerReservas(ControllerSocios controllerSocios, ControllerLivros controllerLivros){
         this.controllerSocios = controllerSocios;
@@ -70,29 +70,32 @@ public class ControllerReservas {
 
     public void efetuarReserva(Socio socioSelecionado, Livro livroSelecionado, LocalDate dataDaReserva){
         boolean reservaExiste = false;
-
         Reserva reservaAux = getReserva(socioSelecionado);
+
         if(reservaAux!= null){
             reservaExiste = true;
         }
 
-        if(reservaExiste == false){
+        if(!reservaExiste){
             Reserva reserva = new Reserva();
             reserva.setSocio(socioSelecionado);
             reserva.setDataReserva(dataDaReserva);
             reserva.getLivros().add(livroSelecionado);
 
             reservas.add(reserva);
+
         }else{
-            reservaAux.getLivros().add(livroSelecionado);
+            reservaAux.getLivros().add(livroSelecionado);//adiciona a uma reserva existente
         }
+
         livroSelecionado.decrementarQuantidade();
         socioSelecionado.aumentarQuantidade();
 
     }
 
     public Reserva getReserva(Socio socioSelecionado){
-        for(Reserva res  : reservas){
+        //igualo o meu socio selecionado com o numero mecanografico
+        for(Reserva res : reservas){
             if(res.getSocio().getNumMecanografico() == socioSelecionado.getNumMecanografico()){
                 return res;
             }
@@ -102,26 +105,28 @@ public class ControllerReservas {
 
     public void devolverLivro(String IdDaReserva, int IdDoLivro) {
         Reserva reservaEncontrada = null;
-        for (Reserva reserva : reservas) {
-            if (IdDaReserva.equalsIgnoreCase(reserva.getIdDaReserva())) {
-                for (Livro livro : reserva.getLivros()) {
-                    if (IdDoLivro == livro.getId()) {
-                        reservaEncontrada = reserva;
+
+        for (Reserva reserva : reservas) { // Percorre a lista de reservas para encontrar a reserva correspondente ao ID informado.
+            if (IdDaReserva.equalsIgnoreCase(reserva.getIdDaReserva())) { // Compara o ID da reserva informado com o ID da reserva atual no loop.
+                for (Livro livro : reserva.getLivros()) { // Percorre a lista de livros da reserva para encontrar o livro correspondente ao ID informado.
+                    if (IdDoLivro == livro.getId()) { // Compara o ID do livro informado com o ID do livro atual no loop.
+                        reservaEncontrada = reserva; // Armazena a reserva encontrada na variável `reservaEncontrada`.
                         break;
                     }
                 }
             }
 
             if (reservaEncontrada != null) {
-                reservaEncontrada.getLivros().removeIf(livro -> IdDoLivro == livro.getId());
+                reservaEncontrada.getLivros().removeIf(livro -> IdDoLivro == livro.getId()); // Remove o livro da lista de livros da reserva.
                 if (reservaEncontrada.getLivros().isEmpty()) {
                     reservas.remove(reservaEncontrada);
                 }
-                editarQuantidadeReserva(IdDoLivro,  1);
-                reservaEncontrada.getSocio().decrementarQuantidade();
+                editarQuantidadeReserva(IdDoLivro, 1);
+                reservaEncontrada.getSocio().decrementarQuantidade(); // Atualiza a quantidade de livros reservados pelo sócio, decrementando em 1.
                 break;
             }
         }
+
     }
 
     public boolean editarQuantidadeReserva(int idDoLivro, int novaQuantidade) {

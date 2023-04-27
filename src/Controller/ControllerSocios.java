@@ -1,6 +1,7 @@
 package Controller;
 
 
+import Model.Reserva;
 import Model.Socio;
 import Utilidades.GestorFicheiros;
 
@@ -28,16 +29,16 @@ public class ControllerSocios {
         }
     }
 
-    public void gravarSociosParaFicheiro(){
+    public void gravarSociosParaFicheiro() {
         String conteudo = "";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        for (Socio aux : socios){
+        for (Socio aux : socios) {
             String formated_date = aux.getDataDeNascimento().format(formatter);
 
             conteudo += aux.getNumMecanografico() + "|";
-            conteudo += aux.getNome() + "|" ;
-            conteudo += aux.getMorada() + "|" ;
-            conteudo += formated_date + "|" ;
+            conteudo += aux.getNome() + "|";
+            conteudo += aux.getMorada() + "|";
+            conteudo += formated_date + "|";
             conteudo += aux.getTelefone() + "|" + "\n";
         }
         GestorFicheiros.gravarFicheiro("socios.txt", conteudo);
@@ -53,16 +54,18 @@ public class ControllerSocios {
         return max;
     }
 
-    public void adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone){
+    public void adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
         this.verificarNumMecanografico();
-        Socio socio = new Socio (nome, morada,dataDeNascimento,telefone);
+        Socio socio = new Socio(nome, morada, dataDeNascimento, telefone);
         this.socios.add(socio);
     }
-    public ArrayList<Socio> listarSocio(){
+
+    public ArrayList<Socio> listarSocio() {
         return this.socios;
 
     }
-    public boolean editarSocio (String numMecanografico , String nome, String morada, LocalDate dataDeNascimento, int telefone) {
+
+    public boolean editarSocio(String numMecanografico, String nome, String morada, LocalDate dataDeNascimento, int telefone) {
         for (Socio socio : socios) {
             if (numMecanografico.equals(socio.getNumMecanografico())) {
                 socio.setNome(nome);
@@ -75,7 +78,7 @@ public class ControllerSocios {
         return false;
     }
 
-    public boolean editarSocioPorNome (String numMecanografico , String nome) {
+    public boolean editarSocioPorNome(String numMecanografico, String nome) {
         for (Socio socio : socios) {
             if (numMecanografico.equals(socio.getNumMecanografico())) {
                 socio.setNome(nome);
@@ -84,7 +87,8 @@ public class ControllerSocios {
         }
         return false;
     }
-    public boolean editarSocioPorMorada (String numMecanografico , String novaMorada) {
+
+    public boolean editarSocioPorMorada(String numMecanografico, String novaMorada) {
         for (Socio socio : socios) {
             if (numMecanografico.equals(socio.getNumMecanografico())) {
                 socio.setMorada(novaMorada);
@@ -93,7 +97,8 @@ public class ControllerSocios {
         }
         return false;
     }
-    public boolean editarSocioPorDataDeNascimento (String numMecanografico, LocalDate novaDataDeNascimento) {
+
+    public boolean editarSocioPorDataDeNascimento(String numMecanografico, LocalDate novaDataDeNascimento) {
         for (Socio socio : socios) {
             if (numMecanografico.equals(socio.getNumMecanografico())) {
                 socio.setDataDeNascimento(novaDataDeNascimento);
@@ -102,7 +107,8 @@ public class ControllerSocios {
         }
         return false;
     }
-    public boolean editarSocioPorTelefone (String numMecanografico, int novaTelefone) {
+
+    public boolean editarSocioPorTelefone(String numMecanografico, int novaTelefone) {
         for (Socio socio : socios) {
             if (numMecanografico.equals(socio.getNumMecanografico())) {
                 socio.setTelefone(novaTelefone);
@@ -113,20 +119,19 @@ public class ControllerSocios {
     }
 
 
-
     public ArrayList<Socio> pesquisarSocioPorNome(String nomeInserido) {
         ArrayList<Socio> nomeSocio = new ArrayList<>();
         for (Socio nome : socios) {
-            if (nomeInserido.equalsIgnoreCase(nome.getNome())){
+            if (nomeInserido.equalsIgnoreCase(nome.getNome())) {
                 nomeSocio.add(nome);
             }
         }
         return nomeSocio;
     }
 
-    public Socio pesquisarSocioPorNumMecanografico (String numMecanografico) {
+    public Socio pesquisarSocioPorNumMecanografico(String numMecanografico) {
         for (Socio socio : socios) {
-            if (numMecanografico.equals(socio.getNumMecanografico())){
+            if (numMecanografico.equals(socio.getNumMecanografico())) {
                 return socio;
             }
         }
@@ -134,13 +139,19 @@ public class ControllerSocios {
     }
 
     public boolean removerSocio(String numMecanografico) {
-        for (Socio socio : socios) {
-            if (numMecanografico.equals(socio.getNumMecanografico())) {
-                socios.remove(socio);
-                return true;
+        boolean encontrouReserva = false;
+        // percorrer as reservas para ver se encontra alguma reserva associada ao sócio
+        for (Reserva reserva : ControllerReservas.reservas) {
+            if (numMecanografico.equals(reserva.getSocio().getNumMecanografico())) {
+                encontrouReserva = true;
             }
         }
-        return false;
+        // não encontrou o sócio a ser removido
+        if (!encontrouReserva) {
+            // percorrer os sócios para encontrar o sócio a ser removido
+            socios.removeIf(socio -> numMecanografico.equals(socio.getNumMecanografico()));
+        }
+        return encontrouReserva;
     }
 
 }
