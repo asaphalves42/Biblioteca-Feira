@@ -10,6 +10,7 @@ public class MenuViewReservas {
     ControllerReservas gerirReservas = new ControllerReservas();
     ViewEfetuarReserva efetuar = new ViewEfetuarReserva();
     ViewListarReserva listar = new ViewListarReserva();
+    ViewCancelarReserva cancelar = new ViewCancelarReserva();
     ViewPesquisarReservaPorId pesquisar = new ViewPesquisarReservaPorId();
     ViewDevolverLivroReserva devolver = new ViewDevolverLivroReserva();
 
@@ -43,7 +44,7 @@ public class MenuViewReservas {
                     case 3:
                         listar.listarTodasAsReservas(gerirReservas);
                         break;
-                    case 4://cancelar
+                    case 4:cancelar.cancelarReserva(gerirReservas);
                         break;
                     case 5://editar reserva
                         break;

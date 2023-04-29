@@ -29,7 +29,7 @@ public class ControllerReservas {
     public void lerLivrosDeFicheiroReserva() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("reservas.txt");
 
-        this.reservas = new ArrayList<>();
+        reservas = new ArrayList<>();
 
         for (String linha : linhas) {
             if (!linha.isEmpty()) {
@@ -43,7 +43,7 @@ public class ControllerReservas {
                         livros.add(livro);
                     }
                     Reserva nova = new Reserva(value_split[0], socio,livros, LocalDate.parse(value_split[3]));
-                    this.reservas.add(nova);
+                    reservas.add(nova);
                 }
             }
         }
@@ -169,6 +169,16 @@ public class ControllerReservas {
             }
         }
         return null;
+    }
+
+    public boolean cancelarReserva(String idReserva) {
+        for (Reserva reserva : reservas) {
+            if (idReserva.equalsIgnoreCase(reserva.getIdDaReserva())) {
+                reservas.remove(reserva);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

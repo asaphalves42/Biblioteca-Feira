@@ -1,9 +1,6 @@
 package Model;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 
 public class Socio extends Pessoa {
 
@@ -51,8 +48,6 @@ public class Socio extends Pessoa {
     public void setNumMecanografico(int numMecanografico) {
         this.numMecanografico = numMecanografico;
     }
-
-
 
     public int getTelefone() {
         return telefone;

@@ -7,7 +7,7 @@
 7|O Lobo do Mar|-|1|Jack London|336|Artes|1904-01-01|Adulto|Penguin Books|9780142437738
 8|O Pequeno Príncipe|-|11|Antoine de Saint-Exupéry|128|Artes|1943-04-06|Infantil|Agir|9788502034806
 9|O Nome da Rosa|-|6|Umberto Eco|528|Artes|1980-01-01|Adulta|Editora Record|9788501014553
-10|O Hobbit|-|8|JRR Tolkien|288|Artes|1937-09-21|Juvenil|HarperCollins|9788595085023
+10|O Hobbit|-|7|JRR Tolkien|288|Artes|1937-09-21|Juvenil|HarperCollins|9788595085023
 11|A Origem das Espécies|-|3|Charles Darwin|592|Artes|1859-11-24|Adulto|Editora Unesp|9788571390434
 12|Os Miseráveis|-|4|Victor Hugo|1504|Artes|1862-04-01|Adulto|Martin Claret|9788544003809
 13|Fahrenheit 451|-|4|Ray Bradbury|208|Artes|1953-10-19|Adulto|Biblioteca Azul|9788525056843
