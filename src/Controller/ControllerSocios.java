@@ -44,24 +44,23 @@ public class ControllerSocios {
         GestorFicheiros.gravarFicheiro("socios.txt", conteudo);
     }
 
-    public int verificarNumMecanografico() {
+    public void verificarNumMecanografico() {
         int max = 0;
         for (Socio id : socios) {
             if (id.getNumMecanografico() > max) {
                 max = id.getNumMecanografico();
             }
         }
-        return max;
     }
 
     public void adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
         this.verificarNumMecanografico();
         Socio socio = new Socio(nome, morada, dataDeNascimento, telefone);
-        this.socios.add(socio);
+        socios.add(socio);
     }
 
     public ArrayList<Socio> listarSocio() {
-        return this.socios;
+        return socios;
 
     }
 
@@ -150,6 +149,7 @@ public class ControllerSocios {
         if (!encontrouReserva) {
             // percorrer os sócios para encontrar o sócio a ser removido
             //função sugerida pelo intelij que usa a função lambda "removeIf" para remover os sócios que não possuem reservas
+            //expressão lambda "removeIf"
             socios.removeIf(socio -> numMecanografico == (socio.getNumMecanografico()));
         }
         return encontrouReserva;

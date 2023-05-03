@@ -12,7 +12,7 @@ public class ValidacaoData {
         try {
             LocalDate data;
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            data = LocalDate.parse(ler.nextLine(), formatter);
+            data = LocalDate.parse(ler.nextLine().trim(), formatter);
             if (data.isAfter(LocalDate.now())) {
                 System.out.println("Data invalida, insira uma data anterior a hoje (" + LocalDate.now().format(formatter) + "):");
                 return LerData2();
