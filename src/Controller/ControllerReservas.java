@@ -35,7 +35,7 @@ public class ControllerReservas {
             if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
                 if (value_split.length !=0) {
-                    Socio socio = controllerSocios.pesquisarSocioPorNumMecanografico(value_split[1]);
+                    Socio socio = controllerSocios.pesquisarSocioPorNumMecanografico(Integer.parseInt(value_split[1]));
                     String[] idLivros = value_split[2].split(",");
                     ArrayList<Livro> livros = new ArrayList<>();
                     for(String idLivro : idLivros){
@@ -68,7 +68,7 @@ public class ControllerReservas {
     }
 
 
-    public void efetuarReserva(Socio socioSelecionado, Livro livroSelecionado, LocalDate dataDaReserva){
+    public boolean efetuarReserva(Socio socioSelecionado, Livro livroSelecionado, LocalDate dataDaReserva){
         boolean reservaExiste = false;
         Reserva reservaAux = getReserva(socioSelecionado);
 
@@ -82,14 +82,24 @@ public class ControllerReservas {
             reserva.setDataReserva(dataDaReserva);
             reserva.getLivros().add(livroSelecionado);
 
-            reservas.add(reserva);
+            if(socioSelecionado.getLivrosReservados() == 3){
+                return false;
+            }else{
+                reservas.add(reserva);
+                socioSelecionado.aumentarQuantidade();
+                livroSelecionado.decrementarQuantidade();
+                return true;
+            }
 
         }else{
-            reservaAux.getLivros().add(livroSelecionado);//adiciona a uma reserva existente
-        }
+            if(socioSelecionado.getLivrosReservados() < 3){
+                reservaAux.getLivros().add(livroSelecionado);
+                return true;
+            }else{
 
-        livroSelecionado.decrementarQuantidade();
-        socioSelecionado.aumentarQuantidade();
+                return false;
+            }
+        }
 
     }
 

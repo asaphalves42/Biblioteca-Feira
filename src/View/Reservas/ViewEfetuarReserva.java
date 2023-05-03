@@ -75,40 +75,35 @@ public class ViewEfetuarReserva {
     public void efetuarReserva(ControllerReservas gerirReservas) {
         Socio socioSelecionado = selecionarSocioExistente(gerirReservas);
 
-
             boolean continuarReservando = true;
-            while (continuarReservando) {
-                Livro livroSelecionado = selecionarLivroDisponivel(gerirReservas);
 
-                System.out.println("Insira a data da reserva: ");
-                ValidacaoData validarData = new ValidacaoData();
-                LocalDate dataDaReserva = validarData.LerData2();
+                while (continuarReservando) {
+                    Livro livroSelecionado = selecionarLivroDisponivel(gerirReservas);
 
-                if (livroSelecionado.getQuantidade() == 0) {
-                    System.out.println("Não existem mais exemplares desse livro no estoque!");
-                    System.out.println(" ");
-                } else {
-                    System.out.println("Livro reservado com sucesso!");
-                    System.out.println(" ");
+                    System.out.println("Insira a data da reserva: ");
+                    ValidacaoData validarData = new ValidacaoData();
+                    LocalDate dataDaReserva = validarData.LerData2();
+
+                    if (livroSelecionado.getQuantidade() == 0) {
+                        System.out.println("Não existem mais exemplares desse livro no estoque!");
+                        System.out.println(" ");
+                    }
+                        boolean sucesso = gerirReservas.efetuarReserva(socioSelecionado, livroSelecionado, dataDaReserva);
+                        if (sucesso) {
+                            System.out.println("Livro reservado com sucesso!");
+                            System.out.println(" ");
+                        }else {
+                            System.out.println("Ocorreu um erro ao efetuar reserva!");
+                            System.out.println(" ");
+                        }
+
+                    String continuar = leStr("Deseja continuar reservar outro livro? (S/N): ");
+                    if (!continuar.equalsIgnoreCase("s") && (!continuar.equalsIgnoreCase("sim"))) {
+                        continuarReservando = false;
+                    }
                 }
-
-                try {
-                    gerirReservas.efetuarReserva(socioSelecionado, livroSelecionado, dataDaReserva);
-                } catch (Exception e) {
-                    System.out.println("Erro ao efetuar reserva: " + e.getMessage());
-                }
+               }
+}
 
 
-                String continuar = leStr("Deseja continuar reservar outro livro? (S/N): ");
-                if (!continuar.equalsIgnoreCase("s") && (!continuar.equalsIgnoreCase("sim"))) {
-                    continuarReservando = false;
-                }
-                if (socioSelecionado.getLivrosReservados() == 3) {
-                    System.out.println("Ja atingiu o número máximo de reservas!");
-                    System.out.println(" ");
 
-                }
-            }
-        }
-
-    }
