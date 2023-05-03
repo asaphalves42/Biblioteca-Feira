@@ -12,7 +12,8 @@ import static Utilidades.Leitura.leStr;
 public class ViewDevolverLivroReserva {
     Satisfacao satisfacao = new Satisfacao();
     ViewSatisfacao view = new ViewSatisfacao();
-    ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao,view);
+    Satisfacao observacao = new Satisfacao();
+    ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao,view,observacao);
 
     public void devolverLivro(ControllerReservas controllerReservas) {
         String idDaReserva;

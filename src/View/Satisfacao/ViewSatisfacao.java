@@ -4,9 +4,11 @@ import java.util.Scanner;
 
 public class ViewSatisfacao {
     private Scanner scanner;
+    private Scanner scanner2;
 
     public ViewSatisfacao() {
         scanner = new Scanner(System.in);
+        scanner2 = new Scanner(System.in);
     }
 
     public void mostrarMensagem() {
@@ -23,6 +25,11 @@ public class ViewSatisfacao {
 
         int satisfacao = scanner.nextInt();
         return satisfacao;
+    }
+    public String obterObservacao() {
+        System.out.println("Deixe uma observacao em formatdo de texto:");
+        String observacao = scanner2.nextLine();
+        return observacao;
     }
 
 
