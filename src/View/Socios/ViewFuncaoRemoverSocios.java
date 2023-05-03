@@ -3,43 +3,36 @@ package View.Socios;
 import Controller.ControllerSocios;
 import Model.Socio;
 
-import static Controller.ControllerSocios.socios;
+import java.util.ArrayList;
+
+import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoRemoverSocios {
     public void removerSocioPorNumMecanografico(ControllerSocios gestor) {
 
-        String numMecanografico = leStr("Insira número mecanográfico do socio");
-        Socio socioParaRemover = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+        String nomeSocio = leStr("Insira o nome do socio:");
+        ArrayList<Socio> socioParaRemover = gestor.pesquisarSocioPorNome(nomeSocio);
 
-        if (socioParaRemover==null) {
+        if (socioParaRemover.isEmpty()) {
             System.out.println("Não existem sócios listados");
             System.out.println(" ");
+
         } else {
-            boolean socioEncontrado = false;
-            for (Socio socio : socios) {
-                if (socio.getNumMecanografico().equals(numMecanografico)) {
-                    System.out.println(socio);
-                    socioEncontrado = true;
-                    break;
-                }
-            }
-            if (!socioEncontrado) {
-                System.out.println("Socio não encontrado(a)");
-                System.out.println(" ");
-                return;
-            }
+           for(Socio socio : socioParaRemover){
+               System.out.println(socio.toString());
+           }
         }
 
-        String numSocio = leStr("Insira o número mecanografico do sócio que quer remover");
+        int numSocio = leInt("Insira o número mecanografico do sócio que quer remover:");
 
         boolean removido = gestor.removerSocio(numSocio);
 
         if (removido) {
-            System.out.println("Sócio eliminado com sucesso");
+            System.out.println("Não foi possível remover o socio, existe uma reserva associada!");
             System.out.println(" ");
         } else {
-            System.out.println("Sócio não encontrado(a)");
+            System.out.println("Sócio removido com sucesso!");
             System.out.println(" ");
         }
     }

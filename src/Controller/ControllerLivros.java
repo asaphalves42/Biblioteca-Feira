@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Livro;
+import Model.Reserva;
 import Utilidades.GestorFicheiros;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 
 public class ControllerLivros {
     public static ArrayList<Livro> livros = new ArrayList<>();
+
     public void lerLivrosDeFicheiro(){
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("livros.txt");
 
@@ -102,18 +104,31 @@ public class ControllerLivros {
     }
 
     public boolean removerLivro(int idLivroRemover) {
-        for (Livro livro : livros) {
-            if (idLivroRemover == livro.getId()) {
-                if (livro.getQuantidade() - 1 > 0) {
-                    livro.setQuantidade(livro.getQuantidade() - 1);
-                } else {
-                    livros.remove(livro);
+        boolean encontrou = false;
+                //percorrer as reservas para ver se encontra
+                for (Reserva reserva : ControllerReservas.reservas) {
+                    for (Livro livrosEscolhido : reserva.getLivros()) {
+                        if (idLivroRemover == livrosEscolhido.getId()) {
+                            encontrou = true;
+                        }
+                    }
                 }
-                return true;
+            //se encontrar remove
+            if (!encontrou) {
+                //for(Livro livro: livros){
+                //    if(idLivroRemover == livro.getId()){
+                //        livros.remove(livro);
+                //       }
+                //     }
+                //   }
+
+                //função sugerida pelo intelij usando lambda para e o "removeIf" para remover, facilitando o uso dos loops
+                livros.removeIf(livro -> idLivroRemover == livro.getId());
             }
-        }
-        return false;
+
+        return encontrou;
     }
+
 
     public boolean editarTituloDoLivro(int idLivroEditar, String tituloNovo) {
         for (Livro livro : livros) {

@@ -14,12 +14,8 @@ public class Reserva {
     public String getIdDaReserva() {
         return idDaReserva;
     }
-    public void setIdDaReserva(String idDaReserva) {
-        this.idDaReserva = idDaReserva;
-    }
 
     public Reserva(){
-
         //Gerar id da reserva
         Random aleatorio = new Random();
         int id = aleatorio.nextInt(99999999);

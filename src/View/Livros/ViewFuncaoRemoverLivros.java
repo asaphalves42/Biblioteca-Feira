@@ -24,13 +24,13 @@ public class ViewFuncaoRemoverLivros {
 
         int idLivroRemover = leInt("Insira o id do livro que quer remover: ");
 
-        boolean removido =  gestor.removerLivro(idLivroRemover);
+        boolean removido = gestor.removerLivro(idLivroRemover);
 
         if(removido){
-            System.out.println("Livro removido com sucesso");
+            System.out.println("Livro se encontra numa reserva, não foi possível remover!");
             System.out.println(" ");
         }else{
-            System.out.println("Livro não encontrado!");
+            System.out.println("Livro removido com sucesso!");
             System.out.println(" ");
         }
 
