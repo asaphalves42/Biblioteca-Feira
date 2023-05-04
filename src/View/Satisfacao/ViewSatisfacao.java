@@ -31,5 +31,4 @@ public class ViewSatisfacao {
         return scanner2.nextLine();
     }
 
-
 }
