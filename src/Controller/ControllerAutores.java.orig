@@ -102,6 +102,15 @@ public class ControllerAutores {
     }
 
     public boolean removerAutor(int idAutor) {
+<<<<<<< HEAD
+        for (Autor autor : autores) {
+            if (idAutor == autor.getId()) {
+                autores.remove(autor);
+                return true;
+            }
+        }
+        return false;
+=======
         boolean encontrouLivro = false;
         // percorre a lista de livros para verificar se o autor está associado a algum deles
         for (Livro livro : livros) {
@@ -116,8 +125,8 @@ public class ControllerAutores {
         } else {
             autores.remove(idAutor);
             return true;
-
-        // se o autor estiver associado a um livro, não é possível removê-lo, então retorna false
+        }
+>>>>>>> d478f1c412944f1d16ceb782d46a04a1942c27f5
     }
 
 

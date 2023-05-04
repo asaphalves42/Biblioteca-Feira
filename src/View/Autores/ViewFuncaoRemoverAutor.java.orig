@@ -31,7 +31,13 @@ public class ViewFuncaoRemoverAutor {
             }
         }
 
+<<<<<<< HEAD
+        int idAutor = leInt("Insira o id autor(a) que quer remover");
+
+        boolean removido = gestor.removerAutor(idAutor);
+=======
         int idAutor = leInt("Insira o Id do(a) autor(a) que quer remover");
+>>>>>>> d478f1c412944f1d16ceb782d46a04a1942c27f5
 
         boolean removido = gestor.removerAutor(idAutor);
         //caso o autor esteja ligado a um livro, conforme se pode verificar no Controller Autores, nao permite remover
