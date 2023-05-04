@@ -39,7 +39,7 @@ public class ViewFuncaoRemoverAutor {
             System.out.println("Autor(a) eliminado com sucesso");
             System.out.println(" ");
         } else {
-            System.out.println("Não é possível remover o(a) autor(a), pois está ligado a pelo menos um livro.");
+            System.out.println("Não é possível remover o(a) autor(a), pois está ligado a um livro.");
             System.out.println(" ");
         }
     }

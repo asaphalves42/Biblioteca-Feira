@@ -122,6 +122,7 @@ public class ViewAplicacao {
                         lerEgravarLivros.gravarLivrosParaFicheiro();
                         lerEgravarAutores.gravarAutorParaFicheiro();
                         lerEgravarSocios.gravarSociosParaFicheiro();
+                        lerEGravarReservas.gravarReservasParaFicheiro();
                         System.exit(0);
                         break;
                     default:
