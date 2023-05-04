@@ -13,6 +13,7 @@ public class ViewPesquisarReservaPorId {
 
         if(reserva== null){
             System.out.println("Reserva não encontrada!");
+            System.out.println(" ");
         }else{
             System.out.println(reserva);
         }

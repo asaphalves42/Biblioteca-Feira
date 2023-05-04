@@ -191,7 +191,22 @@ public class ControllerReservas {
         return false;
     }
 
-}
+    public boolean editarReservaLivro(int idLivro, int novoLivro) {
+        for (Reserva reserva : reservas) {
+            if(reserva.getLivros().contains(idLivro)){
+                for(Livro livroParaEditar : ControllerLivros.livros) {
+                    if(livroParaEditar.getId() == novoLivro) {
+                        novoLivro = livroParaEditar.getId();
+            }
+        }
+
+            }
+        }
+
+    }
+
+    }
+
 
 
 
