@@ -30,11 +30,5 @@ public class ViewSatisfacao {
         System.out.println("Deixe uma observação em formato de texto:");
         return scanner2.nextLine();
     }
-    public String obterObservacao() {
-        System.out.println("Deixe uma observacao em formatdo de texto:");
-        String observacao = scanner2.nextLine();
-        return observacao;
-    }
-
 
 }
