@@ -12,6 +12,7 @@ import static Utilidades.Leitura.leStr;
 public class ViewDevolverLivroReserva {
     Satisfacao satisfacao = new Satisfacao();
     ViewSatisfacao view = new ViewSatisfacao();
+    Satisfacao observacao = new Satisfacao();
     ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao,view);
 
     public void devolverLivro(ControllerReservas controllerReservas) {
@@ -42,7 +43,7 @@ public class ViewDevolverLivroReserva {
             String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
             System.out.println("Todas as respostas serão anônimas!!");
             if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
-                controller.executar();
+                controller.executar(reserva);
             }
 
         }
