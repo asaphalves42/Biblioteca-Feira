@@ -9,15 +9,11 @@ import java.io.IOException;
 public class ControllerSatisfacao {
     private Satisfacao satisfacao;
     private ViewSatisfacao view;
-    private Satisfacao observacao;
 
-
-    public ControllerSatisfacao(Satisfacao satisfacao, ViewSatisfacao view,Satisfacao observacao) {
+    public ControllerSatisfacao(Satisfacao satisfacao, ViewSatisfacao view) {
         this.satisfacao = satisfacao;
         this.view = view;
-        this.observacao = observacao;
     }
-
 
     public void executar() {
         int avaliacao = view.obterSatisfacao();
@@ -26,20 +22,17 @@ public class ControllerSatisfacao {
         satisfacao.setObservacao(observacao);
         escreverNoFicheiro();
         view.mostrarMensagem();
-
     }
 
     private void escreverNoFicheiro() {
         try {
             FileWriter writer = new FileWriter("satisfacao.txt", true);
             int avaliacao = satisfacao.getSatisfacao();
+            String observacao = satisfacao.getObservacao();
             writer.write("Satisfacao: " + avaliacao +  "  Observação: "+ observacao +"\n" );
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
-
 }

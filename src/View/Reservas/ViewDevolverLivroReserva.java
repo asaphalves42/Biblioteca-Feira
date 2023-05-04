@@ -13,7 +13,7 @@ public class ViewDevolverLivroReserva {
     Satisfacao satisfacao = new Satisfacao();
     ViewSatisfacao view = new ViewSatisfacao();
     Satisfacao observacao = new Satisfacao();
-    ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao,view,observacao);
+    ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao,view);
 
     public void devolverLivro(ControllerReservas controllerReservas) {
         String idDaReserva;

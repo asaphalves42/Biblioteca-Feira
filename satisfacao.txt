@@ -7,6 +7,5 @@ Satisfacao: 2
 Satisfacao: 1
 Socio número: null
 Satisfacao: 3
-Satisfacao: 5  Observação: Model.Satisfacao@2401f4c3
-Satisfacao: 5  Observação: Model.Satisfacao@6504e3b2
-Satisfacao: 4  Observação: Model.Satisfacao@626b2d4a
+
+Satisfacao: 4  Observação: naosei
