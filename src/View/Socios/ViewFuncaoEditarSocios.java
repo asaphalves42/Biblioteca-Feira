@@ -13,7 +13,7 @@ public class ViewFuncaoEditarSocios {
 
     public void editarSocioPorNumMecTodosOsCampos(ControllerSocios gestor) {
 
-        String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
+        int numMecanografico = leInt("Insira o número mecanográfico do sócio que pretende editar");
         Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
         if (socio == null) {
@@ -55,7 +55,7 @@ public class ViewFuncaoEditarSocios {
     }
 
     public void editarNomeSocioPorNumMecanografico(ControllerSocios gestor) {
-        String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
+        int numMecanografico = leInt("Insira o número mecanográfico do sócio que pretende editar");
         Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
         if (socio == null) {
@@ -79,7 +79,7 @@ public class ViewFuncaoEditarSocios {
     }
 
     public void editarMoradaSocioPorNumMecanografico(ControllerSocios gestor) {
-        String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
+        int numMecanografico = leInt("Insira o número mecanográfico do sócio que pretende editar");
         Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
         String novaMorada;
         if (socio == null) {
@@ -103,7 +103,7 @@ public class ViewFuncaoEditarSocios {
     }
 
     public void editarDataDeNascimentoSocioPorNumMecanografico(ControllerSocios gestor) {
-        String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
+        int numMecanografico = leInt("Insira o número mecanográfico do sócio que pretende editar");
         Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
         LocalDate novaDataDeNascimento;
@@ -128,7 +128,7 @@ public class ViewFuncaoEditarSocios {
     }
 
     public void editarTelefoneSocioPorNumMecanografico(ControllerSocios gestor) {
-        String numMecanografico = leStr("Insira o número mecanográfico do sócio que pretende editar");
+        int numMecanografico = leInt("Insira o número mecanográfico do sócio que pretende editar");
         Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
         int novoTelefone = 0;

@@ -6,6 +6,7 @@ import Model.Socio;
 
 import java.util.ArrayList;
 
+import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoPesquisarSocio {
@@ -25,7 +26,7 @@ public class ViewFuncaoPesquisarSocio {
 
     public void pesquisarSocioPorNumMecanografico(ControllerSocios gestor) {
 
-        String numMecanografico = leStr("Insira o Id do(a) sócio(a)");
+        int numMecanografico = leInt("Insira o Id do(a) sócio(a)");
 
         Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 

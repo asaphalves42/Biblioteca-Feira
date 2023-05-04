@@ -44,30 +44,29 @@ public class ControllerSocios {
         GestorFicheiros.gravarFicheiro("socios.txt", conteudo);
     }
 
-    public int verificarNumMecanografico() {
+    public void verificarNumMecanografico() {
         int max = 0;
         for (Socio id : socios) {
             if (id.getNumMecanografico() > max) {
                 max = id.getNumMecanografico();
             }
         }
-        return max;
     }
 
     public void adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
         this.verificarNumMecanografico();
         Socio socio = new Socio(nome, morada, dataDeNascimento, telefone);
-        this.socios.add(socio);
+        socios.add(socio);
     }
 
     public ArrayList<Socio> listarSocio() {
-        return this.socios;
+        return socios;
 
     }
 
-    public boolean editarSocio(String numMecanografico, String nome, String morada, LocalDate dataDeNascimento, int telefone) {
+    public boolean editarSocio(int numMecanografico, String nome, String morada, LocalDate dataDeNascimento, int telefone) {
         for (Socio socio : socios) {
-            if (numMecanografico.equals(socio.getNumMecanografico())) {
+            if (numMecanografico == (socio.getNumMecanografico())) {
                 socio.setNome(nome);
                 socio.setMorada(morada);
                 socio.setDataDeNascimento(dataDeNascimento);
@@ -78,9 +77,9 @@ public class ControllerSocios {
         return false;
     }
 
-    public boolean editarSocioPorNome(String numMecanografico, String nome) {
+    public boolean editarSocioPorNome(int numMecanografico, String nome) {
         for (Socio socio : socios) {
-            if (numMecanografico.equals(socio.getNumMecanografico())) {
+            if (numMecanografico == (socio.getNumMecanografico())) {
                 socio.setNome(nome);
                 return true;
             }
@@ -88,9 +87,9 @@ public class ControllerSocios {
         return false;
     }
 
-    public boolean editarSocioPorMorada(String numMecanografico, String novaMorada) {
+    public boolean editarSocioPorMorada(int numMecanografico, String novaMorada) {
         for (Socio socio : socios) {
-            if (numMecanografico.equals(socio.getNumMecanografico())) {
+            if (numMecanografico==(socio.getNumMecanografico())) {
                 socio.setMorada(novaMorada);
                 return true;
             }
@@ -98,9 +97,9 @@ public class ControllerSocios {
         return false;
     }
 
-    public boolean editarSocioPorDataDeNascimento(String numMecanografico, LocalDate novaDataDeNascimento) {
+    public boolean editarSocioPorDataDeNascimento(int numMecanografico, LocalDate novaDataDeNascimento) {
         for (Socio socio : socios) {
-            if (numMecanografico.equals(socio.getNumMecanografico())) {
+            if (numMecanografico==(socio.getNumMecanografico())) {
                 socio.setDataDeNascimento(novaDataDeNascimento);
                 return true;
             }
@@ -108,9 +107,9 @@ public class ControllerSocios {
         return false;
     }
 
-    public boolean editarSocioPorTelefone(String numMecanografico, int novaTelefone) {
+    public boolean editarSocioPorTelefone(int numMecanografico, int novaTelefone) {
         for (Socio socio : socios) {
-            if (numMecanografico.equals(socio.getNumMecanografico())) {
+            if (numMecanografico == (socio.getNumMecanografico())) {
                 socio.setTelefone(novaTelefone);
                 return true;
             }
@@ -129,9 +128,9 @@ public class ControllerSocios {
         return nomeSocio;
     }
 
-    public Socio pesquisarSocioPorNumMecanografico(String numMecanografico) {
+    public Socio pesquisarSocioPorNumMecanografico(int numMecanografico) {
         for (Socio socio : socios) {
-            if (numMecanografico.equals(socio.getNumMecanografico())) {
+            if (numMecanografico == socio.getNumMecanografico()) {
                 return socio;
             }
         }
@@ -150,6 +149,7 @@ public class ControllerSocios {
         if (!encontrouReserva) {
             // percorrer os sócios para encontrar o sócio a ser removido
             //função sugerida pelo intelij que usa a função lambda "removeIf" para remover os sócios que não possuem reservas
+            //expressão lambda "removeIf"
             socios.removeIf(socio -> numMecanografico == (socio.getNumMecanografico()));
         }
         return encontrouReserva;
