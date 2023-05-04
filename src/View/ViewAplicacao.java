@@ -36,7 +36,7 @@ public class ViewAplicacao {
 
 
         // Iniciar o sistema
-        mensagemUtilizadorParaRegisto();
+        //mensagemUtilizadorParaRegisto();
         menuPrincipal();
 
         // Criar instância do ControllerLogin
@@ -122,6 +122,7 @@ public class ViewAplicacao {
                         lerEgravarLivros.gravarLivrosParaFicheiro();
                         lerEgravarAutores.gravarAutorParaFicheiro();
                         lerEgravarSocios.gravarSociosParaFicheiro();
+                        lerEGravarReservas.gravarReservasParaFicheiro();
                         System.exit(0);
                         break;
                     default:

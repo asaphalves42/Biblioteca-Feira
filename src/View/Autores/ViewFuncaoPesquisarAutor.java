@@ -18,6 +18,7 @@ public class ViewFuncaoPesquisarAutor {
 
         if (autor.isEmpty()) {
             System.out.println("Autor inexistente!");
+            System.out.println(" ");
         } else {
             System.out.println(gestor.pesquisarAutorPorNome(nome));
         }
@@ -31,6 +32,7 @@ public class ViewFuncaoPesquisarAutor {
 
         if (autor.isEmpty()) {
             System.out.println("Autor(a) inexistente!");
+            System.out.println(" ");
         } else {
             System.out.println(gestor.pesquisarAutorPorId(id));
         }

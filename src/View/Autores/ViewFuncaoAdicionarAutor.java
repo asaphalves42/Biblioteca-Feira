@@ -32,7 +32,7 @@ public class ViewFuncaoAdicionarAutor {
 
             String morada = "";
             while (morada.trim().isEmpty()) {
-                morada = leStr("Insira a morada do(a) autor(a)");
+                morada = leStr("Insira a morada do(a) autor(a):");
                 if (morada.equalsIgnoreCase("sair")) {
                     sair = true;
                     break;

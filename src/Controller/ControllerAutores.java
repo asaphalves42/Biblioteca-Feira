@@ -1,25 +1,29 @@
 package Controller;
 
 import Model.Autor;
+import Model.Livro;
 import Utilidades.GestorFicheiros;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import static Controller.ControllerLivros.livros;
+
 public class ControllerAutores {
     static ArrayList<Autor> autores = new ArrayList<>();
-   public void lerAutorDeFicheiro() {
+
+    public void lerAutorDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Autores.txt");
 
-            for (String linha : linhas) {
-                if (linha.isEmpty() == false) {
+        for (String linha : linhas) {
+            if (linha.isEmpty() == false) {
                 String[] value_split = linha.split("\\|");
-                if(value_split.length !=0){
+                if (value_split.length != 0) {
                     Autor aux = new Autor(Integer.parseInt(value_split[0]),
                             value_split[1],
                             value_split[2],
-                    LocalDate.parse(value_split[3]));
+                            LocalDate.parse(value_split[3]));
                     autores.add(aux);
                 }
 
@@ -36,15 +40,15 @@ public class ControllerAutores {
             conteudo += aux.getId() + "|";
             conteudo += aux.getNome() + "|";
             conteudo += aux.getMorada() + "|";
-            conteudo += formated_date +  "\n";
+            conteudo += formated_date + "\n";
         }
         GestorFicheiros.gravarFicheiro("Autores.txt", conteudo);
     }
 
-    public int verificarIdAutor(){
+    public int verificarIdAutor() {
         int max = 0;
-        for(Autor id : autores){
-            if(id.getId() > max){
+        for (Autor id : autores) {
+            if (id.getId() > max) {
                 max = id.getId();
             }
         }
@@ -53,7 +57,7 @@ public class ControllerAutores {
 
 
     public void adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
-       this.verificarIdAutor();
+        this.verificarIdAutor();
         Autor autor = new Autor(nome, morada, dataDeNascimento);
         this.autores.add(autor);
 
@@ -65,7 +69,7 @@ public class ControllerAutores {
 
     }
 
-    public boolean editarAutor (int id, String nome, String morada, LocalDate dataDeNascimento) {
+    public boolean editarAutor(int id, String nome, String morada, LocalDate dataDeNascimento) {
         for (Autor autor : autores) {
             if (id == autor.getId()) {
                 autor.setId(id);
@@ -80,37 +84,44 @@ public class ControllerAutores {
 
     public ArrayList<Autor> pesquisarAutorPorNome(String nomeInserido) {
         ArrayList<Autor> nomeAutor = new ArrayList<>();
-            for (Autor nome : autores) {
-                if (nomeInserido.equalsIgnoreCase(nome.getNome())){
-                    nomeAutor.add(nome);
-                }
+        for (Autor nome : autores) {
+            if (nomeInserido.equalsIgnoreCase(nome.getNome())) {
+                nomeAutor.add(nome);
             }
+        }
         return nomeAutor;
     }
 
-    public ArrayList<Autor> pesquisarAutorPorId (int idInserido) {
+    public ArrayList<Autor> pesquisarAutorPorId(int idInserido) {
         ArrayList<Autor> autoresEncontrados = new ArrayList<>();
         for (Autor autor : autores) {
-            if (idInserido == autor.getId()){
+            if (idInserido == autor.getId()) {
                 autoresEncontrados.add(autor);
             }
         }
         return autoresEncontrados;
     }
 
-    public boolean removerAutor(String nomeAutor) {
-        for (Autor autor : autores) {
-            if (nomeAutor.equals(autor.getNome())) {
-                autores.remove(autor);
-                return true;
+    public boolean removerAutor(int idAutor) {
+        boolean encontrouLivro = false;
+        // percorre a lista de livros para verificar se o autor está associado a algum deles
+        for (Livro livro : livros) {
+            if (livro.getAutor().equals(autores.get(idAutor).getNome())) {
+                encontrouLivro = true;
+                break;
             }
         }
-        System.out.println("Não existe autor(a) com o nome inserido");
-        return false;
-    }
+        // se o autor estiver associado a um livro, não é possível removê-lo, então retorna false
+        if (encontrouLivro) {
+            return false;
+        } else {
+            autores.remove(idAutor);
+            return true;
+            // se o autor estiver associado a um livro, não é possível removê-lo, então retorna false
+        }
 
-    public boolean editarAutor(String novoNome, String novaMorada) {
-        return false;
     }
 }
+
+
 
