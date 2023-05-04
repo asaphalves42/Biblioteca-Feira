@@ -2,7 +2,7 @@
 2|A Insustentável Leveza do Ser|-|3|Milan Kundera|352|Ciencias|1984-01-01|Adulto|Companhia das Letras|9788535913828
 3|O Senhor dos Anéis|A Sociedade do Anel|8|JRR Tolkien|480|Matematica|1954-07-29|Juvenil|HarperCollins|9788595085948
 4|O Código Da Vinci|-|4|Dan Brown|464|Matematica|2003-03-18|Adulto|Sextante|9788575421434
-5|1984|-|5|George Orwell|368|Matematica|1949-06-08|Adulto|Companhia das Letras|9788535909555
+5|1984|-|6|George Orwell|368|Matematica|1949-06-08|Adulto|Companhia das Letras|9788535909555
 6|Harry Potter e a Pedra Filosofal|-|9|JK Rowling|223|Matematica|1997-06-26|Infantil|Editora Rocco|9788532530278
 7|O Lobo do Mar|-|0|Jack London|336|Artes|1904-01-01|Adulto|Penguin Books|9780142437738
 8|O Pequeno Príncipe|-|11|Antoine de Saint-Exupéry|128|Artes|1943-04-06|Infantil|Agir|9788502034806

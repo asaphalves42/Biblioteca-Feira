@@ -13,6 +13,7 @@ public class ViewSatisfacao {
 
     public void mostrarMensagem() {
         System.out.println("Avaliação salva com sucesso!");
+        System.out.println(" ");
     }
 
     public int obterSatisfacao() {
@@ -23,13 +24,11 @@ public class ViewSatisfacao {
         System.out.print("                       4 - Satisfeito      "+ "\n");
         System.out.print("                       5 - Bastante Satisfeito"+ "\n");
 
-        int satisfacao = scanner.nextInt();
-        return satisfacao;
+        return scanner.nextInt();
     }
     public String obterObservacao() {
-        System.out.println("Deixe uma observacao em formatdo de texto:");
-        String observacao = scanner2.nextLine();
-        return observacao;
+        System.out.println("Deixe uma observação em formato de texto:");
+        return scanner2.nextLine();
     }
 
 
