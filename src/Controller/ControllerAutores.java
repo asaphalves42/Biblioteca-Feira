@@ -17,7 +17,7 @@ public class ControllerAutores {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Autores.txt");
 
         for (String linha : linhas) {
-            if (linha.isEmpty() == false) {
+            if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
                 if (value_split.length != 0) {
                     Autor aux = new Autor(Integer.parseInt(value_split[0]),
@@ -45,27 +45,26 @@ public class ControllerAutores {
         GestorFicheiros.gravarFicheiro("Autores.txt", conteudo);
     }
 
-    public int verificarIdAutor() {
+    public void verificarIdAutor() {
         int max = 0;
         for (Autor id : autores) {
             if (id.getId() > max) {
                 max = id.getId();
             }
         }
-        return max;
     }
 
 
     public void adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
         this.verificarIdAutor();
         Autor autor = new Autor(nome, morada, dataDeNascimento);
-        this.autores.add(autor);
+        autores.add(autor);
 
     }
 
     public ArrayList<Autor> listarAutores() {
 
-        return this.autores;
+        return autores;
 
     }
 
@@ -104,6 +103,7 @@ public class ControllerAutores {
 
     public boolean removerAutor(int idAutor) {
         boolean encontrouLivro = false;
+
         // percorre a lista de livros para verificar se o autor está associado a algum deles
         for (Livro livro : livros) {
             if (livro.getAutor().equals(autores.get(idAutor).getNome())) {
@@ -112,12 +112,17 @@ public class ControllerAutores {
             }
         }
         // se o autor estiver associado a um livro, não é possível removê-lo, então retorna false
-        if (encontrouLivro) {
+        if (encontrouLivro) { // se o autor estiver associado a um livro, não é possível removê-lo, então retorna false
             return false;
         } else {
-            autores.remove(idAutor);
+            for(Autor autor : autores){
+                if(autor.getId() == idAutor){
+                    autores.remove(autor);
+                    return true;
+                }
+            }
             return true;
-            // se o autor estiver associado a um livro, não é possível removê-lo, então retorna false
+
         }
 
     }
