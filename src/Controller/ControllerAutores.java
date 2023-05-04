@@ -98,14 +98,13 @@ public class ControllerAutores {
         return autoresEncontrados;
     }
 
-    public boolean removerAutor(String nomeAutor) {
+    public boolean removerAutor(int idAutor) {
         for (Autor autor : autores) {
-            if (nomeAutor.equals(autor.getNome())) {
+            if (idAutor == autor.getId()) {
                 autores.remove(autor);
                 return true;
             }
         }
-        System.out.println("Não existe autor(a) com o nome inserido");
         return false;
     }
 

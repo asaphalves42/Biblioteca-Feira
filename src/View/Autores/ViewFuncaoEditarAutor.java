@@ -26,7 +26,7 @@ public class ViewFuncaoEditarAutor {
                 System.out.println("Caso pretenda sair, digite 'sair'");
                 String novoNome = "";
                 while (novoNome.trim().equals("")) {
-                    novoNome = leStr("Insira o novo nome do(a) autor(a)");
+                    novoNome = leStr("Insira o novo nome do(a) autor(a): ");
                     if (novoNome.equalsIgnoreCase("sair")) {
                         sair = true;
                         break;
@@ -41,7 +41,7 @@ public class ViewFuncaoEditarAutor {
 
                 String novaMorada = "";
                 while (novaMorada.trim().equals("")) {
-                    novaMorada = leStr("Insira a nova morada");
+                    novaMorada = leStr("Insira a nova morada: ");
                     if (novaMorada.equalsIgnoreCase("sair")) {
                         sair = true;
                         break;
@@ -52,7 +52,7 @@ public class ViewFuncaoEditarAutor {
                     break;
 
                 }
-                System.out.println("Digite a data de nascimento do autor: ");
+                System.out.println("Digite a nova data de nascimento do autor: ");
                 ValidacaoData validarData = new ValidacaoData();
                 LocalDate novaDataDeNascimento = validarData.LerData2();
 
