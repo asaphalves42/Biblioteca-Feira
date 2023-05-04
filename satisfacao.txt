@@ -11,3 +11,4 @@ Satisfacao: 3
 Satisfacao: 4  Observação: naosei
 Satisfacao: 4  Observação: naosei  Num. Mecanográfico: 26
 Satisfacao: 4  Observação: nao gostei   Num. Mecanográfico: 26
+Satisfacao: 3  Observação: nada  Num. Mecanográfico: 23
