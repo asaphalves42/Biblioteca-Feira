@@ -17,11 +17,11 @@ public class ViewSatisfacao {
 
     public int obterSatisfacao() {
         System.out.print("Por favor, avalie de 1 a 5 em que : " +"\n");
-        System.out.print("                       1 - Muito Mau"+ "\n");
-        System.out.print("                       2 - Mau      "+ "\n");
+        System.out.print("                       1 - Nada Satisfeito"+ "\n");
+        System.out.print("                       2 - Insatisfeito      "+ "\n");
         System.out.print("                       3 - Razoavel "+ "\n");
-        System.out.print("                       4 - Bom      "+ "\n");
-        System.out.print("                       5 - Muito Mau"+ "\n");
+        System.out.print("                       4 - Satisfeito      "+ "\n");
+        System.out.print("                       5 - Bastante Satisfeito"+ "\n");
 
         int satisfacao = scanner.nextInt();
         return satisfacao;
