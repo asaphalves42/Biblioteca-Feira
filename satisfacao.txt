@@ -9,3 +9,4 @@ Socio número: null
 Satisfacao: 3
 
 Satisfacao: 4  Observação: naosei
+Satisfacao: 4  Observação: naosei  Num. Mecanográfico: 26
