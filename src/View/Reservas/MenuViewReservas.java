@@ -9,6 +9,7 @@ import static Utilidades.Leitura.ler;
 public class MenuViewReservas {
     ControllerReservas gerirReservas = new ControllerReservas();
     ViewEfetuarReserva efetuar = new ViewEfetuarReserva();
+    ViewEditarReserva editar = new ViewEditarReserva();
     ViewListarReserva listar = new ViewListarReserva();
     ViewCancelarReserva cancelar = new ViewCancelarReserva();
     ViewPesquisarReservaPorId pesquisar = new ViewPesquisarReservaPorId();
@@ -46,7 +47,7 @@ public class MenuViewReservas {
                         break;
                     case 4:cancelar.cancelarReserva(gerirReservas);
                         break;
-                    case 5://editar reserva
+                    case 5:editar.editarReservaLivro(gerirReservas);
                         break;
                     case 6:
                         pesquisar.pesquisarReservaPorId(gerirReservas);
@@ -62,4 +63,5 @@ public class MenuViewReservas {
             }
         } while (opcao != 8);
     }
-}
+
+    }
