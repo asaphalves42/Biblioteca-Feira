@@ -127,8 +127,8 @@ public class ControllerReservas {
 
             if (reservaEncontrada != null) {
                 reservaEncontrada.getLivros().removeIf(livro -> IdDoLivro == livro.getId()); // Remove o livro da lista de livros da reserva.
-                                                                                            //lambda sugerida pelo intellij
-                if (reservaEncontrada.getLivros().isEmpty()) {
+                //lambda sugerida pelo intellij
+                if (reservaEncontrada.getLivros().isEmpty()) { //Se a reserva encontrada nao houver livros ele remove a reserva.
                     reservas.remove(reservaEncontrada);
                 }
                 editarQuantidadeReserva(IdDoLivro, 1);
@@ -193,19 +193,25 @@ public class ControllerReservas {
 
     public boolean editarReservaLivro(int idLivro, int novoLivro) {
         for (Reserva reserva : reservas) {
-            if(reserva.getLivros().contains(idLivro)){
-                for(Livro livroParaEditar : ControllerLivros.livros) {
-                    if(livroParaEditar.getId() == novoLivro) {
+            if (reserva.getLivros().contains(idLivro)) {
+                reserva.getLivros().remove(idLivro);
+                //aumenta quantidade no stock
+
+                for (Livro livroParaEditar : ControllerLivros.livros) {
+                    if (livroParaEditar.getId() == novoLivro) {
                         novoLivro = livroParaEditar.getId();
-            }
-        }
+                        //reserva.getLivros().add(novoLivro);
+                        //decrementa o novo livro no stock
+                    }
+                }
 
             }
         }
+        return false;
 
     }
 
-    }
+}
 
 
 

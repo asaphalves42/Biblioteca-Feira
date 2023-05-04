@@ -47,7 +47,7 @@ public class MenuViewReservas {
                         break;
                     case 4:cancelar.cancelarReserva(gerirReservas);
                         break;
-                    case 5:this.menuEditar2();
+                    case 5:editar.editarReservaLivro(gerirReservas);
                         break;
                     case 6:
                         pesquisar.pesquisarReservaPorId(gerirReservas);
@@ -64,27 +64,4 @@ public class MenuViewReservas {
         } while (opcao != 8);
     }
 
-    public void menuEditar2() {
-        int opcao;
-
-        do {
-
-                System.out.println("## Editar Reservas ##");
-                System.out.println("---------------");
-                System.out.println("1 - Livros");
-                System.out.println("2 - Data de reserva");
-                System.out.println("3 - Menu anterior");
-
-                opcao = ler.nextInt();
-
-                switch (opcao) {
-                    case 1:editar.editarReservaLivro(gerirReservas);
-                    break;
-                    case 2://livros
-                    case 3:// Menu anterior
-
-                }
-            }while (opcao != 4);
-
-        }
     }

@@ -3,7 +3,6 @@ package View.Reservas;
 import Controller.ControllerReservas;
 import Model.Livro;
 import Model.Socio;
-import Utilidades.ValidacaoData;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -80,9 +79,7 @@ public class ViewEfetuarReserva {
         while (continuarReservando) {
             Livro livroSelecionado = selecionarLivroDisponivel(gerirReservas);
 
-            System.out.println("Insira a data da reserva: ");
-            ValidacaoData validarData = new ValidacaoData();
-            LocalDate dataDaReserva = validarData.LerData2();
+            LocalDate dataDaReserva = LocalDate.now();
 
             if (livroSelecionado.getQuantidade() == 0) {
                 System.out.println("Não existem mais exemplares desse livro no estoque!");

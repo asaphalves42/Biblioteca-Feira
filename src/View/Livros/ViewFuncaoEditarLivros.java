@@ -30,7 +30,6 @@ public class ViewFuncaoEditarLivros {
             }
         }
 
-
         int idEditarTitulo = leInt("Insira o id do livro que quer editar: ");
         String tituloNovo = leStr("Insira o novo título:");
 
