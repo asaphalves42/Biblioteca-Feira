@@ -6,13 +6,14 @@ import Model.Reserva;
 import Model.Satisfacao;
 import View.Satisfacao.ViewSatisfacao;
 
+import java.time.LocalDate;
+
 import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewDevolverLivroReserva {
     Satisfacao satisfacao = new Satisfacao();
     ViewSatisfacao view = new ViewSatisfacao();
-    Satisfacao observacao = new Satisfacao();
     ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao,view);
 
     public void devolverLivro(ControllerReservas controllerReservas) {
@@ -37,7 +38,10 @@ public class ViewDevolverLivroReserva {
             }
 
             idDoLivro = leInt("Qual o ID do livro que deseja devolver?");
-            controllerReservas.devolverLivro(idDaReserva, idDoLivro);
+
+            LocalDate dataDeDevolucao = LocalDate.now();
+
+            controllerReservas.devolverLivro(idDaReserva, idDoLivro, dataDeDevolucao);
 
 
             String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");

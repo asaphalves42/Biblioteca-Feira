@@ -36,7 +36,7 @@ public class ViewAplicacao {
 
 
         // Iniciar o sistema
-        mensagemUtilizadorParaRegisto();
+        //mensagemUtilizadorParaRegisto();
         menuPrincipal();
 
         // Criar instância do ControllerLogin

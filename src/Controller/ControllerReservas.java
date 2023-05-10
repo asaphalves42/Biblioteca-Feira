@@ -42,7 +42,7 @@ public class ControllerReservas {
                         Livro livro = controllerLivros.pesquisarLivroPorId(Integer.parseInt(idLivro));
                         livros.add(livro);
                     }
-                    for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associoado
+                    for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associado
                         if (socioLista.getNumMecanografico() == socio.getNumMecanografico()) {//igualo o socio
                             socioLista.setLivrosReservados(livros.size());//encontro os livros
                         }
@@ -112,7 +112,7 @@ public class ControllerReservas {
         return null;
     }
 
-    public void devolverLivro(String IdDaReserva, int IdDoLivro) {
+    public void devolverLivro(String IdDaReserva, int IdDoLivro, LocalDate dataDeDevolucao) {
         Reserva reservaEncontrada = null;
 
         for (Reserva reserva : reservas) { // Percorre a lista de reservas para encontrar a reserva correspondente ao ID informado.
@@ -128,9 +128,19 @@ public class ControllerReservas {
             if (reservaEncontrada != null) {
                 reservaEncontrada.getLivros().removeIf(livro -> IdDoLivro == livro.getId()); // Remove o livro da lista de livros da reserva.
                 //lambda sugerida pelo intellij
+
+
+                //adicionar uma data de devolução, desvincular o remover livros da lista de reservas pra criar um histórico de livros devolvidos.
+
+                //Livro ... devolvido em dataDeDevolucao...
+
+                //reserva pode ter um estado, aberta ou fechada
+
+                // não pode existir pois preciso de um historico de reservas
                 if (reservaEncontrada.getLivros().isEmpty()) { //Se a reserva encontrada nao houver livros ele remove a reserva.
                     reservas.remove(reservaEncontrada);
                 }
+
                 editarQuantidadeReserva(IdDoLivro, 1);
                 reservaEncontrada.getSocio().decrementarQuantidade(); // Atualiza a quantidade de livros reservados pelo sócio, decrementando em 1.
                 break;
