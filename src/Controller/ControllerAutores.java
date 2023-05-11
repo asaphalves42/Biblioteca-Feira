@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import static Controller.ControllerLivros.livros;
 
 public class ControllerAutores {
-    static ArrayList<Autor> autores = new ArrayList<>();
+    public static ArrayList<Autor> autores = new ArrayList<>();
 
     public void lerAutorDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Autores.txt");

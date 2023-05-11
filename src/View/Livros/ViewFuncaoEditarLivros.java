@@ -3,7 +3,6 @@ package View.Livros;
 import Controller.ControllerLivros;
 import Model.Livro;
 import Utilidades.ValidacaoData;
-import View.Categorias.Categorias;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -126,9 +125,10 @@ public class ViewFuncaoEditarLivros {
         }
 
         int idEditarAutor = leInt("Insira o id do livro que quer editar: ");
-        String novoAutor = leStr("Insira o novo autor:");
 
-        boolean autorEditado = gestor.editarAutor(idEditarAutor, novoAutor);
+        String novoNomeAutor = leStr("Insira o novo nome do autor: ");
+
+        boolean autorEditado = gestor.editarAutor(idEditarAutor, novoNomeAutor);
 
         if(autorEditado){
             System.out.println("Livro editado com sucesso!");
@@ -195,37 +195,14 @@ public class ViewFuncaoEditarLivros {
             System.out.println(" ");
         } else {
             System.out.println("Escolha a nova categoria:");
-            Categorias escolherCat = new Categorias();
-            int opcaoCategoria = escolherCat.escolherCategorias();
 
-            String novaCategoria;
-            switch (opcaoCategoria) {
-                case 1:
-                    novaCategoria = "Artes";
-                    break;
-                case 2:
-                    novaCategoria = "Ciencia";
-                    break;
-                case 3:
-                    novaCategoria = "Matematica";
-                    break;
-                case 4:
-                    novaCategoria = "Psicologia";
-                    break;
-                case 5:
-                    novaCategoria = "Tecnologia";
-                    break;
-                default:
-                    novaCategoria = "";
-                    break;
-            }
+            //editar a categoria baseada nas categorias existentes
 
-            if (gestor.editarCategoria(idLivro, novaCategoria)) {
-                System.out.println("Categoria editada com sucesso!");
-                System.out.println(" ");
-            } else {
-                System.out.println("Livro não encontrado!");
-            }
+
+
+
+
+
         }
     }
 

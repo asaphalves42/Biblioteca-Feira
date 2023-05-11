@@ -1,20 +1,26 @@
 package View.Livros;
 
+import Controller.ControllerAutores;
+import Controller.ControllerCategoria;
 import Controller.ControllerLivros;
-import Controller.ControllerLivrosEautores;
+import View.Categoria.MenuViewCategoria;
 
 import java.util.InputMismatchException;
 
 import static Utilidades.Leitura.ler;
 
 public class MenuViewLivros {
-    ControllerLivros gestor = new ControllerLivros();
-    ControllerLivrosEautores gestorAutor = new ControllerLivrosEautores();
+
+    ControllerAutores gestorAutores = new ControllerAutores();
+    ControllerLivros gestor = new ControllerLivros(gestorAutores);
+
+    ControllerCategoria gestorCategoria = new ControllerCategoria();
     ViewAdicionarLivrosEautores adicionar = new ViewAdicionarLivrosEautores();
     ViewFuncaoListarLivros mostrar = new ViewFuncaoListarLivros();
     ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
     ViewFuncaoEditarLivros editar = new ViewFuncaoEditarLivros();
     ViewFuncaoPesquisarLivros pesquisar = new ViewFuncaoPesquisarLivros();
+    MenuViewCategoria categoria = new MenuViewCategoria();
 
     public void menuLivros2() {
         int opcao;
@@ -58,26 +64,28 @@ public class MenuViewLivros {
                 System.out.println("3 - Editar livros");
                 System.out.println("4 - Remover livros");
                 System.out.println("5 - Pesquisar livros");
-                System.out.println("6 - Gravar");
-                System.out.println("7 - Menu anterior");
+                System.out.println("6 - Categorias");
+                System.out.println("7 - Gravar");
+                System.out.println("8 - Menu anterior");
 
                 opcao = ler.nextInt();
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1 -> adicionar.menuAdicionarLivros(gestorAutor);
+                    case 1 -> adicionar.menuAdicionarLivros(gestor, gestorCategoria);
                     case 2 -> mostrar.listarTodosOsLivros(gestor);
                     case 3 -> this.menuLivros3();
                     case 4 -> eliminar.eliminarLivroPorTitulo(gestor);
                     case 5 -> this.menuLivros2();
-                    case 6 -> gestor.gravarLivrosParaFicheiro();
+                    case 6 -> categoria.menuCategoria();
+                    case 7 -> gestor.gravarLivrosParaFicheiro();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 7);
+        } while (opcao != 8);
     }
 
     public void menuLivros3() {

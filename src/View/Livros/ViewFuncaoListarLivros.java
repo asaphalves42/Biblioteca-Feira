@@ -6,7 +6,6 @@ import Model.Livro;
 import java.util.ArrayList;
 
 public class ViewFuncaoListarLivros {
-
     public void listarTodosOsLivros(ControllerLivros gestor) {
 
         ArrayList<Livro> livrosListados = gestor.listarLivros();

@@ -1,20 +1,20 @@
 package View.Livros;
 
 
-import Controller.ControllerLivrosEautores;
+import Controller.ControllerCategoria;
+import Controller.ControllerLivros;
 import Model.Autor;
+import Model.Categoria;
 import Utilidades.ValidacaoData;
-import View.Categorias.Categorias;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static Utilidades.Leitura.*;
+import static Utilidades.Leitura.leIntPositivo;
+import static Utilidades.Leitura.leStr;
 
 public class ViewAdicionarLivrosEautores {
-    ArrayList<String> categorias = new ArrayList<>();
-
-    public void menuAdicionarLivros(ControllerLivrosEautores gestorAutor) {
+    public void menuAdicionarLivros(ControllerLivros gestorAutor, ControllerCategoria gestorCategoria) {
 
         boolean sair = false;
         do {
@@ -49,10 +49,12 @@ public class ViewAdicionarLivrosEautores {
                 break;
             }
             int quantidade = leIntPositivo("Introduza a quantidade: ");
-            System.out.println("");
+            System.out.println(" ");
 
             int numDePaginas = leIntPositivo("Introduza o número de páginas: ");
-            System.out.println("");
+            System.out.println(" ");
+
+            //adicionar autor com autor existente no programa
 
             ArrayList<Autor> adicionarAutorExistente;
             String nomeAutor;
@@ -93,7 +95,6 @@ public class ViewAdicionarLivrosEautores {
 
             Autor autorAdicionado = null;
             if (idAdicionarAutor > 0) {
-                autorAdicionado = null;
                 for (Autor autor : adicionarAutorExistente) {
                     if (autor.getId() == idAdicionarAutor) {
                         autorAdicionado = autor;
@@ -101,43 +102,25 @@ public class ViewAdicionarLivrosEautores {
                     }
                 }
 
-                if (autorAdicionado != null) {
-                    gestorAutor.adicionarAutor(String.valueOf(autorAdicionado));
-
                     System.out.println("Autor(a) adicionado(a) com sucesso!");
+                    System.out.println(" ");
+                }
+
+            // adicionar categorias puxando da lista de categorias
+
+            String categoria;
+            Categoria categoriaEncontrada = null;
+
+            while(categoriaEncontrada == null){
+                categoria = leStr("Insira a categoria:");
+                categoriaEncontrada = gestorCategoria.pesquisarCategoria(categoria);
+
+                if(categoriaEncontrada == null){
+                    System.out.println("Categoria não encontrada!");
                     System.out.println(" ");
                 }
             }
 
-            if (autorAdicionado != null) {
-                gestorAutor.adicionarAutor(String.valueOf(autorAdicionado));
-
-                System.out.println("Autor(a) adicionado(a) com sucesso!");
-                System.out.println(" ");
-            }
-
-            Categorias escolherCat = new Categorias();
-            int opcaoCategoria = escolherCat.escolherCategorias();
-
-            switch (opcaoCategoria) {
-                case 1:
-                    categorias.add("Artes");
-                    break;
-                case 2:
-                    categorias.add("Ciencias");
-                    break;
-                case 3:
-                    categorias.add("Matematica");
-                    break;
-                case 4:
-                    categorias.add("Psicologia");
-                    break;
-                case 5:
-                    categorias.add("Tecnologia");
-                    break;
-                default:
-                    break;
-            }
 
             System.out.println("Digite a data de publicação do livro: ");
             ValidacaoData validarData = new ValidacaoData();
@@ -189,7 +172,7 @@ public class ViewAdicionarLivrosEautores {
             System.out.println("Livro " + titulo + " adicionado com sucesso!");
             System.out.println(" ");
 
-            gestorAutor.adicionarLivrosComAutores(titulo, subtitulo, quantidade, numDePaginas, autorAdicionado, categorias, dataDePublicacao, faixaEtaria, editora, ISBN);
+            gestorAutor.adicionarLivrosComAutores(titulo, subtitulo, quantidade, numDePaginas, autorAdicionado, categoriaEncontrada, dataDePublicacao, faixaEtaria, editora, ISBN);
 
         } while (sair);
     }

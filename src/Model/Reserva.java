@@ -11,6 +11,17 @@ public class Reserva {
     private LocalDate dataReserva;
     private String idDaReserva;
 
+    private boolean reservaFechada;
+
+
+    public boolean isReservaFechada() {
+        return reservaFechada;
+    }
+
+    public void setReservaFechada(boolean reservaFechada) {
+        this.reservaFechada = reservaFechada;
+    }
+
     public String getIdDaReserva() {
         return idDaReserva;
     }

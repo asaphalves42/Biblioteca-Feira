@@ -1,28 +1,23 @@
 package Model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Livro {
-    public Livro(String autor){
-        this.autor = autor;
-
-    }
-    public Livro(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor autorAdicionado, ArrayList<String> categorias, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+    public Livro(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor autorAdicionado, Categoria categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
         this.id = ++proximoId;
         this.titulo = titulo;
         this.subtitulo = subtitulo;
         this.quantidade = quantidade;
         this.numDePaginas = numDePaginas;
-        this.autor = autorAdicionado.getNome();
-        this.categoria = categorias.get(0);
+        this.autor = autorAdicionado;
+        this.categoria = categoria;
         this.dataDePublicacao = dataDePublicacao;
         this.faixaEtaria = faixaEtaria;
         this.editora = editora;
         this.ISBN = ISBN;
     }
 
-    public Livro(int id, String titulo, String subtitulo, int quantidade, String autor, int numDePaginas, String categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+    public Livro(int id, String titulo, String subtitulo, int quantidade, Autor autorAdicionado, int numDePaginas, Categoria categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
         this.id = id;
         this.titulo = titulo;
         this.subtitulo = subtitulo;
@@ -33,7 +28,7 @@ public class Livro {
         this.faixaEtaria = faixaEtaria;
         this.editora = editora;
         this.ISBN = ISBN;
-        this.autor = autor;
+        this.autor = autorAdicionado;
 
         if(id>proximoId){
             proximoId = id;
@@ -45,12 +40,13 @@ public class Livro {
     private String subtitulo;
     private int quantidade;
     private int numDePaginas;
-    private String categoria;
+    private Categoria categoria;
     private LocalDate dataDePublicacao;
     private String faixaEtaria;
     private String editora;
     private String ISBN;
-    private String autor;
+    private Autor autor;
+
 
     public void decrementarQuantidade(){
         if(quantidade > 0){
@@ -67,10 +63,6 @@ public class Livro {
 
     public int getNumDePaginas() {
         return numDePaginas;
-    }
-
-    public String getCategoria() {
-        return categoria;
     }
 
     public LocalDate getDataDePublicacao() {
@@ -101,9 +93,6 @@ public class Livro {
         this.numDePaginas = numDePaginas;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
 
     public void setDataDePublicacao(LocalDate dataDePublicacao) {
         this.dataDePublicacao = dataDePublicacao;
@@ -121,11 +110,11 @@ public class Livro {
         this.ISBN = ISBN;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
@@ -141,6 +130,14 @@ public class Livro {
         return id;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public String toString() {
         return "Livro [ " + "\n" +
@@ -148,9 +145,9 @@ public class Livro {
                 "Quantidade: " + this.quantidade + "\n" +
                 "Título: " + this.titulo + "\n" +
                 "Subtitulo: " + this.subtitulo + "\n" +
-                "Autor: " + this.autor + "\n" +
+                "Autor: " + this.autor.getNome() + "\n" +
                 "Número de páginas: " + this.numDePaginas + "\n" +
-                "Categoria: " + this.categoria + "\n" +
+                "Categoria: " + categoria.getNome() + "\n" +
                 "Data de publicacao: " + this.dataDePublicacao + "\n" +
                 "Faixa etaria: " + this.faixaEtaria + "\n" +
                 "Editora: " + this.editora + "\n" +

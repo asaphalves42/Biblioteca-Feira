@@ -21,15 +21,18 @@ public class ViewAplicacao {
         controllerLogin = new ControllerLogin(new ViewLogin());
     }
     private ControllerLogin controllerLogin;
-    ControllerLivros lerEgravarLivros = new ControllerLivros();
     ControllerAutores lerEgravarAutores = new ControllerAutores();
+    ControllerLivros lerEgravarLivros = new ControllerLivros(lerEgravarAutores);
     ControllerSocios lerEgravarSocios = new ControllerSocios();
+    ControllerCategoria lerEgravarCategoria = new ControllerCategoria();
     ControllerReservas lerEGravarReservas = new ControllerReservas(lerEgravarSocios,lerEgravarLivros);
     public void Iniciar() {
         //Ler os ficheiros
+
         lerEgravarAutores.lerAutorDeFicheiro();
-        lerEgravarLivros.lerLivrosDeFicheiro();
+        //lerEgravarLivros.lerLivrosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
+        lerEgravarCategoria.lerFicheiroCategoria();
         lerEGravarReservas.lerLivrosDeFicheiroReserva();
         MensagemBoasVindas.textoInicial();
         MensagemBoasVindas.mensagemBoasVindas();
@@ -57,7 +60,7 @@ public class ViewAplicacao {
             try {
                 opcao = ler.nextInt();
                 switch (opcao) {
-                    case 1:
+                    case 1 -> {
                         controllerLogin = new ControllerLogin(new ViewLogin());
                         boolean loginSucesso = controllerLogin.iniciar();
                         if (loginSucesso) {
@@ -66,23 +69,17 @@ public class ViewAplicacao {
                         } else {
                             ViewLogin.mostrarMensagemDeLoginFalhado();
                         }
-                        break;
-                    case 2:
-                        controllerLogin.registar();
-                        break;
-                    case 3:
-                        System.exit(0);
-                        break;
-                    default:
-                        System.out.println("Por favor, insira uma opção válida numérica.");
-                        break;
+                    }
+                    case 2 -> controllerLogin.registar();
+                    case 3 -> System.exit(0);
+                    default -> System.out.println("Por favor, insira uma opção válida numérica.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 3);
+        } while (true);
     }
 
     public void menuPrincipal() {
@@ -102,32 +99,31 @@ public class ViewAplicacao {
                 opcao = ler.nextInt();
 
                 switch (opcao) {
-                    case 1:
+                    case 1 -> {
                         MenuViewLivros mostrarMenu = new MenuViewLivros();
                         mostrarMenu.menuLivros();
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         MenuViewAutores mostraMenu = new MenuViewAutores();
                         mostraMenu.menuAutores();
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         MenuViewReservas mostrarMenuReservas = new MenuViewReservas();
                         mostrarMenuReservas.menuReservas();
-                        break;
-                    case 4:
+                    }
+                    case 4 -> {
                         MenuViewSocios menuSocios = new MenuViewSocios();
                         menuSocios.menuSocios();
-                        break;
-                    case 5:
+                    }
+                    case 5 -> {
                         lerEgravarLivros.gravarLivrosParaFicheiro();
                         lerEgravarAutores.gravarAutorParaFicheiro();
                         lerEgravarSocios.gravarSociosParaFicheiro();
+                        lerEgravarCategoria.gravarFicheiroCategoria();
                         lerEGravarReservas.gravarReservasParaFicheiro();
                         System.exit(0);
-                        break;
-                    default:
-                        System.out.println("Por favor, insira uma opção válida numérica.");
-                        break;
+                    }
+                    default -> System.out.println("Por favor, insira uma opção válida numérica.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

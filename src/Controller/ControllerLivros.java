@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Autor;
+import Model.Categoria;
 import Model.Livro;
 import Model.Reserva;
 import Utilidades.GestorFicheiros;
@@ -8,35 +10,48 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import static Controller.ControllerAutores.autores;
+
 
 public class ControllerLivros {
     public static ArrayList<Livro> livros = new ArrayList<>();
+    public ControllerAutores controllerAutores;
 
-    public void lerLivrosDeFicheiro(){
+    public ControllerLivros(ControllerAutores controllerAutores) {
+        this.controllerAutores = controllerAutores;
+    }
+
+    public void lerLivrosDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("livros.txt");
 
-            for (String linha : linhas) {
-                if(linha.isEmpty() == false){
+        livros = new ArrayList<>();
+
+        for (String linha : linhas) {
+            if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
-                if(value_split.length != 0) {
-                    Livro aux = new Livro(Integer.parseInt(value_split[0]),
-                            value_split[1],
-                            value_split[2],
-                            Integer.parseInt(value_split[3]),
-                            value_split[4],
-                            Integer.parseInt(value_split[5]),
-                            value_split[6],
-                            LocalDate.parse(value_split[7]),
-                            value_split[8],
-                            value_split[9],
-                            value_split[10]);
-                    livros.add(aux);
-                }
-                }
+                ArrayList<Autor> autor = controllerAutores.pesquisarAutorPorNome((value_split[4]));
+
+                Livro aux = new Livro(Integer.parseInt(value_split[0]),
+                        value_split[1],
+                        value_split[2],
+                        Integer.parseInt(value_split[3]),
+                        // mudar para Autor
+                        autor.get(3),
+                        Integer.parseInt(value_split[5]),
+
+                        //mudar para categorias
+                        new Categoria(value_split[6]),
+                        LocalDate.parse(value_split[7]),
+                        value_split[8],
+                        value_split[9],
+                        value_split[10]);
+                livros.add(aux);
+            }
 
         }
-
     }
+
+
     public void gravarLivrosParaFicheiro(){
         String conteudo = "";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -59,7 +74,7 @@ public class ControllerLivros {
     }
 
     public ArrayList<Livro> listarLivros() {
-        return this.livros;
+        return livros;
     }
 
     public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloInserido) {
@@ -71,23 +86,50 @@ public class ControllerLivros {
         }
         return livrosTitulo;
     }
+    public void verificarId(){
+        int max = 0;
+        for(Livro id : livros){
+            if(id.getId() > max){
+                max = id.getId();
+            }
+        }
+
+    }
+    public void adicionarLivrosComAutores(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor autorAdicionado, Categoria categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
+        this.verificarId();
+        Livro livro = new Livro(titulo, subtitulo, quantidade, numDePaginas, autorAdicionado, categoria, dataDePublicacao,faixaEtaria, editora, ISBN);
+
+        livros.add(livro);
+
+
+    }
 
     public ArrayList<Livro> pesquisarLivroPorAutor(String autorInserido){
         ArrayList<Livro> livrosDoAutor = new ArrayList<>();
         for (Livro autor : livros) {
-            if (autorInserido.equalsIgnoreCase(autor.getAutor())) {
+            if (autorInserido.equalsIgnoreCase(autor.getAutor().getNome())) {
                 livrosDoAutor.add(autor);
             }
         }
         return livrosDoAutor;
 
     }
+    public ArrayList<Autor> pesquisarAutorPorNome(String nomeInserido) {
+        ArrayList<Autor> nomeAutor = new ArrayList<>();
+        for (Autor nome : autores) {
+            if (nomeInserido.equalsIgnoreCase(nome.getNome())){
+                nomeAutor.add(nome);
+            }
+        }
+        return nomeAutor;
+    }
+
 
     public ArrayList<Livro> pesquisarLivroCategoria(String categoriaInserida){
         ArrayList<Livro> categoriaLivros = new ArrayList<>();
-        for (Livro categoria : livros) {
-            if (categoriaInserida.equalsIgnoreCase(categoria.getCategoria())) {
-                categoriaLivros.add(categoria);
+        for (Livro livro : livros) {
+            if (categoriaInserida.equalsIgnoreCase(livro.getCategoria().getNome())) {
+                categoriaLivros.add(livro);
             }
         }
         return categoriaLivros;
@@ -159,10 +201,20 @@ public class ControllerLivros {
         }
         return false;
     }
-    public boolean editarAutor(int idEditarTitulo, String novoAutor) {
+    public boolean editarAutor(int idEditarLivro, String novoNomeAutor) {
+        Autor autorEncontrado = null;
+        for (Autor autor : autores) {
+            if (autor.getNome().equals(novoNomeAutor)) {
+                autorEncontrado = autor;
+                break;
+            }
+        }
+        if (autorEncontrado == null) {
+            return false;
+        }
         for (Livro livro : livros) {
-            if (idEditarTitulo == livro.getId()) {
-                livro.setAutor(novoAutor);
+            if (idEditarLivro == livro.getId()) {
+                livro.setAutor(autorEncontrado);
                 return true;
             }
         }
@@ -182,7 +234,6 @@ public class ControllerLivros {
     public boolean editarCategoria(int idEditarTitulo, String novaCategoria) {
         for (Livro livro : livros) {
             if (idEditarTitulo == livro.getId()) {
-                livro.setCategoria(novaCategoria);
                 return true;
             }
         }

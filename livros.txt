@@ -1,15 +1,6 @@
-1|A Revolução dos Bichos|-|5|George Orwell|112|Ciencias|1945-01-02|Adulto|Companhia das Letras|9788535909555
-2|A Insustentável Leveza do Ser|-|3|Milan Kundera|352|Ciencias|1984-01-01|Adulto|Companhia das Letras|9788535913828
-3|O Senhor dos Anéis|A Sociedade do Anel|8|JRR Tolkien|480|Matematica|1954-07-29|Juvenil|HarperCollins|9788595085948
-4|O Código Da Vinci|-|4|Dan Brown|464|Matematica|2003-03-18|Adulto|Sextante|9788575421434
-5|1984|-|6|George Orwell|368|Matematica|1949-06-08|Adulto|Companhia das Letras|9788535909555
-6|Harry Potter e a Pedra Filosofal|-|9|JK Rowling|223|Matematica|1997-06-26|Infantil|Editora Rocco|9788532530278
-7|O Lobo do Mar|-|0|Jack London|336|Artes|1904-01-01|Adulto|Penguin Books|9780142437738
-8|O Pequeno Príncipe|-|11|Antoine de Saint-Exupéry|128|Artes|1943-04-06|Infantil|Agir|9788502034806
-9|O Nome da Rosa|-|4|Umberto Eco|528|Artes|1980-01-01|Adulta|Editora Record|9788501014553
-10|O Hobbit|-|6|JRR Tolkien|288|Artes|1937-09-21|Juvenil|HarperCollins|9788595085023
-11|A Origem das Espécies|-|2|Charles Darwin|592|Artes|1859-11-24|Adulto|Editora Unesp|9788571390434
-12|Os Miseráveis|-|3|Victor Hugo|1504|Artes|1862-04-01|Adulto|Martin Claret|9788544003809
-13|Fahrenheit 451|-|3|Ray Bradbury|208|Artes|1953-10-19|Adulto|Biblioteca Azul|9788525056843
-14|Biblia|-|1|Umberto Eco|9458|Psicologia|2020-02-10|Adulto|JJ|238478472
-15|Apresentação lp2|-|1|Roberto|565|Matematica|2008-09-16|+18|SMF|12345
+1|878|AUYCSDG|3|[Autor: 
+ID: 11
+Nome: Victor Hugo
+Morada: Besançon, França
+Data de nascimento: 1802-02-26]
+----------------------------------------------------|34|Model.Categoria@2b05039f|2020-08-01|+18|wok|asd

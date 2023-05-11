@@ -34,6 +34,7 @@ public class ControllerReservas {
         for (String linha : linhas) {
             if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
+
                 if (value_split.length != 0) {
                     Socio socio = controllerSocios.pesquisarSocioPorNumMecanografico(Integer.parseInt(value_split[1]));
                     String[] idLivros = value_split[2].split(",");
@@ -138,7 +139,9 @@ public class ControllerReservas {
 
                 // não pode existir pois preciso de um historico de reservas
                 if (reservaEncontrada.getLivros().isEmpty()) { //Se a reserva encontrada nao houver livros ele remove a reserva.
-                    reservas.remove(reservaEncontrada);
+                    //reserva passa para o historico (criar um objeto historico)
+                    //apagar a reserva
+                    reservaEncontrada.setReservaFechada(true);
                 }
 
                 editarQuantidadeReserva(IdDoLivro, 1);
