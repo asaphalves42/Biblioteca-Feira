@@ -22,13 +22,14 @@ public class Livro {
         this.titulo = titulo;
         this.subtitulo = subtitulo;
         this.quantidade = quantidade;
+        this.autor = autorAdicionado;
         this.numDePaginas = numDePaginas;
         this.categoria = categoria;
         this.dataDePublicacao = dataDePublicacao;
         this.faixaEtaria = faixaEtaria;
         this.editora = editora;
         this.ISBN = ISBN;
-        this.autor = autorAdicionado;
+
 
         if(id>proximoId){
             proximoId = id;

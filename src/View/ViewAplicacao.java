@@ -30,7 +30,7 @@ public class ViewAplicacao {
         //Ler os ficheiros
 
         lerEgravarAutores.lerAutorDeFicheiro();
-        //lerEgravarLivros.lerLivrosDeFicheiro();
+        lerEgravarLivros.lerLivrosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
         lerEgravarCategoria.lerFicheiroCategoria();
         lerEGravarReservas.lerLivrosDeFicheiroReserva();

@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static Controller.ControllerAutores.autores;
+import static Controller.ControllerCategoria.categorias;
 
 
 public class ControllerLivros {
@@ -24,19 +25,17 @@ public class ControllerLivros {
     public void lerLivrosDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("livros.txt");
 
-        livros = new ArrayList<>();
-
         for (String linha : linhas) {
             if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
-                ArrayList<Autor> autor = controllerAutores.pesquisarAutorPorNome((value_split[4]));
-
+                String autorLido = value_split[4];
+                Autor autor = controllerAutores.pesquisarAutorPorNomeTESTE(autorLido);
                 Livro aux = new Livro(Integer.parseInt(value_split[0]),
                         value_split[1],
                         value_split[2],
                         Integer.parseInt(value_split[3]),
                         // mudar para Autor
-                        autor.get(3),
+                        autor,
                         Integer.parseInt(value_split[5]),
 
                         //mudar para categorias
@@ -62,9 +61,9 @@ public class ControllerLivros {
             conteudo += aux.getTitulo() + "|" ;
             conteudo += aux.getSubtitulo() + "|" ;
             conteudo += aux.getQuantidade() + "|" ;
-            conteudo += aux.getAutor() + "|" ;
+            conteudo += aux.getAutor().getNome() + "|" ;
             conteudo += aux.getNumDePaginas() + "|" ;
-            conteudo += aux.getCategoria() + "|" ;
+            conteudo += aux.getCategoria().getNome() + "|" ;
             conteudo += formated_date + "|" ;
             conteudo += aux.getFaixaEtaria() + "|" ;
             conteudo += aux.getEditora() + "|" ;
@@ -231,9 +230,20 @@ public class ControllerLivros {
         return false;
     }
 
-    public boolean editarCategoria(int idEditarTitulo, String novaCategoria) {
+    public boolean editarCategoria(int idEditarLivro, String novaCategoria) {
+        Categoria categoriaEncontrada = null;
+        for (Categoria categoria : categorias) {
+            if (categoria.getNome().equals(novaCategoria)) {
+                categoriaEncontrada = categoria;
+                break;
+            }
+        }
+        if (categoriaEncontrada == null) {
+            return false;
+        }
         for (Livro livro : livros) {
-            if (idEditarTitulo == livro.getId()) {
+            if (idEditarLivro == livro.getId()) {
+                livro.setCategoria(categoriaEncontrada);
                 return true;
             }
         }

@@ -172,39 +172,39 @@ public class ViewFuncaoEditarLivros {
     }
 
     public void editarPorCategoria(ControllerLivros gestor) {
-        ArrayList<Livro> livros;
-        do {
-            String tituloInserido = leStr("Insira o título do livro: ");
-            livros = gestor.pesquisarLivroPorTitulo(tituloInserido);
+        ArrayList<Livro> livrosParaEditar;
 
-            if (livros.isEmpty()) {
-                System.out.println("Não existem livros com esse título!");
+        while (true) {
+            String tituloLivro = leStr("Insira o título do livro que quer editar:");
+            livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
+
+            if (livrosParaEditar.isEmpty()) {
+                System.out.println("Não existem livros com este título!");
                 System.out.println(" ");
             } else {
-                for (Livro livro : livros) {
-                    System.out.println(livro.toString());
+                for (Livro livro : livrosParaEditar) {
+                    System.out.println(livro);
                 }
+                break;
             }
-        } while (livros.isEmpty());
+        }
 
-        int idLivro = leInt("Insira o id do livro que deseja editar a categoria:");
-        Livro livroParaEditar = gestor.pesquisarLivroPorId(idLivro);
+        int idEditarCategoria = leInt("Insira o id do livro que quer editar: ");
 
-        if (livroParaEditar == null) {
-            System.out.println("Livro não encontrado!");
+        String novaCategoria = leStr("Insira o novo nome do autor: ");
+
+        boolean autorEditado = gestor.editarCategoria(idEditarCategoria, novaCategoria);
+
+        if(autorEditado){
+            System.out.println("Livro editado com sucesso!");
             System.out.println(" ");
-        } else {
-            System.out.println("Escolha a nova categoria:");
-
-            //editar a categoria baseada nas categorias existentes
-
-
-
-
-
-
+        } else{
+            System.out.println("Categoria não existe!");
+            System.out.println(" ");
         }
     }
+
+
 
     public void editarPorData(ControllerLivros gestor){
         ArrayList<Livro> livrosParaEditar;

@@ -1,2 +1,5 @@
-artes
-matematica
+Artes
+Matematica
+Psicologia
+Tecnologia
+Ciencias

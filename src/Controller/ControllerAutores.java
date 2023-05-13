@@ -19,13 +19,13 @@ public class ControllerAutores {
         for (String linha : linhas) {
             if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
-                if (value_split.length != 0) {
+
                     Autor aux = new Autor(Integer.parseInt(value_split[0]),
                             value_split[1],
                             value_split[2],
                             LocalDate.parse(value_split[3]));
                     autores.add(aux);
-                }
+
 
             }
         }
@@ -89,6 +89,16 @@ public class ControllerAutores {
             }
         }
         return nomeAutor;
+    }
+    public Autor pesquisarAutorPorNomeTESTE(String nomeInserido) {
+        Autor autor;
+        for (Autor nome : autores) {
+            if (nomeInserido.equalsIgnoreCase(nome.getNome())) {
+                autor= nome;
+                return autor;
+            }
+        }
+        return null;
     }
 
     public ArrayList<Autor> pesquisarAutorPorId(int idInserido) {
