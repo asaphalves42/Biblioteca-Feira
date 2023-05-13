@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Livro;
+import Model.Produto;
 import Model.Reserva;
 import Model.Socio;
 import Utilidades.GestorFicheiros;
@@ -8,16 +9,15 @@ import Utilidades.GestorFicheiros;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
-import static Controller.ControllerLivros.livros;
+import static Controller.ControllerProdutos.produtos;
 import static Controller.ControllerSocios.socios;
 
 public class ControllerReservas {
     public static ArrayList<Reserva> reservas = new ArrayList<>();
     public ControllerSocios controllerSocios;
-    public ControllerLivros controllerLivros;
+    public ControllerProdutos controllerLivros;
 
-    public ControllerReservas(ControllerSocios controllerSocios, ControllerLivros controllerLivros) {
+    public ControllerReservas(ControllerSocios controllerSocios, ControllerProdutos controllerLivros) {
         this.controllerSocios = controllerSocios;
         this.controllerLivros = controllerLivros;
     }
@@ -38,9 +38,9 @@ public class ControllerReservas {
                 if (value_split.length != 0) {
                     Socio socio = controllerSocios.pesquisarSocioPorNumMecanografico(Integer.parseInt(value_split[1]));
                     String[] idLivros = value_split[2].split(",");
-                    ArrayList<Livro> livros = new ArrayList<>();
+                    ArrayList<Produto> livros = new ArrayList<>();
                     for (String idLivro : idLivros) {
-                        Livro livro = controllerLivros.pesquisarLivroPorId(Integer.parseInt(idLivro));
+                        Produto livro = controllerLivros.pesquisarProdutoPorId(Integer.parseInt(idLivro));
                         livros.add(livro);
                     }
                     for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associado
@@ -64,7 +64,7 @@ public class ControllerReservas {
             conteudo += aux.getIdDaReserva() + "|";
             conteudo += aux.getSocio().getNumMecanografico() + "|";
             String idLivros = "";
-            for (Livro livro : aux.getLivros()) {
+            for (Produto livro : aux.getLivros()) {
                 idLivros += livro.getId() + ",";
             }
             conteudo += idLivros + "|";
@@ -118,7 +118,7 @@ public class ControllerReservas {
 
         for (Reserva reserva : reservas) { // Percorre a lista de reservas para encontrar a reserva correspondente ao ID informado.
             if (IdDaReserva.equalsIgnoreCase(reserva.getIdDaReserva())) { // Compara o ID da reserva informado com o ID da reserva atual no loop.
-                for (Livro livro : reserva.getLivros()) { // Percorre a lista de livros da reserva para encontrar o livro correspondente ao ID informado.
+                for (Produto livro : reserva.getLivros()) { // Percorre a lista de livros da reserva para encontrar o livro correspondente ao ID informado.
                     if (IdDoLivro == livro.getId()) { // Compara o ID do livro informado com o ID do livro atual no loop.
                         reservaEncontrada = reserva; // Armazena a reserva encontrada na variável `reservaEncontrada`.
                         break;
@@ -153,7 +153,7 @@ public class ControllerReservas {
     }
 
     public void editarQuantidadeReserva(int idDoLivro, int novaQuantidade) {
-        for (Livro livro : livros) {
+        for (Produto livro : produtos) {
             if (idDoLivro == livro.getId()) {
                 livro.setQuantidade(livro.getQuantidade() + novaQuantidade);
                 return;
@@ -177,9 +177,9 @@ public class ControllerReservas {
 
     public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloDoLivro) {
         ArrayList<Livro> livrosTitulo = new ArrayList<>();
-        for (Livro livro : livros) {
+        for (Produto livro : produtos) {
             if (tituloDoLivro.equalsIgnoreCase(livro.getTitulo())) {
-                livrosTitulo.add(livro);
+                livrosTitulo.add((Livro) livro);
             }
         }
         return livrosTitulo;
@@ -203,6 +203,7 @@ public class ControllerReservas {
         }
         return false;
     }
+    /*
 
     public boolean editarReservaLivro(int idLivro, int novoLivro) {
         for (Reserva reserva : reservas) {
@@ -224,6 +225,7 @@ public class ControllerReservas {
 
     }
 
+     */
 }
 
 

@@ -2,7 +2,7 @@ package View.Livros;
 
 import Controller.ControllerAutores;
 import Controller.ControllerCategoria;
-import Controller.ControllerLivros;
+import Controller.ControllerProdutos;
 import View.Categoria.MenuViewCategoria;
 
 import java.util.InputMismatchException;
@@ -12,8 +12,7 @@ import static Utilidades.Leitura.ler;
 public class MenuViewLivros {
 
     ControllerAutores gestorAutores = new ControllerAutores();
-    ControllerLivros gestor = new ControllerLivros(gestorAutores);
-
+    ControllerProdutos gestor = new ControllerProdutos();
     ControllerCategoria gestorCategoria = new ControllerCategoria();
     ViewAdicionarLivrosEautores adicionar = new ViewAdicionarLivrosEautores();
     ViewFuncaoListarLivros mostrar = new ViewFuncaoListarLivros();
@@ -78,7 +77,7 @@ public class MenuViewLivros {
                     case 4 -> eliminar.eliminarLivroPorTitulo(gestor);
                     case 5 -> this.menuLivros2();
                     case 6 -> categoria.menuCategoria();
-                    case 7 -> gestor.gravarLivrosParaFicheiro();
+                    case 7 -> gestor.gravarProdutosParaFicheiro();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
@@ -124,7 +123,7 @@ public class MenuViewLivros {
                     case 8 -> editar.editarFaixaEtaria(gestor);
                     case 9 -> editar.editarEditora(gestor);
                     case 10 -> editar.editarISBN(gestor);
-                    case 11 -> gestor.gravarLivrosParaFicheiro();
+                    case 11 -> gestor.gravarProdutosParaFicheiro();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

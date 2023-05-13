@@ -47,7 +47,7 @@ public class MenuViewReservas {
                         break;
                     case 4:cancelar.cancelarReserva(gerirReservas);
                         break;
-                    case 5:editar.editarReservaLivro(gerirReservas);
+                    case 5://editar.editarReservaLivro(gerirReservas);
                         break;
                     case 6:
                         pesquisar.pesquisarReservaPorId(gerirReservas);

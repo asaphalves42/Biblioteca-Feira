@@ -1,23 +1,24 @@
 package View.Livros;
 
-import Controller.ControllerLivros;
-import Model.Livro;
+import Controller.ControllerProdutos;
+import Model.Produto;
 
 import java.util.ArrayList;
 
-import static Utilidades.Leitura.*;
+import static Utilidades.Leitura.leInt;
+import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoRemoverLivros {
-    public void eliminarLivroPorTitulo(ControllerLivros gestor){
+    public void eliminarLivroPorTitulo(ControllerProdutos gestor){
 
         String tituloLivro = leStr("Insira o título do livro: ");
-        ArrayList<Livro> livrosParaRemover = gestor.pesquisarLivroPorTitulo(tituloLivro);
+        ArrayList<Produto> livrosParaRemover = gestor.pesquisarProdutoPorTitulo(tituloLivro);
 
         if(livrosParaRemover.isEmpty()){
             System.out.println("Nao existem livros no stock!");
             System.out.println(" ");
         } else{
-            for(Livro livro : livrosParaRemover){
+            for(Produto livro : livrosParaRemover){
                 System.out.println(livro);
             }
         }

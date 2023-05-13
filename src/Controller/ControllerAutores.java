@@ -1,14 +1,15 @@
 package Controller;
 
 import Model.Autor;
-import Model.Livro;
+import Model.Produto;
 import Utilidades.GestorFicheiros;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 
-import static Controller.ControllerLivros.livros;
+import static Controller.ControllerProdutos.produtos;
 
 public class ControllerAutores {
     public static ArrayList<Autor> autores = new ArrayList<>();
@@ -112,30 +113,38 @@ public class ControllerAutores {
     }
 
     public boolean removerAutor(int idAutor) {
-        boolean encontrouLivro = false;
+        boolean autorAssociadoLivro = false;
 
-        // percorre a lista de livros para verificar se o autor está associado a algum deles
-        for (Livro livro : livros) {
-            if (livro.getAutor().equals(autores.get(idAutor).getNome())) {
-                encontrouLivro = true;
+        // Verifica se o autor está associado a algum livro
+        for (Produto livro : produtos) {
+            if (Objects.equals(livro.getAutor().getId(), idAutor)) {
+                autorAssociadoLivro = true;
                 break;
             }
         }
-        // se o autor estiver associado a um livro, não é possível removê-lo, então retorna false
-        if (encontrouLivro) { // se o autor estiver associado a um livro, não é possível removê-lo, então retorna false
+
+        if (autorAssociadoLivro) {
+            // O autor está associado a um livro, não é possível removê-lo
             return false;
         } else {
-            for(Autor autor : autores){
-                if(autor.getId() == idAutor){
-                    autores.remove(autor);
-                    return true;
+            // Remove o autor da lista de autores
+            int index = -1;
+            for (int i = 0; i < autores.size(); i++) {
+                if (autores.get(i).getId() == idAutor) {
+                    index = i;
+                    break;
                 }
             }
-            return true;
-
+            if (index != -1) {
+                autores.remove(index);
+                return true;
+            } else {
+                // O autor não foi encontrado na lista de autores
+                return false;
+            }
         }
-
     }
+
 }
 
 

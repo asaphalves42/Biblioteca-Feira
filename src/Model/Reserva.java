@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Reserva {
     private Socio socio;
-    private ArrayList<Livro> livros = new ArrayList<>();
+    private ArrayList<Produto> livros = new ArrayList<>();
 
     private LocalDate dataReserva;
     private String idDaReserva;
@@ -32,7 +32,7 @@ public class Reserva {
         int id = aleatorio.nextInt(99999999);
         this.idDaReserva = String.format("%08d", id);
     }
-    public Reserva(String idReserva, Socio socio, ArrayList<Livro> livros, LocalDate dataReserva) {
+    public Reserva(String idReserva, Socio socio, ArrayList<Produto> livros, LocalDate dataReserva) {
         this.idDaReserva = idReserva;
         this.socio = socio;
         this.livros = livros;
@@ -47,7 +47,7 @@ public class Reserva {
         this.socio = socio;
     }
 
-    public ArrayList<Livro> getLivros() {
+    public ArrayList<Produto> getLivros() {
         return livros;
     }
 
@@ -61,10 +61,10 @@ public class Reserva {
     }
 
 
-    public String getNomes(ArrayList<Livro> livros) {
+    public String getNomes(ArrayList<Produto> livros) {
         String nomes = "";
-        for (Livro livro : livros) {
-            nomes += livro.getTitulo() + " | " + "Id do livro: " + livro.getId() + "\n";
+        for (Produto livro : livros) {
+            nomes += livro.getTitulo().toLowerCase()+ " | " + "Id do livro: " + livro.getId() + "\n";
 
         }
         return nomes;

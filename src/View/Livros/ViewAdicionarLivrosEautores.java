@@ -2,7 +2,7 @@ package View.Livros;
 
 
 import Controller.ControllerCategoria;
-import Controller.ControllerLivros;
+import Controller.ControllerProdutos;
 import Model.Autor;
 import Model.Categoria;
 import Utilidades.ValidacaoData;
@@ -14,7 +14,7 @@ import static Utilidades.Leitura.leIntPositivo;
 import static Utilidades.Leitura.leStr;
 
 public class ViewAdicionarLivrosEautores {
-    public void menuAdicionarLivros(ControllerLivros gestorAutor, ControllerCategoria gestorCategoria) {
+    public void menuAdicionarLivros(ControllerProdutos gestorAutor, ControllerCategoria gestorCategoria) {
 
         boolean sair = false;
         do {

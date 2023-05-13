@@ -2,13 +2,13 @@ package Controller;
 
 
 import Model.Categoria;
-import Model.Livro;
+import Model.Produto;
 import Utilidades.GestorFicheiros;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static Controller.ControllerLivros.livros;
+import static Controller.ControllerProdutos.produtos;
 
 public class ControllerCategoria {
     public static ArrayList<Categoria> categorias = new ArrayList<>();
@@ -59,7 +59,7 @@ public class ControllerCategoria {
 
     public boolean removerCategoria(Categoria categoriaRemover) {
         // Verifica se a categoria está associada a algum livro
-        for (Livro livro : livros) {
+        for (Produto livro : produtos) {
             if (livro.getCategoria().equals(categoriaRemover)) {
                 // A categoria está associada a um livro, não é possível remover
                 return false;

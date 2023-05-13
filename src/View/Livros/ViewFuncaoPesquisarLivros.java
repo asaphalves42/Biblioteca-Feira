@@ -1,7 +1,8 @@
 package View.Livros;
 
-import Controller.ControllerLivros;
+import Controller.ControllerProdutos;
 import Model.Livro;
+import Model.Produto;
 
 import java.util.ArrayList;
 
@@ -9,24 +10,24 @@ import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoPesquisarLivros {
 
-    public void livroPorTitulo(ControllerLivros gestor){
+    public void livroPorTitulo(ControllerProdutos gestor){
 
         String tituloInserido = leStr("Insira o título do livro:");
 
-        ArrayList<Livro> livros = gestor.pesquisarLivroPorTitulo(tituloInserido);
+        ArrayList<Produto> livros = gestor.pesquisarProdutoPorTitulo(tituloInserido);
 
         if(livros.isEmpty()){
             System.out.println("Livro nao existente!");
         }else{
-            System.out.println(gestor.pesquisarLivroPorTitulo(tituloInserido));
+            System.out.println(gestor.pesquisarProdutoPorTitulo(tituloInserido));
         }
     }
 
-    public void livrosPorAutor(ControllerLivros gestor){
+    public void livrosPorAutor(ControllerProdutos gestor){
 
         String autorInserido = leStr("Insira o autor do livro:");
 
-        ArrayList<Livro> livros = gestor.pesquisarLivroPorAutor(autorInserido);
+        ArrayList<Produto> livros = gestor.pesquisarProdutoPorAutor(autorInserido);
 
         if(livros.isEmpty()){
             System.out.println("Autor nao existe!");
@@ -36,7 +37,7 @@ public class ViewFuncaoPesquisarLivros {
 
     }
 
-    public void livrosPorCategoria(ControllerLivros gestor) {
+    public void livrosPorCategoria(ControllerProdutos gestor) {
         String categoriaInserida = leStr("Insira a categoria do livro:");
         ArrayList<Livro> livros = gestor.pesquisarLivroCategoria(categoriaInserida);
 
@@ -53,11 +54,11 @@ public class ViewFuncaoPesquisarLivros {
     }
 
 
-    public void livroPorISBN(ControllerLivros gestor){
+    public void livroPorISBN(ControllerProdutos gestor){
 
         String ISBNinserido = leStr("Insira o ISBN do livro:");
 
-        Livro livro = gestor.pesquisarLivroISBN(ISBNinserido);
+        Livro livro = (Livro) gestor.pesquisarLivroISBN(ISBNinserido);
 
         if (livro == null){
             System.out.println("ISBN nao existente!");

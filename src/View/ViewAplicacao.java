@@ -3,7 +3,7 @@ package View;
 
 import Controller.*;
 import Controller.ControllerAutores;
-import Controller.ControllerLivros;
+import Controller.ControllerProdutos;
 import Controller.ControllerLogin;
 import Utilidades.MensagemBoasVindas;
 import View.Autores.MenuViewAutores;
@@ -22,15 +22,15 @@ public class ViewAplicacao {
     }
     private ControllerLogin controllerLogin;
     ControllerAutores lerEgravarAutores = new ControllerAutores();
-    ControllerLivros lerEgravarLivros = new ControllerLivros(lerEgravarAutores);
+    ControllerProdutos lerEgravarProdutos = new ControllerProdutos();
     ControllerSocios lerEgravarSocios = new ControllerSocios();
     ControllerCategoria lerEgravarCategoria = new ControllerCategoria();
-    ControllerReservas lerEGravarReservas = new ControllerReservas(lerEgravarSocios,lerEgravarLivros);
+    ControllerReservas lerEGravarReservas = new ControllerReservas(lerEgravarSocios,lerEgravarProdutos);
     public void Iniciar() {
         //Ler os ficheiros
 
         lerEgravarAutores.lerAutorDeFicheiro();
-        lerEgravarLivros.lerLivrosDeFicheiro();
+        lerEgravarProdutos.lerProdutosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
         lerEgravarCategoria.lerFicheiroCategoria();
         lerEGravarReservas.lerLivrosDeFicheiroReserva();
@@ -116,7 +116,7 @@ public class ViewAplicacao {
                         menuSocios.menuSocios();
                     }
                     case 5 -> {
-                        lerEgravarLivros.gravarLivrosParaFicheiro();
+                        lerEgravarProdutos.gravarProdutosParaFicheiro();
                         lerEgravarAutores.gravarAutorParaFicheiro();
                         lerEgravarSocios.gravarSociosParaFicheiro();
                         lerEgravarCategoria.gravarFicheiroCategoria();

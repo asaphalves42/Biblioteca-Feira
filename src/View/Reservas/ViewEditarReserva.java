@@ -1,12 +1,8 @@
 package View.Reservas;
 
-import Controller.ControllerReservas;
-import Model.Reserva;
-
-import static Controller.ControllerReservas.reservas;
-import static Utilidades.Leitura.leInt;
-import static Utilidades.Leitura.leStr;
 public class ViewEditarReserva {
+
+    /*
     public void editarReservaLivro(ControllerReservas gestorReserva) {
 
             String idReserva = leStr("Insira o Id da reserva que pretende editar:");
@@ -35,6 +31,8 @@ public class ViewEditarReserva {
                 }
             }
 
+
+     */
     }
 
 
