@@ -22,7 +22,7 @@ public class ViewAplicacao {
     }
     private ControllerLogin controllerLogin;
     ControllerAutores lerEgravarAutores = new ControllerAutores();
-    ControllerProdutos lerEgravarProdutos = new ControllerProdutos();
+    ControllerProdutos lerEgravarProdutos = new ControllerProdutos(lerEgravarAutores);
     ControllerSocios lerEgravarSocios = new ControllerSocios();
     ControllerCategoria lerEgravarCategoria = new ControllerCategoria();
     ControllerReservas lerEGravarReservas = new ControllerReservas(lerEgravarSocios,lerEgravarProdutos);

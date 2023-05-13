@@ -10,9 +10,8 @@ import java.util.InputMismatchException;
 import static Utilidades.Leitura.ler;
 
 public class MenuViewLivros {
-
-    ControllerAutores gestorAutores = new ControllerAutores();
-    ControllerProdutos gestor = new ControllerProdutos();
+    ControllerAutores gestorAutor = new ControllerAutores();
+    ControllerProdutos gestor = new ControllerProdutos(gestorAutor);
     ControllerCategoria gestorCategoria = new ControllerCategoria();
     ViewAdicionarLivrosEautores adicionar = new ViewAdicionarLivrosEautores();
     ViewFuncaoListarLivros mostrar = new ViewFuncaoListarLivros();

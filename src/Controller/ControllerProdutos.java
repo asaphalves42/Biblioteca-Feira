@@ -16,23 +16,23 @@ public class ControllerProdutos {
 
     public ControllerAutores controllerAutores;
 
-    public void ControllerProdutos(ControllerAutores controllerAutores) {
+    public ControllerProdutos(ControllerAutores controllerAutores) {
         this.controllerAutores = controllerAutores;
     }
 
     public static ArrayList<Produto> produtos = new ArrayList<>();
 
     public void lerProdutosDeFicheiro() {
-        ArrayList<String> linhasProduto = GestorFicheiros.LerFicheiro("produto.txt");
+        ArrayList<String> linhasProduto = GestorFicheiros.LerFicheiro("produtos.txt");
         ArrayList<String> linhasLivro = GestorFicheiros.LerFicheiro("livros.txt");
         //ArrayList<String> linhasCD = GestorFicheiros.LerFicheiro("cd.txt");
 
         for (String linha : linhasProduto) {
-            if (linha.isEmpty() == false) {
+            if (!linha.isEmpty()) {
                 String[] value_split_produto = linha.split("\\|");
                 if (value_split_produto.length != 0) {
                     Produto aux = null;
-                    if (value_split_produto[1] == "livro") {
+                    if (Objects.equals(value_split_produto[1], "livro")) {
                         // se é do tipo livro, vamos ter que procurar no ficheiro de livros a linha correspondente
                         String[] value_split_livro = null;
                         Autor autor = null;
@@ -86,7 +86,7 @@ public class ControllerProdutos {
             conteudoProduto += aux.getFaixaEtaria() + "|"; // 7
             conteudoProduto += aux.getEditora() + "|";  // 8
 
-            if (aux.getTipo().toLowerCase() == "livro") {
+            if (aux.getTipo().equalsIgnoreCase("livro")) {
                 Livro livro = (Livro) aux;
                 conteudoLivro += aux.getId() + "|";
                 conteudoLivro += livro.getSubtitulo() + "|";
@@ -175,20 +175,6 @@ public class ControllerProdutos {
             }
         }
         return nomeAutor;
-    }
-
-    public Produto pesquisarLivroId(int idInserido) {
-        for (Produto produto : produtos) {
-            if (produto.getTipo() == "livro") {
-                // isto é um cast, diz ao sistema que o produto é do tipo livro, e passo para um variavel desse tipo
-                // tem que ser utilizado quando queremos aceder a atributos não comuns (livro / cd)
-                Livro aux = (Livro) produto;
-                if (idInserido == aux.getId()) {
-                    return produto;
-                }
-            }
-        }
-        return null;
     }
 
     public boolean removerLivro(int idLivroRemover) {
