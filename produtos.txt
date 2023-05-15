@@ -1,1 +1,2 @@
-1|livro|1984|5|George Orwell|Matematica|1949-06-08|Adulto|Companhia das Letras|2|livro|A Revolução dos Bichos|5|George Orwell|Ciencias|1945-01-02|adulto|Companhia das Letras|3|livro|A Insustentável Leveza do Ser|8|Milan Kundera|Ciencias|1984-01-01|Adulto|Companhia das Letras|
+1|livro|1984|3|Asaph|Artes|1990-08-04|Adulto|Porto|
+2|livro|teste|3|Asaph|Matematica|1999-06-09|teste|teste|

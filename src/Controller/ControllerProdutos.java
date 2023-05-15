@@ -84,7 +84,7 @@ public class ControllerProdutos {
             conteudoProduto += aux.getCategoria().getNome() + "|";// 5
             conteudoProduto += formated_date + "|";// 6
             conteudoProduto += aux.getFaixaEtaria() + "|"; // 7
-            conteudoProduto += aux.getEditora() + "|";  // 8
+            conteudoProduto += aux.getEditora() + "|" + "\n";  // 8
 
             if (aux.getTipo().equalsIgnoreCase("livro")) {
                 Livro livro = (Livro) aux;
