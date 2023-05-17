@@ -92,7 +92,7 @@ public class ControllerProdutos {
                 conteudoLivro += livro.getSubtitulo() + "|";
                 conteudoLivro += livro.getNumDePaginas() + "|";
                 conteudoLivro += livro.getISBN() + "\n";
-            } else if (aux.getTipo().toLowerCase() == "cd") {
+            } else if (aux.getTipo().equalsIgnoreCase("cd")) {
                 //...fazer igual para CD
             }
         }
@@ -175,6 +175,22 @@ public class ControllerProdutos {
             }
         }
         return nomeAutor;
+    }
+    public void verificarId() {
+        int max = 0;
+        for (Produto id : produtos) {
+            if (id.getId() > max) {
+                max = id.getId();
+            }
+        }
+
+    }
+    public void adicionarLivrosComAutores(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor
+            autorAdicionado, Categoria categorias, LocalDate dataDePublicacao, String faixaEtaria, String editora, String
+                                                  ISBN) {
+        this.verificarId();
+        Produto livro = new Livro(0, titulo, quantidade, autorAdicionado, categorias, dataDePublicacao, faixaEtaria, editora, ISBN, subtitulo, numDePaginas);
+        produtos.add(livro);
     }
 
     public boolean removerLivro(int idLivroRemover) {
@@ -331,23 +347,9 @@ public class ControllerProdutos {
 
 
 
-    public void verificarId() {
-        int max = 0;
-        for (Produto id : produtos) {
-            if (id.getId() > max) {
-                max = id.getId();
-            }
-        }
 
-    }
 
-    public void adicionarLivrosComAutores(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor
-            autorAdicionado, Categoria categorias, LocalDate dataDePublicacao, String faixaEtaria, String editora, String
-                                                  ISBN) {
-        this.verificarId();
-        Produto livro = new Livro(0, titulo, quantidade, autorAdicionado, categorias, dataDePublicacao, faixaEtaria, editora, ISBN, subtitulo, numDePaginas);
-        produtos.add(livro);
-    }
+
 
 }
 

@@ -30,7 +30,7 @@ public class CD extends Produto{
                 "Autor: " + this.getAutor() + "\n" +
                 "Número de capítulos: " + this.getNumCapitulos() + "\n" +
                 "Categoria: " + this.getCategoria() + "\n" +
-                "Data de publicacao: " + this.getDataDePublicacao() + "\n" +
+                "Data de lançamento: " + this.getDataDePublicacao() + "\n" +
                 "Faixa etaria: " + this.getFaixaEtaria() + "\n" +
                 "Editora: " + this.getEditora() + "]" + "\n" +
               "----------------------------------------------------";

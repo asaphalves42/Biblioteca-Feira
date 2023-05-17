@@ -13,7 +13,7 @@ public class MenuViewLivros {
     ControllerAutores gestorAutor = new ControllerAutores();
     ControllerProdutos gestor = new ControllerProdutos(gestorAutor);
     ControllerCategoria gestorCategoria = new ControllerCategoria();
-    ViewAdicionarLivrosEautores adicionar = new ViewAdicionarLivrosEautores();
+    ViewAdicionarLivros adicionar = new ViewAdicionarLivros();
     ViewFuncaoListarLivros mostrar = new ViewFuncaoListarLivros();
     ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
     ViewFuncaoEditarLivros editar = new ViewFuncaoEditarLivros();

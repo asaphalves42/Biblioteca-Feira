@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static Utilidades.Leitura.leIntPositivo;
 import static Utilidades.Leitura.leStr;
 
-public class ViewAdicionarLivrosEautores {
+public class ViewAdicionarLivros {
     public void menuAdicionarLivros(ControllerProdutos gestorAutor, ControllerCategoria gestorCategoria) {
 
         boolean sair = false;
