@@ -44,17 +44,9 @@ public class ControllerSocios {
         GestorFicheiros.gravarFicheiro("socios.txt", conteudo);
     }
 
-    public void verificarNumMecanografico() {
-        int max = 0;
-        for (Socio id : socios) {
-            if (id.getNumMecanografico() > max) {
-                max = id.getNumMecanografico();
-            }
-        }
-    }
 
     public void adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
-        this.verificarNumMecanografico();
+
         Socio socio = new Socio(nome, morada, dataDeNascimento, telefone);
         socios.add(socio);
     }

@@ -46,18 +46,9 @@ public class ControllerAutores {
         GestorFicheiros.gravarFicheiro("Autores.txt", conteudo);
     }
 
-    public void verificarIdAutor() {
-        int max = 0;
-        for (Autor id : autores) {
-            if (id.getId() > max) {
-                max = id.getId();
-            }
-        }
-    }
-
 
     public void adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
-        this.verificarIdAutor();
+
         Autor autor = new Autor(nome, morada, dataDeNascimento);
         autores.add(autor);
 
