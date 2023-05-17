@@ -10,32 +10,35 @@ import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoRemoverSocios {
     public void removerSocioPorNumMecanografico(ControllerSocios gestor) {
+        boolean sair = false;
 
-        String nomeSocio = leStr("Insira o nome do socio:");
-        ArrayList<Socio> socioParaRemover = gestor.pesquisarSocioPorNome(nomeSocio);
+        while (!sair) {
+            try {
+                String nomeSocio = leStr("Insira o nome do sócio:");
+                ArrayList<Socio> socioParaRemover = gestor.pesquisarSocioPorNome(nomeSocio);
 
-        if (socioParaRemover.isEmpty()) {
-            System.out.println("Não existem sócios listados");
-            System.out.println(" ");
+                if (socioParaRemover.isEmpty()) {
+                    System.out.println("Não existem sócios listados!\n");
+                } else {
+                    for (Socio socio : socioParaRemover) {
+                        System.out.println(socio.toString());
+                    }
+                    int numSocio = leInt("Insira o número mecanográfico do sócio que deseja remover:");
 
-        } else {
-           for(Socio socio : socioParaRemover){
-               System.out.println(socio.toString());
-           }
-        }
+                    boolean removido = gestor.removerSocio(numSocio);
 
-        int numSocio = leInt("Insira o número mecanografico do sócio que quer remover:");
-
-        boolean removido = gestor.removerSocio(numSocio);
-
-        if (removido) {
-            System.out.println("Não foi possível remover o socio, existe uma reserva associada!");
-            System.out.println(" ");
-        } else {
-            System.out.println("Sócio removido com sucesso!");
-            System.out.println(" ");
+                    if (removido) {
+                        System.out.println("Não foi possível remover o sócio, existe uma reserva associada!\n");
+                    } else {
+                        System.out.println("Sócio removido com sucesso!\n");
+                        sair = true;  // Sócio removido com sucesso, então sair do loop
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro ao remover o sócio: " + e.getMessage() + "\n");
+            }
         }
     }
-
 }
+
 

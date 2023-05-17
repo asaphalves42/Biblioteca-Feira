@@ -9,6 +9,7 @@ import Utilidades.GestorFicheiros;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
 import static Controller.ControllerProdutos.produtos;
 import static Controller.ControllerSocios.socios;
 
@@ -203,29 +204,41 @@ public class ControllerReservas {
         }
         return false;
     }
-    /*
 
-    public boolean editarReservaLivro(int idLivro, int novoLivro) {
-        for (Reserva reserva : reservas) {
-            if (reserva.getLivros().contains(idLivro)) {
-                reserva.getLivros().remove(idLivro);
-                //aumenta quantidade no stock
-
-                for (Livro livroParaEditar : ControllerLivros.livros) {
-                    if (livroParaEditar.getId() == novoLivro) {
-                        novoLivro = livroParaEditar.getId();
-                        //reserva.getLivros().add(novoLivro);
-                        //decrementa o novo livro no stock
-                    }
-                }
-
-            }
+    public void listaTodosOsLivros() {
+        ArrayList<Produto> todosLivros = new ArrayList<>();
+        for (Produto livro: ControllerProdutos.produtos){
+            todosLivros.add(livro);
         }
-        return false;
-
+        System.out.println(todosLivros);
     }
 
-     */
+    public boolean editarReservaLivro(int idLivro, int novoLivroId) {
+        boolean encontrou = false;
+        for (Reserva reserva : reservas) {
+            for (Produto livro : reserva.getLivros()) {
+                if (livro.getId() == idLivro) {
+                    reserva.getLivros().remove(livro);
+                    livro.aumentarQuantidade();
+                    encontrou = true;
+                    break;
+                }
+            }
+
+            if (encontrou) {
+                Produto novoLivro = ControllerProdutos.pesquisarProdutoPorId(novoLivroId);
+                if (novoLivro != null) {
+                    reserva.getLivros().add(novoLivro);
+                    novoLivro.decrementarQuantidade();
+                }
+                break;
+            }
+        }
+
+
+        return encontrou;
+    }
+
 }
 
 

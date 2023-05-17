@@ -126,7 +126,7 @@ public class ControllerProdutos {
 
     }
 
-    public Produto pesquisarProdutoPorId(int IdInserido) {
+    public static Produto pesquisarProdutoPorId(int IdInserido) {
         for (Produto produto : produtos) {
             if (Objects.equals(produto.getTipo(), "livro")){
                 // isto é um cast, diz ao sistema que o produto é do tipo livro, e passo para um variavel desse tipo

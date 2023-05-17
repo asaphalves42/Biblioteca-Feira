@@ -11,6 +11,8 @@ import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewEfetuarReserva {
+    private ArrayList<Livro> livros;
+
     private Socio selecionarSocioExistente(ControllerReservas gerirReservas) {
         Socio socioSelecionado = null;
 
@@ -44,9 +46,12 @@ public class ViewEfetuarReserva {
 
     private Livro selecionarLivroDisponivel(ControllerReservas gerirReservas) {
         Livro livroSelecionado = null;
+        String input;
 
         while (livroSelecionado == null) {
             String tituloDoLivro = leStr("Digite o título do livro:");
+
+
             ArrayList<Livro> livrosDisponiveis = gerirReservas.pesquisarLivroPorTitulo(tituloDoLivro);
 
             if (livrosDisponiveis.isEmpty()) {
@@ -57,13 +62,23 @@ public class ViewEfetuarReserva {
                     System.out.println(livro.toString());
                 }
 
-                int idLivro = leInt("Insira o id do livro que deseja reservar:");
+                String idLivroStr = leStr("Insira o ID do livro que deseja reservar:");
 
-                for (Livro livro : livrosDisponiveis) {
-                    if (livro.getId() == idLivro) {
-                        livroSelecionado = livro;
-                        break;
+                if (idLivroStr.equalsIgnoreCase("sair")) {
+                    break; // Sair do loop while
+                }
+
+                try {
+                    int idLivro = Integer.parseInt(idLivroStr);
+
+                    for (Livro livro : livrosDisponiveis) {
+                        if (livro.getId() == idLivro) {
+                            livroSelecionado = livro;
+                            break;
+                        }
                     }
+                } catch (NumberFormatException e) {
+                    System.out.println("ID do livro inválido! Tente novamente.");
                 }
             }
         }
@@ -71,8 +86,15 @@ public class ViewEfetuarReserva {
         return livroSelecionado;
     }
 
-    public void efetuarReserva(ControllerReservas gerirReservas) {
+
+    public void efetuarReserva(ControllerReservas gerirReservas ) {
         Socio socioSelecionado = selecionarSocioExistente(gerirReservas);
+        String input;
+        input = leStr("Se deseja mostrar todos os livros insira um ENTER");
+        if (input.equalsIgnoreCase("")) {
+            gerirReservas.listaTodosOsLivros();
+
+        }
 
         boolean continuarReservando = true;
 
@@ -80,6 +102,7 @@ public class ViewEfetuarReserva {
             Livro livroSelecionado = selecionarLivroDisponivel(gerirReservas);
 
             LocalDate dataDaReserva = LocalDate.now();
+
 
             if (livroSelecionado.getQuantidade() == 0) {
                 System.out.println("Não existem mais exemplares desse livro no estoque!");
@@ -105,6 +128,7 @@ public class ViewEfetuarReserva {
             }
         }
     }
+
 }
 
 
