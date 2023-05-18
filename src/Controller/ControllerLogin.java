@@ -13,14 +13,16 @@ import static Utilidades.Leitura.ler;
 
 public class ControllerLogin {
     private ViewLogin viewLogin;
+    private boolean isAdmin;
 
     public ControllerLogin(ViewLogin viewLogin) {
         this.viewLogin = viewLogin;
+        this.isAdmin = false;
     }
-
 
     public boolean iniciar() {
         boolean loginSucesso = false;
+
         while (!loginSucesso) {
             String email = viewLogin.getEmail();
             String password = viewLogin.getPassword();
@@ -28,7 +30,8 @@ public class ControllerLogin {
             if (validarEmail(email) && obterUtilizadorPorEmail(email) != null && obterUtilizadorPorEmail(email).getPassword().equals(password)) {
                 loginSucesso = true;
             } else {
-                viewLogin.tentativaEmail();
+
+               viewLogin.tentativaEmail();
                 if (!ler.next().equalsIgnoreCase("S")) {
                     break;
                 }
@@ -37,7 +40,23 @@ public class ControllerLogin {
         return loginSucesso;
     }
 
-    private boolean validarEmail(String email) {
+
+    public boolean autenticarAdministrador() {
+        System.out.println("Por favor, insira as credenciais de administrador:");
+        System.out.print("Utilizador: ");
+        String utilizador = ler.next();
+        System.out.print("Senha: ");
+        String senha = ler.next();
+
+        // Verificar se as credenciais estão corretas
+        if (utilizador.equals("admin@admin.pt") && senha.equals("admin")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean validarEmail(String email) {
         String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         return email.matches(regex);
     }
@@ -50,6 +69,7 @@ public class ControllerLogin {
             String password = viewLogin.getPassword();
 
             if (!validarEmail(email)) {
+
                 viewLogin.tentativaEmail();
                 String resposta = ler.next();
                 if (!resposta.equalsIgnoreCase("S")) {
@@ -70,7 +90,6 @@ public class ControllerLogin {
 
         return registoBemSucedido;
     }
-
     private Utilizador obterUtilizadorPorEmail(String email) {
         File file = new File("utilizadores.txt");
         try {
@@ -87,10 +106,19 @@ public class ControllerLogin {
             scanner.close();
         } catch (FileNotFoundException e) {
             viewLogin.erroFicheiroNaoEncontrado();
-
         }
         return null;
     }
+    public void testeAdm(){
+
+        boolean autenticado = autenticarAdministrador();
+        if (autenticado) {
+            registar();
+        } else {
+            System.out.println("Credenciais de administrador incorretas. Não é possível realizar o registo.");
+        }
+    }
+
 
 
 }

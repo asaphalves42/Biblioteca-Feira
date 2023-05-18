@@ -37,7 +37,7 @@ public class ViewAplicacao {
 
 
         // Iniciar o sistema
-        //mensagemUtilizadorParaRegisto();
+       // mensagemUtilizadorParaRegisto();
         menuPrincipal();
 
         // Criar instância do ControllerLogin
@@ -68,8 +68,9 @@ public class ViewAplicacao {
                             ViewLogin.mostrarMensagemDeLoginFalhado();
                         }
                     }
-                    case 2 -> controllerLogin.registar();
+                    case 2 -> controllerLogin.testeAdm();
                     case 3 -> System.exit(0);
+
                     default -> System.out.println("Por favor, insira uma opção válida numérica.");
                 }
             } catch (InputMismatchException e) {
