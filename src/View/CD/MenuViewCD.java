@@ -1,10 +1,20 @@
 package View.CD;
 
+import Controller.ControllerAutores;
+import Controller.ControllerCategoria;
+import Controller.ControllerProdutos;
+
 import java.util.InputMismatchException;
 
 import static Utilidades.Leitura.ler;
 
 public class MenuViewCD {
+    ControllerAutores gestorAutor = new ControllerAutores();
+    ControllerProdutos gestor = new ControllerProdutos(gestorAutor);
+    ControllerCategoria gestorCategoria = new ControllerCategoria();
+    ViewListarCd listarCDS= new ViewListarCd();
+    ViewAdicionarCd adicionarCDS= new ViewAdicionarCd();
+
     public void menuCds() {
         int opcao;
 
@@ -24,8 +34,8 @@ public class MenuViewCD {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1: //adicionar cds
-                    case 2: //listar cds
+                    case 1: adicionarCDS.MenuAdicionarCd(gestor, gestorCategoria);
+                    case 2: listarCDS.listarCDS(gestor);
                     case 3: //editar cds
                     case 4: //remover cds
                     case 5: //pesquisar cds

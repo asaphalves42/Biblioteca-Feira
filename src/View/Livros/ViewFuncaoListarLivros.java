@@ -1,6 +1,7 @@
 package View.Livros;
 
 import Controller.ControllerProdutos;
+import Model.Livro;
 import Model.Produto;
 
 import java.util.ArrayList;
@@ -8,14 +9,17 @@ import java.util.ArrayList;
 public class ViewFuncaoListarLivros {
     public void listarTodosOsLivros(ControllerProdutos gestor) {
 
-        ArrayList<Produto> livrosListados = gestor.listarProdutos();
+        ArrayList<Livro> livrosListados = gestor.listarProdutosLivros();
 
-        if(livrosListados.isEmpty()){
+        if (livrosListados.isEmpty()) {
             System.out.println("Nao existem livros no stock!");
             System.out.println(" ");
-        } else{
-            for(Produto livro : livrosListados){
-                System.out.println(livro.toString());
+        } else {
+
+            for (Produto livro : livrosListados) {
+                if (livro.getTipo().equals("livro")) {
+                    System.out.println(livro);
+                }
             }
         }
     }

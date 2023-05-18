@@ -25,6 +25,8 @@ public class ControllerProdutos {
     public void lerProdutosDeFicheiro() {
         ArrayList<String> linhasProduto = GestorFicheiros.LerFicheiro("produtos.txt");
         ArrayList<String> linhasLivro = GestorFicheiros.LerFicheiro("livros.txt");
+
+
         //ArrayList<String> linhasCD = GestorFicheiros.LerFicheiro("cd.txt");
 
         for (String linha : linhasProduto) {
@@ -105,6 +107,26 @@ public class ControllerProdutos {
         return produtos;
     }
 
+    public ArrayList<Livro> listarProdutosLivros() {
+        ArrayList<Livro> livros = new ArrayList<>();
+        for(Produto produto : produtos){
+            if (produto.getTipo().equalsIgnoreCase("livro")){
+                livros.add((Livro) produto);
+            }
+        }
+        return livros;
+    }
+
+    public ArrayList<CD> listarProdutosCd() {
+        ArrayList<CD> cds = new ArrayList<>();
+        for(Produto produtoCd : produtos){
+            if (produtoCd.getTipo().equalsIgnoreCase("cd")){
+                cds.add((CD) produtoCd);
+            }
+        }
+        return cds;
+    }
+
     public ArrayList<Produto> pesquisarProdutoPorTitulo(String tituloInserido) {
         ArrayList<Produto> produtosTitulo = new ArrayList<>();
         for (Produto produto : produtos) {
@@ -176,19 +198,9 @@ public class ControllerProdutos {
         }
         return nomeAutor;
     }
-    public void verificarId() {
-        int max = 0;
-        for (Produto id : produtos) {
-            if (id.getId() > max) {
-                max = id.getId();
-            }
-        }
-
-    }
     public void adicionarLivrosComAutores(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor
             autorAdicionado, Categoria categorias, LocalDate dataDePublicacao, String faixaEtaria, String editora, String
                                                   ISBN) {
-        this.verificarId();
         Produto livro = new Livro(0, titulo, quantidade, autorAdicionado, categorias, dataDePublicacao, faixaEtaria, editora, ISBN, subtitulo, numDePaginas);
         produtos.add(livro);
     }
@@ -346,11 +358,13 @@ public class ControllerProdutos {
     }
 
 
+    public void adicionarCDS(String titulo, int quantidade, int numCapitulos, Autor autorAdicionado, Categoria categoriaEncontrada, LocalDate dataDePublicacao, String faixaEtaria, String editora) {
+        Produto CD = new CD(0,titulo, quantidade, autorAdicionado, categoriaEncontrada, dataDePublicacao,  faixaEtaria, editora,numCapitulos);
+        produtos.add(CD);
+    }
 
-
-
-
-
+    public boolean removerCD(int idCDRemover) {
+    }
 }
 
 
