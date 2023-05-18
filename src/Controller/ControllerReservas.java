@@ -114,11 +114,12 @@ public class ControllerReservas {
         return null;
     }
 
-    public void devolverLivro(String IdDaReserva,LocalDate dataDeDevolucao) {
+    public void devolverLivro(String IdDaReserva, LocalDate dataDeDevolucao, Socio socioDaReserva) {
         Reserva idDaReserva = pesquisarReservaPorId(IdDaReserva);
         idDaReserva.setDataDeDevolucao(dataDeDevolucao);
         for(Produto produtos: idDaReserva.getLivros()){
             produtos.aumentarQuantidade();
+            // decrementar no socio
         }
 
         }
@@ -162,6 +163,7 @@ public class ControllerReservas {
             if (idReserva.equalsIgnoreCase(reserva.getIdDaReserva())) {
                 for (Produto cancelarLivro : reserva.getLivros()) {
                     cancelarLivro.aumentarQuantidade();
+                    //Decrementar no socio
                 }
                 reservas.remove(reserva);
 

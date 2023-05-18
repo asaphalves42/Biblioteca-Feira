@@ -4,6 +4,7 @@ import Controller.ControllerReservas;
 import Controller.ControllerSatisfacao;
 import Model.Reserva;
 import Model.Satisfacao;
+import Model.Socio;
 import View.Satisfacao.ViewSatisfacao;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public class ViewDevolverProdutoReserva {
     ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao, view);
 
     public void devolverProduto(ControllerReservas controllerReservas) {
+        Socio socioDaReserva = null;
         String idDaReserva;
         boolean continuar = true;
 
@@ -37,7 +39,7 @@ public class ViewDevolverProdutoReserva {
 
             LocalDate dataDeDevolucao = LocalDate.now();
 
-            controllerReservas.devolverLivro(idDaReserva, dataDeDevolucao);
+            controllerReservas.devolverLivro(idDaReserva, dataDeDevolucao, socioDaReserva);
 
             String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
             if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
