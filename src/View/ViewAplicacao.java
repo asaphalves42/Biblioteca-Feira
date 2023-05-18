@@ -5,6 +5,7 @@ import Controller.*;
 import Utilidades.MensagemBoasVindas;
 import View.Autores.MenuViewAutores;
 import View.CD.MenuViewCD;
+import View.Categoria.MenuViewCategoria;
 import View.Livros.MenuViewLivros;
 import View.Login.ViewLogin;
 import View.Reservas.MenuViewReservas;
@@ -90,10 +91,11 @@ public class ViewAplicacao {
                 System.out.println("Selecione uma opcao:");
                 System.out.println("1 - Livros");
                 System.out.println("2 - CD'S");
-                System.out.println("3 - Autores");
-                System.out.println("4 - Reservas");
-                System.out.println("5 - Sócios");
-                System.out.println("6 - Fechar e gravar");
+                System.out.println("3 - Categorias");
+                System.out.println("4 - Autores");
+                System.out.println("5 - Reservas");
+                System.out.println("6 - Sócios");
+                System.out.println("7 - Fechar e gravar");
 
                 opcao = ler.nextInt();
 
@@ -107,26 +109,30 @@ public class ViewAplicacao {
                         mostrarMenu.menuCds();
                     }
                     case 3 -> {
+                        MenuViewCategoria mostrarMenu = new MenuViewCategoria();
+                        mostrarMenu.menuCategoria();
+                    }
+                    case 4 -> {
                         MenuViewAutores mostraMenu = new MenuViewAutores();
                         mostraMenu.menuAutores();
                     }
-                    case 4 -> {
+                    case 5 -> {
                         MenuViewReservas mostrarMenuReservas = new MenuViewReservas();
                         mostrarMenuReservas.menuReservas();
                     }
-                    case 5 -> {
+                    case 6 -> {
                         MenuViewSocios menuSocios = new MenuViewSocios();
                         menuSocios.menuSocios();
                     }
-                    case 6 -> {
+                    case 7 -> {
                         lerEgravarProdutos.gravarProdutosParaFicheiro();
                         lerEgravarAutores.gravarAutorParaFicheiro();
                         lerEgravarSocios.gravarSociosParaFicheiro();
                         lerEgravarCategoria.gravarFicheiroCategoria();
                         lerEGravarReservas.gravarReservasParaFicheiro();
                         System.exit(0);
+                        }
 
-                    }
                     default -> System.out.println("Por favor, insira uma opção válida numérica.");
                 }
             } catch (InputMismatchException e) {
@@ -135,7 +141,7 @@ public class ViewAplicacao {
                 ler.nextLine();
             }
 
-        } while (opcao != 7);
+        } while (opcao != 8);
     }
 
 

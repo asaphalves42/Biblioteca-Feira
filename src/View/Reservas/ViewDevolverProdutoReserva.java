@@ -8,24 +8,22 @@ import View.Satisfacao.ViewSatisfacao;
 
 import java.time.LocalDate;
 
-import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
-public class ViewDevolverLivroReserva {
+public class ViewDevolverProdutoReserva {
     Satisfacao satisfacao = new Satisfacao();
     ViewSatisfacao view = new ViewSatisfacao();
-    ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao,view);
+    ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao, view);
 
-    public void devolverLivro(ControllerReservas controllerReservas) {
+    public void devolverProduto(ControllerReservas controllerReservas) {
         String idDaReserva;
-        int idDoLivro;
         boolean continuar = true;
 
         while (continuar) {
             idDaReserva = leStr("Qual o ID da reserva que deseja devolver (ou digite 'sair' para sair)?");
             if (idDaReserva.equalsIgnoreCase("sair")) {
                 continuar = false;
-                continue;
+                break; // Sai do loop while
             }
 
             Reserva reserva = controllerReservas.pesquisarReservaPorId(idDaReserva);
@@ -37,22 +35,20 @@ public class ViewDevolverLivroReserva {
                 continue;
             }
 
-            idDoLivro = leInt("Qual o ID do livro que deseja devolver?");
-
             LocalDate dataDeDevolucao = LocalDate.now();
 
-            controllerReservas.devolverLivro(idDaReserva, idDoLivro, dataDeDevolucao);
-
+            controllerReservas.devolverLivro(idDaReserva, dataDeDevolucao);
 
             String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
             if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
                 controller.executar(reserva);
             }
 
-        }
-            System.out.println("Livro devolvido com sucesso!");
+            System.out.println("Devolvido com sucesso!");
             System.out.println(" ");
         }
     }
+}
+
 
 

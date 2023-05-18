@@ -41,7 +41,7 @@ public class ControllerReservas {
                     String[] idLivros = value_split[2].split(",");
                     ArrayList<Produto> livros = new ArrayList<>();
                     for (String idLivro : idLivros) {
-                        Produto livro = controllerLivros.pesquisarProdutoPorId(Integer.parseInt(idLivro));
+                        Produto livro = ControllerProdutos.pesquisarProdutoPorId(Integer.parseInt(idLivro));
                         livros.add(livro);
                     }
                     for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associado
@@ -114,53 +114,14 @@ public class ControllerReservas {
         return null;
     }
 
-    public void devolverLivro(String IdDaReserva, int IdDoLivro, LocalDate dataDeDevolucao) {
-        Reserva reservaEncontrada = null;
-
-        for (Reserva reserva : reservas) { // Percorre a lista de reservas para encontrar a reserva correspondente ao ID informado.
-            if (IdDaReserva.equalsIgnoreCase(reserva.getIdDaReserva())) { // Compara o ID da reserva informado com o ID da reserva atual no loop.
-                for (Produto livro : reserva.getLivros()) { // Percorre a lista de livros da reserva para encontrar o livro correspondente ao ID informado.
-                    if (IdDoLivro == livro.getId()) { // Compara o ID do livro informado com o ID do livro atual no loop.
-                        reservaEncontrada = reserva; // Armazena a reserva encontrada na variável `reservaEncontrada`.
-                        break;
-                    }
-                }
-            }
-
-            if (reservaEncontrada != null) {
-                reservaEncontrada.getLivros().removeIf(livro -> IdDoLivro == livro.getId()); // Remove o livro da lista de livros da reserva.
-                //lambda sugerida pelo intellij
-
-
-                //adicionar uma data de devolução, desvincular o remover livros da lista de reservas pra criar um histórico de livros devolvidos.
-
-                //Livro ... devolvido em dataDeDevolucao...
-
-                //reserva pode ter um estado, aberta ou fechada
-
-                // não pode existir pois preciso de um historico de reservas
-                if (reservaEncontrada.getLivros().isEmpty()) { //Se a reserva encontrada nao houver livros ele remove a reserva.
-                    //reserva passa para o historico (criar um objeto historico)
-                    //apagar a reserva
-                    reservaEncontrada.setReservaFechada(true);
-                }
-
-                editarQuantidadeReserva(IdDoLivro, 1);
-                reservaEncontrada.getSocio().decrementarQuantidade(); // Atualiza a quantidade de livros reservados pelo sócio, decrementando em 1.
-                break;
-            }
+    public void devolverLivro(String IdDaReserva,LocalDate dataDeDevolucao) {
+        Reserva idDaReserva = pesquisarReservaPorId(IdDaReserva);
+        idDaReserva.setDataDeDevolucao(dataDeDevolucao);
+        for(Produto produtos: idDaReserva.getLivros()){
+            produtos.aumentarQuantidade();
         }
 
-    }
-
-    public void editarQuantidadeReserva(int idDoLivro, int novaQuantidade) {
-        for (Produto livro : produtos) {
-            if (idDoLivro == livro.getId()) {
-                livro.setQuantidade(livro.getQuantidade() + novaQuantidade);
-                return;
-            }
         }
-    }
 
     public ArrayList<Reserva> listarReservas() {
         return reservas;
@@ -196,9 +157,14 @@ public class ControllerReservas {
     }
 
     public boolean cancelarReserva(String idReserva) {
+
         for (Reserva reserva : reservas) {
             if (idReserva.equalsIgnoreCase(reserva.getIdDaReserva())) {
+                for (Produto cancelarLivro : reserva.getLivros()) {
+                    cancelarLivro.aumentarQuantidade();
+                }
                 reservas.remove(reserva);
+
                 return true;
             }
         }
@@ -226,16 +192,15 @@ public class ControllerReservas {
             }
 
             if (encontrou) {
-                Produto novoLivro = ControllerProdutos.pesquisarProdutoPorId(novoLivroId);
+                Livro novoLivro = (Livro) ControllerProdutos.pesquisarProdutoPorId(novoLivroId);
                 if (novoLivro != null) {
-                    reserva.getLivros().add(novoLivro);
+                    if (novoLivro.getQuantidade() > 0)
+                        reserva.getLivros().add(novoLivro);
                     novoLivro.decrementarQuantidade();
                 }
                 break;
             }
         }
-
-
         return encontrou;
     }
 

@@ -8,16 +8,11 @@ import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewEditarReserva {
-    public void editarReservaLivro(ControllerReservas gestorReserva) {
-
-        boolean sair = false;
+    public void editarReserva(ControllerReservas gestorReserva) {
 
         System.out.println("Caso pretenda sair, digite 'sair'");
         String idReserva = leStr("Insira o Id da reserva que pretende editar:");
         Reserva editReservas = gestorReserva.pesquisarReservaPorId(idReserva);
-        if (String.valueOf(idReserva).equals(sair)) { // converte o valor inteiro idReserva em string e compara com "sair"
-            return; // Retorna ao menu anterior
-        }
 
         if (editReservas == null) {
             System.out.println("Reserva não encontrada!");

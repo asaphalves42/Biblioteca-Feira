@@ -13,7 +13,7 @@ public class MenuViewReservas {
     ViewListarReserva listar = new ViewListarReserva();
     ViewCancelarReserva cancelar = new ViewCancelarReserva();
     ViewPesquisarReservaPorId pesquisar = new ViewPesquisarReservaPorId();
-    ViewDevolverLivroReserva devolver = new ViewDevolverLivroReserva();
+    ViewDevolverProdutoReserva devolver = new ViewDevolverProdutoReserva();
 
     public void menuReservas() {
         int opcao;
@@ -25,7 +25,7 @@ public class MenuViewReservas {
                 System.out.println("## Reservas ##");
                 System.out.println("---------------");
                 System.out.println("1 - Efetuar reserva");
-                System.out.println("2 - Devolucao");
+                System.out.println("2 - Devolução");
                 System.out.println("3 - Listar reservas");
                 System.out.println("4 - Cancelar reservas");
                 System.out.println("5 - Editar reserva");
@@ -36,25 +36,13 @@ public class MenuViewReservas {
                 opcao = ler.nextInt();
 
                 switch (opcao) {
-                    case 1:
-                        efetuar.efetuarReserva(gerirReservas);
-                        break;
-                    case 2:
-                        devolver.devolverLivro(gerirReservas);
-                        break;
-                    case 3:
-                        listar.listarTodasAsReservas(gerirReservas);
-                        break;
-                    case 4:cancelar.cancelarReserva(gerirReservas);
-                        break;
-                    case 5:editar.editarReservaLivro(gerirReservas);
-                        break;
-                    case 6:
-                        pesquisar.pesquisarReservaPorId(gerirReservas);
-                        break;
-                    case 7:
-                        gerirReservas.gravarReservasParaFicheiro();
-                        break;
+                    case 1 -> this.menuReservas2();
+                    case 2 -> devolver.devolverProduto(gerirReservas);
+                    case 3 -> listar.listarTodasAsReservas(gerirReservas);
+                    case 4 -> cancelar.cancelarReserva(gerirReservas);
+                    case 5 -> editar.editarReserva(gerirReservas);
+                    case 6 -> pesquisar.pesquisarReservaPorId(gerirReservas);
+                    case 7 -> gerirReservas.gravarReservasParaFicheiro();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
@@ -63,5 +51,41 @@ public class MenuViewReservas {
             }
         } while (opcao != 8);
     }
+
+    public void menuReservas2() {
+        int opcao;
+
+        do {
+            try {
+
+
+                System.out.println("## Reservas ##");
+                System.out.println("---------------");
+                System.out.println("1 - Livros");
+                System.out.println("2 - CD´s");
+                System.out.println("3 - Menu anterior");
+
+                opcao = ler.nextInt();
+
+                switch (opcao) {
+                    case 1:
+                        efetuar.efetuarReservaLivros(gerirReservas);
+                        break;
+                    case 2:
+                        //efetuarReservas CD´s
+                        break;
+
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira uma opção válida numérica.");
+                opcao = 0;
+                ler.nextLine();
+            }
+        } while (opcao != 3);
+    }
+
+
+
+
 
     }

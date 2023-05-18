@@ -11,7 +11,6 @@ import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewEfetuarReserva {
-    private ArrayList<Livro> livros;
 
     private Socio selecionarSocioExistente(ControllerReservas gerirReservas) {
         Socio socioSelecionado = null;
@@ -44,9 +43,8 @@ public class ViewEfetuarReserva {
         return socioSelecionado;
     }
 
-    private Livro selecionarLivroDisponivel(ControllerReservas gerirReservas) {
+    private Livro selecionarProdutoDisponivel(ControllerReservas gerirReservas) {
         Livro livroSelecionado = null;
-        String input;
 
         while (livroSelecionado == null) {
             String tituloDoLivro = leStr("Digite o título do livro:");
@@ -87,7 +85,7 @@ public class ViewEfetuarReserva {
     }
 
 
-    public void efetuarReserva(ControllerReservas gerirReservas ) {
+    public void efetuarReservaLivros(ControllerReservas gerirReservas ) {
         Socio socioSelecionado = selecionarSocioExistente(gerirReservas);
         String input;
         input = leStr("Se deseja mostrar todos os livros insira um ENTER");
@@ -99,7 +97,7 @@ public class ViewEfetuarReserva {
         boolean continuarReservando = true;
 
         while (continuarReservando) {
-            Livro livroSelecionado = selecionarLivroDisponivel(gerirReservas);
+            Livro livroSelecionado = selecionarProdutoDisponivel(gerirReservas);
 
             LocalDate dataDaReserva = LocalDate.now();
 

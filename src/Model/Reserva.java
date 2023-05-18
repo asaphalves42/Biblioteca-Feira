@@ -11,16 +11,8 @@ public class Reserva {
     private LocalDate dataReserva;
     private String idDaReserva;
 
-    private boolean reservaFechada;
+    private LocalDate dataDeDevolucao;
 
-
-    public boolean isReservaFechada() {
-        return reservaFechada;
-    }
-
-    public void setReservaFechada(boolean reservaFechada) {
-        this.reservaFechada = reservaFechada;
-    }
 
     public String getIdDaReserva() {
         return idDaReserva;
@@ -39,6 +31,14 @@ public class Reserva {
         this.dataReserva = dataReserva;
     }
 
+    public LocalDate getDataDeDevolucao() {
+        return dataDeDevolucao;
+    }
+
+    public void setDataDeDevolucao(LocalDate dataDeDevolucao) {
+        this.dataDeDevolucao = dataDeDevolucao;
+    }
+
     public Socio getSocio() {
         return socio;
     }
@@ -50,7 +50,6 @@ public class Reserva {
     public ArrayList<Produto> getLivros() {
         return livros;
     }
-
 
     public LocalDate getDataReserva() {
         return dataReserva;
@@ -78,7 +77,9 @@ public class Reserva {
                 "Número mecanográfico: " + socio.getNumMecanografico() + "\n" +
                 "Quantidade de Livros: " + livros.size() + "\n" +
                 "Livros: " + getNomes(livros) + "\n" +
-                "Data da reserva: " + dataReserva + "]" + "\n" + "-----------------------------";
+                "Data da reserva: " + dataReserva + "]" + "\n"  +
+                "Devolvido em: " + getDataDeDevolucao() + "\n" +
+                "-----------------------------" + "\n";
     }
 
 }

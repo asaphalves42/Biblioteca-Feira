@@ -62,9 +62,8 @@ public class MenuViewLivros {
                 System.out.println("3 - Editar livros");
                 System.out.println("4 - Remover livros");
                 System.out.println("5 - Pesquisar livros");
-                System.out.println("6 - Categorias");
-                System.out.println("7 - Gravar");
-                System.out.println("8 - Menu anterior");
+                System.out.println("6 - Gravar");
+                System.out.println("7 - Menu anterior");
 
                 opcao = ler.nextInt();
                 ler.nextLine();
@@ -75,15 +74,14 @@ public class MenuViewLivros {
                     case 3 -> this.menuLivros3();
                     case 4 -> eliminar.eliminarLivroPorTitulo(gestor);
                     case 5 -> this.menuLivros2();
-                    case 6 -> categoria.menuCategoria();
-                    case 7 -> gestor.gravarProdutosParaFicheiro();
+                    case 6 -> gestor.gravarProdutosParaFicheiro();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 8);
+        } while (opcao != 7);
     }
 
     public void menuLivros3() {

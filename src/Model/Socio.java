@@ -8,7 +8,7 @@ public class Socio extends Pessoa {
         super(nome, morada, dataDeNascimento);
         this.numMecanografico = ++ultimoNumMecanografico;
         this.telefone = telefone;
-        this.livrosReservados = 0;
+        this.produtosReservados = 0;
     }
 
     public Socio(int numMecanografico,String nome, String morada, LocalDate dataDeNascimento, int telefone) {
@@ -19,26 +19,26 @@ public class Socio extends Pessoa {
             ultimoNumMecanografico = numMecanografico;
         }
     }
-    private int livrosReservados;
+    private int produtosReservados;
     private int telefone;
     private int numMecanografico;
     private static int ultimoNumMecanografico=0;
 
     public void aumentarQuantidade(){
-        livrosReservados++;
+        produtosReservados++;
     }
     public void decrementarQuantidade(){
-        if(livrosReservados > 0){
-            livrosReservados--;
+        if(produtosReservados > 0){
+            produtosReservados--;
         }
     }
 
     public int getLivrosReservados() {
-        return livrosReservados;
+        return produtosReservados;
     }
 
     public void setLivrosReservados(int livrosReservados) {
-        this.livrosReservados = livrosReservados;
+        this.produtosReservados = livrosReservados;
     }
 
     public int getNumMecanografico() {
