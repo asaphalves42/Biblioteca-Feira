@@ -363,8 +363,12 @@ public class ControllerProdutos {
         produtos.add(CD);
     }
 
+<<<<<<< HEAD
+
+=======
     public boolean removerCD(int idCDRemover) {
     }
+>>>>>>> 411159b98a794bd53c3299f0aeca5af4deccbef1
 }
 
 
