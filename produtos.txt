@@ -1,2 +1,3 @@
 1|livro|teste|3|Asaph|Artes|2001-02-10|teste|teste|
 2|CD|teste|2|Asaph|Artes|2002-02-02|teste|teste|
+3|livro|teste2|45|Asaph|Artes|1999-02-10|teste2|teste2|

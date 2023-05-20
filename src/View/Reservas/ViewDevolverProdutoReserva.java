@@ -17,39 +17,37 @@ public class ViewDevolverProdutoReserva {
     ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao, view);
 
     public void devolverProduto(ControllerReservas controllerReservas) {
-        Socio socioDaReserva = null;
         String idDaReserva;
-        boolean continuar = true;
-
-        while (continuar) {
+        while (true) {
             idDaReserva = leStr("Qual o ID da reserva que deseja devolver (ou digite 'sair' para sair)?");
             if (idDaReserva.equalsIgnoreCase("sair")) {
-                continuar = false;
+
                 break; // Sai do loop while
             }
 
             Reserva reserva = controllerReservas.pesquisarReservaPorId(idDaReserva);
             if (reserva != null) {
                 System.out.println(reserva);
+                Socio socioDaReserva = reserva.getSocio(); // Obtém o sócio associado à reserva
+                LocalDate dataDeDevolucao = LocalDate.now();
+
+                controllerReservas.devolverLivro(idDaReserva, dataDeDevolucao, socioDaReserva);
+
+                String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
+                if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
+                    controller.executar(reserva);
+                }
+
+                System.out.println("Devolvido com sucesso!");
+                System.out.println(" ");
             } else {
                 System.out.println("Reserva não encontrada");
                 System.out.println(" ");
-                continue;
             }
-
-            LocalDate dataDeDevolucao = LocalDate.now();
-
-            controllerReservas.devolverLivro(idDaReserva, dataDeDevolucao, socioDaReserva);
-
-            String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
-            if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
-                controller.executar(reserva);
-            }
-
-            System.out.println("Devolvido com sucesso!");
-            System.out.println(" ");
         }
     }
+
+
 }
 
 

@@ -169,10 +169,14 @@ public class ViewAdicionarLivros {
             if (sair) {
                 break;
             }
-            System.out.println("Livro " + titulo + " adicionado com sucesso!");
-            System.out.println(" ");
 
-            gestorAutor.adicionarLivros(titulo, subtitulo, quantidade, numDePaginas, autorAdicionado, categoriaEncontrada, dataDePublicacao, faixaEtaria, editora, ISBN);
+           boolean adicionado = gestorAutor.adicionarLivros(titulo, subtitulo, quantidade, numDePaginas, autorAdicionado, categoriaEncontrada, dataDePublicacao, faixaEtaria, editora, ISBN);
+           if (adicionado){
+               System.out.println("Livro " + titulo + " adicionado com sucesso!");
+               System.out.println(" ");
+           }else{
+               System.out.println("Ocorreu um erro ao adicionar o livro!\n");
+           }
 
         } while (sair);
     }

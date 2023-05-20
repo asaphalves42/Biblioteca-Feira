@@ -21,7 +21,7 @@ public class Socio extends Pessoa {
     }
     private int produtosReservados;
     private int telefone;
-    private int numMecanografico;
+    private final int numMecanografico;
     private static int ultimoNumMecanografico=0;
 
     public void aumentarQuantidade(){
@@ -33,20 +33,16 @@ public class Socio extends Pessoa {
         }
     }
 
-    public int getLivrosReservados() {
+    public int getProdutosReservados() {
         return produtosReservados;
     }
 
-    public void setLivrosReservados(int livrosReservados) {
-        this.produtosReservados = livrosReservados;
+    public void setProdutosReservados(int produtosReservados) {
+        this.produtosReservados = produtosReservados;
     }
 
     public int getNumMecanografico() {
         return numMecanografico;
-    }
-
-    public void setNumMecanografico(int numMecanografico) {
-        this.numMecanografico = numMecanografico;
     }
 
     public int getTelefone() {

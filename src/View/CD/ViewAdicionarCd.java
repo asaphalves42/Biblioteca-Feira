@@ -140,12 +140,14 @@ public class ViewAdicionarCd {
                 if (sair) {
                     break;
                 }
+                boolean adicionado = gestorCds.adicionarCDS(titulo,quantidade,NumCapitulos, autorAdicionado, categoriaEncontrada, dataDePublicacao, FaixaEtaria, editora);
 
-                System.out.println("CD " + titulo + " adicionado com sucesso!");
-                System.out.println(" ");
-
-                gestorCds.adicionarCDS(titulo,quantidade,NumCapitulos, autorAdicionado, categoriaEncontrada, dataDePublicacao, FaixaEtaria, editora);
-
+                if(adicionado){
+                    System.out.println("CD " + titulo + " adicionado com sucesso!");
+                    System.out.println(" ");
+                }else{
+                    System.out.println("Ocorreu um erro ao adicionar o CD!\n");
+                }
             } while (sair);
         }
 

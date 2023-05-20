@@ -43,7 +43,7 @@ public class ControllerReservas {
                     }
                     for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associado
                         if (socioLista.getNumMecanografico() == socio.getNumMecanografico()) {//igualo o socio
-                            socioLista.setLivrosReservados(livros.size());//encontro os livros
+                            socioLista.setProdutosReservados(livros.size());//encontro os livros
                         }
                     }
                     Reserva nova = new Reserva(value_split[0], socio, livros, LocalDate.parse(value_split[3]),LocalDate.parse(value_split[4]));
@@ -88,7 +88,7 @@ public class ControllerReservas {
             reserva.setDataReserva(dataDaReserva);
             reservaAux = reserva;
         }
-        if (socioSelecionado.getLivrosReservados() >= 3) {//se ja estiver 3, não deixa reservar
+        if (socioSelecionado.getProdutosReservados() >= 3) {//se ja estiver 3, não deixa reservar
             return false;
 
         } else { //adicionar a uma reserva que ja existe
@@ -114,14 +114,20 @@ public class ControllerReservas {
     }
 
     public void devolverLivro(String IdDaReserva, LocalDate dataDeDevolucao, Socio socioDaReserva) {
-        Reserva idDaReserva = pesquisarReservaPorId(IdDaReserva);
-        idDaReserva.setDataDeDevolucao(dataDeDevolucao);
-        for(Produto produtos: idDaReserva.getLivros()){
-            produtos.aumentarQuantidade();
-            // decrementar no socio
+
+        Reserva reserva = pesquisarReservaPorId(IdDaReserva);
+        reserva.setDataDeDevolucao(dataDeDevolucao);
+
+        for (Produto produto : reserva.getLivros()) {
+            produto.aumentarQuantidade();
         }
 
+        if (socioDaReserva != null) {
+            socioDaReserva.decrementarQuantidade();
         }
+    }
+
+
 
     public ArrayList<Reserva> listarReservas() {
         return reservas;
@@ -160,20 +166,21 @@ public class ControllerReservas {
     }
 
     public boolean cancelarReserva(String idReserva) {
-
         for (Reserva reserva : reservas) {
             if (idReserva.equalsIgnoreCase(reserva.getIdDaReserva())) {
                 for (Produto cancelarLivro : reserva.getLivros()) {
                     cancelarLivro.aumentarQuantidade();
-                    //Decrementar no socio
                 }
+                Socio socio = reserva.getSocio();
+                socio.decrementarQuantidade();
                 reservas.remove(reserva);
-
                 return true;
             }
         }
         return false;
     }
+
+
 
     public ArrayList<Livro> listaTodosOsLivros() {
         ArrayList<Livro> livros = new ArrayList<>();

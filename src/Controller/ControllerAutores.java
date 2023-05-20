@@ -47,11 +47,12 @@ public class ControllerAutores {
     }
 
 
-    public void adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
+    public boolean adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
 
         Autor autor = new Autor(nome, morada, dataDeNascimento);
         autores.add(autor);
 
+        return true;
     }
 
     public ArrayList<Autor> listarAutores() {

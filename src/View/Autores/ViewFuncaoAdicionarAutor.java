@@ -50,10 +50,16 @@ public class ViewFuncaoAdicionarAutor {
                 ValidacaoData validarData = new ValidacaoData();
                 LocalDate dataDeNascimento = validarData.LerData2();
 
-                System.out.println("Autor(a) " + nome + " adicionado(a) com sucesso!");
-                System.out.println(" ");
 
-                gestor.adicionarAutores(nome, morada, dataDeNascimento);
+
+                boolean adicionado = gestor.adicionarAutores(nome, morada, dataDeNascimento);
+
+                if(adicionado){
+                    System.out.println("Autor(a) " + nome + " adicionado(a) com sucesso!");
+                    System.out.println(" ");
+                }else{
+                    System.out.println("Ocorreu um erro ao adicionar o autor!\n");
+                }
             }
         } while (!sair);
     }

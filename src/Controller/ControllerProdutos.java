@@ -233,11 +233,12 @@ public class ControllerProdutos {
         }
         return nomeAutor;
     }
-    public void adicionarLivros(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor
+    public boolean adicionarLivros(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor
             autorAdicionado, Categoria categorias, LocalDate dataDePublicacao, String faixaEtaria, String editora, String
                                                   ISBN) {
         Produto livro = new Livro(0, titulo, quantidade, autorAdicionado, categorias, dataDePublicacao, faixaEtaria, editora, ISBN, subtitulo, numDePaginas);
         produtos.add(livro);
+        return true;
     }
 
     public boolean removerLivro(int idLivroRemover) {
@@ -394,9 +395,10 @@ public class ControllerProdutos {
     }
 
 
-    public void adicionarCDS(String titulo, int quantidade, int numCapitulos, Autor autorAdicionado, Categoria categoriaEncontrada, LocalDate dataDePublicacao, String faixaEtaria, String editora) {
+    public boolean adicionarCDS(String titulo, int quantidade, int numCapitulos, Autor autorAdicionado, Categoria categoriaEncontrada, LocalDate dataDePublicacao, String faixaEtaria, String editora) {
         Produto CD = new CD(0,titulo, quantidade, autorAdicionado, categoriaEncontrada, dataDePublicacao,  faixaEtaria, editora,numCapitulos);
         produtos.add(CD);
+        return true;
     }
 
     public boolean removerCD(int idCDRemover) {
