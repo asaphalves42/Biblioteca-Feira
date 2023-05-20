@@ -31,23 +31,23 @@ public class ViewDevolverProdutoReserva {
                 Socio socioDaReserva = reserva.getSocio(); // Obtém o sócio associado à reserva
                 LocalDate dataDeDevolucao = LocalDate.now();
 
-                controllerReservas.devolverLivro(idDaReserva, dataDeDevolucao, socioDaReserva);
+                boolean devolvido = controllerReservas.devolverLivro(idDaReserva, dataDeDevolucao, socioDaReserva);
 
                 String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
                 if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
                     controller.executar(reserva);
                 }
 
-                System.out.println("Devolvido com sucesso!");
-                System.out.println(" ");
-            } else {
-                System.out.println("Reserva não encontrada");
-                System.out.println(" ");
+                if (devolvido) {
+                    System.out.println("Devolvido com sucesso!");
+                    System.out.println(" ");
+                } else {
+                    System.out.println("Reserva não encontrada");
+                    System.out.println(" ");
+                }
             }
         }
     }
-
-
 }
 
 

@@ -8,7 +8,8 @@ import static Utilidades.Leitura.ler;
 
 public class MenuViewReservas {
     ControllerReservas gerirReservas = new ControllerReservas();
-    ViewEfetuarReserva efetuar = new ViewEfetuarReserva();
+    ViewEfetuarReservaLivro efetuar = new ViewEfetuarReservaLivro();
+    ViewEfetuarReservaCD efetuarCD = new ViewEfetuarReservaCD();
     ViewEditarReserva editar = new ViewEditarReserva();
     ViewListarReserva listar = new ViewListarReserva();
     ViewCancelarReserva cancelar = new ViewCancelarReserva();
@@ -68,13 +69,8 @@ public class MenuViewReservas {
                 opcao = ler.nextInt();
 
                 switch (opcao) {
-                    case 1:
-                        efetuar.efetuarReservaLivros(gerirReservas);
-                        break;
-                    case 2:
-                        //efetuarReservas CD´s
-                        break;
-
+                    case 1 -> efetuar.efetuarReservaLivros(gerirReservas);
+                    case 2 -> efetuarCD.efetuarReservaCD(gerirReservas);
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

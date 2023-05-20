@@ -73,6 +73,16 @@ public class ControllerReservas {
         GestorFicheiros.gravarFicheiro("reservas.txt", conteudo);
     }
 
+    public boolean efetuarReservaCD(Socio socioSelecionado, CD cdSelecionado, LocalDate dataDaReserva) {
+
+        // efetuar reserva do cd
+
+        //habilitar para reservar cd e livro na mesma reserva
+
+        // alterar no ficheiro
+
+        return true;
+    }
 
     public boolean efetuarReserva(Socio socioSelecionado, Livro livroSelecionado, LocalDate dataDaReserva) {
         boolean reservaExiste = false;
@@ -82,7 +92,7 @@ public class ControllerReservas {
             reservaExiste = true;
         }
 
-        if (!reservaExiste) {//cria uma nova reserva
+        if (!reservaExiste) {//cria uma reserva
             Reserva reserva = new Reserva();
             reserva.setSocio(socioSelecionado);
             reserva.setDataReserva(dataDaReserva);
@@ -113,7 +123,7 @@ public class ControllerReservas {
         return null;
     }
 
-    public void devolverLivro(String IdDaReserva, LocalDate dataDeDevolucao, Socio socioDaReserva) {
+    public boolean devolverLivro(String IdDaReserva, LocalDate dataDeDevolucao, Socio socioDaReserva) {
 
         Reserva reserva = pesquisarReservaPorId(IdDaReserva);
         reserva.setDataDeDevolucao(dataDeDevolucao);
@@ -125,6 +135,7 @@ public class ControllerReservas {
         if (socioDaReserva != null) {
             socioDaReserva.decrementarQuantidade();
         }
+        return true;
     }
 
 
@@ -154,6 +165,17 @@ public class ControllerReservas {
         }
         return livrosTitulo;
     }
+    public ArrayList<CD> pesquisarCDPorTitulo(String tituloDoCd) {
+        ArrayList<CD> cdsTitulo = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto instanceof CD cd) {
+                if (tituloDoCd.equalsIgnoreCase(cd.getTitulo())) {
+                    cdsTitulo.add(cd);
+                }
+            }
+        }
+        return cdsTitulo;
+    }
 
 
     public Reserva pesquisarReservaPorId(String idReserva) {
@@ -180,8 +202,6 @@ public class ControllerReservas {
         return false;
     }
 
-
-
     public ArrayList<Livro> listaTodosOsLivros() {
         ArrayList<Livro> livros = new ArrayList<>();
         for (Produto produto : produtos) {
@@ -200,7 +220,6 @@ public class ControllerReservas {
         }
         return cds;
     }
-
 
     public boolean editarReservaLivro(int idLivro, int novoLivroId) {
         boolean encontrou = false;
