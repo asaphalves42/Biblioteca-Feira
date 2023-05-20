@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.Livro;
-import Model.Produto;
-import Model.Reserva;
-import Model.Socio;
+import Model.*;
 import Utilidades.GestorFicheiros;
 
 import java.time.LocalDate;
@@ -49,7 +46,7 @@ public class ControllerReservas {
                             socioLista.setLivrosReservados(livros.size());//encontro os livros
                         }
                     }
-                    Reserva nova = new Reserva(value_split[0], socio, livros, LocalDate.parse(value_split[3]));
+                    Reserva nova = new Reserva(value_split[0], socio, livros, LocalDate.parse(value_split[3]),LocalDate.parse(value_split[4]));
                     reservas.add(nova);
                 }
             }
@@ -61,6 +58,7 @@ public class ControllerReservas {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         for (Reserva aux : reservas) {
             String formated_date = aux.getDataReserva().format(formatter);
+            String formated_date1 = aux.getDataDeDevolucao().format(formatter);
 
             conteudo += aux.getIdDaReserva() + "|";
             conteudo += aux.getSocio().getNumMecanografico() + "|";
@@ -69,7 +67,8 @@ public class ControllerReservas {
                 idLivros += livro.getId() + ",";
             }
             conteudo += idLivros + "|";
-            conteudo += formated_date + "|\n";
+            conteudo += formated_date + "|";
+            conteudo += formated_date1 + "\n";
         }
         GestorFicheiros.gravarFicheiro("reservas.txt", conteudo);
     }
@@ -140,13 +139,16 @@ public class ControllerReservas {
 
     public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloDoLivro) {
         ArrayList<Livro> livrosTitulo = new ArrayList<>();
-        for (Produto livro : produtos) {
-            if (tituloDoLivro.equalsIgnoreCase(livro.getTitulo())) {
-                livrosTitulo.add((Livro) livro);
+        for (Produto produto : produtos) {
+            if (produto instanceof Livro livro) {
+                if (tituloDoLivro.equalsIgnoreCase(livro.getTitulo())) {
+                    livrosTitulo.add(livro);
+                }
             }
         }
         return livrosTitulo;
     }
+
 
     public Reserva pesquisarReservaPorId(String idReserva) {
         for (Reserva reserva : reservas) {
@@ -173,13 +175,25 @@ public class ControllerReservas {
         return false;
     }
 
-    public void listaTodosOsLivros() {
-        ArrayList<Produto> todosLivros = new ArrayList<>();
-        for (Produto livro: ControllerProdutos.produtos){
-            todosLivros.add(livro);
+    public ArrayList<Livro> listaTodosOsLivros() {
+        ArrayList<Livro> livros = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto instanceof Livro) {
+                livros.add((Livro) produto);
+            }
         }
-        System.out.println(todosLivros);
+        return livros;
     }
+    public ArrayList<CD> listaTodosOsCDs() {
+        ArrayList<CD> cds = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto instanceof CD) {
+                cds.add((CD) produto);
+            }
+        }
+        return cds;
+    }
+
 
     public boolean editarReservaLivro(int idLivro, int novoLivroId) {
         boolean encontrou = false;

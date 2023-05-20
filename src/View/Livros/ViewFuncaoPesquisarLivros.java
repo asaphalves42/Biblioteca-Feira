@@ -14,12 +14,12 @@ public class ViewFuncaoPesquisarLivros {
 
         String tituloInserido = leStr("Insira o título do livro:");
 
-        ArrayList<Produto> livros = gestor.pesquisarProdutoPorTitulo(tituloInserido);
+        ArrayList<Livro> livros = gestor.pesquisarLivroPorTitulo(tituloInserido);
 
         if(livros.isEmpty()){
             System.out.println("Livro nao existente!");
         }else{
-            System.out.println(gestor.pesquisarProdutoPorTitulo(tituloInserido));
+            System.out.println(gestor.pesquisarLivroPorTitulo(tituloInserido));
         }
     }
 

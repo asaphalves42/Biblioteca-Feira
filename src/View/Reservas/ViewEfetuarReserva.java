@@ -87,10 +87,13 @@ public class ViewEfetuarReserva {
 
     public void efetuarReservaLivros(ControllerReservas gerirReservas ) {
         Socio socioSelecionado = selecionarSocioExistente(gerirReservas);
-        String input;
-        input = leStr("Se deseja mostrar todos os livros insira um ENTER");
+
+        String input = leStr("Se deseja mostrar todos os livros insira um ENTER");
         if (input.equalsIgnoreCase("")) {
-            gerirReservas.listaTodosOsLivros();
+            ArrayList<Livro> todosOsLivros = gerirReservas.listaTodosOsLivros();
+            for (Livro livro : todosOsLivros) {
+                System.out.println(livro);
+            }
 
         }
 
@@ -114,7 +117,7 @@ public class ViewEfetuarReserva {
                     System.out.println("Livro reservado com sucesso!");
                     System.out.println(" ");
                 } else {
-                    System.out.println("Ocorreu um erro ao efetuar reserva!");
+                    System.out.println("Ocorreu um erro ao efetuar reserva, número máximo de produtos reservados!");
                     System.out.println(" ");
                 }
 

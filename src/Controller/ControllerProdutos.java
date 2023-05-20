@@ -25,9 +25,7 @@ public class ControllerProdutos {
     public void lerProdutosDeFicheiro() {
         ArrayList<String> linhasProduto = GestorFicheiros.LerFicheiro("produtos.txt");
         ArrayList<String> linhasLivro = GestorFicheiros.LerFicheiro("livros.txt");
-
-
-        //ArrayList<String> linhasCD = GestorFicheiros.LerFicheiro("cd.txt");
+        ArrayList<String> linhasCD = GestorFicheiros.LerFicheiro("cd.txt");
 
         for (String linha : linhasProduto) {
             if (!linha.isEmpty()) {
@@ -60,6 +58,30 @@ public class ControllerProdutos {
                                 value_split_livro[2],
                                 Integer.parseInt(value_split_livro[3])
                         );
+                    }else if (Objects.equals(value_split_produto[1], "CD")){
+                        String[] value_split_cd = null;
+                        Autor autor = null;
+                        for (String linhaCD : linhasCD){
+                            if (linhaCD.startsWith(value_split_produto[0])){
+                                value_split_cd = linhaCD.split("\\|");
+                                String autorLido = value_split_produto[4];
+                                autor = controllerAutores.pesquisarAutorPorNomeTESTE(autorLido);
+                            }
+                        }
+
+                        assert value_split_cd != null;
+
+                        aux = new CD(
+                                Integer.parseInt(value_split_produto[0]),
+                                value_split_produto[2],
+                                Integer.parseInt(value_split_produto[3]),
+                                autor,
+                                new Categoria(value_split_produto[5]),
+                                LocalDate.parse(value_split_produto[6]),
+                                value_split_produto[7],
+                                value_split_produto[8],
+                                Integer.parseInt(value_split_cd[1])
+                        );
                     }
                     produtos.add(aux);
                 }
@@ -67,6 +89,7 @@ public class ControllerProdutos {
         }
 
     }
+
 
     public void gravarProdutosParaFicheiro() {
         String conteudoProduto = "";
@@ -96,15 +119,14 @@ public class ControllerProdutos {
                 conteudoLivro += livro.getISBN() + "\n";
             } else if (aux.getTipo().equalsIgnoreCase("cd")) {
                 //...fazer igual para CD
+                CD cd = (CD) aux;
+                conteudoCD += aux.getId() + "|";
+                conteudoCD += cd.getNumCapitulos() + "\n";
             }
         }
         GestorFicheiros.gravarFicheiro("produtos.txt", conteudoProduto);
         GestorFicheiros.gravarFicheiro("livros.txt", conteudoLivro);
-        //GestorFicheiros.gravarFicheiro("cd.txt", conteudoCD);
-    }
-
-    public ArrayList<Produto> listarProdutos() {
-        return produtos;
+        GestorFicheiros.gravarFicheiro("cd.txt", conteudoCD);
     }
 
     public ArrayList<Livro> listarProdutosLivros() {
@@ -127,15 +149,16 @@ public class ControllerProdutos {
         return cds;
     }
 
-    public ArrayList<Produto> pesquisarProdutoPorTitulo(String tituloInserido) {
-        ArrayList<Produto> produtosTitulo = new ArrayList<>();
+    public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloInserido) {
+        ArrayList<Livro> livrosTitulo = new ArrayList<>();
         for (Produto produto : produtos) {
-            if (tituloInserido.equalsIgnoreCase(produto.getTitulo())) {
-                produtosTitulo.add(produto);
+            if (produto instanceof Livro livro && tituloInserido.equalsIgnoreCase(produto.getTitulo())) {
+                livrosTitulo.add(livro);
             }
         }
-        return produtosTitulo;
+        return livrosTitulo;
     }
+
 
     public ArrayList<Produto> pesquisarProdutoPorAutor(String autorInserido) {
         ArrayList<Produto> produtoDoAutor = new ArrayList<>();
@@ -189,6 +212,18 @@ public class ControllerProdutos {
 
     }
 
+    public ArrayList<CD> pesquisarCDPorTitulo(String tituloDoCD) {
+        ArrayList<CD> cdsTitulo = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto instanceof CD cd) {
+                if (tituloDoCD.equalsIgnoreCase(cd.getTitulo())) {
+                    cdsTitulo.add(cd);
+                }
+            }
+        }
+        return cdsTitulo;
+    }
+
     public ArrayList<Autor> pesquisarAutorPorNome(String nomeInserido) {
         ArrayList<Autor> nomeAutor = new ArrayList<>();
         for (Autor nome : autores) {
@@ -198,7 +233,7 @@ public class ControllerProdutos {
         }
         return nomeAutor;
     }
-    public void adicionarLivrosComAutores(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor
+    public void adicionarLivros(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor
             autorAdicionado, Categoria categorias, LocalDate dataDePublicacao, String faixaEtaria, String editora, String
                                                   ISBN) {
         Produto livro = new Livro(0, titulo, quantidade, autorAdicionado, categorias, dataDePublicacao, faixaEtaria, editora, ISBN, subtitulo, numDePaginas);
@@ -212,6 +247,7 @@ public class ControllerProdutos {
             for (Produto livrosEscolhido : reserva.getLivros()) {
                 if (idLivroRemover == livrosEscolhido.getId()) {
                     encontrou = true;
+                    break;
                 }
             }
         }
@@ -364,6 +400,7 @@ public class ControllerProdutos {
     }
 
     public boolean removerCD(int idCDRemover) {
+        return true;
     }
 }
 

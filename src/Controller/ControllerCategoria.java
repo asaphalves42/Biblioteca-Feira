@@ -42,7 +42,7 @@ public class ControllerCategoria {
     public boolean adicionarCategorias(String nomeCategoria){
         // Verificar se a categoria já existe
         for (Categoria categoria : categorias) {
-            if (categoria.getNome().equals(nomeCategoria)) {
+            if (categoria.getNome().equalsIgnoreCase(nomeCategoria)) {
                 return false; // A categoria já existe, não é possível adicioná-la novamente
             }
         }
@@ -66,7 +66,7 @@ public class ControllerCategoria {
     public boolean removerCategoria(Categoria categoriaRemover) {
         // Verifica se a categoria está associada a algum livro
         for (Produto livro : produtos) {
-            if (livro.getCategoria().getNome().equals(categoriaRemover.getNome())) {
+            if (livro.getCategoria().getNome().equalsIgnoreCase(categoriaRemover.getNome())) {
                 // A categoria está associada a um livro, não é possível remover
                 return false;
             }

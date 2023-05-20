@@ -9,7 +9,7 @@ public class Reserva {
     private ArrayList<Produto> livros = new ArrayList<>();
 
     private LocalDate dataReserva;
-    private String idDaReserva;
+    private final String idDaReserva;
 
     private LocalDate dataDeDevolucao;
 
@@ -24,11 +24,12 @@ public class Reserva {
         int id = aleatorio.nextInt(99999999);
         this.idDaReserva = String.format("%08d", id);
     }
-    public Reserva(String idReserva, Socio socio, ArrayList<Produto> livros, LocalDate dataReserva) {
+    public Reserva(String idReserva, Socio socio, ArrayList<Produto> livros, LocalDate dataReserva, LocalDate dataDeDevolucao) {
         this.idDaReserva = idReserva;
         this.socio = socio;
         this.livros = livros;
         this.dataReserva = dataReserva;
+        this.dataDeDevolucao = dataDeDevolucao;
     }
 
     public LocalDate getDataDeDevolucao() {
@@ -78,7 +79,7 @@ public class Reserva {
                 "Quantidade de Livros: " + livros.size() + "\n" +
                 "Livros: " + getNomes(livros) + "\n" +
                 "Data da reserva: " + dataReserva + "]" + "\n"  +
-                "Devolvido em: " + getDataDeDevolucao() + "\n" +
+                "Devolvido em: " + dataDeDevolucao + "\n" +
                 "-----------------------------" + "\n";
     }
 

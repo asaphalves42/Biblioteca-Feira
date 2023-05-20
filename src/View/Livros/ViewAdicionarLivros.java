@@ -172,7 +172,7 @@ public class ViewAdicionarLivros {
             System.out.println("Livro " + titulo + " adicionado com sucesso!");
             System.out.println(" ");
 
-            gestorAutor.adicionarLivrosComAutores(titulo, subtitulo, quantidade, numDePaginas, autorAdicionado, categoriaEncontrada, dataDePublicacao, faixaEtaria, editora, ISBN);
+            gestorAutor.adicionarLivros(titulo, subtitulo, quantidade, numDePaginas, autorAdicionado, categoriaEncontrada, dataDePublicacao, faixaEtaria, editora, ISBN);
 
         } while (sair);
     }

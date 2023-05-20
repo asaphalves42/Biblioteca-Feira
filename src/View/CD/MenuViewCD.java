@@ -35,11 +35,16 @@ public class MenuViewCD {
 
                 switch (opcao) {
                     case 1: adicionarCDS.MenuAdicionarCd(gestor, gestorCategoria);
+                    break;
                     case 2: listarCDS.listarCDS(gestor);
+                    break;
                     case 3: //editar cds
+                        break;
                     case 4: //remover cds
+                        break;
                     case 5: //pesquisar cds
-                    case 6: //gravar
+                        break;
+                    case 6: gestor.gravarProdutosParaFicheiro();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

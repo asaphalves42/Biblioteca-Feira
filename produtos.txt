@@ -1,4 +1,2 @@
-1|livro|1984|3|Asaph|Artes|1990-08-04|Adulto|Porto|
-2|livro|teste|3|Asaph|Matematica|1999-06-09|teste|teste|
-3|livro|teste2|4|Jack London|Matematica|2020-06-07|teste2|teste2|
-4|livro|teste3|1|Antoine de Saint-Exupéry|Psicologia|2021-08-09|teste3|teste3|
+1|livro|teste|3|Asaph|Artes|2001-02-10|teste|teste|
+2|CD|teste|2|Asaph|Artes|2002-02-02|teste|teste|

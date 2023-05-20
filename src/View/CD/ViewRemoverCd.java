@@ -17,7 +17,7 @@ public class ViewRemoverCd {
         while (!sair) {
             try {
                 String tituloCD = leStr("Insira o título do livro: ");
-                ArrayList<CD> cdsParaRemover = gestor.pesquisarProdutoPorTitulo(tituloCD);
+                ArrayList<CD> cdsParaRemover = gestor.pesquisarCDPorTitulo(tituloCD);
 
                 if (cdsParaRemover.isEmpty()) {
                     System.out.println("Não existem cds no stock!\n");
