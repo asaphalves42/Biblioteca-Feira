@@ -33,6 +33,11 @@ public class Socio extends Pessoa {
         }
     }
 
+    public void resetQuantidade(){
+        produtosReservados = 0;
+
+    }
+
     public int getProdutosReservados() {
         return produtosReservados;
     }

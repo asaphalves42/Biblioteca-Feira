@@ -107,6 +107,7 @@ public class ViewEfetuarReservaLivro {
                 System.out.println("Não existem mais exemplares desse livro no estoque!");
                 System.out.println();
             } else {
+
                 boolean sucesso = gerirReservas.efetuarReserva(socioSelecionado, livroSelecionado, dataDaReserva);
 
                 if (sucesso) {
