@@ -223,6 +223,17 @@ public class ControllerProdutos {
         }
         return cdsTitulo;
     }
+    public ArrayList<CD> pesquisarCDPorAutor(String AutorDoCD) {
+        ArrayList<CD> cdsAutor = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto instanceof CD cd) {
+                if (AutorDoCD.equalsIgnoreCase(cd.getAutor().getNome())) {
+                    cdsAutor.add(cd);
+                }
+            }
+        }
+        return cdsAutor;
+    }
 
     public ArrayList<Autor> pesquisarAutorPorNome(String nomeInserido) {
         ArrayList<Autor> nomeAutor = new ArrayList<>();
