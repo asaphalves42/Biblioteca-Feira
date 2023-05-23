@@ -52,6 +52,8 @@ public class ControllerLogin {
         GestorFicheiros.gravarFicheiro("Utilizadores.txt", conteudo);
     }
 
+
+
     public static void adicionarUtilizador(String email, String password) {
         if (validarEmail(email)) {
             Utilizador utilizador = new Utilizador(email, password);

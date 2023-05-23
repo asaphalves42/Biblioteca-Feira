@@ -8,6 +8,7 @@ import View.CD.MenuViewCD;
 import View.Categoria.MenuViewCategoria;
 import View.Livros.MenuViewLivros;
 
+import View.Login.MenuViewLogin;
 import View.Reservas.MenuViewReservas;
 import View.Socios.MenuViewSocios;
 
@@ -26,9 +27,11 @@ public class ViewAplicacao {
     ControllerCategoria lerEgravarCategoria = new ControllerCategoria();
     ControllerReservas lerEGravarReservas = new ControllerReservas(lerEgravarSocios,lerEgravarProdutos);
     ControllerLogin lerEgravarUtilizadores = new ControllerLogin();
+    MenuViewLogin menulogin = new MenuViewLogin();
+
     public void Iniciar() {
         //Ler os ficheiros
-        lerEgravarUtilizadores.lerUtilizadorDeFicheiro();
+       // lerEgravarUtilizadores.lerUtilizadorDeFicheiro();
         lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarProdutos.lerProdutosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
@@ -39,56 +42,17 @@ public class ViewAplicacao {
 
 
         // Iniciar o sistema
-        mensagemUtilizadorParaRegisto();
-        menuPrincipal();
+
+        menulogin.menuUtilizadores();
+       // mensagemUtilizadorParaRegisto();
+       // menuPrincipal();
 
         // Criar instância do ControllerLogin
       //  controllerLogin = new ControllerLogin(new ViewLogin());
 
     }
 
-    public void mensagemUtilizadorParaRegisto() {
-        int opcao;
 
-        do {
-            System.out.println("Se já estás registado no sistema, selecione a opção 1 para efetuar o login");
-            System.out.println("1 - Login");
-            System.out.println("Se não, efetue o registo!");
-            System.out.println("2 - Efetuar registo");
-            System.out.println("3 - Sair");
-
-            try {
-                opcao = ler.nextInt();
-                switch (opcao) {
-                    /*
-                }
-                    case 1 -> {
-
-                       // controllerLogin = new ControllerLogin(new ViewLogin());
-
-                      //  boolean loginSucesso = controllerLogin.iniciar();
-                        if (loginSucesso) {
-                            ViewLogin.mostrarMensagemDeLoginComSucesso();
-                            menuPrincipal();
-                        } else {
-                            ViewLogin.mostrarMensagemDeLoginFalhado();
-                        }
-                    }
-                  //  case 2 -> controllerLogin.testeAdm();
-
-
-
-                    case 3 -> System.exit(0);
-*/
-                    default -> System.out.println("Por favor, insira uma opção válida numérica.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Por favor, insira uma opção válida numérica.");
-                opcao = 0;
-                ler.nextLine();
-            }
-        } while (true);
-    }
 
     public void menuPrincipal() {
 

@@ -2,31 +2,47 @@ package View.Login;
 
 import Controller.ControllerLogin;
 
+import static Utilidades.Leitura.leStr;
 import static Utilidades.Leitura.ler;
 import Controller.ControllerLogin;
+import View.ViewAplicacao;
+
 public class ViewFuncaoRealizarLogin {
     private ControllerLogin controllerLogin = new ControllerLogin();
+    ViewAplicacao viewaplicacao = new ViewAplicacao();
 
-    private void realizarLogin() {
+    public void realizarLogin() {
         System.out.println("## Login ##");
         System.out.println("------------------------");
 
-        System.out.print("Email: ");
-        String email = ler.nextLine();
+        boolean autenticado = false;
 
-        System.out.print("Password: ");
-        String password = ler.nextLine();
+        do {
+            String  email = leStr("Password: ");
 
 
-        boolean autenticado = controllerLogin.autenticarUtilizador(email, password);
+          String  password = leStr("Password: ");
+
+            autenticado = controllerLogin.autenticarUtilizador(email, password);
+
+            if (!autenticado) {
+                System.out.println("Credenciais inválidas.");
+
+
+                String  opcao = leStr("Deseja inserir novamente o email? (S/N): ");
+
+                if (!opcao.equalsIgnoreCase("S")) {
+                    break;
+                }
+            }
+        } while (!autenticado);
 
         if (autenticado) {
             System.out.println("Login realizado com sucesso!");
-            // Coloque aqui o código que deseja executar após o login bem-sucedido
-        } else {
-            System.out.println("Credenciais inválidas. Tente novamente.");
+            viewaplicacao.menuPrincipal();
         }
 
         System.out.println();
     }
+
 }

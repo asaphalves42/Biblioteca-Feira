@@ -1,11 +1,2 @@
-tiago1,tiago1
-tiago.a.marquez@gmail.com,jatedisse
-josesa,josesa
-rosasa,rosasa
-teste,teste
-rjr@isep.ipp.pt,rjr
-asaphalves42@gmail.com,teste
-t@t.com,1
-p@p.com,1
-p@p.com,1
-p@p.com,123
+tiago.a.marquez@gmail.com|naosei
+joaocosta@gmail.com|naoseigg
