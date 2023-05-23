@@ -16,6 +16,7 @@ public class MenuViewCD {
     ViewAdicionarCd adicionarCDS = new ViewAdicionarCd();
     ViewPesquisarCd CDPorTitulo = new ViewPesquisarCd();
     ViewPesquisarCd CDSPorAutor= new ViewPesquisarCd();
+    ViewRemoverCd eliminarCDporTitulo = new ViewRemoverCd();
     public void menuCds() {
         int opcao;
 
@@ -44,6 +45,7 @@ public class MenuViewCD {
                     case 3: //editar cds
                         break;
                     case 4: //remover cds
+                        eliminarCDporTitulo.eliminarCDporTitulo(gestor);
                         break;
                     case 5:
                         pesquisarCD();

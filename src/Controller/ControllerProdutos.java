@@ -278,6 +278,15 @@ public class ControllerProdutos {
 
         return encontrou;
     }
+    public boolean editarCDDoLivro(int idCDEditar, String tituloNovo) {
+        for (Produto CD : produtos) {
+            if (idCDEditar == CD.getId()) {
+                CD.setTitulo(tituloNovo);
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean editarTituloDoLivro(int idLivroEditar, String tituloNovo) {
         for (Produto livro : produtos) {
