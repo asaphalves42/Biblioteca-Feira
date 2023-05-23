@@ -29,9 +29,10 @@ public class ViewDevolverProdutoReserva {
             if (reserva != null) {
                 System.out.println(reserva);
                 Socio socioDaReserva = reserva.getSocio(); // Obtém o sócio associado à reserva
+
                 LocalDate dataDeDevolucao = LocalDate.now();
 
-                boolean devolvido = controllerReservas.devolverLivro(idDaReserva, dataDeDevolucao, socioDaReserva);
+                boolean devolvido = controllerReservas.devolverProduto(idDaReserva, dataDeDevolucao, socioDaReserva);
 
                 String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
                 if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {

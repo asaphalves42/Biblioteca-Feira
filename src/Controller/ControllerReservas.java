@@ -23,11 +23,11 @@ public class ControllerReservas {
     public ControllerReservas() {
 
     }
-
     public void lerLivrosDeFicheiroReserva() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("reservas.txt");
 
         reservas = new ArrayList<>();
+        LocalDate date;
 
         for (String linha : linhas) {
             if (!linha.isEmpty()) {
@@ -38,27 +38,62 @@ public class ControllerReservas {
                     String[] idLivros = value_split[2].split(",");
                     ArrayList<Produto> livros = new ArrayList<>();
                     for (String idLivro : idLivros) {
-                        Produto livro = ControllerProdutos.pesquisarProdutoPorId(Integer.parseInt(idLivro));
-                        livros.add(livro);
-                    }
-                    for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associado
-                        if (socioLista.getNumMecanografico() == socio.getNumMecanografico()) {//igualo o socio
-                            socioLista.setProdutosReservados(livros.size());//encontro os livros
+                        if(idLivro != null && !idLivro.isEmpty()){
+                            Produto livro = ControllerProdutos.pesquisarProdutoPorId(Integer.parseInt(idLivro));
+                            livros.add(livro);
                         }
                     }
-                    Reserva nova = new Reserva(value_split[0], socio, livros, LocalDate.parse(value_split[3]),LocalDate.parse(value_split[4]));
+
+                    String[] idCds= value_split[3].split(",");
+                    ArrayList<Produto> cds = new ArrayList<>();
+                    for (String idCd : idCds) {
+                        if(idCd != null && !idCd.isEmpty()) {
+                            Produto cd = ControllerProdutos.pesquisarProdutoPorId(Integer.parseInt(idCd));
+                            cds.add(cd);
+                        }
+                    }
+
+                    if(value_split[5].equalsIgnoreCase("null")){
+                         date = null;
+                    }else{
+                         date = LocalDate.parse(value_split[4]);
+                    }
+                    Reserva nova = new Reserva(value_split[0], socio, livros, cds, LocalDate.parse(value_split[4]),date);
+
+                    if(date!= null){
+                        nova.setDevolvido(true);
+                        for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associado
+                            if (socioLista.getNumMecanografico() == socio.getNumMecanografico()) {//igualo o socio
+                                socioLista.setProdutosReservados(0);//encontro os livros
+                            }
+                        }
+                    }else{
+                        for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associado
+                            if (socioLista.getNumMecanografico() == socio.getNumMecanografico()) {//igualo o socio
+                                socioLista.setProdutosReservados(livros.size() + cds.size());//encontro os livros
+                            }
+                        }
+                    }
                     reservas.add(nova);
                 }
             }
         }
     }
 
+
     public void gravarReservasParaFicheiro() {
         String conteudo = "";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formated_date1;
         for (Reserva aux : reservas) {
             String formated_date = aux.getDataReserva().format(formatter);
-            String formated_date1 = aux.getDataDeDevolucao().format(formatter);
+
+            if(aux.getDataDeDevolucao()!= null){
+                formated_date1 = aux.getDataDeDevolucao().format(formatter);
+            }else{
+                formated_date1 = null;
+            }
+
 
             conteudo += aux.getIdDaReserva() + "|";
             conteudo += aux.getSocio().getNumMecanografico() + "|";
@@ -67,6 +102,12 @@ public class ControllerReservas {
                 idLivros += livro.getId() + ",";
             }
             conteudo += idLivros + "|";
+            String idCds = "";
+            for (Produto cd : aux.getCds()) {
+                idCds += cd.getId() + ",";
+            }
+
+            conteudo += idCds + "|";
             conteudo += formated_date + "|";
             conteudo += formated_date1 + "\n";
         }
@@ -75,13 +116,31 @@ public class ControllerReservas {
 
     public boolean efetuarReservaCD(Socio socioSelecionado, CD cdSelecionado, LocalDate dataDaReserva) {
 
-        // efetuar reserva do cd
+        boolean reservaExiste = false;
+        Reserva reservaAux = getReserva(socioSelecionado);
 
-        //habilitar para reservar cd e livro na mesma reserva
+        if (reservaAux != null) {
+            reservaExiste = true;
+        }
 
-        // alterar no ficheiro
+        if (!reservaExiste) {//cria uma reserva
+            Reserva reserva = new Reserva();
+            reserva.setSocio(socioSelecionado);
+            reserva.setDataReserva(dataDaReserva);
+            reservaAux = reserva;
+        }
+        if (socioSelecionado.getProdutosReservados() >= 3) {//se ja estiver 3, não deixa reservar
+            return false;
 
-        return true;
+        } else { //adicionar a uma reserva que ja existe
+            reservaAux.getCds().add(cdSelecionado);
+            socioSelecionado.aumentarQuantidade();
+            cdSelecionado.decrementarQuantidade();
+            if (!reservaExiste) {
+                reservas.add(reservaAux);
+            }
+            return true;
+        }
     }
 
     public boolean efetuarReserva(Socio socioSelecionado, Livro livroSelecionado, LocalDate dataDaReserva) {
@@ -112,33 +171,31 @@ public class ControllerReservas {
         }
     }
 
-
     public Reserva getReserva(Socio socioSelecionado) {
         //igualo o meu socio selecionado com o numero mecanografico
         for (Reserva res : reservas) {
-            if (res.getSocio().getNumMecanografico() == socioSelecionado.getNumMecanografico()) {
+            if (res.getSocio().getNumMecanografico() == socioSelecionado.getNumMecanografico() && !res.isDevolvido()) {
                 return res;
             }
         }
         return null;
     }
 
-    public boolean devolverLivro(String IdDaReserva, LocalDate dataDeDevolucao, Socio socioDaReserva) {
+    public boolean devolverProduto(String IdDaReserva, LocalDate dataDeDevolucao, Socio socioDaReserva) {
 
         Reserva reserva = pesquisarReservaPorId(IdDaReserva);
         reserva.setDataDeDevolucao(dataDeDevolucao);
+        reserva.setDevolvido(true);
 
         for (Produto produto : reserva.getLivros()) {
             produto.aumentarQuantidade();
         }
 
         if (socioDaReserva != null) {
-            socioDaReserva.decrementarQuantidade();
+            socioDaReserva.resetQuantidade();
         }
         return true;
     }
-
-
 
     public ArrayList<Reserva> listarReservas() {
         return reservas;
@@ -193,8 +250,12 @@ public class ControllerReservas {
                 for (Produto cancelarLivro : reserva.getLivros()) {
                     cancelarLivro.aumentarQuantidade();
                 }
+
+                for (Produto cancelarCD : reserva.getCds()) {
+                    cancelarCD.aumentarQuantidade();
+                }
                 Socio socio = reserva.getSocio();
-                socio.decrementarQuantidade();
+                socio.resetQuantidade();
                 reservas.remove(reserva);
                 return true;
             }

@@ -8,14 +8,14 @@ import java.util.ArrayList;
 public class ViewListarReserva {
     public void listarTodasAsReservas(ControllerReservas gerirReservas) {
 
-        ArrayList<Reserva> livrosReservadosListados = gerirReservas.listarReservas();
+        ArrayList<Reserva> reservasListadas = gerirReservas.listarReservas();
 
-        if(livrosReservadosListados.isEmpty()){
+        if(reservasListadas.isEmpty()){
             System.out.println("Nao existem reservas!");
             System.out.println(" ");
         } else{
-            for(Reserva livroReservado : livrosReservadosListados){
-                System.out.println(livroReservado.toString());
+            for(Reserva reserva : reservasListadas){
+                System.out.println(reserva.toString());
             }
         }
     }

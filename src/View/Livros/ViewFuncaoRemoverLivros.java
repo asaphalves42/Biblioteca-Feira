@@ -1,7 +1,7 @@
 package View.Livros;
 
 import Controller.ControllerProdutos;
-import Model.CD;
+import Model.Livro;
 import Model.Produto;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class ViewFuncaoRemoverLivros {
         while (!sair) {
             try {
                 String tituloLivro = leStr("Insira o título do livro: ");
-                ArrayList<CD> livrosParaRemover = gestor.pesquisarCDPorTitulo(tituloLivro);
+                ArrayList<Livro> livrosParaRemover = gestor.pesquisarLivroPorTitulo(tituloLivro);
 
                 if (livrosParaRemover.isEmpty()) {
                     System.out.println("Não existem livros no estoque!\n");

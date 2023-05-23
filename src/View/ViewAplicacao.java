@@ -7,7 +7,7 @@ import View.Autores.MenuViewAutores;
 import View.CD.MenuViewCD;
 import View.Categoria.MenuViewCategoria;
 import View.Livros.MenuViewLivros;
-import View.Login.ViewLogin;
+
 import View.Reservas.MenuViewReservas;
 import View.Socios.MenuViewSocios;
 
@@ -17,7 +17,7 @@ import static Utilidades.Leitura.ler;
 
 public class ViewAplicacao {
     public ViewAplicacao() {
-        controllerLogin = new ControllerLogin(new ViewLogin());
+        //controllerLogin = new ControllerLogin(new ViewLogin());
     }
     private ControllerLogin controllerLogin;
     ControllerAutores lerEgravarAutores = new ControllerAutores();
@@ -25,9 +25,10 @@ public class ViewAplicacao {
     ControllerSocios lerEgravarSocios = new ControllerSocios();
     ControllerCategoria lerEgravarCategoria = new ControllerCategoria();
     ControllerReservas lerEGravarReservas = new ControllerReservas(lerEgravarSocios,lerEgravarProdutos);
+    ControllerLogin lerEgravarUtilizadores = new ControllerLogin();
     public void Iniciar() {
         //Ler os ficheiros
-
+        lerEgravarUtilizadores.lerUtilizadorDeFicheiro();
         lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarProdutos.lerProdutosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
@@ -38,11 +39,11 @@ public class ViewAplicacao {
 
 
         // Iniciar o sistema
-        //mensagemUtilizadorParaRegisto();
+        mensagemUtilizadorParaRegisto();
         menuPrincipal();
 
         // Criar instância do ControllerLogin
-        controllerLogin = new ControllerLogin(new ViewLogin());
+      //  controllerLogin = new ControllerLogin(new ViewLogin());
 
     }
 
@@ -59,9 +60,13 @@ public class ViewAplicacao {
             try {
                 opcao = ler.nextInt();
                 switch (opcao) {
+                    /*
+                }
                     case 1 -> {
-                        controllerLogin = new ControllerLogin(new ViewLogin());
-                        boolean loginSucesso = controllerLogin.iniciar();
+
+                       // controllerLogin = new ControllerLogin(new ViewLogin());
+
+                      //  boolean loginSucesso = controllerLogin.iniciar();
                         if (loginSucesso) {
                             ViewLogin.mostrarMensagemDeLoginComSucesso();
                             menuPrincipal();
@@ -69,8 +74,12 @@ public class ViewAplicacao {
                             ViewLogin.mostrarMensagemDeLoginFalhado();
                         }
                     }
-                    case 2 -> controllerLogin.registar();
+                  //  case 2 -> controllerLogin.testeAdm();
+
+
+
                     case 3 -> System.exit(0);
+*/
                     default -> System.out.println("Por favor, insira uma opção válida numérica.");
                 }
             } catch (InputMismatchException e) {

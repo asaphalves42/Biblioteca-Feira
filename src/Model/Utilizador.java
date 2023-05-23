@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class Utilizador {
+public  class Utilizador {
 
     public Utilizador(String email, String password) {
         this.email = email;
@@ -25,6 +25,11 @@ public class Utilizador {
         return password;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Utilizador{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

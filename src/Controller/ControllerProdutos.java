@@ -180,6 +180,11 @@ public class ControllerProdutos {
                 if (IdInserido == aux.getId()) {
                     return produto;
                 }
+            } else if(Objects.equals(produto.getTipo(), "CD")){
+                CD aux = (CD) produto;
+                if (IdInserido == aux.getId()) {
+                    return produto;
+                }
             }
         }
         return null;
