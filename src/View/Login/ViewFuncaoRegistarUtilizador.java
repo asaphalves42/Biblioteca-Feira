@@ -16,10 +16,16 @@ public class ViewFuncaoRegistarUtilizador {
 
         String password = leStr("Password :");
 
-        ControllerLogin.adicionarUtilizador(email, password);
+        boolean adicionado = ControllerLogin.adicionarUtilizador(email, password);
 
-        System.out.println("Utilizador registado com sucesso!");
+        if(adicionado){
+            System.out.println("Utilizador registado com sucesso!");
+        } else{
+            System.out.println("erro ao sjd");
+        }
+
+        //deixar a opcao no menu
         controllerLogin.gravarUtilizadorParaFicheiro();
-        System.out.println();
+
     }
 }

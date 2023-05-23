@@ -21,7 +21,7 @@ public class MenuViewAdministrarUtilizadores {
             System.out.println("1 - Registar Utilizador");
             System.out.println("2 - Eliminar Utilizador");
             System.out.println("3 - Aceder à Libraria");
-            System.out.println("3 - Sair");
+            System.out.println("4 - Sair");
 
             try {
                 opcao = ler.nextInt();
