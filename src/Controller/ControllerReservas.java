@@ -174,7 +174,7 @@ public class ControllerReservas {
     public Reserva getReserva(Socio socioSelecionado) {
         //igualo o meu socio selecionado com o numero mecanografico
         for (Reserva res : reservas) {
-            if (res.getSocio().getNumMecanografico() == socioSelecionado.getNumMecanografico() && res.isDevolvido() == false) {
+            if (res.getSocio().getNumMecanografico() == socioSelecionado.getNumMecanografico() && !res.isDevolvido()) {
                 return res;
             }
         }
