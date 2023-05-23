@@ -21,7 +21,7 @@ public class ViewRegistrarAdministrador {
 
             ControllerLogin.adicionarUtilizador(email, password);
 
-            System.out.println("Utilizador registado com sucesso!");
+            System.out.println("Administrador registado com sucesso!");
             controllersuperadministrador.gravarAdministradorParaFicheiro();
             System.out.println();
         }
