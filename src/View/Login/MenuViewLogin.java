@@ -22,10 +22,10 @@ public class MenuViewLogin {
 
                 switch (opcao) {
                     case 1:
-                        realizarLogin();
+                        //realizarLogin();
                         break;
                     case 2:
-                        registarUtilizador();
+                        //registarUtilizador();
                         break;
                     case 3:
                         System.out.println("Saindo do sistema...");

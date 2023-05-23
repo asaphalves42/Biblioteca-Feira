@@ -28,7 +28,7 @@ public class ViewAplicacao {
     ControllerLogin lerEgravarUtilizadores = new ControllerLogin();
     public void Iniciar() {
         //Ler os ficheiros
-        lerEgravarUtilizadores.lerUtilizadorDeFicheiro();
+
         lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarProdutos.lerProdutosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
@@ -39,7 +39,7 @@ public class ViewAplicacao {
 
 
         // Iniciar o sistema
-        mensagemUtilizadorParaRegisto();
+        //mensagemUtilizadorParaRegisto();
         menuPrincipal();
 
         // Criar instância do ControllerLogin

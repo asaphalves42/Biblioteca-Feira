@@ -9,28 +9,46 @@ import static Utilidades.Leitura.leStr;
 
 public class ViewPesquisarCd {
     public void CDPorTitulo(ControllerProdutos gestor){
+        while (true) {
+            try {
+                String tituloCD = leStr("Insira o título do livro (ou 'sair' para voltar ao menu anterior):");
 
-        String tituloCD = leStr("Insira o título do livro:");
+                if (tituloCD.equalsIgnoreCase("sair")) {
+                    break;  // Sair do loop e retornar ao menu anterior
+                }
 
-        ArrayList<CD>  CD = gestor.pesquisarCDPorTitulo(tituloCD);
+                ArrayList<CD> CDs = gestor.pesquisarCDPorTitulo(tituloCD);
 
-        if(CD.isEmpty()){
-            System.out.println("CD nao existente!");
-        }else{
-            System.out.println(gestor.pesquisarCDPorTitulo(tituloCD));
+                if (CDs.isEmpty()) {
+                    System.out.println("CD não encontrado!");
+                } else {
+                    System.out.println(CDs);
+                }
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro. Por favor, tente novamente.");
+            }
         }
     }
+
     public void CDSPorAutor(ControllerProdutos gestor){
+        while (true) {
+            try {
+                String autorCDInserido = leStr("Insira o autor do CD (ou 'sair' para voltar ao menu anterior):");
 
-        String autorCDInserido = leStr("Insira o autor do CD:");
+                if (autorCDInserido.equalsIgnoreCase("sair")) {
+                    break;  // Sair do loop e retornar ao menu anterior
+                }
 
-        ArrayList<CD> CD = gestor.pesquisarCDPorAutor(autorCDInserido);
+                ArrayList<CD> CDs = gestor.pesquisarCDPorAutor(autorCDInserido);
 
-        if(CD.isEmpty()){
-            System.out.println("Autor nao existe!");
-        }else{
-            System.out.println(CD);
+                if (CDs.isEmpty()) {
+                    System.out.println("Autor não encontrado!");
+                } else {
+                    System.out.println(CDs);
+                }
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro. Por favor, tente novamente.");
+            }
         }
-
     }
 }
