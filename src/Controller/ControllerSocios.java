@@ -45,10 +45,11 @@ public class ControllerSocios {
     }
 
 
-    public void adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
+    public boolean adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
 
         Socio socio = new Socio(nome, morada, dataDeNascimento, telefone);
         socios.add(socio);
+        return true;
     }
 
     public ArrayList<Socio> listarSocio() {

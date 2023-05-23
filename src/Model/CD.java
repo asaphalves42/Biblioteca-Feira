@@ -4,17 +4,17 @@ import java.time.LocalDate;
 
 public class CD extends Produto{
     public CD(int id, String titulo, int quantidade, Autor nomeAutor, Categoria categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora,
-              String numCapitulos) {
+              int numCapitulos) {
         super(id, titulo, quantidade, nomeAutor, categoria, dataDePublicacao, faixaEtaria, editora);
         this.numCapitulos = numCapitulos;
     }
-    private String numCapitulos;
+    private int numCapitulos;
 
-    public String getNumCapitulos() {
+    public int getNumCapitulos() {
         return numCapitulos;
     }
 
-    public void setNumCapitulos(String numCapitulos) {
+    public void setNumCapitulos(int numCapitulos) {
         this.numCapitulos = numCapitulos;
     }
 
@@ -27,12 +27,12 @@ public class CD extends Produto{
                 "ID: " + this.getId() + "\n" +
                 "Quantidade: " + this.getQuantidade() + "\n" +
                 "Título: " + this.getTitulo() + "\n" +
-                "Autor: " + this.getAutor() + "\n" +
+                "Autor: " + this.getAutor().getNome() + "\n" +
                 "Número de capítulos: " + this.getNumCapitulos() + "\n" +
-                "Categoria: " + this.getCategoria() + "\n" +
+                "Categoria: " + this.getCategoria().getNome() + "\n" +
                 "Data de lançamento: " + this.getDataDePublicacao() + "\n" +
                 "Faixa etaria: " + this.getFaixaEtaria() + "\n" +
-                "Editora: " + this.getEditora() + "]" + "\n" +
+                "Produtora: " + this.getEditora() + "]" + "\n" +
               "----------------------------------------------------";
     }
 

@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
-public class ViewEfetuarReserva {
-    private ArrayList<Livro> livros;
+public class ViewEfetuarReservaLivro {
 
     private Socio selecionarSocioExistente(ControllerReservas gerirReservas) {
         Socio socioSelecionado = null;
@@ -44,9 +43,8 @@ public class ViewEfetuarReserva {
         return socioSelecionado;
     }
 
-    private Livro selecionarLivroDisponivel(ControllerReservas gerirReservas) {
+    private Livro selecionarProdutoDisponivel(ControllerReservas gerirReservas) {
         Livro livroSelecionado = null;
-        String input;
 
         while (livroSelecionado == null) {
             String tituloDoLivro = leStr("Digite o título do livro:");
@@ -87,44 +85,43 @@ public class ViewEfetuarReserva {
     }
 
 
-    public void efetuarReserva(ControllerReservas gerirReservas ) {
+    public void efetuarReservaLivros(ControllerReservas gerirReservas) {
         Socio socioSelecionado = selecionarSocioExistente(gerirReservas);
-        String input;
-        input = leStr("Se deseja mostrar todos os livros insira um ENTER");
-        if (input.equalsIgnoreCase("")) {
-            gerirReservas.listaTodosOsLivros();
 
+        String input = leStr("Se deseja mostrar todos os livros insira um ENTER");
+        if (input.equalsIgnoreCase("")) {
+            ArrayList<Livro> todosOsLivros = gerirReservas.listaTodosOsLivros();
+            for (Livro livro : todosOsLivros) {
+                System.out.println(livro);
+            }
         }
 
         boolean continuarReservando = true;
 
         while (continuarReservando) {
-            Livro livroSelecionado = selecionarLivroDisponivel(gerirReservas);
+            Livro livroSelecionado = selecionarProdutoDisponivel(gerirReservas);
 
             LocalDate dataDaReserva = LocalDate.now();
 
-
             if (livroSelecionado.getQuantidade() == 0) {
                 System.out.println("Não existem mais exemplares desse livro no estoque!");
-                System.out.println(" ");
-
+                System.out.println();
             } else {
 
                 boolean sucesso = gerirReservas.efetuarReserva(socioSelecionado, livroSelecionado, dataDaReserva);
 
                 if (sucesso) {
                     System.out.println("Livro reservado com sucesso!");
-                    System.out.println(" ");
+                    System.out.println();
                 } else {
-                    System.out.println("Ocorreu um erro ao efetuar reserva!");
-                    System.out.println(" ");
+                    System.out.println("Ocorreu um erro ao efetuar reserva, número máximo de produtos reservados!");
+                    System.out.println();
                 }
 
                 String continuar = leStr("Deseja continuar reservar outro livro? (S/N): ");
                 if (!continuar.equalsIgnoreCase("s") && (!continuar.equalsIgnoreCase("sim"))) {
                     continuarReservando = false;
                 }
-
             }
         }
     }

@@ -25,7 +25,7 @@ public class ControllerProdutos {
     public void lerProdutosDeFicheiro() {
         ArrayList<String> linhasProduto = GestorFicheiros.LerFicheiro("produtos.txt");
         ArrayList<String> linhasLivro = GestorFicheiros.LerFicheiro("livros.txt");
-        //ArrayList<String> linhasCD = GestorFicheiros.LerFicheiro("cd.txt");
+        ArrayList<String> linhasCD = GestorFicheiros.LerFicheiro("cd.txt");
 
         for (String linha : linhasProduto) {
             if (!linha.isEmpty()) {
@@ -58,6 +58,30 @@ public class ControllerProdutos {
                                 value_split_livro[2],
                                 Integer.parseInt(value_split_livro[3])
                         );
+                    }else if (Objects.equals(value_split_produto[1], "CD")){
+                        String[] value_split_cd = null;
+                        Autor autor = null;
+                        for (String linhaCD : linhasCD){
+                            if (linhaCD.startsWith(value_split_produto[0])){
+                                value_split_cd = linhaCD.split("\\|");
+                                String autorLido = value_split_produto[4];
+                                autor = controllerAutores.pesquisarAutorPorNomeTESTE(autorLido);
+                            }
+                        }
+
+                        assert value_split_cd != null;
+
+                        aux = new CD(
+                                Integer.parseInt(value_split_produto[0]),
+                                value_split_produto[2],
+                                Integer.parseInt(value_split_produto[3]),
+                                autor,
+                                new Categoria(value_split_produto[5]),
+                                LocalDate.parse(value_split_produto[6]),
+                                value_split_produto[7],
+                                value_split_produto[8],
+                                Integer.parseInt(value_split_cd[1])
+                        );
                     }
                     produtos.add(aux);
                 }
@@ -65,6 +89,7 @@ public class ControllerProdutos {
         }
 
     }
+
 
     public void gravarProdutosParaFicheiro() {
         String conteudoProduto = "";
@@ -94,26 +119,46 @@ public class ControllerProdutos {
                 conteudoLivro += livro.getISBN() + "\n";
             } else if (aux.getTipo().equalsIgnoreCase("cd")) {
                 //...fazer igual para CD
+                CD cd = (CD) aux;
+                conteudoCD += aux.getId() + "|";
+                conteudoCD += cd.getNumCapitulos() + "\n";
             }
         }
         GestorFicheiros.gravarFicheiro("produtos.txt", conteudoProduto);
         GestorFicheiros.gravarFicheiro("livros.txt", conteudoLivro);
-        //GestorFicheiros.gravarFicheiro("cd.txt", conteudoCD);
+        GestorFicheiros.gravarFicheiro("cd.txt", conteudoCD);
     }
 
-    public ArrayList<Produto> listarProdutos() {
-        return produtos;
-    }
-
-    public ArrayList<Produto> pesquisarProdutoPorTitulo(String tituloInserido) {
-        ArrayList<Produto> produtosTitulo = new ArrayList<>();
-        for (Produto produto : produtos) {
-            if (tituloInserido.equalsIgnoreCase(produto.getTitulo())) {
-                produtosTitulo.add(produto);
+    public ArrayList<Livro> listarProdutosLivros() {
+        ArrayList<Livro> livros = new ArrayList<>();
+        for(Produto produto : produtos){
+            if (produto.getTipo().equalsIgnoreCase("livro")){
+                livros.add((Livro) produto);
             }
         }
-        return produtosTitulo;
+        return livros;
     }
+
+    public ArrayList<CD> listarProdutosCd() {
+        ArrayList<CD> cds = new ArrayList<>();
+        for(Produto produtoCd : produtos){
+            if (produtoCd.getTipo().equalsIgnoreCase("cd")){
+                cds.add((CD) produtoCd);
+            }
+        }
+        return cds;
+    }
+
+    public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloInserido) {
+        ArrayList<Livro> livrosTitulo = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto instanceof Livro livro && tituloInserido.equalsIgnoreCase(produto.getTitulo())) {
+                livrosTitulo.add(livro);
+            }
+        }
+        return livrosTitulo;
+    }
+
 
     public ArrayList<Produto> pesquisarProdutoPorAutor(String autorInserido) {
         ArrayList<Produto> produtoDoAutor = new ArrayList<>();
@@ -132,6 +177,11 @@ public class ControllerProdutos {
                 // isto é um cast, diz ao sistema que o produto é do tipo livro, e passo para um variavel desse tipo
                 // tem que ser utilizado quando queremos aceder a atributos não comuns (livro / cd)
                 Livro aux = (Livro) produto;
+                if (IdInserido == aux.getId()) {
+                    return produto;
+                }
+            } else if(Objects.equals(produto.getTipo(), "CD")){
+                CD aux = (CD) produto;
                 if (IdInserido == aux.getId()) {
                     return produto;
                 }
@@ -167,6 +217,18 @@ public class ControllerProdutos {
 
     }
 
+    public ArrayList<CD> pesquisarCDPorTitulo(String tituloDoCD) {
+        ArrayList<CD> cdsTitulo = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto instanceof CD cd) {
+                if (tituloDoCD.equalsIgnoreCase(cd.getTitulo())) {
+                    cdsTitulo.add(cd);
+                }
+            }
+        }
+        return cdsTitulo;
+    }
+
     public ArrayList<Autor> pesquisarAutorPorNome(String nomeInserido) {
         ArrayList<Autor> nomeAutor = new ArrayList<>();
         for (Autor nome : autores) {
@@ -176,21 +238,12 @@ public class ControllerProdutos {
         }
         return nomeAutor;
     }
-    public void verificarId() {
-        int max = 0;
-        for (Produto id : produtos) {
-            if (id.getId() > max) {
-                max = id.getId();
-            }
-        }
-
-    }
-    public void adicionarLivrosComAutores(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor
+    public boolean adicionarLivros(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor
             autorAdicionado, Categoria categorias, LocalDate dataDePublicacao, String faixaEtaria, String editora, String
                                                   ISBN) {
-        this.verificarId();
         Produto livro = new Livro(0, titulo, quantidade, autorAdicionado, categorias, dataDePublicacao, faixaEtaria, editora, ISBN, subtitulo, numDePaginas);
         produtos.add(livro);
+        return true;
     }
 
     public boolean removerLivro(int idLivroRemover) {
@@ -200,6 +253,7 @@ public class ControllerProdutos {
             for (Produto livrosEscolhido : reserva.getLivros()) {
                 if (idLivroRemover == livrosEscolhido.getId()) {
                     encontrou = true;
+                    break;
                 }
             }
         }
@@ -346,11 +400,15 @@ public class ControllerProdutos {
     }
 
 
+    public boolean adicionarCDS(String titulo, int quantidade, int numCapitulos, Autor autorAdicionado, Categoria categoriaEncontrada, LocalDate dataDePublicacao, String faixaEtaria, String editora) {
+        Produto CD = new CD(0,titulo, quantidade, autorAdicionado, categoriaEncontrada, dataDePublicacao,  faixaEtaria, editora,numCapitulos);
+        produtos.add(CD);
+        return true;
+    }
 
-
-
-
-
+    public boolean removerCD(int idCDRemover) {
+        return true;
+    }
 }
 
 

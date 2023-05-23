@@ -1,10 +1,20 @@
 package View.CD;
 
+import Controller.ControllerAutores;
+import Controller.ControllerCategoria;
+import Controller.ControllerProdutos;
+
 import java.util.InputMismatchException;
 
 import static Utilidades.Leitura.ler;
 
 public class MenuViewCD {
+    ControllerAutores gestorAutor = new ControllerAutores();
+    ControllerProdutos gestor = new ControllerProdutos(gestorAutor);
+    ControllerCategoria gestorCategoria = new ControllerCategoria();
+    ViewListarCd listarCDS= new ViewListarCd();
+    ViewAdicionarCd adicionarCDS= new ViewAdicionarCd();
+
     public void menuCds() {
         int opcao;
 
@@ -24,12 +34,17 @@ public class MenuViewCD {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1: //adicionar cds
-                    case 2: //listar cds
+                    case 1: adicionarCDS.MenuAdicionarCd(gestor, gestorCategoria);
+                    break;
+                    case 2: listarCDS.listarCDS(gestor);
+                    break;
                     case 3: //editar cds
+                        break;
                     case 4: //remover cds
+                        break;
                     case 5: //pesquisar cds
-                    case 6: //gravar
+                        break;
+                    case 6: gestor.gravarProdutosParaFicheiro();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

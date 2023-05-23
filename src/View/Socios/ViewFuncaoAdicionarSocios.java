@@ -59,10 +59,17 @@ public class ViewFuncaoAdicionarSocios {
                 }
             }
 
-            System.out.println("Sócio " + nome + " adicionado com sucesso!");
-            System.out.println(" ");
 
-            gestorSocio.adicionarSocio(nome, morada, dataDeNascimento, telefone);
+
+            boolean adicionado = gestorSocio.adicionarSocio(nome, morada, dataDeNascimento, telefone);
+
+            if(adicionado){
+                System.out.println("Sócio " + nome + " adicionado com sucesso!");
+                System.out.println(" ");
+            }else{
+                System.out.println("Ocorreu um erro ao adicionar o sócio!\n");
+
+            }
 
         } while (!sair);
 
