@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Autor;
 import Model.Utilizador;
 import Utilidades.GestorFicheiros;
 
@@ -52,13 +51,15 @@ public class ControllerLogin {
         GestorFicheiros.gravarFicheiro("Utilizadores.txt", conteudo);
     }
 
-    public static void adicionarUtilizador(String email, String password) {
+
+
+    public static boolean adicionarUtilizador(String email, String password) {
         if (validarEmail(email)) {
             Utilizador utilizador = new Utilizador(email, password);
             utilizadores.add(utilizador);
-        } else {
-            System.out.println("Email inválido. Por favor, insira um email válido.");
+            return true;
         }
+        return false;
     }
 
     public static boolean validarEmail(String email) {
@@ -88,9 +89,9 @@ public class ControllerLogin {
                     return true;
                 }
             }
-        } else {
-            System.out.println("Email inválido. Por favor, insira um email válido.");
         }
         return false;
     }
+
+
 }

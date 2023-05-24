@@ -4,8 +4,8 @@ import Controller.ControllerLogin;
 
 import static Utilidades.Leitura.leStr;
 
-public class MenuRemoverUtilizador {
-    private void apagarUtilizador() {
+public class ViewFuncaoRemoverUtilizador {
+    public void apagarUtilizador() {
         System.out.println("## Apagar Utilizador ##");
         System.out.println("----------------------");
 
@@ -20,6 +20,7 @@ public class MenuRemoverUtilizador {
         }
 
         System.out.println();
+
     }
 
 }

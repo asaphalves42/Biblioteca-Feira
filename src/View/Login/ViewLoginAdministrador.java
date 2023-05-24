@@ -1,13 +1,15 @@
 package View.Login;
 
+import Controller.ControllerAdministrador;
 import Controller.ControllerLogin;
+
 import static Utilidades.Leitura.leStr;
 
-public class ViewFuncaoRealizarLogin {
-    private ControllerLogin controllerLogin;
+public class ViewLoginAdministrador {
+    private ControllerAdministrador controlleradministrador;
 
-    public ViewFuncaoRealizarLogin(ControllerLogin controllerLogin) {
-        this.controllerLogin = controllerLogin;
+    public ViewLoginAdministrador(ControllerAdministrador controlleradministrador) {
+        this.controlleradministrador = controlleradministrador;
     }
 
     public boolean realizarLogin() {
@@ -20,7 +22,7 @@ public class ViewFuncaoRealizarLogin {
             String email = leStr("Email: ");
             String password = leStr("Password: ");
 
-            autenticado = controllerLogin.autenticarUtilizador(email, password);
+            autenticado = controlleradministrador.autenticarAdministrador(email, password);
 
             if (!autenticado) {
                 System.out.println("Credenciais inválidas.");
@@ -38,6 +40,7 @@ public class ViewFuncaoRealizarLogin {
         }
 
         System.out.println();
+
         return autenticado;
     }
 }
