@@ -41,12 +41,19 @@ public class MenuViewLogin {
 
                 switch (opcao) {
                     case 1:
+<<<<<<< HEAD
 
 
 
                         break;
                     case 2:
                         realizarLogin.realizarLogin();
+=======
+                        //realizarLogin();
+                        break;
+                    case 2:
+                        //registarUtilizador();
+>>>>>>> e783e24daa7e832abe4d2a028759f75a8d4d730e
                         break;
                     case 3:System.exit(0);
                         break;

@@ -1,23 +1,37 @@
 package Model;
 
-public class Satisfacao {
-    private int satisfacao;
-    private String observacao;
 
-    public void setSatisfacao(int satisfacao) {
-        this.satisfacao = satisfacao;
+public  class Satisfacao {
+
+    public Satisfacao(String nota, String observacao) {
+        this.nota = nota;
+        this.observacao = observacao;
     }
 
+    private String nota;
+    private String observacao;
 
-    public int getSatisfacao() {
-        return satisfacao;
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+
+    public String getObservacao() {
+        return observacao;
     }
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
-    public String getObservacao() {
-        return observacao;
-    }
 
+    @Override
+    public String toString() {
+        return "Satisfacao{" +
+                "nota=" + nota +
+                ", observacao='" + observacao + '\'' +
+                '}';
+    }
 }

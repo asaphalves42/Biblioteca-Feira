@@ -1,46 +1,72 @@
 package Controller;
 
 import Model.Satisfacao;
+import Model.Utilizador;
+import Utilidades.GestorFicheiros;
 import View.Satisfacao.ViewSatisfacao;
 import Model.Reserva;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ControllerSatisfacao {
-    private Satisfacao satisfacao;
-    private ViewSatisfacao view;
+    public static ArrayList<Satisfacao> satisfacoes = new ArrayList<>();
 
 
-    public ControllerSatisfacao(Satisfacao satisfacao, ViewSatisfacao view) {
-        this.satisfacao = satisfacao;
-        this.view = view;
-    }
+    public ArrayList<Satisfacao> listarUtilizadores() {
 
-    public void executar(Reserva reserva) {
-        int avaliacao = view.obterSatisfacao();
-        satisfacao.setSatisfacao(avaliacao);
-        String observacao = view.obterObservacao();
-        satisfacao.setObservacao(observacao);
-        escreverNoFicheiro(reserva);
-        view.mostrarMensagem();
+        return satisfacoes;
+
     }
 
 
+    public void lerSatisfacaoDeFicheiro() {
+        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Satisfacoes.txt");
 
-    private void escreverNoFicheiro(Reserva reserva) {
-        try {
-            FileWriter writer = new FileWriter("satisfacao.txt", true);
-            //Embelezamento de codigo
-            int avaliacao = satisfacao.getSatisfacao();
-            String observacao = satisfacao.getObservacao();
-            int numMecanografico = reserva.getSocio().getNumMecanografico();
+        for (String linha : linhas) {
+            if (!linha.isEmpty()) {
+                String[] value_split = linha.split("\\|");
 
-            writer.write("Satisfacao: " + avaliacao +  "  Observação: "+ observacao + "  Num. Mecanográfico: " + numMecanografico + "\n" );
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+                Satisfacao aux = new Satisfacao(value_split[0], value_split[1]);
+                satisfacoes.add(aux);
+            }
         }
     }
+
+
+
+
+    public void gravarSatisfacaoParaFicheiro() {
+        String conteudo = "";
+        for (Satisfacao aux : satisfacoes) {
+            conteudo += aux.getNota() + "|";
+            conteudo += aux.getObservacao() + "\n";
+        }
+        GestorFicheiros.gravarFicheiro("Satisfacao.txt", conteudo);
+    }
+
+
+
+    public static boolean adicionarSatisfacao(String nota, String observacao) {
+
+            Satisfacao satisfacao = new Satisfacao(nota, observacao);
+            satisfacoes.add(satisfacao);
+            return true;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 }

@@ -12,9 +12,9 @@ import java.time.LocalDate;
 import static Utilidades.Leitura.leStr;
 
 public class ViewDevolverProdutoReserva {
-    Satisfacao satisfacao = new Satisfacao();
+
     ViewSatisfacao view = new ViewSatisfacao();
-    ControllerSatisfacao controller = new ControllerSatisfacao(satisfacao, view);
+
 
     public void devolverProduto(ControllerReservas controllerReservas) {
         String idDaReserva;
@@ -35,9 +35,9 @@ public class ViewDevolverProdutoReserva {
                 boolean devolvido = controllerReservas.devolverProduto(idDaReserva, dataDeDevolucao, socioDaReserva);
 
                 String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
-                if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
-                    controller.executar(reserva);
-                }
+             //   if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
+                //      controller.executar(reserva);
+                //   }
 
                 if (devolvido) {
                     System.out.println("Devolvido com sucesso!");

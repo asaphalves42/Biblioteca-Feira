@@ -53,8 +53,12 @@ public class ViewAplicacao {
     public void Iniciar() {
 
         //Ler os ficheiros
+<<<<<<< HEAD
         lerSuperAdministradorDeFicheiro.lerSuperAdministradorDeFicheiro();
         lerAdministradorDeFicheiro.lerAdministradorDeFicheiro();
+=======
+
+>>>>>>> e783e24daa7e832abe4d2a028759f75a8d4d730e
         lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarProdutos.lerProdutosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
@@ -69,6 +73,11 @@ public class ViewAplicacao {
 
 
         // Iniciar o sistema
+<<<<<<< HEAD
+=======
+        //mensagemUtilizadorParaRegisto();
+        menuPrincipal();
+>>>>>>> e783e24daa7e832abe4d2a028759f75a8d4d730e
 
         menuInicialLogin();
 
