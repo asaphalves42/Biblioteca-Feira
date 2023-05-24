@@ -192,11 +192,11 @@ public class ViewFuncaoEditarLivros {
 
         int idEditarCategoria = leInt("Insira o id do livro que quer editar: ");
 
-        String novaCategoria = leStr("Insira o novo nome do autor: ");
+        String novaCategoria = leStr("Insira o novo nome da Categoria: ");
 
-        boolean autorEditado = gestor.editarCategoria(idEditarCategoria, novaCategoria);
+        boolean categoriaEditada = gestor.editarCategoria(idEditarCategoria, novaCategoria);
 
-        if(autorEditado){
+        if(categoriaEditada){
             System.out.println("Livro editado com sucesso!");
             System.out.println(" ");
         } else{
