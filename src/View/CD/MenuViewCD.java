@@ -89,10 +89,10 @@ public class MenuViewCD {
 
                 switch (opcao) {
                     case 1:
-                        CDPorTitulo.CDPorTitulo(gestor);
+                        CDPorTitulo.cdsPorTitulo(gestor);
                         break;
                     case 2:
-                        CDSPorAutor.CDSPorAutor(gestor);
+                        CDSPorAutor.cdsPorAutor(gestor);
                         break;
                 }
             } catch (InputMismatchException e) {

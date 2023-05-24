@@ -45,11 +45,6 @@ public class ViewAplicacao {
     ControllerAdministrador lerAdministradorDeFicheiro = new ControllerAdministrador();
     ControllerSuperAdministrador lerSuperAdministradorDeFicheiro= new ControllerSuperAdministrador();
 
-
-
-
-
-
     public void Iniciar() {
 
         //Ler os ficheiros

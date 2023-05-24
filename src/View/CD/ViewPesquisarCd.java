@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import static Utilidades.Leitura.leStr;
 
 public class ViewPesquisarCd {
-    public void CDPorTitulo(ControllerProdutos gestor){
+    public void cdsPorTitulo(ControllerProdutos gestor){
         while (true) {
             try {
-                String tituloCD = leStr("Insira o título do livro (ou 'sair' para voltar ao menu anterior):");
+                String tituloCD = leStr("Insira o título do cd (ou 'sair' para voltar ao menu anterior):");
 
                 if (tituloCD.equalsIgnoreCase("sair")) {
                     break;  // Sair do loop e retornar ao menu anterior
@@ -30,7 +30,7 @@ public class ViewPesquisarCd {
         }
     }
 
-    public void CDSPorAutor(ControllerProdutos gestor){
+    public void cdsPorAutor(ControllerProdutos gestor){
         while (true) {
             try {
                 String autorCDInserido = leStr("Insira o autor do CD (ou 'sair' para voltar ao menu anterior):");
