@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Administrador;
+import Model.SuperAdministrador;
+import Model.Utilizador;
 import Utilidades.GestorFicheiros;
 
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.regex.Pattern;
 
 public class ControllerSuperAdministrador {
     public static ArrayList<Administrador> administradores = new ArrayList<>();
+    public static ArrayList<SuperAdministrador> superadministrador = new ArrayList<>();
 
 
     public ArrayList<Administrador> listarAdministradores() {
@@ -17,15 +20,13 @@ public class ControllerSuperAdministrador {
 
     }
 
-    public ArrayList<Administrador> pesquisarAdministradorPorEmail(String emailinserido) {
-        ArrayList<Administrador> administradoresEncontrados = new ArrayList<>();
-        for (Administrador administrador : administradores) {
-            if (emailinserido == administrador.getEmail()) {
-                administradoresEncontrados.add(administrador);
-            }
-        }
-        return administradoresEncontrados;
+    public ArrayList<SuperAdministrador> listarSuperAdministradores() {
+
+        return superadministrador;
+
     }
+
+
     public void lerAdministradorDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Administradores.txt");
 
@@ -39,8 +40,18 @@ public class ControllerSuperAdministrador {
         }
     }
 
+    public void lerSuperAdministradorDeFicheiro() {
+        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("SuperAdministrador.txt");
 
+        for (String linha : linhas) {
+            if (!linha.isEmpty()) {
+                String[] value_split = linha.split("\\|");
 
+                SuperAdministrador aux = new SuperAdministrador(value_split[0], value_split[1]);
+                superadministrador.add(aux);
+            }
+        }
+    }
 
     public void gravarAdministradorParaFicheiro() {
         String conteudo = "";
@@ -51,15 +62,13 @@ public class ControllerSuperAdministrador {
         GestorFicheiros.gravarFicheiro("Administradores.txt", conteudo);
     }
 
-
-
-    public static void adicionarAdministrador(String email, String password) {
+    public static boolean adicionarAdministrador(String email, String password) {
         if (validarEmail(email)) {
             Administrador administrador = new Administrador(email, password);
             administradores.add(administrador);
-        } else {
-            System.out.println("Email inválido. Por favor, insira um email válido.");
+            return true;
         }
+        return false;
     }
 
     public static boolean validarEmail(String email) {
@@ -78,22 +87,25 @@ public class ControllerSuperAdministrador {
         }
         return false;
     }
-
-
-
-
-    public boolean autenticarAdministrador(String email, String password) {
+    public boolean autenticarSuperAdministrador(String email, String password) {
         if (validarEmail(email)) {
-            for (Administrador administrador : administradores) {
-                if (administrador.getEmail().equalsIgnoreCase(email) && administrador.getPassword().equals(password)) {
+            for (SuperAdministrador superadministrador : superadministrador) {
+                if (superadministrador.getEmail().equalsIgnoreCase(email) && superadministrador.getPassword().equals(password)) {
                     return true;
                 }
             }
-        } else {
-            System.out.println("Email inválido. Por favor, insira um email válido.");
         }
         return false;
     }
+
+
+
+
+
+
+
+
+
 
     public boolean validarAdministrador(String email, String password){
         boolean validacao=true;
