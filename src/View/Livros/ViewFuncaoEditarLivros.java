@@ -97,7 +97,7 @@ public class ViewFuncaoEditarLivros {
         int idEditarQuantidade = leInt("Insira o id do livro que quer editar: ");
         int novaQuantidade = leIntPositivo("Insira a nova quantidade:");
 
-        boolean quantidadeEditada = gestor.editarQuantidade(idEditarQuantidade, novaQuantidade);
+        boolean quantidadeEditada = gestor.editarQuantidadeLivro(idEditarQuantidade, novaQuantidade);
 
         if(quantidadeEditada){
             System.out.println("Livro editado com sucesso!");
@@ -129,7 +129,7 @@ public class ViewFuncaoEditarLivros {
 
         String novoNomeAutor = leStr("Insira o novo nome do autor: ");
 
-        boolean autorEditado = gestor.editarAutor(idEditarAutor, novoNomeAutor);
+        boolean autorEditado = gestor.editarAutorLivro(idEditarAutor, novoNomeAutor);
 
         if(autorEditado){
             System.out.println("Livro editado com sucesso!");
@@ -194,7 +194,7 @@ public class ViewFuncaoEditarLivros {
 
         String novaCategoria = leStr("Insira o novo nome da Categoria: ");
 
-        boolean categoriaEditada = gestor.editarCategoria(idEditarCategoria, novaCategoria);
+        boolean categoriaEditada = gestor.editarCategoriaLivro(idEditarCategoria, novaCategoria);
 
         if(categoriaEditada){
             System.out.println("Livro editado com sucesso!");
@@ -230,7 +230,7 @@ public class ViewFuncaoEditarLivros {
         ValidacaoData validarData = new ValidacaoData();
         LocalDate novaDataDePublicacao = validarData.LerData2();
 
-        boolean dataEditada = gestor.editarDataDePubli(idEditarData, novaDataDePublicacao);
+        boolean dataEditada = gestor.editarDataDePubliLivro(idEditarData, novaDataDePublicacao);
 
         if(dataEditada){
             System.out.println("Livro editado com sucesso!");
@@ -294,7 +294,7 @@ public class ViewFuncaoEditarLivros {
         int idEditarEditora = leInt("Insira o id do livro que quer editar: ");
         String novaEditora = leStr("Insira a nova editora:");
 
-        boolean editoraEditada = gestor.editarEditora(idEditarEditora, novaEditora);
+        boolean editoraEditada = gestor.editarEditoraLivro(idEditarEditora, novaEditora);
 
         if(editoraEditada){
             System.out.println("Livro editado com sucesso!");
