@@ -1,51 +1,38 @@
 package View.Satisfacao;
 
-import Controller.ControllerLogin;
 import Controller.ControllerSatisfacao;
+import static Utilidades.Leitura.leStr;
+import static Utilidades.Leitura.ler;
 
 import java.util.Scanner;
 
-import static Utilidades.Leitura.leStr;
-
 public class ViewSatisfacao {
-    private Scanner scanner;
-    private Scanner scanner2;
-
-    ControllerSatisfacao controllersatisfacao = new ControllerSatisfacao();
-
-    public void mostrarMensagem() {
-        System.out.println("Avaliação salva com sucesso!");
-        System.out.println(" ");
-    }
+    private ControllerSatisfacao controllerSatisfacao = new ControllerSatisfacao();
 
 
-    public void obterSatisfacao() {
-        System.out.println("## Formulario de Satisfacao ##");
+
+    public void obterSatisfacao(String idReserva) {
+        System.out.println("## Formulário de Satisfação ##");
         System.out.println("-----------------------------------");
-        System.out.print("Por favor, avalie de 1 a 5 em que : " +"\n");
-        System.out.print("                       1 - Nada Satisfeito"+ "\n");
-        System.out.print("                       2 - Insatisfeito      "+ "\n");
-        System.out.print("                       3 - Razoavel "+ "\n");
-        System.out.print("                       4 - Satisfeito      "+ "\n");
-        System.out.print("                       5 - Bastante Satisfeito"+ "\n");
+        System.out.println("Por favor, avalie de 1 a 5, onde:");
+        System.out.println("1 - Nada Satisfeito");
+        System.out.println("2 - Insatisfeito");
+        System.out.println("3 - Razoável");
+        System.out.println("4 - Satisfeito");
+        System.out.println("5 - Bastante Satisfeito");
 
 
-        String nota = leStr("Insira a sua avalicacao");
+        String nota = leStr("Insira a sua avaliação:");
+        String observacao = leStr("Deixe uma observacao em formato de texto:");
 
-        String observacao = leStr("Deixe uma observacao :");
 
-        boolean adicionado = ControllerSatisfacao.adicionarSatisfacao(nota, observacao);
+        boolean adicionado = controllerSatisfacao.adicionarSatisfacao(nota, observacao, idReserva);
 
-        if(adicionado){
-            System.out.println("Satisfacao adicionada com sucesso");
-            controllersatisfacao.gravarSatisfacaoParaFicheiro();
-        } else{
-            System.out.println("erro ao adicionar satisfacao");
+        if (adicionado) {
+            System.out.println("Satisfação adicionada com sucesso");
+            controllerSatisfacao.gravarSatisfacaoParaFicheiro();
+        } else {
+            System.out.println("Erro ao adicionar satisfação");
         }
-
-
-
-
     }
-
 }
