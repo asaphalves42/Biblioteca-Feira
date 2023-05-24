@@ -10,7 +10,7 @@ public class ViewFuncaoRealizarLogin {
         this.controllerLogin = controllerLogin;
     }
 
-    public void realizarLogin() {
+    public boolean realizarLogin() {
         System.out.println("## Login ##");
         System.out.println("------------------------");
 
@@ -38,5 +38,6 @@ public class ViewFuncaoRealizarLogin {
         }
 
         System.out.println();
+        return autenticado;
     }
 }

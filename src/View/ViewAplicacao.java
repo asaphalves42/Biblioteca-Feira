@@ -16,7 +16,8 @@ import View.SuperAdministrador.ViewSuperAdministrador;
 
 import java.util.InputMismatchException;
 
-import static Utilidades.Leitura.ler;
+import static Utilidades.Leitura.*;
+import static Utilidades.Leitura.leStr;
 
 public class ViewAplicacao {
     public ViewAplicacao() {
@@ -108,7 +109,13 @@ public class ViewAplicacao {
                         break;
 
                     case 3:
-                        realizarLogin.realizarLogin();
+                        boolean loginbemsucedidobiliotecario = realizarLogin.realizarLogin();
+                        if(loginbemsucedidobiliotecario){
+                            menuPrincipal();
+                        }else {
+                            System.out.println("Credenciais inválidas. Por favor, tente novamente.");
+                        }
+
                         break;
                     case 4:
                         System.exit(0);
@@ -121,7 +128,7 @@ public class ViewAplicacao {
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 4);
+        } while (opcao != 5);
     }
 
     public void menuAdministracao() {
@@ -151,7 +158,18 @@ public class ViewAplicacao {
                         break;
                     case 3:
                         menuPrincipal();
-                    case 4:System.exit(0);
+                    case 4:
+                        String resposta = leStr("Deseja guardar os utilizadores registados  ?");
+                        if(resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")){
+                            controllerLogin.gravarUtilizadorParaFicheiro();
+                            menuInicialLogin();
+
+                        }else{
+                            menuInicialLogin();
+                        }
+
+
+
 
                         break;
                     default:
