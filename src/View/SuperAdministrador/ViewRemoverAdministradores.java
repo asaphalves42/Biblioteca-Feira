@@ -7,7 +7,7 @@ import static Utilidades.Leitura.leStr;
 
 public class ViewRemoverAdministradores {
 
-    public void apagarAdministrador() {
+    public void removerAdministrador() {
         System.out.println("## Apagar Administrador ##");
         System.out.println("----------------------");
 
@@ -21,7 +21,7 @@ public class ViewRemoverAdministradores {
             System.out.println("Administrador não encontrado.");
         }
 
-        System.out.println();
+
 
     }
 }
