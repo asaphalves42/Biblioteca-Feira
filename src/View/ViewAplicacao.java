@@ -8,9 +8,11 @@ import View.CD.MenuViewCD;
 import View.Categoria.MenuViewCategoria;
 import View.Livros.MenuViewLivros;
 
-import View.Login.MenuViewLogin;
+
+import View.Login.*;
 import View.Reservas.MenuViewReservas;
 import View.Socios.MenuViewSocios;
+import View.SuperAdministrador.ViewSuperAdministrador;
 
 import java.util.InputMismatchException;
 
@@ -18,39 +20,153 @@ import static Utilidades.Leitura.ler;
 
 public class ViewAplicacao {
     public ViewAplicacao() {
-        //controllerLogin = new ControllerLogin(new ViewLogin());
+
+        controllerLogin = new ControllerLogin();
+        realizarLogin = new ViewFuncaoRealizarLogin(controllerLogin);
+        controlleradministrador=new ControllerAdministrador();
+
+        controllersuperadministrador = new ControllerSuperAdministrador();
+        loginadministrador =new ViewLoginAdministrador(controlleradministrador);
+        loginsuperadministrador = new ViewLoginSuperAdministrador(controllersuperadministrador);
     }
     private ControllerLogin controllerLogin;
+    private ControllerAdministrador controlleradministrador;
+    private ControllerSuperAdministrador controllersuperadministrador;
+    private ViewFuncaoRealizarLogin realizarLogin;
+    private ViewLoginAdministrador loginadministrador;
+    private ViewLoginSuperAdministrador loginsuperadministrador;
     ControllerAutores lerEgravarAutores = new ControllerAutores();
     ControllerProdutos lerEgravarProdutos = new ControllerProdutos(lerEgravarAutores);
     ControllerSocios lerEgravarSocios = new ControllerSocios();
     ControllerCategoria lerEgravarCategoria = new ControllerCategoria();
     ControllerReservas lerEGravarReservas = new ControllerReservas(lerEgravarSocios,lerEgravarProdutos);
-    ControllerLogin lerEgravarUtilizadores = new ControllerLogin();
-    MenuViewLogin menulogin = new MenuViewLogin();
+    ControllerLogin lerUtilizadorDeFicheiro=new ControllerLogin();
+    ControllerAdministrador lerAdministradorDeFicheiro = new ControllerAdministrador();
+    ControllerSuperAdministrador lerSuperAdministradorDeFicheiro= new ControllerSuperAdministrador();
+
+
+
+
+
 
     public void Iniciar() {
+
         //Ler os ficheiros
-       // lerEgravarUtilizadores.lerUtilizadorDeFicheiro();
+        lerSuperAdministradorDeFicheiro.lerSuperAdministradorDeFicheiro();
+        lerAdministradorDeFicheiro.lerAdministradorDeFicheiro();
         lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarProdutos.lerProdutosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
         lerEgravarCategoria.lerFicheiroCategoria();
         lerEGravarReservas.lerLivrosDeFicheiroReserva();
+        lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro();
+
+
+
         MensagemBoasVindas.textoInicial();
         MensagemBoasVindas.mensagemBoasVindas();
 
 
         // Iniciar o sistema
 
-        menulogin.menuUtilizadores();
-       // mensagemUtilizadorParaRegisto();
-       // menuPrincipal();
-
-        // Criar instância do ControllerLogin
-      //  controllerLogin = new ControllerLogin(new ViewLogin());
+        menuInicialLogin();
 
     }
+    public void menuInicialLogin() {
+        int opcao;
+
+        do {
+            System.out.println("## Que funções deseja desempenhar? ##");
+            System.out.println("------------------------");
+            System.out.println("1 - Super Administrador");
+            System.out.println("2 - Sub - Administrador");
+            System.out.println("3 - Bibliotecário");
+            System.out.println("4 - Sair");
+
+            try {
+                opcao = ler.nextInt();
+                ler.nextLine(); // Limpar o buffer do scanner
+
+                switch (opcao) {
+                    case 1:
+                        boolean loginSuperBemSucedido = loginsuperadministrador.realizarLogin();
+                        if (loginSuperBemSucedido) {
+                            ViewSuperAdministrador superadministrador = new ViewSuperAdministrador();
+                            superadministrador.menuSuperAdministrador();
+                        }else {
+                            System.out.println("Credenciais inválidas. Por favor, tente novamente.");
+                        }
+                        break;
+                    case 2:
+
+                        boolean loginBemSucedido = loginadministrador.realizarLogin();
+                        if (loginBemSucedido) {
+                            menuAdministracao();
+                        } else {
+                            System.out.println("Credenciais inválidas. Por favor, tente novamente.");
+                        }
+                        break;
+
+                    case 3:
+                        realizarLogin.realizarLogin();
+                        break;
+                    case 4:
+                        System.exit(0);
+                    default:
+                        System.out.println("Por favor, insira uma opção válida.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira uma opção válida numérica.");
+                opcao = 0;
+                ler.nextLine();
+            }
+        } while (opcao != 4);
+    }
+
+    public void menuAdministracao() {
+
+        int opcao;
+
+        do {
+            System.out.println("## Sistema de Administração ##");
+            System.out.println("------------------------");
+            System.out.println("1 - Registar Utilizador");
+            System.out.println("2 - Eliminar Utilizador");
+            System.out.println("3 - Aceder à Libraria");
+            System.out.println("4 - Sair");
+
+            try {
+                opcao = ler.nextInt();
+                ler.nextLine(); // Limpar o buffer do scanner
+
+                switch (opcao) {
+                    case 1:
+                        ViewFuncaoRegistarUtilizador registarutilizador = new ViewFuncaoRegistarUtilizador();
+                        registarutilizador.registarUtilizador();
+                        break;
+                    case 2:
+                        ViewFuncaoRemoverUtilizador removerutilizador = new ViewFuncaoRemoverUtilizador();
+                        removerutilizador.apagarUtilizador();
+                        break;
+                    case 3:
+                        menuPrincipal();
+                    case 4:System.exit(0);
+
+                        break;
+                    default:
+                        System.out.println("Por favor, insira uma opção válida.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira uma opção válida numérica.");
+                opcao = 0;
+                ler.nextLine();
+            }
+        } while (opcao != 5);
+    }
+
+
 
 
 
@@ -116,6 +232,9 @@ public class ViewAplicacao {
 
         } while (opcao != 8);
     }
+
+
+
 
 
 

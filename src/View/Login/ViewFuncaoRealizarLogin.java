@@ -1,15 +1,14 @@
 package View.Login;
 
 import Controller.ControllerLogin;
-
 import static Utilidades.Leitura.leStr;
-import static Utilidades.Leitura.ler;
-import Controller.ControllerLogin;
-import View.ViewAplicacao;
 
 public class ViewFuncaoRealizarLogin {
-    private ControllerLogin controllerLogin = new ControllerLogin();
-    ViewAplicacao viewaplicacao = new ViewAplicacao();
+    private ControllerLogin controllerLogin;
+
+    public ViewFuncaoRealizarLogin(ControllerLogin controllerLogin) {
+        this.controllerLogin = controllerLogin;
+    }
 
     public void realizarLogin() {
         System.out.println("## Login ##");
@@ -18,18 +17,15 @@ public class ViewFuncaoRealizarLogin {
         boolean autenticado = false;
 
         do {
-            String  email = leStr("Password: ");
-
-
-          String  password = leStr("Password: ");
+            String email = leStr("Email: ");
+            String password = leStr("Password: ");
 
             autenticado = controllerLogin.autenticarUtilizador(email, password);
 
             if (!autenticado) {
                 System.out.println("Credenciais inválidas.");
 
-
-                String  opcao = leStr("Deseja inserir novamente o email? (S/N): ");
+                String opcao = leStr("Deseja inserir novamente o email? (S/N): ");
 
                 if (!opcao.equalsIgnoreCase("S")) {
                     break;
@@ -39,10 +35,8 @@ public class ViewFuncaoRealizarLogin {
 
         if (autenticado) {
             System.out.println("Login realizado com sucesso!");
-            viewaplicacao.menuPrincipal();
         }
 
         System.out.println();
     }
-
 }
