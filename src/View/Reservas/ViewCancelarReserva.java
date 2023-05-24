@@ -12,10 +12,10 @@ public class ViewCancelarReserva {
         String idReserva = leStr("Insira o id da reserva a ser cancelada: ");
         Reserva locReserva = gestorReserva.pesquisarReservaPorId(idReserva);
 
-        if(locReserva == null) {
+        if (locReserva == null) {
             System.out.println("Reserva não encontrada!");
             System.out.println(" ");
-        }else {
+        } else {
 
             boolean removido = gestorReserva.cancelarReserva(idReserva);
 

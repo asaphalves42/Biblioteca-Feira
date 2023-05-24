@@ -23,18 +23,18 @@ public class ViewEditarReserva {
             }
         }
 
-        int idLivro = leInt("Insira o ID do livro que pretende editar:");
+        int idProduto = leInt("Insira o ID produto que pretende editar:");
 
-        if (String.valueOf(idLivro).equalsIgnoreCase("sair")) {
+        if (String.valueOf(idProduto).equalsIgnoreCase("sair")) {
             return; // Retorna ao menu anterior
         }
 
-        int novoLivro = leInt("Insira o ID do novo livro:");
+        int novoProduto = leInt("Insira o ID do novo produto:");
 
-        if (String.valueOf(novoLivro).equalsIgnoreCase("sair")) {
+        if (String.valueOf(novoProduto).equalsIgnoreCase("sair")) {
             return; // Retorna ao menu anterior
         }
-        boolean editado = gestorReserva.editarReservaLivro(idLivro, novoLivro);
+        boolean editado = gestorReserva.editarReservaLivro(novoProduto, novoProduto);
 
         if (editado) {
             System.out.println("Reserva editada com sucesso!");
