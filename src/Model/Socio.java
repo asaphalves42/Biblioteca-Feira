@@ -27,11 +27,6 @@ public class Socio extends Pessoa {
     public void aumentarQuantidade(){
         produtosReservados++;
     }
-    public void decrementarQuantidade(){
-        if(produtosReservados > 0){
-            produtosReservados--;
-        }
-    }
 
     public void resetQuantidade(){
         produtosReservados = 0;
