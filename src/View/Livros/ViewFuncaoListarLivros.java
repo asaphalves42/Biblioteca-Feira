@@ -8,19 +8,21 @@ import java.util.ArrayList;
 
 public class ViewFuncaoListarLivros {
     public void listarTodosOsLivros(ControllerProdutos gestor) {
+        try {
+            ArrayList<Livro> livrosListados = gestor.listarProdutosLivros();
 
-        ArrayList<Livro> livrosListados = gestor.listarProdutosLivros();
-
-        if (livrosListados.isEmpty()) {
-            System.out.println("Nao existem livros no stock!");
-            System.out.println(" ");
-        } else {
-
-            for (Produto livro : livrosListados) {
-                if (livro.getTipo().equals("livro")) {
-                    System.out.println(livro);
+            if (livrosListados.isEmpty()) {
+                System.out.println("Não existem livros no estoque!");
+                System.out.println(" ");
+            } else {
+                for (Produto livro : livrosListados) {
+                    if (livro.getTipo().equals("livro")) {
+                        System.out.println(livro);
+                    }
                 }
             }
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao listar os livros. Por favor, tente novamente.");
         }
     }
 }
