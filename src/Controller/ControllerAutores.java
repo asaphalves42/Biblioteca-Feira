@@ -1,9 +1,13 @@
 package Controller;
 
 import Model.Autor;
+import Model.Categoria;
 import Model.Produto;
+import Utilidades.BaseDados;
 import Utilidades.GestorFicheiros;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,43 +17,69 @@ import static Controller.ControllerProdutos.produtos;
 
 public class ControllerAutores {
     public static ArrayList<Autor> autores = new ArrayList<>();
+    // lista com os identificadores dos registos eliminados. utilizado durante o processo de gravação
+    public static ArrayList<String> eliminados = new ArrayList<String>();
+    public void lerAutorDeBaseDados() {
 
-    public void lerAutorDeFicheiro() {
-        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Autores.txt");
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+            ResultSet resultado = basedados.Selecao("select * from autor inner join pessoa on autor.id_pessoa = pessoa.id");
 
-        for (String linha : linhas) {
-            if (!linha.isEmpty()) {
-                String[] value_split = linha.split("\\|");
-
-                    Autor aux = new Autor(Integer.parseInt(value_split[0]),
-                            value_split[1],
-                            value_split[2],
-                            LocalDate.parse(value_split[3]));
-                    autores.add(aux);
-
-
+            while(resultado.next()){
+                // enquanto existirem registos, vou ler 1 a 1
+                Autor aux = new Autor(resultado.getInt("id"),
+                        resultado.getString("nome"),
+                        resultado.getString("morada"),
+                        LocalDate.parse(resultado.getDate("data_nascimento").toString()));
+                autores.add(aux);
             }
+            basedados.Desligar();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public void gravarAutorParaFicheiro() {
-        String conteudo = "";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        for (Autor aux : autores) {
-            String formated_date = aux.getDataDeNascimento().format(formatter);
+    public void gravarAutorParaBaseDados() {
 
-            conteudo += aux.getId() + "|";
-            conteudo += aux.getNome() + "|";
-            conteudo += aux.getMorada() + "|";
-            conteudo += formated_date + "\n";
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            //insere ou atualizar os registos
+            for (Autor aux : autores) {
+                if (aux.getPendenteGravacao()) {
+                    basedados.Executar("DELETE FROM autor where id = " + aux.getId());
+                    basedados.Executar("DELETE FROM pessoa where id = '" + aux.getIdPessoa() + "'");
+                    basedados.Executar("INSERT INTO pessoa (id, nome, morada, data_nascimento) " +
+                            " values ('" + aux.getIdPessoa() + "', '" + aux.getNome() + "', '" + aux.getMorada() + "', '"+aux.getDataDeNascimento().format(formatter)+"')");
+                    basedados.Executar("INSERT INTO autor (id, id_pessoa) " +
+                            " values (" + aux.getId() + ", '" + aux.getIdPessoa()+"')");
+
+                }
+            }
+
+            //eliminar registos que foram apagados
+            if (eliminados.size() > 0){
+                for (String aux : eliminados) {
+                    basedados.Executar("DELETE FROM autor where id_pessoa = " + aux);
+                    basedados.Executar("DELETE FROM pessoa where id = " + aux);
+                }
+                eliminados.clear(); //apago o array porque já foi processado
+            }
+
+            basedados.Desligar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        GestorFicheiros.gravarFicheiro("Autores.txt", conteudo);
     }
 
 
     public boolean adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
 
         Autor autor = new Autor(nome, morada, dataDeNascimento);
+        autor.setPendenteGravacao(true);
         autores.add(autor);
 
         return true;
@@ -68,6 +98,7 @@ public class ControllerAutores {
                 autor.setNome(nome);
                 autor.setMorada(morada);
                 autor.setDataDeNascimento(dataDeNascimento);
+                autor.setPendenteGravacao(true);
                 return true;
             }
         }
@@ -128,6 +159,7 @@ public class ControllerAutores {
                 }
             }
             if (index != -1) {
+                this.eliminados.add(autores.get(index).getIdPessoa());
                 autores.remove(index);
                 return true;
             } else {

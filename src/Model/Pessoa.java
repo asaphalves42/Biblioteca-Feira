@@ -13,6 +13,7 @@ public class Pessoa {
     private String morada;
     private LocalDate dataDeNascimento;
 
+    private boolean pendenteGravacao; //indicador que informa se o registo é novo ou alterado e precisa de ser gravado na base de dados
 
     public String getNome() {
         return nome;
@@ -36,6 +37,11 @@ public class Pessoa {
 
     public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
+    }
+
+    public boolean getPendenteGravacao() { return pendenteGravacao; }
+    public void setPendenteGravacao(boolean pendenteGravacao) {
+        this.pendenteGravacao = pendenteGravacao;
     }
 
 }

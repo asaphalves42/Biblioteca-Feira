@@ -64,7 +64,7 @@ public class ViewFuncaoEditarAutor {
                 } else {
                     System.out.println("Autor não editado");
                     System.out.println(" ");
-                    gestor.gravarAutorParaFicheiro();
+                    gestor.gravarAutorParaBaseDados();
                 }
             }
             }

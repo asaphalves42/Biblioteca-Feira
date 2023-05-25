@@ -31,6 +31,10 @@ public class Autor extends Pessoa {
         return id;
     }
 
+    public String getIdPessoa() {
+        return "A"+id;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
