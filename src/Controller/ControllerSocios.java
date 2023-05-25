@@ -136,6 +136,7 @@ public class ControllerSocios {
         for (Reserva reserva : ControllerReservas.reservas) {
             if (numMecanografico == reserva.getSocio().getNumMecanografico()) {
                 encontrouReserva = true;
+                break;
             }
         }
         // não encontrou o sócio a ser removido

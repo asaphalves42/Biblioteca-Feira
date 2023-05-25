@@ -281,7 +281,7 @@ public class ViewEditarCd {
 
         while (true) {
             try {
-                String tituloCD = leStr("Insira o título do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
+                String tituloCD = leStr("Insira o título do cd que quer editar (ou 'sair' para voltar ao menu anterior):");
 
                 if (tituloCD.equalsIgnoreCase("sair")) {
                     break;  // Sair do loop e retornar ao menu anterior
@@ -333,7 +333,7 @@ public class ViewEditarCd {
                 cdsParaEditar = gestor.pesquisarCDPorTitulo(tituloCD);
 
                 if (cdsParaEditar.isEmpty()) {
-                    System.out.println("Não existem livros com este título!");
+                    System.out.println("Não existem cd's com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto CD : cdsParaEditar) {
@@ -347,16 +347,16 @@ public class ViewEditarCd {
         }
 
         if (!cdsParaEditar.isEmpty()) {
-            int idEditarEditora = leInt("Insira o id do livro que quer editar: ");
+            int idEditarEditora = leInt("Insira o id do cd que quer editar: ");
             String novaEditora = leStr("Insira a nova produtora:");
 
             boolean editoraEditada = gestor.editarProdutoraCD(idEditarEditora, novaEditora);
 
             if (editoraEditada) {
-                System.out.println("Livro editado com sucesso!");
+                System.out.println("CD editado com sucesso!");
                 System.out.println(" ");
             } else {
-                System.out.println("Livro não encontrado!");
+                System.out.println("CD não encontrado!");
                 System.out.println(" ");
             }
         }
