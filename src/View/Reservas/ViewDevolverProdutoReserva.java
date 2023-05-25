@@ -35,9 +35,11 @@ public class ViewDevolverProdutoReserva {
                 boolean devolvido = controllerReservas.devolverProduto(idDaReserva, dataDeDevolucao, socioDaReserva);
 
                 String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
-             //   if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
-                //      controller.executar(reserva);
-                //   }
+                if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
+                    view.obterSatisfacao(idDaReserva);
+
+                }
+
 
                 if (devolvido) {
                     System.out.println("Devolvido com sucesso!");

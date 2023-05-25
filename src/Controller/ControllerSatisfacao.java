@@ -1,72 +1,48 @@
 package Controller;
 
 import Model.Satisfacao;
-import Model.Utilizador;
 import Utilidades.GestorFicheiros;
 import View.Satisfacao.ViewSatisfacao;
-import Model.Reserva;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ControllerSatisfacao {
-    public static ArrayList<Satisfacao> satisfacoes = new ArrayList<>();
+    private ArrayList<Satisfacao> satisfacoes = new ArrayList<>();
 
-
-    public ArrayList<Satisfacao> listarUtilizadores() {
-
+    public ArrayList<Satisfacao> listarSatisfacoes() {
         return satisfacoes;
-
     }
 
-
     public void lerSatisfacaoDeFicheiro() {
-        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Satisfacoes.txt");
+        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Satisfacao.txt");
 
         for (String linha : linhas) {
             if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
 
-                Satisfacao aux = new Satisfacao(value_split[0], value_split[1]);
-                satisfacoes.add(aux);
+                String nota = value_split[0];
+                String observacao = value_split[1];
+                String idReserva = value_split[2];
+
+                Satisfacao satisfacao = new Satisfacao(nota, observacao, idReserva);
+                satisfacoes.add(satisfacao);
             }
         }
     }
 
-
-
-
     public void gravarSatisfacaoParaFicheiro() {
-        String conteudo = "";
-        for (Satisfacao aux : satisfacoes) {
-            conteudo += aux.getNota() + "|";
-            conteudo += aux.getObservacao() + "\n";
+        StringBuilder conteudo = new StringBuilder();
+        for (Satisfacao satisfacao : satisfacoes) {
+            conteudo.append(satisfacao.getNota()).append("|");
+            conteudo.append(satisfacao.getObservacao()).append("|");
+            conteudo.append(satisfacao.getIdReserva()).append("\n");
         }
-        GestorFicheiros.gravarFicheiro("Satisfacao.txt", conteudo);
+        GestorFicheiros.gravarFicheiro("Satisfacao.txt", conteudo.toString());
     }
 
-
-
-    public static boolean adicionarSatisfacao(String nota, String observacao) {
-
-            Satisfacao satisfacao = new Satisfacao(nota, observacao);
-            satisfacoes.add(satisfacao);
-            return true;
-
-
+    public boolean adicionarSatisfacao(String nota, String observacao, String idReserva) {
+        Satisfacao satisfacao = new Satisfacao(nota, observacao, idReserva);
+        satisfacoes.add(satisfacao);
+        return true;
     }
-
-
-
-
-
-
-
-
-
-
-
 }

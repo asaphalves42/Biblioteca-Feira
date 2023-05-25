@@ -1,14 +1,1 @@
-Satisfacao: 2
-Satisfacao: 1
-Satisfacao: 2
-Satisfacao: 1
-Satisfacao: 4
-Satisfacao: 2
-Satisfacao: 1
-Socio número: null
-Satisfacao: 3
-
-Satisfacao: 4  Observação: naosei
-Satisfacao: 4  Observação: naosei  Num. Mecanográfico: 26
-Satisfacao: 4  Observação: nao gostei   Num. Mecanográfico: 26
-Satisfacao: 3  Observação: nada  Num. Mecanográfico: 23
+5|teste observacao 123|84632700

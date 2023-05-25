@@ -1,30 +1,30 @@
 package Model;
 
-
-public  class Satisfacao {
-
-    public Satisfacao(String nota, String observacao) {
-        this.nota = nota;
-        this.observacao = observacao;
-    }
-
+public class Satisfacao {
     private String nota;
     private String observacao;
+    private String idReserva;
+
+    public Satisfacao(String nota, String observacao, String idReserva) {
+        this.nota = nota;
+        this.observacao = observacao;
+        this.idReserva = idReserva;
+    }
 
     public String getNota() {
         return nota;
-    }
-
-    public void setNota(String nota) {
-        this.nota = nota;
     }
 
     public String getObservacao() {
         return observacao;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
+    public String getIdReserva() {
+        return idReserva;
+    }
+
+    public void setIdReserva(String idReserva) {
+        this.idReserva = idReserva;
     }
 
     @Override
@@ -32,6 +32,7 @@ public  class Satisfacao {
         return "Satisfacao{" +
                 "nota=" + nota +
                 ", observacao='" + observacao + '\'' +
+                ", idReserva='" + idReserva + '\'' +
                 '}';
     }
 }
