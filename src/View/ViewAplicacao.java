@@ -55,10 +55,10 @@ public class ViewAplicacao {
         //Ler os ficheiros
         lerSuperAdministradorDeFicheiro.lerSuperAdministradorDeFicheiro();
         lerAdministradorDeFicheiro.lerAdministradorDeFicheiro();
-        lerEgravarAutores.lerAutorDeFicheiro();
+        lerEgravarAutores.lerAutorDeBaseDados();
         lerEgravarProdutos.lerProdutosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
-        lerEgravarCategoria.lerFicheiroCategoria();
+        lerEgravarCategoria.lerBaseDadosCategoria();
         lerEGravarReservas.lerLivrosDeFicheiroReserva();
         lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro();
 
@@ -233,7 +233,7 @@ public class ViewAplicacao {
                     }
                     case 7 -> {
                         lerEgravarProdutos.gravarProdutosParaFicheiro();
-                        lerEgravarAutores.gravarAutorParaFicheiro();
+                        lerEgravarAutores.gravarAutorParaBaseDados();
                         lerEgravarSocios.gravarSociosParaFicheiro();
                         lerEgravarCategoria.gravarFicheiroCategoria();
                         lerEGravarReservas.gravarReservasParaFicheiro();
