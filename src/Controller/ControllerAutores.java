@@ -1,10 +1,8 @@
 package Controller;
 
 import Model.Autor;
-import Model.Categoria;
 import Model.Produto;
 import Utilidades.BaseDados;
-import Utilidades.GestorFicheiros;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +16,7 @@ import static Controller.ControllerProdutos.produtos;
 public class ControllerAutores {
     public static ArrayList<Autor> autores = new ArrayList<>();
     // lista com os identificadores dos registos eliminados. utilizado durante o processo de gravação
-    public static ArrayList<String> eliminados = new ArrayList<String>();
+    public static ArrayList<String> eliminados = new ArrayList<>();
     public void lerAutorDeBaseDados() {
 
         try {
