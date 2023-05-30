@@ -47,17 +47,28 @@ public class ViewAplicacao {
 
     public void Iniciar() {
 
-        //Ler os ficheiros
+        /*
+
+        Ler os ficheiros txt...
+
+         */
         lerSuperAdministradorDeFicheiro.lerSuperAdministradorDeFicheiro();
         lerAdministradorDeFicheiro.lerAdministradorDeFicheiro();
-        lerEgravarAutores.lerAutorDeBaseDados();
+        lerEgravarAutores.lerAutorDeFicheiro();
+        lerEgravarCategoria.lerFicheiroCategoria();
         lerEgravarProdutos.lerProdutosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
-        lerEgravarCategoria.lerBaseDadosCategoria();
         lerEGravarReservas.lerLivrosDeFicheiroReserva();
         lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro();
 
+        /*
+        Ler base de dados
 
+         */
+
+
+        //lerEgravarAutores.lerAutorDeBaseDados();
+        //lerEgravarCategoria.lerBaseDadosCategoria();
 
         MensagemBoasVindas.textoInicial();
         MensagemBoasVindas.mensagemBoasVindas();
@@ -228,7 +239,7 @@ public class ViewAplicacao {
                     }
                     case 7 -> {
                         lerEgravarProdutos.gravarProdutosParaFicheiro();
-                        lerEgravarAutores.gravarAutorParaBaseDados();
+                        lerEgravarAutores.gravarAutorParaFicheiro();
                         lerEgravarSocios.gravarSociosParaFicheiro();
                         lerEgravarCategoria.gravarFicheiroCategoria();
                         lerEGravarReservas.gravarReservasParaFicheiro();

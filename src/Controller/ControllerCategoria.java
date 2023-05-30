@@ -3,10 +3,8 @@ package Controller;
 
 import Model.Categoria;
 import Model.Produto;
-import Utilidades.BaseDados;
+import Utilidades.GestorFicheiros;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -15,52 +13,35 @@ import static Controller.ControllerProdutos.produtos;
 public class ControllerCategoria {
     public static ArrayList<Categoria> categorias = new ArrayList<>();
 
-    // lista com os identificadores dos registos eliminados. utilizado durante o processo de gravação
-    public static ArrayList<String> eliminados = new ArrayList<String>();
-    public void lerBaseDadosCategoria() {
-        try {
-            BaseDados basedados = new BaseDados();
-            basedados.Ligar();
-            ResultSet resultado = basedados.Selecao("select * from categoria");
+    public void lerFicheiroCategoria() {
+        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("categorias.txt");
 
-            while(resultado.next()){
-                // enquanto existirem registos, vou ler 1 a 1
-                Categoria aux = new Categoria(resultado.getString("nome"));
-                categorias.add(aux);
+        for (String linha : linhas) {
+            if (!linha.isEmpty()) {
+                String[] value_split = linha.split("\\|");
+                if (value_split.length != 0) {
+                    Categoria aux = new Categoria(
+                            Integer.parseInt(value_split[0]),
+                            value_split[1]);
+
+                    categorias.add(aux);
+                }
+
             }
-            basedados.Desligar();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
     public void gravarFicheiroCategoria(){
-        try {
-            BaseDados basedados = new BaseDados();
-            basedados.Ligar();
-            //insere ou atualizar os registos
-            int contador = 0;
-            for (Categoria aux : categorias) {
-                contador++;
-                if (aux.getPendenteGravacao()) {
-                    basedados.Executar("DELETE FROM categoria where id = " + contador); //deve ser alterado para o ID quando existir;
-                    basedados.Executar("INSERT INTO categoria (id, nome) values (" + contador + ", '" + aux.getNome() + "')");
-                }
-            }
+        String conteudo = "";
+        for (Categoria aux : categorias) {
+            conteudo += aux.getNome() + "\n";
+            conteudo += aux.getId() + "\n";
 
-            //eliminar registos que foram apagados
-            if (eliminados.size() > 0){
-                for (String aux : eliminados) {
-                    basedados.Executar("DELETE FROM categoria where nome = '" + aux + "'");
-                }
-                eliminados.clear(); //apago o array porque já foi processado
-            }
-
-            basedados.Desligar();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
+        GestorFicheiros.gravarFicheiro("categorias.txt", conteudo);
     }
+
+
 
     public boolean adicionarCategorias(String nomeCategoria){
         // Verificar se a categoria já existe
@@ -69,9 +50,8 @@ public class ControllerCategoria {
                 return false; // A categoria já existe, não é possível adicioná-la novamente
             }
         }
+        Categoria adicionarCategoria = new Categoria(0, nomeCategoria);
 
-        Categoria adicionarCategoria = new Categoria(nomeCategoria);
-        adicionarCategoria.setPendenteGravacao(true);
         categorias.add(adicionarCategoria);
 
         return true;
@@ -95,8 +75,6 @@ public class ControllerCategoria {
                 return false;
             }
         }
-        // Remove a categoria da lista de categorias
-        eliminados.add(categoriaRemover.getNome()); //deve ser adicionado o ID
         categorias.remove(categoriaRemover);
         return true;
     }
