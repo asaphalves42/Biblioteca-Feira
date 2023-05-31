@@ -26,8 +26,6 @@ public class ControllerAutores {
                         value_split[2],
                         LocalDate.parse(value_split[3]));
                 autores.add(aux);
-
-
             }
         }
     }
