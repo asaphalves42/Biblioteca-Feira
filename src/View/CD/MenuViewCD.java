@@ -9,25 +9,29 @@ import java.util.InputMismatchException;
 import static Utilidades.Leitura.ler;
 
 public class MenuViewCD {
-    ControllerAutores gestorAutor = new ControllerAutores();
-    ControllerProdutos gestor = new ControllerProdutos(gestorAutor);
-    ControllerCategoria gestorCategoria = new ControllerCategoria();
+
+    public MenuViewCD (ControllerProdutos controllerProdutos, ControllerCategoria controllerCategorias, ControllerAutores controllerAutores) {
+        this.gestor = controllerProdutos;
+        this.gestorCategorias = controllerCategorias;
+        this.gestorAutores = controllerAutores;
+    }
+    ControllerProdutos gestor;
+    ControllerCategoria gestorCategorias;
+    ControllerAutores gestorAutores;
     ViewListarCd listarCDS = new ViewListarCd();
     ViewAdicionarCd adicionarCDS = new ViewAdicionarCd();
     ViewPesquisarCd CDPorTitulo = new ViewPesquisarCd();
     ViewPesquisarCd CDSPorAutor= new ViewPesquisarCd();
     ViewRemoverCd eliminarCDporTitulo = new ViewRemoverCd();
-
     ViewEditarCd editarCDSPorTitulo = new ViewEditarCd();
-
     ViewEditarCd editarQuantidadeCD = new ViewEditarCd();
-
     ViewEditarCd editarCDSPorAutor = new ViewEditarCd();
     ViewEditarCd editarNumFaixas = new ViewEditarCd();
     ViewEditarCd editarPorCategoriaCD =new ViewEditarCd();
     ViewEditarCd editarPorDataCD =new ViewEditarCd();
     ViewEditarCd editarFaixaEtariaCD =new ViewEditarCd() ;
     ViewEditarCd editarEditoraCD = new ViewEditarCd();
+
     public void menuCds() {
         int opcao;
 
@@ -48,7 +52,7 @@ public class MenuViewCD {
 
                 switch (opcao) {
                     case 1:
-                        adicionarCDS.MenuAdicionarCd(gestor, gestorCategoria);
+                        adicionarCDS.MenuAdicionarCd(gestor, gestorCategorias, gestorAutores);
                         break;
                     case 2:
                         listarCDS.listarCDS(gestor);
@@ -103,6 +107,7 @@ public class MenuViewCD {
         } while (opcao != 3);
 
     }
+
     public void editarCD() {
         int opcao;
 

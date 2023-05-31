@@ -30,7 +30,7 @@ public class ViewRemoverCd {
                         }
                         int idCDRemover = leInt("Insira o ID do CD que deseja remover: ");
 
-                        boolean removido = gestor.removerCD(idCDRemover);
+                        boolean removido = gestor.removerProduto(idCDRemover);
 
                         if (removido) {
                             System.out.println("O CD está em uma reserva, não foi possível remover!\n");

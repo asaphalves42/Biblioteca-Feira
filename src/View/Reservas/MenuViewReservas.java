@@ -1,14 +1,24 @@
 package View.Reservas;
 
+import Controller.ControllerProdutos;
 import Controller.ControllerReservas;
+import Controller.ControllerSocios;
 
 import java.util.InputMismatchException;
 
 import static Utilidades.Leitura.ler;
 
 public class MenuViewReservas {
-    ControllerReservas gerirReservas = new ControllerReservas();
-    ViewEfetuarReservaLivro efetuar = new ViewEfetuarReservaLivro();
+    public MenuViewReservas(ControllerReservas controllerReservas, ControllerProdutos controllerProdutos, ControllerSocios controllerSocios) {
+        this.gerirReservas = controllerReservas;
+        this.gerirProdutos = controllerProdutos;
+        this.gerirSocios = controllerSocios;
+    }
+
+    ControllerReservas gerirReservas;
+    ControllerProdutos gerirProdutos;
+    ControllerSocios gerirSocios;
+    ViewEfetuarReservaLivro efetuarLivro = new ViewEfetuarReservaLivro();
     ViewEfetuarReservaCD efetuarCD = new ViewEfetuarReservaCD();
     ViewEditarReserva editar = new ViewEditarReserva();
     ViewListarReserva listar = new ViewListarReserva();
@@ -41,7 +51,7 @@ public class MenuViewReservas {
                     case 2 -> devolver.devolverProduto(gerirReservas);
                     case 3 -> listar.listarTodasAsReservas(gerirReservas);
                     case 4 -> cancelar.cancelarReserva(gerirReservas);
-                    case 5 -> editar.editarReserva(gerirReservas);
+                    case 5 -> editar.editarReserva(gerirReservas, gerirProdutos, gerirSocios);
                     case 6 -> pesquisar.pesquisarReservaPorId(gerirReservas);
                     case 7 -> gerirReservas.gravarReservasParaFicheiro();
                 }
@@ -69,8 +79,8 @@ public class MenuViewReservas {
                 opcao = ler.nextInt();
 
                 switch (opcao) {
-                    case 1 -> efetuar.efetuarReservaLivros(gerirReservas);
-                    case 2 -> efetuarCD.efetuarReservaCD(gerirReservas);
+                    case 1 -> efetuarLivro.efetuarReserva(gerirReservas, gerirProdutos, gerirSocios, null);
+                    case 2 -> efetuarCD.efetuarReserva(gerirReservas, gerirProdutos, gerirSocios, null);
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
@@ -79,9 +89,4 @@ public class MenuViewReservas {
             }
         } while (opcao != 3);
     }
-
-
-
-
-
-    }
+}

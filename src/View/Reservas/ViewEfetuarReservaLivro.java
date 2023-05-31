@@ -1,6 +1,8 @@
 package View.Reservas;
 
+import Controller.ControllerProdutos;
 import Controller.ControllerReservas;
+import Controller.ControllerSocios;
 import Model.Livro;
 import Model.Socio;
 
@@ -12,12 +14,12 @@ import static Utilidades.Leitura.leStr;
 
 public class ViewEfetuarReservaLivro {
 
-    private Socio selecionarSocioExistente(ControllerReservas gerirReservas) {
+    private Socio selecionarSocioExistente(ControllerSocios gerirSocios) {
         Socio socioSelecionado = null;
 
         while (socioSelecionado == null) {
             String nomeSocio = leStr("Insira o nome do sócio:");
-            ArrayList<Socio> socioExistente = gerirReservas.pesquisarSocioPorNome(nomeSocio);
+            ArrayList<Socio> socioExistente = gerirSocios.pesquisarSocioPorNome(nomeSocio);
 
             if (socioExistente.isEmpty()) {
                 System.out.println("Não existem sócios com esse nome!");
@@ -43,14 +45,14 @@ public class ViewEfetuarReservaLivro {
         return socioSelecionado;
     }
 
-    private Livro selecionarProdutoDisponivel(ControllerReservas gerirReservas) {
+    private Livro selecionarProdutoDisponivel(ControllerProdutos gerirProdutos) {
         Livro livroSelecionado = null;
 
         while (livroSelecionado == null) {
             String tituloDoLivro = leStr("Digite o título do livro:");
 
 
-            ArrayList<Livro> livrosDisponiveis = gerirReservas.pesquisarLivroPorTitulo(tituloDoLivro);
+            ArrayList<Livro> livrosDisponiveis = gerirProdutos.pesquisarLivroPorTitulo(tituloDoLivro);
 
             if (livrosDisponiveis.isEmpty()) {
                 System.out.println("Não existem exemplares disponíveis desse livro!");
@@ -84,14 +86,20 @@ public class ViewEfetuarReservaLivro {
         return livroSelecionado;
     }
 
+    public void efetuarReserva(ControllerReservas gerirReservas, ControllerProdutos gerirProdutos, ControllerSocios gerirSocios, Socio socio) {
 
-    public void efetuarReservaLivros(ControllerReservas gerirReservas) {
-        Socio socioSelecionado = selecionarSocioExistente(gerirReservas);
+        Socio socioSelecionado = socio;
+        if (socio == null) {
+            socioSelecionado = selecionarSocioExistente(gerirSocios);
+        }
+
+        if (socioSelecionado == null) { // se não selecionou nenhum socio ou não foi passado como parametro, então volta a questionar
+            efetuarReserva(gerirReservas, gerirProdutos, gerirSocios,null);
+        }
 
         String input = leStr("Se deseja mostrar todos os livros insira um ENTER");
         if (input.equalsIgnoreCase("")) {
-            ArrayList<Livro> todosOsLivros = gerirReservas.listaTodosOsLivros();
-            for (Livro livro : todosOsLivros) {
+            for (Livro livro : gerirProdutos.listarProdutosLivros()) {
                 System.out.println(livro);
             }
         }
@@ -99,7 +107,7 @@ public class ViewEfetuarReservaLivro {
         boolean continuarReservando = true;
 
         while (continuarReservando) {
-            Livro livroSelecionado = selecionarProdutoDisponivel(gerirReservas);
+            Livro livroSelecionado = selecionarProdutoDisponivel(gerirProdutos);
 
             LocalDate dataDaReserva = LocalDate.now();
 
@@ -108,7 +116,7 @@ public class ViewEfetuarReservaLivro {
                 System.out.println();
             } else {
 
-                boolean sucesso = gerirReservas.efetuarReserva(socioSelecionado, livroSelecionado, dataDaReserva);
+                boolean sucesso = gerirReservas.efetuarReservaProduto(socioSelecionado, livroSelecionado, dataDaReserva);
 
                 if (sucesso) {
                     System.out.println("Livro reservado com sucesso!");

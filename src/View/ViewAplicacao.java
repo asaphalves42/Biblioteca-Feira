@@ -7,8 +7,6 @@ import View.Autores.MenuViewAutores;
 import View.CD.MenuViewCD;
 import View.Categoria.MenuViewCategoria;
 import View.Livros.MenuViewLivros;
-
-
 import View.Login.*;
 import View.Reservas.MenuViewReservas;
 import View.Socios.MenuViewSocios;
@@ -16,59 +14,50 @@ import View.SuperAdministrador.ViewSuperAdministrador;
 
 import java.util.InputMismatchException;
 
-import static Utilidades.Leitura.*;
 import static Utilidades.Leitura.leStr;
+import static Utilidades.Leitura.ler;
 
 public class ViewAplicacao {
     public ViewAplicacao() {
-
-        controllerLogin = new ControllerLogin();
-        realizarLogin = new ViewFuncaoRealizarLogin(controllerLogin);
-        controlleradministrador=new ControllerAdministrador();
-
-        controllersuperadministrador = new ControllerSuperAdministrador();
-        loginadministrador =new ViewLoginAdministrador(controlleradministrador);
-        loginsuperadministrador = new ViewLoginSuperAdministrador(controllersuperadministrador);
     }
-    private ControllerLogin controllerLogin;
-    private ControllerAdministrador controlleradministrador;
-    private ControllerSuperAdministrador controllersuperadministrador;
+
     private ViewFuncaoRealizarLogin realizarLogin;
     private ViewLoginAdministrador loginadministrador;
     private ViewLoginSuperAdministrador loginsuperadministrador;
-    ControllerAutores lerEgravarAutores = new ControllerAutores();
-    ControllerProdutos lerEgravarProdutos = new ControllerProdutos(lerEgravarAutores);
-    ControllerSocios lerEgravarSocios = new ControllerSocios();
-    ControllerCategoria lerEgravarCategoria = new ControllerCategoria();
-    ControllerReservas lerEGravarReservas = new ControllerReservas(lerEgravarSocios,lerEgravarProdutos);
-    ControllerLogin lerUtilizadorDeFicheiro=new ControllerLogin();
-    ControllerAdministrador lerAdministradorDeFicheiro = new ControllerAdministrador();
-    ControllerSuperAdministrador lerSuperAdministradorDeFicheiro= new ControllerSuperAdministrador();
+    ControllerAutores lerEgravarAutores;
+    ControllerProdutos lerEgravarProdutos;
+    ControllerSocios lerEgravarSocios;
+    ControllerCategoria lerEgravarCategoria;
+    ControllerReservas lerEGravarReservas;
+    ControllerLogin lerUtilizadorDeFicheiro;
+    ControllerAdministrador lerAdministradorDeFicheiro;
+    ControllerSuperAdministrador lerSuperAdministradorDeFicheiro;
 
     public void Iniciar() {
 
-        /*
+        //iniciar controllers
+        lerUtilizadorDeFicheiro = new ControllerLogin();
+        lerAdministradorDeFicheiro = new ControllerAdministrador();
+        lerSuperAdministradorDeFicheiro = new ControllerSuperAdministrador();
+        lerEgravarAutores = new ControllerAutores();
+        lerEgravarSocios = new ControllerSocios();
+        lerEgravarCategoria = new ControllerCategoria();
+        lerEgravarProdutos = new ControllerProdutos(lerEgravarAutores, lerEgravarCategoria);
+        lerEGravarReservas = new ControllerReservas(lerEgravarSocios, lerEgravarProdutos);
 
-        Ler os ficheiros txt...
-
-         */
+        //ler dados ficheiro
         lerSuperAdministradorDeFicheiro.lerSuperAdministradorDeFicheiro();
         lerAdministradorDeFicheiro.lerAdministradorDeFicheiro();
-        lerEgravarAutores.lerAutorDeFicheiro();
+        lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro();
         lerEgravarCategoria.lerFicheiroCategoria();
+        lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarProdutos.lerProdutosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
-        lerEGravarReservas.lerLivrosDeFicheiroReserva();
-        lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro();
+        lerEGravarReservas.lerReservaFicheiro();
 
-        /*
-        Ler base de dados
-
-         */
-
-
-        //lerEgravarAutores.lerAutorDeBaseDados();
-        //lerEgravarCategoria.lerBaseDadosCategoria();
+        realizarLogin = new ViewFuncaoRealizarLogin(lerUtilizadorDeFicheiro);
+        loginadministrador = new ViewLoginAdministrador(lerAdministradorDeFicheiro);
+        loginsuperadministrador = new ViewLoginSuperAdministrador(lerSuperAdministradorDeFicheiro);
 
         MensagemBoasVindas.textoInicial();
         MensagemBoasVindas.mensagemBoasVindas();
@@ -167,7 +156,7 @@ public class ViewAplicacao {
                     case 4:
                         String resposta = leStr("Deseja guardar os utilizadores registados  ?");
                         if(resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")){
-                            controllerLogin.gravarUtilizadorParaFicheiro();
+                            lerUtilizadorDeFicheiro.gravarUtilizadorParaFicheiro();
                             menuInicialLogin();
 
                         }else{
@@ -214,11 +203,11 @@ public class ViewAplicacao {
 
                 switch (opcao) {
                     case 1 -> {
-                        MenuViewLivros mostrarMenu = new MenuViewLivros();
+                        MenuViewLivros mostrarMenu = new MenuViewLivros(lerEgravarProdutos, lerEgravarCategoria, lerEgravarAutores);
                         mostrarMenu.menuLivros();
                     }
                     case 2 -> {
-                        MenuViewCD mostrarMenu = new MenuViewCD();
+                        MenuViewCD mostrarMenu = new MenuViewCD(lerEgravarProdutos, lerEgravarCategoria, lerEgravarAutores);
                         mostrarMenu.menuCds();
                     }
                     case 3 -> {
@@ -230,7 +219,7 @@ public class ViewAplicacao {
                         mostraMenu.menuAutores();
                     }
                     case 5 -> {
-                        MenuViewReservas mostrarMenuReservas = new MenuViewReservas();
+                        MenuViewReservas mostrarMenuReservas = new MenuViewReservas(lerEGravarReservas, lerEgravarProdutos, lerEgravarSocios);
                         mostrarMenuReservas.menuReservas();
                     }
                     case 6 -> {
@@ -244,7 +233,7 @@ public class ViewAplicacao {
                         lerEgravarCategoria.gravarFicheiroCategoria();
                         lerEGravarReservas.gravarReservasParaFicheiro();
                         System.exit(0);
-                        }
+                    }
 
                     default -> System.out.println("Por favor, insira uma opção válida numérica.");
                 }
@@ -256,8 +245,6 @@ public class ViewAplicacao {
 
         } while (opcao != 8);
     }
-
-
 
 
 

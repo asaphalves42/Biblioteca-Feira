@@ -10,7 +10,7 @@ public class ViewRemoverCategoria {
     public void removerCategoria(ControllerCategoria gestor){
         String categoriaPraRemover = leStr("Insira a categoria que deseja remover:");
 
-        Categoria categoriaRemover = gestor.pesquisarCategoria(categoriaPraRemover);
+        Categoria categoriaRemover = gestor.pesquisarCategoriaPorNome(categoriaPraRemover);
 
         if(categoriaRemover == null) {
             System.out.println("Categoria não existe!");

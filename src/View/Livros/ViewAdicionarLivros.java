@@ -1,6 +1,7 @@
 package View.Livros;
 
 
+import Controller.ControllerAutores;
 import Controller.ControllerCategoria;
 import Controller.ControllerProdutos;
 import Model.Autor;
@@ -14,7 +15,7 @@ import static Utilidades.Leitura.leIntPositivo;
 import static Utilidades.Leitura.leStr;
 
 public class ViewAdicionarLivros {
-    public void menuAdicionarLivros(ControllerProdutos gestorAutor, ControllerCategoria gestorCategoria) {
+    public void menuAdicionarLivros(ControllerProdutos gestor, ControllerCategoria gestorCategoria, ControllerAutores gestorAutores){
 
         boolean sair = false;
         do {
@@ -63,7 +64,7 @@ public class ViewAdicionarLivros {
                 if (nomeAutor.equalsIgnoreCase("sair")) {
                     return;
                 }
-                adicionarAutorExistente = gestorAutor.pesquisarAutorPorNome(nomeAutor);
+                adicionarAutorExistente = gestorAutores.pesquisarAutorPorNome(nomeAutor);
 
                 if (adicionarAutorExistente.isEmpty()) {
                     System.out.println("Não existem autores com esse nome!");
@@ -101,10 +102,9 @@ public class ViewAdicionarLivros {
                         break;
                     }
                 }
-
-                    System.out.println("Autor(a) adicionado(a) com sucesso!");
-                    System.out.println(" ");
-                }
+                System.out.println("Autor(a) adicionado(a) com sucesso!");
+                System.out.println(" ");
+            }
 
             // adicionar categorias puxando da lista de categorias
 
@@ -113,7 +113,7 @@ public class ViewAdicionarLivros {
 
             while(categoriaEncontrada == null){
                 categoria = leStr("Insira a categoria:");
-                categoriaEncontrada = gestorCategoria.pesquisarCategoria(categoria);
+                categoriaEncontrada = gestorCategoria.pesquisarCategoriaPorNome(categoria);
 
                 if(categoriaEncontrada == null){
                     System.out.println("Categoria não encontrada!");
@@ -170,13 +170,13 @@ public class ViewAdicionarLivros {
                 break;
             }
 
-           boolean adicionado = gestorAutor.adicionarLivros(titulo, subtitulo, quantidade, numDePaginas, autorAdicionado, categoriaEncontrada, dataDePublicacao, faixaEtaria, editora, ISBN);
-           if (adicionado){
-               System.out.println("Livro " + titulo + " adicionado com sucesso!");
-               System.out.println(" ");
-           }else{
-               System.out.println("Ocorreu um erro ao adicionar o livro!\n");
-           }
+            boolean adicionado = gestor.adicionarLivros(titulo, subtitulo, quantidade, numDePaginas, autorAdicionado, categoriaEncontrada, dataDePublicacao, faixaEtaria, editora, ISBN);
+            if (adicionado){
+                System.out.println("Livro " + titulo + " adicionado com sucesso!");
+                System.out.println(" ");
+            }else{
+                System.out.println("Ocorreu um erro ao adicionar o livro!\n");
+            }
 
         } while (sair);
     }

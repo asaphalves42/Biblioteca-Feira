@@ -1,6 +1,8 @@
 package View.Reservas;
 
+import Controller.ControllerProdutos;
 import Controller.ControllerReservas;
+import Controller.ControllerSocios;
 import Model.CD;
 import Model.Socio;
 
@@ -11,7 +13,8 @@ import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewEfetuarReservaCD {
-    private Socio selecionarSocioExistente(ControllerReservas gerirReservas) {
+
+    private Socio selecionarSocioExistente(ControllerSocios gerirReservas) {
         Socio socioSelecionado = null;
 
         while (socioSelecionado == null) {
@@ -42,14 +45,14 @@ public class ViewEfetuarReservaCD {
         return socioSelecionado;
     }
 
-    private CD selecionarProdutoDisponivel(ControllerReservas gerirReservas) {
+    private CD selecionarProdutoDisponivel(ControllerProdutos gerirProdutos) {
         CD cdSelecionado = null;
 
         while (cdSelecionado == null) {
             String tituloDoCd = leStr("Digite o título do cd:");
 
 
-            ArrayList<CD> cdsDisponiveis = gerirReservas.pesquisarCDPorTitulo(tituloDoCd);
+            ArrayList<CD> cdsDisponiveis = gerirProdutos.pesquisarCDPorTitulo(tituloDoCd);
 
             if (cdsDisponiveis.isEmpty()) {
                 System.out.println("Não existem cd's disponíveis!");
@@ -83,14 +86,20 @@ public class ViewEfetuarReservaCD {
         return cdSelecionado;
     }
 
+    public void efetuarReserva(ControllerReservas gerirReservas, ControllerProdutos gerirProdutos, ControllerSocios gerirSocios, Socio socio) {
 
-    public void efetuarReservaCD(ControllerReservas gerirReservas) {
-        Socio socioSelecionado = selecionarSocioExistente(gerirReservas);
+        Socio socioSelecionado = socio;
+        if (socio == null) {
+            socioSelecionado = selecionarSocioExistente(gerirSocios);
+        }
+
+        if (socioSelecionado == null) { // se não selecionou nenhum socio ou não foi passado como parametro, então volta a questionar
+            efetuarReserva(gerirReservas, gerirProdutos, gerirSocios,null);
+        }
 
         String input = leStr("Se deseja mostrar todos os CD´s insira um ENTER");
         if (input.equalsIgnoreCase("")) {
-            ArrayList<CD> todosOsCds = gerirReservas.listaTodosOsCDs();
-            for (CD cd : todosOsCds) {
+            for (CD cd : gerirProdutos.listarProdutosCd()) {
                 System.out.println(cd);
             }
         }
@@ -99,7 +108,7 @@ public class ViewEfetuarReservaCD {
 
         while (continuarReservando) {
 
-            CD cdSelecionado = selecionarProdutoDisponivel(gerirReservas);
+            CD cdSelecionado = selecionarProdutoDisponivel(gerirProdutos);
 
             LocalDate dataDaReserva = LocalDate.now();
 
@@ -107,7 +116,7 @@ public class ViewEfetuarReservaCD {
                 System.out.println("Não existem mais exemplares desse cd no stock!");
                 System.out.println();
             } else {
-                boolean sucesso = gerirReservas.efetuarReservaCD(socioSelecionado, cdSelecionado, dataDaReserva);
+                boolean sucesso = gerirReservas.efetuarReservaProduto(socioSelecionado, cdSelecionado, dataDaReserva);
 
                 if (sucesso) {
                     System.out.println("CD reservado com sucesso!");

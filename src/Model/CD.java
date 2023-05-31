@@ -19,9 +19,10 @@ public class CD extends Produto{
     }
 
     @Override
-    public String getTipo() {
-        return "CD";
+    public TipoProduto getTipo() {
+        return TipoProduto.CD;
     }
+
     public String toString() {
         return getTipo()+" [ " + "\n" +
                 "ID: " + this.getId() + "\n" +
@@ -33,7 +34,7 @@ public class CD extends Produto{
                 "Data de lançamento: " + this.getDataDePublicacao() + "\n" +
                 "Faixa etaria: " + this.getFaixaEtaria() + "\n" +
                 "Produtora: " + this.getEditora() + "]" + "\n" +
-              "----------------------------------------------------";
+                "----------------------------------------------------";
     }
 
 }
