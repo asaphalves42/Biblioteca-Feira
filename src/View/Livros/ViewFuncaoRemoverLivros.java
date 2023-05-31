@@ -19,7 +19,7 @@ public class ViewFuncaoRemoverLivros {
                 ArrayList<Livro> livrosParaRemover = gestor.pesquisarLivroPorTitulo(tituloLivro);
 
                 if (livrosParaRemover.isEmpty()) {
-                    System.out.println("Não existem livros no estoque!\n");
+                    System.out.println("Não existem livros no stock!\n");
                 } else {
                     for (Produto livro : livrosParaRemover) {
                         System.out.println(livro);
@@ -29,7 +29,9 @@ public class ViewFuncaoRemoverLivros {
                     boolean removido = gestor.removerProduto(idLivroRemover);
 
                     if (removido) {
-                        System.out.println("O livro está em uma reserva, não foi possível remover!\n");
+                        System.out.println("O livro está numa reserva, não foi possível remover!\n");
+                    } else if (livrosParaRemover.stream().noneMatch(livro -> livro.getId() == idLivroRemover)) {
+                        System.out.println("Não existe um livro com o ID inserido!");
                     } else {
                         System.out.println("Livro removido com sucesso!\n");
                         sair = true;  // Livro removido com sucesso, então sair do loop

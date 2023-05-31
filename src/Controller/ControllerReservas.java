@@ -41,7 +41,7 @@ public class ControllerReservas {
                         }
                     }
                     
-                    if(value_split[4].equalsIgnoreCase("null")){
+                    if(value_split[3].equalsIgnoreCase("null")){
                         date = null;
                     }else{
                         date = LocalDate.parse(value_split[4]);

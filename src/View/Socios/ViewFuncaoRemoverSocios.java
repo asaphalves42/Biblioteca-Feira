@@ -29,6 +29,7 @@ public class ViewFuncaoRemoverSocios {
 
                     if (removido) {
                         System.out.println("Não foi possível remover o sócio, existe uma reserva associada!\n");
+
                     } else {
                         System.out.println("Sócio removido com sucesso!\n");
                         sair = true;  // Sócio removido com sucesso, então sair do loop

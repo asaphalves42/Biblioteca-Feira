@@ -1,2 +1,4 @@
 1|Livro|teste|345|Asaph|Artes|2020-02-10|teste|teste|
 2|CD|testecd|56|Asaph|Artes|2008-07-10|testecd|testecd|
+3|Livro|Professor|100|Asaph|Psicologia|2000-01-01|Adultos|Porto Editora|
+4|Livro|Alunos|5|Asaph|Psicologia|1999-10-01|Adultos|Sem editora|

@@ -156,14 +156,14 @@ public class ViewAdicionarLivros {
             }
 
             String ISBN = "";
-            while (ISBN.trim().isEmpty()) {
+            while (ISBN.trim().isEmpty() || ISBN.length() != 13 || !ISBN.matches("\\d+")) { //A expressão regular "\d+" verifica se a string contém um ou mais dígitos.
                 ISBN = leStr("Introduza o ISBN: ");
                 if (ISBN.equalsIgnoreCase("sair")) {
                     sair = true;
                     break;
                 }
-                if (ISBN.trim().isEmpty()) {
-                    System.out.println("Por favor, introduza um ISBN válido!");
+                if (ISBN.trim().isEmpty() || ISBN.length() != 13 || !ISBN.matches("\\d+")) { //A expressão regular "\d+" verifica se a string contém um ou mais dígitos.
+                    System.out.println("Por favor, introduza um ISBN válido com 13 dígitos numéricos!");
                 }
             }
             if (sair) {

@@ -58,7 +58,7 @@ public class ViewFuncaoPesquisarLivros {
             ArrayList<Livro> livros = gestor.pesquisarLivroCategoria(categoriaInserida);
 
             if (livros.isEmpty()) {
-                System.out.println("Não há livros cadastrados nesta categoria!");
+                System.out.println("Não há livros registados nesta categoria!");
                 System.out.println(" ");
             } else {
                 System.out.println("Livros encontrados na categoria " + categoriaInserida + ":");
