@@ -149,7 +149,7 @@ public class ViewFuncaoEditarLivros {
             }
             int novaQuantidade = Integer.parseInt(novaQuantidadeStr);
 
-            boolean quantidadeEditada = gestor.editarQuantidade(idEditarQuantidade, novaQuantidade);
+            boolean quantidadeEditada = gestor.editarQuantidadeLivro(idEditarQuantidade, novaQuantidade);
 
             if (quantidadeEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -200,7 +200,7 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean autorEditado = gestor.editarAutor(idEditarAutor, novoNomeAutor);
+            boolean autorEditado = gestor.editarAutorLivro(idEditarAutor, novoNomeAutor);
 
             if (autorEditado) {
                 System.out.println("Livro editado com sucesso!");
@@ -302,7 +302,7 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean categoriaEditada = gestor.editarCategoria(idEditarCategoria, novaCategoria);
+            boolean categoriaEditada = gestor.editarCategoriaLivro(idEditarCategoria, novaCategoria);
 
             if (categoriaEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -356,7 +356,7 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean dataEditada = gestor.editarDataDePubli(idEditarData, novaDataDePublicacao);
+            boolean dataEditada = gestor.editarDataDePubliLivro(idEditarData, novaDataDePublicacao);
 
             if (dataEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -458,7 +458,7 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean editoraEditada = gestor.editarEditora(idEditarEditora, novaEditora);
+            boolean editoraEditada = gestor.editarEditoraLivro(idEditarEditora, novaEditora);
 
             if (editoraEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -508,7 +508,7 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean editoraEditada = gestor.editarEditora(idEditarEditora, novaEditora);
+            boolean editoraEditada = gestor.editarEditoraLivro(idEditarEditora, novaEditora);
 
             if (editoraEditada) {
                 System.out.println("Livro editado com sucesso!");

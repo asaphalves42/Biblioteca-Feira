@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Reserva;
 import Model.Satisfacao;
 import Utilidades.GestorFicheiros;
 import View.Satisfacao.ViewSatisfacao;
@@ -45,4 +46,6 @@ public class ControllerSatisfacao {
         satisfacoes.add(satisfacao);
         return true;
     }
+
+
 }
