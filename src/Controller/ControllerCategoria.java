@@ -76,9 +76,9 @@ public class ControllerCategoria {
 
     public boolean removerCategoria(Categoria categoriaRemover) {
         // Verifica se a categoria está associada a algum livro
-        for (Produto livro : produtos) {
-            if (livro.getCategoria().getId() == categoriaRemover.getId()) {
-                // A categoria está associada a um livro, não é possível remover
+        for (Produto produto : produtos) {
+            if (produto.getCategoria().getNome().equalsIgnoreCase(categoriaRemover.getNome())) {
+                // A categoria está associada a um produto, não é possível remover
                 return false;
             }
         }
