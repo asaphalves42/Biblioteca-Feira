@@ -1,9 +1,7 @@
 package View.Reservas;
 
 import Controller.ControllerReservas;
-import Controller.ControllerSatisfacao;
 import Model.Reserva;
-import Model.Satisfacao;
 import Model.Socio;
 import View.Satisfacao.ViewSatisfacao;
 
@@ -14,7 +12,6 @@ import static Utilidades.Leitura.leStr;
 public class ViewDevolverProdutoReserva {
 
     ViewSatisfacao view = new ViewSatisfacao();
-
 
     public void devolverProduto(ControllerReservas controllerReservas) {
         String idDaReserva;
@@ -32,7 +29,7 @@ public class ViewDevolverProdutoReserva {
 
                 LocalDate dataDeDevolucao = LocalDate.now();
 
-                boolean devolvido = controllerReservas.devolverProduto(idDaReserva, dataDeDevolucao, socioDaReserva);
+                boolean devolvido = controllerReservas.devolverReserva(idDaReserva, dataDeDevolucao);
 
                 String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
                 if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {

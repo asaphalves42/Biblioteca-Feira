@@ -12,13 +12,11 @@ public class ViewFuncaoListarLivros {
             ArrayList<Livro> livrosListados = gestor.listarProdutosLivros();
 
             if (livrosListados.isEmpty()) {
-                System.out.println("Não existem livros no estoque!");
+                System.out.println("Não existem livros no stock!");
                 System.out.println(" ");
             } else {
                 for (Produto livro : livrosListados) {
-                    if (livro.getTipo().equals("livro")) {
-                        System.out.println(livro);
-                    }
+                    System.out.println(livro);
                 }
             }
         } catch (Exception e) {

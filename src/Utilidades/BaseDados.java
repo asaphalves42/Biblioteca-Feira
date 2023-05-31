@@ -22,7 +22,7 @@ public class BaseDados {
     // função de terminar a ligação ao SQL
     public boolean Desligar() {
         try {
-            if (connection.isClosed() == false) {
+            if (!connection.isClosed()) {
                 connection.close();
             }
             return true;
@@ -35,7 +35,7 @@ public class BaseDados {
     public ResultSet Selecao(String query) {
         try {
             //se já foi invocado o ligar e a ligação está valida então envia o comando da query
-            if (connection != null && connection.isClosed() == false) {
+            if (connection != null && !connection.isClosed()) {
                 Statement script = connection.createStatement();
                 return script.executeQuery(query); //executa o script e aguarda tabela retorno (ResultSet)
             }
@@ -48,7 +48,7 @@ public class BaseDados {
     public boolean Executar(String query) {
         try {
             //se já foi invocado o ligar e a ligação está valida então envia o comando da query
-            if (connection != null && connection.isClosed() == false) {
+            if (connection != null && !connection.isClosed()) {
                 Statement script = connection.createStatement();
                 script.execute(query); //executa o script e aguarda true ou false (booelan)
                 return true;

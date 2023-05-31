@@ -7,26 +7,49 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-<<<<<<< HEAD
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../mssql-jdbc-12.2.0.jre8.jar!/" />
-=======
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/libs/commons-email-1.5.jar!/" />
+          <root url="jar://$USER_HOME$/mssql-jdbc-12.2.0.jre8.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+<<<<<<< HEAD
     <orderEntry type="module-library" exported="">
+=======
+    <orderEntry type="module-library">
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/libs/mail-1.4.7.jar!/" />
->>>>>>> 8c0f7ea1114d0b8a9568a7b51743e1a9a1554824
+          <root url="jar://$MODULE_DIR$/libs/email/commons-email-1.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+<<<<<<< HEAD
+    <orderEntry type="module-library" exported="">
+=======
+    <orderEntry type="module-library">
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/email/mail-1.4.7.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+<<<<<<< HEAD
+    <orderEntry type="module-library" exported="">
+=======
+    <orderEntry type="module-library">
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/sqljdbc_12.2.0.0_ptb/sqljdbc_12.2/ptb/mssql-jdbc-12.2.0.jre8.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

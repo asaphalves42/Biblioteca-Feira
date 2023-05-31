@@ -1,29 +1,26 @@
 package Controller;
 
-import Model.*;
+import Model.Produto;
+import Model.Reserva;
+import Model.Socio;
 import Utilidades.GestorFicheiros;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import static Controller.ControllerProdutos.produtos;
-import static Controller.ControllerSocios.socios;
-
 public class ControllerReservas {
     public static ArrayList<Reserva> reservas = new ArrayList<>();
+    public static ArrayList<String> eliminados = new ArrayList<String>();
     public ControllerSocios controllerSocios;
-    public ControllerProdutos controllerLivros;
+    public ControllerProdutos controllerProdutos;
 
-    public ControllerReservas(ControllerSocios controllerSocios, ControllerProdutos controllerLivros) {
+    public ControllerReservas(ControllerSocios controllerSocios, ControllerProdutos controllerProdutos) {
         this.controllerSocios = controllerSocios;
-        this.controllerLivros = controllerLivros;
+        this.controllerProdutos = controllerProdutos;
     }
 
-    public ControllerReservas() {
-
-    }
-    public void lerLivrosDeFicheiroReserva() {
+    public void lerReservaFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("reservas.txt");
 
         reservas = new ArrayList<>();
@@ -35,30 +32,21 @@ public class ControllerReservas {
 
                 if (value_split.length != 0) {
                     Socio socio = controllerSocios.pesquisarSocioPorNumMecanografico(Integer.parseInt(value_split[1]));
-                    String[] idLivros = value_split[2].split(",");
-                    ArrayList<Produto> livros = new ArrayList<>();
-                    for (String idLivro : idLivros) {
-                        if(idLivro != null && !idLivro.isEmpty()){
-                            Produto livro = ControllerProdutos.pesquisarProdutoPorId(Integer.parseInt(idLivro));
-                            livros.add(livro);
+                    String[] idProdutos = value_split[2].split(",");
+                    ArrayList<Produto> produtos = new ArrayList<>();
+                    for (String idProduto : idProdutos) {
+                        if(idProduto != null && !idProduto.isEmpty()){
+                            Produto livro = controllerProdutos.pesquisarProdutoPorId(Integer.parseInt(idProduto));
+                            produtos.add(livro);
                         }
                     }
-
-                    String[] idCds= value_split[3].split(",");
-                    ArrayList<Produto> cds = new ArrayList<>();
-                    for (String idCd : idCds) {
-                        if(idCd != null && !idCd.isEmpty()) {
-                            Produto cd = ControllerProdutos.pesquisarProdutoPorId(Integer.parseInt(idCd));
-                            cds.add(cd);
-                        }
-                    }
-
-                    if(value_split[5].equalsIgnoreCase("null")){
-                         date = null;
+                    
+                    if(value_split[4].equalsIgnoreCase("null")){
+                        date = null;
                     }else{
-                         date = LocalDate.parse(value_split[4]);
+                        date = LocalDate.parse(value_split[4]);
                     }
-                    Reserva nova = new Reserva(value_split[0], socio, livros, cds, LocalDate.parse(value_split[4]),date);
+                    Reserva nova = new Reserva(value_split[0], socio, produtos, LocalDate.parse(value_split[4]),date);
 
                     if(date!= null){
                         nova.setDevolvido(true);
@@ -70,7 +58,7 @@ public class ControllerReservas {
                     }else{
                         for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associado
                             if (socioLista.getNumMecanografico() == socio.getNumMecanografico()) {//igualo o socio
-                                socioLista.setProdutosReservados(livros.size() + cds.size());//encontro os livros
+                                socioLista.setProdutosReservados(produtos.size());//encontro os livros
                             }
                         }
                     }
@@ -79,7 +67,6 @@ public class ControllerReservas {
             }
         }
     }
-
 
     public void gravarReservasParaFicheiro() {
         String conteudo = "";
@@ -97,24 +84,19 @@ public class ControllerReservas {
 
             conteudo += aux.getIdDaReserva() + "|";
             conteudo += aux.getSocio().getNumMecanografico() + "|";
-            String idLivros = "";
-            for (Produto livro : aux.getLivros()) {
-                idLivros += livro.getId() + ",";
+            String idProdutos = "";
+            for (Produto produto : aux.getProdutos()) {
+                idProdutos += produto.getId() + ",";
             }
-            conteudo += idLivros + "|";
-            String idCds = "";
-            for (Produto cd : aux.getCds()) {
-                idCds += cd.getId() + ",";
-            }
-
-            conteudo += idCds + "|";
+            conteudo += idProdutos + "|";
             conteudo += formated_date + "|";
             conteudo += formated_date1 + "\n";
         }
         GestorFicheiros.gravarFicheiro("reservas.txt", conteudo);
     }
 
-    public boolean efetuarReservaCD(Socio socioSelecionado, CD cdSelecionado, LocalDate dataDaReserva) {
+
+    public boolean efetuarReservaProduto(Socio socioSelecionado, Produto produtoSelecionado, LocalDate dataDaReserva) {
 
         boolean reservaExiste = false;
         Reserva reservaAux = getReserva(socioSelecionado);
@@ -127,43 +109,15 @@ public class ControllerReservas {
             Reserva reserva = new Reserva();
             reserva.setSocio(socioSelecionado);
             reserva.setDataReserva(dataDaReserva);
+            reserva.setPendenteGravacao(true);
             reservaAux = reserva;
         }
         if (socioSelecionado.getProdutosReservados() >= 3) {//se ja estiver 3, não deixa reservar
             return false;
-
         } else { //adicionar a uma reserva que ja existe
-            reservaAux.getCds().add(cdSelecionado);
+            reservaAux.getProdutos().add(produtoSelecionado);
             socioSelecionado.aumentarQuantidade();
-            cdSelecionado.decrementarQuantidade();
-            if (!reservaExiste) {
-                reservas.add(reservaAux);
-            }
-            return true;
-        }
-    }
-
-    public boolean efetuarReserva(Socio socioSelecionado, Livro livroSelecionado, LocalDate dataDaReserva) {
-        boolean reservaExiste = false;
-        Reserva reservaAux = getReserva(socioSelecionado);
-
-        if (reservaAux != null) {
-            reservaExiste = true;
-        }
-
-        if (!reservaExiste) {//cria uma reserva
-            Reserva reserva = new Reserva();
-            reserva.setSocio(socioSelecionado);
-            reserva.setDataReserva(dataDaReserva);
-            reservaAux = reserva;
-        }
-        if (socioSelecionado.getProdutosReservados() >= 3) {//se ja estiver 3, não deixa reservar
-            return false;
-
-        } else { //adicionar a uma reserva que ja existe
-            reservaAux.getLivros().add(livroSelecionado);
-            socioSelecionado.aumentarQuantidade();
-            livroSelecionado.decrementarQuantidade();
+            produtoSelecionado.decrementarQuantidade();
             if (!reservaExiste) {
                 reservas.add(reservaAux);
             }
@@ -181,59 +135,40 @@ public class ControllerReservas {
         return null;
     }
 
-    public boolean devolverProduto(String IdDaReserva, LocalDate dataDeDevolucao, Socio socioDaReserva) {
+    public boolean devolverReserva(String idDaReserva, LocalDate dataDeDevolucao) {
 
-        Reserva reserva = pesquisarReservaPorId(IdDaReserva);
+        Reserva reserva = pesquisarReservaPorId(idDaReserva);
         reserva.setDataDeDevolucao(dataDeDevolucao);
         reserva.setDevolvido(true);
-
-        for (Produto produto : reserva.getLivros()) {
+        reserva.setPendenteGravacao(true);
+        for (Produto produto : reserva.getProdutos()) {
             produto.aumentarQuantidade();
         }
 
-        if (socioDaReserva != null) {
-            socioDaReserva.resetQuantidade();
+        if (reserva.getSocio() != null) {
+            reserva.getSocio().resetQuantidade();
         }
         return true;
+    }
+
+    public boolean devolverProduto(String IdDaReserva, Integer IdProduto) {
+        Reserva reserva = pesquisarReservaPorId(IdDaReserva);
+        if (reserva != null) {
+            for (Produto produto : reserva.getProdutos()) {
+                if (produto.getId() == IdProduto) {
+                    produto.aumentarQuantidade();
+                    reserva.getProdutos().remove(produto);
+                    reserva.setPendenteGravacao(true);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public ArrayList<Reserva> listarReservas() {
         return reservas;
     }
-
-    public ArrayList<Socio> pesquisarSocioPorNome(String nomeInserido) {
-        ArrayList<Socio> socioListado = new ArrayList<>();
-        for (Socio socio : socios) {
-            if (nomeInserido.equalsIgnoreCase(socio.getNome())) {
-                socioListado.add(socio);
-            }
-        }
-        return socioListado;
-    }
-
-    public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloDoLivro) {
-        ArrayList<Livro> livrosTitulo = new ArrayList<>();
-        for (Produto produto : produtos) {
-            if (produto instanceof Livro livro) {
-                if (tituloDoLivro.equalsIgnoreCase(livro.getTitulo())) {
-                    livrosTitulo.add(livro);
-                }
-            }
-        }
-        return livrosTitulo;
-    }
-    public ArrayList<CD> pesquisarCDPorTitulo(String tituloDoCd) {
-        ArrayList<CD> cdsTitulo = new ArrayList<>();
-        for (Produto produto : produtos) {
-            if (produto instanceof CD cd) {
-                if (tituloDoCd.equalsIgnoreCase(cd.getTitulo())) {
-                    cdsTitulo.add(cd);
-                }
-            }
-        }
-        return cdsTitulo;
-    }
-
 
     public Reserva pesquisarReservaPorId(String idReserva) {
         for (Reserva reserva : reservas) {
@@ -247,66 +182,45 @@ public class ControllerReservas {
     public boolean cancelarReserva(String idReserva) {
         for (Reserva reserva : reservas) {
             if (idReserva.equalsIgnoreCase(reserva.getIdDaReserva())) {
-                for (Produto cancelarLivro : reserva.getLivros()) {
-                    cancelarLivro.aumentarQuantidade();
-                }
-
-                for (Produto cancelarCD : reserva.getCds()) {
-                    cancelarCD.aumentarQuantidade();
+                for (Produto produtoReserva : reserva.getProdutos()) {
+                    produtoReserva.aumentarQuantidade();
                 }
                 Socio socio = reserva.getSocio();
                 socio.resetQuantidade();
                 reservas.remove(reserva);
+                eliminados.add(reserva.getIdDaReserva());
                 return true;
             }
         }
         return false;
     }
 
-    public ArrayList<Livro> listaTodosOsLivros() {
-        ArrayList<Livro> livros = new ArrayList<>();
-        for (Produto produto : produtos) {
-            if (produto instanceof Livro) {
-                livros.add((Livro) produto);
-            }
-        }
-        return livros;
-    }
-    public ArrayList<CD> listaTodosOsCDs() {
-        ArrayList<CD> cds = new ArrayList<>();
-        for (Produto produto : produtos) {
-            if (produto instanceof CD) {
-                cds.add((CD) produto);
-            }
-        }
-        return cds;
-    }
-
-    public boolean editarReservaLivro(int idLivro, int novoLivroId) {
+    public boolean editarReservaAlterarProduto(String idReserva, int idProduto, int idNovoProduto) {
         boolean encontrou = false;
-        for (Reserva reserva : reservas) {
-            for (Produto livro : reserva.getLivros()) {
-                if (livro.getId() == idLivro) {
-                    reserva.getLivros().remove(livro);
-                    livro.aumentarQuantidade();
+        Reserva reserva = this.pesquisarReservaPorId(idReserva);
+        if (reserva != null) {
+            for (Produto produto : reserva.getProdutos()) {
+                if (produto.getId() == idProduto) {
+                    reserva.getProdutos().remove(produto);
+                    reserva.setPendenteGravacao(true);
+                    produto.aumentarQuantidade();
                     encontrou = true;
                     break;
                 }
             }
-
             if (encontrou) {
-                Livro novoLivro = (Livro) ControllerProdutos.pesquisarProdutoPorId(novoLivroId);
-                if (novoLivro != null) {
-                    if (novoLivro.getQuantidade() > 0)
-                        reserva.getLivros().add(novoLivro);
-                    novoLivro.decrementarQuantidade();
+                Produto novoProduto = controllerProdutos.pesquisarProdutoPorId(idNovoProduto);
+                if (novoProduto != null) {
+                    if (novoProduto.getQuantidade() > 0){
+                        reserva.getProdutos().add(novoProduto);
+                        novoProduto.decrementarQuantidade();
+                        reserva.setPendenteGravacao(true);
+                    }
                 }
-                break;
             }
         }
         return encontrou;
     }
-
 }
 
 

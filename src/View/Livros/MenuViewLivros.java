@@ -10,9 +10,15 @@ import java.util.InputMismatchException;
 import static Utilidades.Leitura.ler;
 
 public class MenuViewLivros {
-    ControllerAutores gestorAutor = new ControllerAutores();
-    ControllerProdutos gestor = new ControllerProdutos(gestorAutor);
-    ControllerCategoria gestorCategoria = new ControllerCategoria();
+
+    public MenuViewLivros (ControllerProdutos controllerProdutos, ControllerCategoria controllerCategorias, ControllerAutores controllerAutores) {
+        this.gestor = controllerProdutos;
+        this.gestorCategorias = controllerCategorias;
+        this.gestorAutores = controllerAutores;
+    }
+    ControllerProdutos gestor;
+    ControllerCategoria gestorCategorias;
+    ControllerAutores gestorAutores;
     ViewAdicionarLivros adicionar = new ViewAdicionarLivros();
     ViewFuncaoListarLivros mostrar = new ViewFuncaoListarLivros();
     ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
@@ -69,7 +75,7 @@ public class MenuViewLivros {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1 -> adicionar.menuAdicionarLivros(gestor, gestorCategoria);
+                    case 1 -> adicionar.menuAdicionarLivros(gestor, gestorCategorias, gestorAutores);
                     case 2 -> mostrar.listarTodosOsLivros(gestor);
                     case 3 -> this.menuLivros3();
                     case 4 -> eliminar.eliminarLivroPorTitulo(gestor);
@@ -119,14 +125,13 @@ public class MenuViewLivros {
                     case 7 -> editar.editarPorData(gestor);
                     case 8 -> editar.editarFaixaEtaria(gestor);
                     case 9 -> editar.editarEditora(gestor);
-                    case 10 -> editar.editarISBN(gestor);
-                    case 11 -> gestor.gravarProdutosParaFicheiro();
+                    case 10 -> gestor.gravarProdutosParaFicheiro();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 12);
+        } while (opcao != 11);
     }
 }

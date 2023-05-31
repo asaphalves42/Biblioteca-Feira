@@ -6,8 +6,7 @@ import java.util.Random;
 
 public class Reserva {
     private Socio socio;
-    private ArrayList<Produto> livros = new ArrayList<>();
-    private ArrayList<Produto> cds = new ArrayList<>();
+    private ArrayList<Produto> produtos = new ArrayList<>();
     private LocalDate dataReserva;
     private final String idDaReserva;
 
@@ -15,6 +14,7 @@ public class Reserva {
 
     private boolean devolvido;
 
+    private boolean pendenteGravacao; //indicador que informa se o registo é novo ou alterado e precisa de ser gravado na base de dados
 
     public String getIdDaReserva() {
         return idDaReserva;
@@ -27,12 +27,11 @@ public class Reserva {
         this.idDaReserva = String.format("%08d", id);
         this.devolvido = false;
     }
-    public Reserva(String idReserva, Socio socio, ArrayList<Produto> livros, ArrayList<Produto> cds,
+    public Reserva(String idReserva, Socio socio, ArrayList<Produto> produtos,
                    LocalDate dataReserva, LocalDate dataDeDevolucao) {
         this.idDaReserva = idReserva;
         this.socio = socio;
-        this.livros = livros;
-        this.cds= cds;
+        this.produtos = produtos;
         this.dataReserva = dataReserva;
         this.dataDeDevolucao = dataDeDevolucao;
     }
@@ -61,20 +60,21 @@ public class Reserva {
         this.socio = socio;
     }
 
-    public ArrayList<Produto> getLivros() {
-        return livros;
+    public ArrayList<Produto> getProdutos() {
+        return produtos;
     }
 
-    public void setLivros(ArrayList<Produto> livros) {
-        this.livros = livros;
+    public void setProdutos(ArrayList<Produto> produtos) {
+        this.produtos = produtos;
     }
-
-    public ArrayList<Produto> getCds() {
-        return cds;
-    }
-
-    public void setCds(ArrayList<Produto> cds) {
-        this.cds = cds;
+    public ArrayList<Produto> getProdutosPorTipo(TipoProduto tipo) {
+        ArrayList<Produto> produtos = new ArrayList<Produto>();
+        for (Produto produto : this.produtos) {
+            if (produto.getTipo() == tipo){
+                produtos.add(produto);
+            }
+        }
+        return produtos;
     }
 
     public LocalDate getDataReserva() {
@@ -85,20 +85,22 @@ public class Reserva {
         this.dataReserva = dataReserva;
     }
 
-    public String getNomes(ArrayList<Produto> produtos) {
-
-        if(produtos.size() > 0){
+    public String getNomesProdutos(TipoProduto tipo) {
+        if (produtos.size() > 0){
             String nomes = "";
             for (Produto prod : produtos) {
-                if(prod.getTipo().equalsIgnoreCase("livro")){
-                    nomes += prod.getTitulo().toLowerCase()+ " | " + "Id do livro: " + prod.getId() + "\n";
-                }else{
-                    nomes += prod.getTitulo().toLowerCase()+ " | " + "Id do CD: " + prod.getId() + "\n";
+                if(prod.getTipo() == tipo){
+                    nomes += prod.getTitulo().toLowerCase()+ " | " + "Id do " + tipo.toString() + ": " + prod.getId() + "\n";
                 }
             }
             return nomes;
         }
         return "";
+    }
+
+    public boolean getPendenteGravacao() { return pendenteGravacao; }
+    public void setPendenteGravacao(boolean pendenteGravacao) {
+        this.pendenteGravacao = pendenteGravacao;
     }
 
     @Override
@@ -107,10 +109,10 @@ public class Reserva {
                 "Id da reserva: " + idDaReserva + "\n" +
                 "Sócio: " + socio.getNome() + "\n" +
                 "Número mecanográfico: " + socio.getNumMecanografico() + "\n" +
-                "Quantidade de Livros: " + livros.size() + "\n" +
-                "Quantidade de CD´s: " + cds.size() + "\n" +
-                "Livros: " + getNomes(livros) + "\n" +
-                "CD´s: " + getNomes(cds) + "\n" +
+                "Quantidade de Livros: " + getProdutosPorTipo(TipoProduto.Livro).size() + "\n" +
+                "Quantidade de CD´s: " + getProdutosPorTipo(TipoProduto.CD).size() + "\n" +
+                "Livros: " + getNomesProdutos(TipoProduto.Livro) + "\n" +
+                "CD´s: " + getNomesProdutos(TipoProduto.CD) + "\n" +
                 "Data da reserva: " + dataReserva + "]" + "\n"  +
                 "Devolvido em: " + dataDeDevolucao + "\n" +
                 "-----------------------------" + "\n";

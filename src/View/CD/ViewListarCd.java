@@ -3,6 +3,7 @@ package View.CD;
 import Controller.ControllerProdutos;
 import Model.CD;
 import Model.Produto;
+import Model.TipoProduto;
 
 import java.util.ArrayList;
 
@@ -10,9 +11,9 @@ import static Utilidades.Leitura.leStr;
 
 public class ViewListarCd {
 
-    public void listarCDS(ControllerProdutos gestorCds) {
+    public void listarCDS(ControllerProdutos gestorProdutos) {
 
-        ArrayList<CD> cdsListados = gestorCds.listarProdutosCd();
+        ArrayList<CD> cdsListados = gestorProdutos.listarProdutosCd();
 
         if (cdsListados.isEmpty()) {
             System.out.println("Nao existem cds no stock!");
@@ -22,7 +23,7 @@ public class ViewListarCd {
             while (true) {
 
                 for (Produto CD : cdsListados) {
-                    if (CD.getTipo().equals("CD"))
+                    if (CD.getTipo() == TipoProduto.CD)
                         System.out.println(CD);
                 }
 
