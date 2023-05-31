@@ -1,6 +1,2 @@
-1|Livro|teste|3|Asaph|Artes|2001-02-10|teste|teste|
-2|CD|teste|1|Asaph|Artes|2002-02-02|teste|teste|
-3|Livro|teste2|43|Asaph|Artes|1999-02-10|teste2|teste2|
-5|CD|Kizomba|33|Asaph|Artes|1998-08-12|Adulto|Loucura|
-6|CD|mettalica|5|Asaph|Musica|2000-10-01|20|nao sei|
-7|Livro|Harry Potter|4|Jack London|Matematica|2020-05-03|adultos|veja|
+1|Livro|teste|345|Asaph|Artes|2020-02-10|teste|teste|
+2|CD|testecd|56|Asaph|Artes|2008-07-10|testecd|testecd|
