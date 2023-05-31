@@ -44,7 +44,7 @@ public class ViewFuncaoEditarLivros {
             int idEditarTitulo = leInt("Insira o id do livro que quer editar: ");
             String tituloNovo = leStr("Insira o novo título:");
 
-            boolean tituloEditado = gestor.editarTituloDoLivro(idEditarTitulo, tituloNovo);
+            boolean tituloEditado = gestor.editarTituloDoProduto(idEditarTitulo, tituloNovo);
 
             if (tituloEditado) {
                 System.out.println("Livro editado com sucesso!");
@@ -149,7 +149,7 @@ public class ViewFuncaoEditarLivros {
             }
             int novaQuantidade = Integer.parseInt(novaQuantidadeStr);
 
-            boolean quantidadeEditada = gestor.editarQuantidadeLivro(idEditarQuantidade, novaQuantidade);
+            boolean quantidadeEditada = gestor.editarQuantidadeProduto(idEditarQuantidade, novaQuantidade);
 
             if (quantidadeEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -200,7 +200,7 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean autorEditado = gestor.editarAutorLivro(idEditarAutor, novoNomeAutor);
+            boolean autorEditado = gestor.editarAutorProduto(idEditarAutor, novoNomeAutor);
 
             if (autorEditado) {
                 System.out.println("Livro editado com sucesso!");
@@ -302,7 +302,7 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean categoriaEditada = gestor.editarCategoriaLivro(idEditarCategoria, novaCategoria);
+            boolean categoriaEditada = gestor.editarCategoriaProduto(idEditarCategoria, novaCategoria);
 
             if (categoriaEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -356,7 +356,7 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean dataEditada = gestor.editarDataDePubliLivro(idEditarData, novaDataDePublicacao);
+            boolean dataEditada = gestor.editarDataDePublicacaoProduto(idEditarData, novaDataDePublicacao);
 
             if (dataEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -458,7 +458,7 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean editoraEditada = gestor.editarEditoraLivro(idEditarEditora, novaEditora);
+            boolean editoraEditada = gestor.editarEditoraProduto(idEditarEditora, novaEditora);
 
             if (editoraEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -472,54 +472,5 @@ public class ViewFuncaoEditarLivros {
         }
     }
 
-    public void editarISBN(ControllerProdutos gestor) {
-        ArrayList<Livro> livrosParaEditar;
-
-        while (true) {
-            try {
-                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para encerrar):");
-                if (tituloLivro.equalsIgnoreCase("sair")) {
-                    return;
-                }
-                livrosParaEditar = gestor.pesquisarLivroPorTitulo(tituloLivro);
-
-                if (livrosParaEditar.isEmpty()) {
-                    System.out.println("Não existem livros com este título!");
-                    System.out.println(" ");
-                } else {
-                    for (Produto livro : livrosParaEditar) {
-                        System.out.println(livro);
-                    }
-                    break;
-                }
-            } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao pesquisar os livros. Por favor, tente novamente.");
-            }
-        }
-
-        try {
-            int idEditarEditora = leInt("Insira o id do livro que quer editar (ou 'sair' para encerrar):");
-            if (idEditarEditora == -1) {
-                return;
-            }
-
-            String novaEditora = leStr("Insira a nova editora (ou 'sair' para encerrar):");
-            if (novaEditora.equalsIgnoreCase("sair")) {
-                return;
-            }
-
-            boolean editoraEditada = gestor.editarEditoraLivro(idEditarEditora, novaEditora);
-
-            if (editoraEditada) {
-                System.out.println("Livro editado com sucesso!");
-                System.out.println(" ");
-            } else {
-                System.out.println("Livro não encontrado!");
-                System.out.println(" ");
-            }
-        } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao editar o livro. Por favor, tente novamente.");
-        }
-    }
 }
 

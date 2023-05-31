@@ -43,7 +43,7 @@ public class ViewEditarCd {
             int idEditarTitulo = leInt("Insira o id do CD que quer editar: ");
             String tituloNovo = leStr("Insira o novo título:");
 
-            boolean tituloEditado = gestor.editarTituloDoCD(idEditarTitulo, tituloNovo);
+            boolean tituloEditado = gestor.editarTituloDoProduto(idEditarTitulo, tituloNovo);
 
             if (tituloEditado) {
                 System.out.println("CD editado com sucesso!");
@@ -86,7 +86,7 @@ public class ViewEditarCd {
             int idEditarQuantidade = leInt("Insira o id do livro que quer editar: ");
             int novaQuantidade = leIntPositivo("Insira a nova quantidade:");
 
-            boolean quantidadeEditada = gestor.editarQuantidadeCD(idEditarQuantidade, novaQuantidade);
+            boolean quantidadeEditada = gestor.editarQuantidadeProduto(idEditarQuantidade, novaQuantidade);
 
             if (quantidadeEditada) {
                 System.out.println("CD editado com sucesso!");
@@ -130,7 +130,7 @@ public class ViewEditarCd {
 
             String novoNomeAutor = leStr("Insira o novo nome do autor: ");
 
-            boolean autorEditado = gestor.editarAutorCD(idEditarAutor, novoNomeAutor);
+            boolean autorEditado = gestor.editarAutorProduto(idEditarAutor, novoNomeAutor);
 
             if (autorEditado) {
                 System.out.println("CD editado com sucesso!");
@@ -219,7 +219,7 @@ public class ViewEditarCd {
 
             String novaCategoria = leStr("Insira o novo nome da Categoria: ");
 
-            boolean categoriaEditada = gestor.editarCategoriaCD(idEditarCategoria, novaCategoria);
+            boolean categoriaEditada = gestor.editarCategoriaProduto(idEditarCategoria, novaCategoria);
 
             if (categoriaEditada) {
                 System.out.println("CD editado com sucesso!");
@@ -264,7 +264,7 @@ public class ViewEditarCd {
             ValidacaoData validarData = new ValidacaoData();
             LocalDate novaDataDePublicacao = validarData.LerData2();
 
-            boolean dataEditada = gestor.editarDataCD(idEditarData, novaDataDePublicacao);
+            boolean dataEditada = gestor.editarDataDePublicacaoProduto(idEditarData, novaDataDePublicacao);
 
             if (dataEditada) {
                 System.out.println("CD editado com sucesso!");
@@ -307,7 +307,7 @@ public class ViewEditarCd {
             int idEditarFaixa = leInt("Insira o id do CD que quer editar: ");
             String novaFaixaEtaria = leStr("Insira a nova faixa etária:");
 
-            boolean faixaEditada = gestor.editarFaixaEtariaCD(idEditarFaixa, novaFaixaEtaria);
+            boolean faixaEditada = gestor.editarFaixaEtaria(idEditarFaixa, novaFaixaEtaria);
 
             if (faixaEditada) {
                 System.out.println("CD editado com sucesso!");
@@ -350,7 +350,7 @@ public class ViewEditarCd {
             int idEditarEditora = leInt("Insira o id do cd que quer editar: ");
             String novaEditora = leStr("Insira a nova produtora:");
 
-            boolean editoraEditada = gestor.editarProdutoraCD(idEditarEditora, novaEditora);
+            boolean editoraEditada = gestor.editarEditoraProduto(idEditarEditora, novaEditora);
 
             if (editoraEditada) {
                 System.out.println("CD editado com sucesso!");

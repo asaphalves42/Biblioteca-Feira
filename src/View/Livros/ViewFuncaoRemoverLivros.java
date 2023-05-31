@@ -26,7 +26,7 @@ public class ViewFuncaoRemoverLivros {
                     }
                     int idLivroRemover = leInt("Insira o ID do livro que deseja remover: ");
 
-                    boolean removido = gestor.removerLivro(idLivroRemover);
+                    boolean removido = gestor.removerProduto(idLivroRemover);
 
                     if (removido) {
                         System.out.println("O livro está em uma reserva, não foi possível remover!\n");

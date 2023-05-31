@@ -44,7 +44,7 @@ public class ViewFuncaoEditarLivros {
             int idEditarTitulo = leInt("Insira o id do livro que quer editar: ");
             String tituloNovo = leStr("Insira o novo título:");
 
-            boolean tituloEditado = gestor.editarTituloDoLivro(idEditarTitulo, tituloNovo);
+            boolean tituloEditado = gestor.editarTituloDoProduto(idEditarTitulo, tituloNovo);
 
             if (tituloEditado) {
                 System.out.println("Livro editado com sucesso!");
@@ -143,17 +143,17 @@ public class ViewFuncaoEditarLivros {
             }
             int idEditarQuantidade = Integer.parseInt(idEditarQuantidadeStr);
 
-<<<<<<< HEAD
             String novaQuantidadeStr = leStr("Insira a nova quantidade (ou 'sair' para encerrar):");
             if (novaQuantidadeStr.equalsIgnoreCase("sair")) {
                 return;
             }
             int novaQuantidade = Integer.parseInt(novaQuantidadeStr);
-=======
-        boolean quantidadeEditada = gestor.editarQuantidadeLivro(idEditarQuantidade, novaQuantidade);
->>>>>>> d8badd72601bb73b7ccd83b221126e435e8f3eab
 
-            boolean quantidadeEditada = gestor.editarQuantidade(idEditarQuantidade, novaQuantidade);
+<<<<<<< HEAD
+            boolean quantidadeEditada = gestor.editarQuantidadeLivro(idEditarQuantidade, novaQuantidade);
+=======
+            boolean quantidadeEditada = gestor.editarQuantidadeProduto(idEditarQuantidade, novaQuantidade);
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
 
             if (quantidadeEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -162,25 +162,8 @@ public class ViewFuncaoEditarLivros {
                 System.out.println("Livro não encontrado!");
                 System.out.println(" ");
             }
-<<<<<<< HEAD
         } catch (Exception e) {
             System.out.println("Ocorreu um erro ao editar o livro. Por favor, tente novamente.");
-=======
-        }
-
-        int idEditarAutor = leInt("Insira o id do livro que quer editar: ");
-
-        String novoNomeAutor = leStr("Insira o novo nome do autor: ");
-
-        boolean autorEditado = gestor.editarAutorLivro(idEditarAutor, novoNomeAutor);
-
-        if(autorEditado){
-            System.out.println("Livro editado com sucesso!");
-            System.out.println(" ");
-        } else{
-            System.out.println("Livro não encontrado!");
-            System.out.println(" ");
->>>>>>> d8badd72601bb73b7ccd83b221126e435e8f3eab
         }
     }
 
@@ -221,7 +204,11 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean autorEditado = gestor.editarAutor(idEditarAutor, novoNomeAutor);
+<<<<<<< HEAD
+            boolean autorEditado = gestor.editarAutorLivro(idEditarAutor, novoNomeAutor);
+=======
+            boolean autorEditado = gestor.editarAutorProduto(idEditarAutor, novoNomeAutor);
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
 
             if (autorEditado) {
                 System.out.println("Livro editado com sucesso!");
@@ -324,10 +311,10 @@ public class ViewFuncaoEditarLivros {
             }
 
 <<<<<<< HEAD
-            boolean categoriaEditada = gestor.editarCategoria(idEditarCategoria, novaCategoria);
+            boolean categoriaEditada = gestor.editarCategoriaLivro(idEditarCategoria, novaCategoria);
 =======
-        boolean categoriaEditada = gestor.editarCategoriaLivro(idEditarCategoria, novaCategoria);
->>>>>>> d8badd72601bb73b7ccd83b221126e435e8f3eab
+            boolean categoriaEditada = gestor.editarCategoriaProduto(idEditarCategoria, novaCategoria);
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
 
             if (categoriaEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -374,18 +361,18 @@ public class ViewFuncaoEditarLivros {
             }
             int idEditarData = Integer.parseInt(idEditarDataStr);
 
-<<<<<<< HEAD
             System.out.println("Digite a nova data de publicação do livro (ou 'sair' para encerrar): ");
             ValidacaoData validarData = new ValidacaoData();
             LocalDate novaDataDePublicacao = validarData.LerData2();
             if (novaDataDePublicacao == null) {
                 return;
             }
-=======
-        boolean dataEditada = gestor.editarDataDePubliLivro(idEditarData, novaDataDePublicacao);
->>>>>>> d8badd72601bb73b7ccd83b221126e435e8f3eab
 
-            boolean dataEditada = gestor.editarDataDePubli(idEditarData, novaDataDePublicacao);
+<<<<<<< HEAD
+            boolean dataEditada = gestor.editarDataDePubliLivro(idEditarData, novaDataDePublicacao);
+=======
+            boolean dataEditada = gestor.editarDataDePublicacaoProduto(idEditarData, novaDataDePublicacao);
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
 
             if (dataEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -482,16 +469,16 @@ public class ViewFuncaoEditarLivros {
             }
             int idEditarEditora = Integer.parseInt(idEditarEditoraStr);
 
-<<<<<<< HEAD
             String novaEditora = leStr("Insira a nova editora (ou 'sair' para encerrar):");
             if (novaEditora.equalsIgnoreCase("sair")) {
                 return;
             }
-=======
-        boolean editoraEditada = gestor.editarEditoraLivro(idEditarEditora, novaEditora);
->>>>>>> d8badd72601bb73b7ccd83b221126e435e8f3eab
 
-            boolean editoraEditada = gestor.editarEditora(idEditarEditora, novaEditora);
+<<<<<<< HEAD
+            boolean editoraEditada = gestor.editarEditoraLivro(idEditarEditora, novaEditora);
+=======
+            boolean editoraEditada = gestor.editarEditoraProduto(idEditarEditora, novaEditora);
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
 
             if (editoraEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -505,6 +492,7 @@ public class ViewFuncaoEditarLivros {
         }
     }
 
+<<<<<<< HEAD
     public void editarISBN(ControllerProdutos gestor) {
         ArrayList<Livro> livrosParaEditar;
 
@@ -541,7 +529,7 @@ public class ViewFuncaoEditarLivros {
                 return;
             }
 
-            boolean editoraEditada = gestor.editarEditora(idEditarEditora, novaEditora);
+            boolean editoraEditada = gestor.editarEditoraLivro(idEditarEditora, novaEditora);
 
             if (editoraEditada) {
                 System.out.println("Livro editado com sucesso!");
@@ -554,5 +542,7 @@ public class ViewFuncaoEditarLivros {
             System.out.println("Ocorreu um erro ao editar o livro. Por favor, tente novamente.");
         }
     }
+=======
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
 }
 

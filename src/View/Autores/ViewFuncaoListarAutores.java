@@ -9,14 +9,19 @@ public class ViewFuncaoListarAutores {
 
     public void listarTodosOsAutores(ControllerAutores gestor) {
 
-        ArrayList <Autor> autoresListados = gestor.listarAutores();
+        try {
 
-       if (autoresListados.isEmpty()) {
-            System.out.println("Não existem autores registados");
+            ArrayList<Autor> autoresListados = gestor.listarAutores();
+
+            if (autoresListados.isEmpty()) {
+                System.out.println("Não existem autores registados\n");
             } else {
-               for (Autor autor : autoresListados) {
-            System.out.println(autor.toString());
+                for (Autor autor : autoresListados) {
+                    System.out.println(autor.toString());
                 }
+            }
+        }catch (Exception e) {
+            System.out.println("Ocorreu um erro ao listar autores\n");
         }
     }
 }

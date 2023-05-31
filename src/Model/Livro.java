@@ -39,8 +39,9 @@ public class Livro extends Produto {
         this.ISBN = ISBN;
     }
 
-    public String getTipo() {
-        return "livro";
+    @Override
+    public TipoProduto getTipo() {
+        return TipoProduto.Livro;
     }
 
     @Override
