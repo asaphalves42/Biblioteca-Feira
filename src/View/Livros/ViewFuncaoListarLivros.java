@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ViewFuncaoListarLivros {
     public void listarTodosOsLivros(ControllerProdutos gestor) {
-        try {
+       // try {
             ArrayList<Livro> livrosListados = gestor.listarProdutosLivros();
 
             if (livrosListados.isEmpty()) {
@@ -19,8 +19,8 @@ public class ViewFuncaoListarLivros {
                     System.out.println(livro);
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao listar os livros. Por favor, tente novamente.");
+       // } catch (Exception e) {
+           // System.out.println("Ocorreu um erro ao listar os livros. Por favor, tente novamente.");
         }
     }
-}
+

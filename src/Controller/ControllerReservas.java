@@ -36,8 +36,8 @@ public class ControllerReservas {
                     ArrayList<Produto> produtos = new ArrayList<>();
                     for (String idProduto : idProdutos) {
                         if(idProduto != null && !idProduto.isEmpty()){
-                            Produto livro = controllerProdutos.pesquisarProdutoPorId(Integer.parseInt(idProduto));
-                            produtos.add(livro);
+                            Produto produto = controllerProdutos.pesquisarProdutoPorId(Integer.parseInt(idProduto));
+                            produtos.add(produto);
                         }
                     }
                     

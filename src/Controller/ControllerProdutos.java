@@ -19,6 +19,7 @@ public class ControllerProdutos {
     }
 
     public static ArrayList<Produto> produtos = new ArrayList<>();
+    public static ArrayList<Integer> eliminados = new ArrayList<Integer>();
 
     public void lerProdutosDeFicheiro() {
         ArrayList<String> linhasProduto = GestorFicheiros.LerFicheiro("produtos.txt");
@@ -30,7 +31,7 @@ public class ControllerProdutos {
                 String[] value_split_produto = linha.split("\\|");
                 if (value_split_produto.length != 0) {
                     Produto aux = null;
-                    if (Objects.equals(value_split_produto[1], "livro")) {
+                    if (Objects.equals(value_split_produto[1], "Livro")) {
                         // se é do tipo livro, vamos ter que procurar no ficheiro de livros a linha correspondente
                         String[] value_split_livro = null;
                         Autor autor = null;
@@ -125,7 +126,6 @@ public class ControllerProdutos {
         GestorFicheiros.gravarFicheiro("livros.txt", conteudoLivro);
         GestorFicheiros.gravarFicheiro("cd.txt", conteudoCD);
     }
-
 
     /*
 
@@ -277,7 +277,7 @@ public class ControllerProdutos {
         if (!encontrou) {
             //função sugerida pelo intelij usando lambda para e o "removeIf" para remover, facilitando o uso dos loops
             produtos.removeIf(livro -> idProdutoRemover == livro.getId());
-
+            eliminados.add(idProdutoRemover);
         }
 
         return encontrou;
