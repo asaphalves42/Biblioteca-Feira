@@ -163,9 +163,6 @@ public class ViewAplicacao {
                             menuInicialLogin();
                         }
 
-
-
-
                         break;
                     default:
                         System.out.println("Por favor, insira uma opção válida.");
