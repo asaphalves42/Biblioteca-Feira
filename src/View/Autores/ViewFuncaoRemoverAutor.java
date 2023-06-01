@@ -15,6 +15,7 @@ public class ViewFuncaoRemoverAutor {
             try {
                 String nome = leStr("Insira o nome do(a) autor(a): ");
                 ArrayList<Autor> autorParaRemover = gestor.pesquisarAutorPorNome(nome);
+                ArrayList<Integer> idsValidos = new ArrayList<>();
 
                 if (autorParaRemover.isEmpty()) {
                     System.out.println("Não existem autores com esse nome!\n");
@@ -24,6 +25,7 @@ public class ViewFuncaoRemoverAutor {
                     for (Autor autor : autorParaRemover) {
                         if (autor.getNome().equals(nome)) {
                             System.out.println(autor);
+                            idsValidos.add(autor.getId());
                             autorEncontrado = true;
                         }
                     }
@@ -34,6 +36,11 @@ public class ViewFuncaoRemoverAutor {
                 }
 
                 int idAutor = leInt("Insira o ID do(a) autor(a) que deseja remover: ");
+
+                if (!idsValidos.contains(idAutor)) {
+                    System.out.println("ID inválido. Insira um ID válido da lista mostrada.\n");
+                    continue;  // Continuar no loop para permitir nova tentativa
+                }
 
                 boolean removido = gestor.removerAutor(idAutor);
 
@@ -50,4 +57,3 @@ public class ViewFuncaoRemoverAutor {
     }
 
 }
-
