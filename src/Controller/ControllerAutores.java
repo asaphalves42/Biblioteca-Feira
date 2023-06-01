@@ -119,10 +119,6 @@ public class ControllerAutores {
             return false;
         } else {
 
-            //buscar o autor da lista que imprimiu e apagar somente aquele
-
-            //proximo sprint
-
             // Remove o autor da lista de autores
             int index = -1;
             for (int i = 0; i < autores.size(); i++) {

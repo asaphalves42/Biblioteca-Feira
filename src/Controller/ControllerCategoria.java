@@ -65,26 +65,33 @@ public class ControllerCategoria {
         }
         return null;
     }
-    public Categoria pesquisarCategoriaPorId(Integer idCategoria){
+    public Categoria pesquisarCategoriaPorId(int idCategoria){
         for(Categoria categoria : categorias){
-            if(Objects.equals(categoria.getId(), idCategoria)){
+            if(categoria.getId() == idCategoria){
                 return categoria;
             }
         }
         return null;
     }
 
-    public boolean removerCategoria(Categoria categoriaRemover) {
-        // Verifica se a categoria está associada a algum livro
-        for (Produto produto : produtos) {
-            if (produto.getCategoria().getNome().equalsIgnoreCase(categoriaRemover.getNome())) {
-                // A categoria está associada a um produto, não é possível remover
-                return false;
+    public boolean removerCategoria(int idCategoria) {
+        Categoria categoriaEncontrada = pesquisarCategoriaPorId(idCategoria);
+
+        if (categoriaEncontrada != null) {
+            // Verifica se a categoria está associada a algum produto
+            for (Produto produto : produtos) {
+                if (produto.getCategoria().getId() == idCategoria) {
+                    // A categoria está associada a um produto, não é possível remover
+                    return false;
+                }
             }
+
+            // Remove a categoria da lista de categorias
+            categorias.remove(categoriaEncontrada);
+            return true;
         }
-        // Remove a categoria da lista de categorias
-        categorias.remove(categoriaRemover);
-        return true;
+
+        return false; // A categoria não foi encontrada
     }
 
     public ArrayList<Categoria> listarCategorias() {

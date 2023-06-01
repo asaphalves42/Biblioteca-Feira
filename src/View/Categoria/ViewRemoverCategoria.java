@@ -3,7 +3,7 @@ package View.Categoria;
 import Controller.ControllerCategoria;
 import Model.Categoria;
 
-import static Utilidades.Leitura.leStr;
+import static Utilidades.Leitura.leInt;
 
 public class ViewRemoverCategoria {
 
@@ -12,32 +12,27 @@ public class ViewRemoverCategoria {
 
         while (!sair) {
             try {
-                String categoriaPraRemover = leStr("Insira a categoria que deseja remover (ou digite 'sair' para sair):");
-
-                // Verificar se o usuário digitou "sair" e, se sim, sair do loop
-                if (categoriaPraRemover.equalsIgnoreCase("sair")) {
-                    sair = true;
-                    continue;
+                for (Categoria categoria : gestor.listarCategorias()) {
+                    System.out.println(categoria);
                 }
 
-                Categoria categoriaRemover = gestor.pesquisarCategoriaPorNome(categoriaPraRemover);
+                int idCategoria = leInt("Insira o id da categoria que deseja remover:");
 
-                if (categoriaRemover == null) {
-                    System.out.println("Categoria não existe!\n");
+                boolean remover = gestor.removerCategoria(idCategoria);
+
+                if (remover) {
+                    System.out.println("Categoria removida com sucesso!\n");
                 } else {
-                    boolean remover = gestor.removerCategoria(categoriaRemover);
-
-                    if (remover) {
-                        System.out.println("Categoria removida com sucesso!\n");
-                    } else {
-                        System.out.println("Categoria está associada a um livro, não foi possível remover!\n");
-                    }
+                    System.out.println("Categoria não encontrada ou está associada a um livro, não foi possível remover!\n");
                 }
+
+                sair = true; // Sai do loop após a execução bem-sucedida
             } catch (Exception e) {
                 System.out.println("Ocorreu um erro ao remover a categoria: " + e.getMessage() + "\n");
             }
         }
     }
 
-
 }
+
+

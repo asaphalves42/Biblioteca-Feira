@@ -1,2 +1,1 @@
-1|Livro|teste|345|Asaph|Artes|2020-02-10|teste|teste|
-2|CD|testecd|56|Asaph|Artes|2008-07-10|testecd|testecd|
+1|Livro|teste|45|Asaph|1|1999-02-10|teste|teste|
