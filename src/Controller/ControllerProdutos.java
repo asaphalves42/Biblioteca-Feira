@@ -63,11 +63,14 @@ public class ControllerProdutos {
                     } else if (Objects.equals(value_split_produto[1], "CD")) {
                         String[] value_split_cd = null;
                         Autor autor = null;
+                        Categoria categoria = null;
                         for (String linhaCD : linhasCD) {
                             if (linhaCD.startsWith(value_split_produto[0])) {
                                 value_split_cd = linhaCD.split("\\|");
                                 String autorLido = value_split_produto[4];
+                                int idCategoria = Integer.parseInt(value_split_produto[5]);
                                 autor = controllerAutores.pesquisarAutorPorNomeTESTE(autorLido);
+                                categoria = controllerCategorias.pesquisarCategoriaPorId(idCategoria);
                             }
                         }
 
@@ -78,7 +81,7 @@ public class ControllerProdutos {
                                 value_split_produto[2],
                                 Integer.parseInt(value_split_produto[3]),
                                 autor,
-                                new Categoria(0, value_split_produto[5]),
+                                categoria,
                                 LocalDate.parse(value_split_produto[6]),
                                 value_split_produto[7],
                                 value_split_produto[8],
@@ -266,25 +269,40 @@ public class ControllerProdutos {
     }
 
     public boolean removerProduto(int idProdutoRemover) {
+        ArrayList<Reserva> reservasTodas = ControllerReservas.reservas;
+        ArrayList<Reserva> reservasNaoEntregues = new ArrayList<>();
+
+        if(reservasTodas.isEmpty()) {
+            return false;
+        }
+
+        for (Reserva reserva : reservasTodas) {
+            if(reserva.getDataDeDevolucao() == null){
+                reservasNaoEntregues.add(reserva);
+            }
+        }
+
         boolean encontrou = false;
-        //percorrer as reservas para ver se encontra
-        for (Reserva reserva : ControllerReservas.reservas) {
-            for (Produto livrosEscolhido : reserva.getProdutos()) {
-                if (idProdutoRemover == livrosEscolhido.getId()) {
+        // Percorrer as reservas para ver se encontra o produto
+        for (Reserva reserva : reservasNaoEntregues) {
+            for (Produto produtoEscolhido : reserva.getProdutos()) {
+                if (idProdutoRemover == produtoEscolhido.getId()) {
                     encontrou = true;
                     break;
                 }
             }
         }
-        //se encontrar remove
+
+        // Remover o produto se não estiver em nenhuma reserva
         if (!encontrou) {
-            //função sugerida pelo intelij usando lambda para e o "removeIf" para remover, facilitando o uso dos loops
-            produtos.removeIf(livro -> idProdutoRemover == livro.getId());
-            eliminados.add(idProdutoRemover);
+            // Remover o produto da lista de produtos
+            produtos.removeIf(produto -> idProdutoRemover == produto.getId());
+
         }
 
         return encontrou;
     }
+
 
     public boolean editarTituloDoProduto(int idProdutoEditar, String tituloNovo) {
         for (Produto produto : produtos) {

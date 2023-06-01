@@ -33,7 +33,7 @@ public class ViewRemoverCd {
                         boolean removido = gestor.removerProduto(idCDRemover);
 
                         if (removido) {
-                            System.out.println("O CD está em uma reserva, não foi possível remover!\n");
+                            System.out.println("Não foi possível remover!\n");
                         } else {
                             System.out.println("CD removido com sucesso!\n");
                             sair = true;  // CD removido com sucesso, então sair do loop

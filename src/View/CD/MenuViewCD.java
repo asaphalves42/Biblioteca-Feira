@@ -113,17 +113,17 @@ public class MenuViewCD {
 
         do {
             try {
-                System.out.println("## CD's Editar ##");
+                System.out.println("## CD's Editar por: ##");
                 System.out.println("------------------------");
-                System.out.println("1 - Editar Título");
-                System.out.println("2 - Editar Autor");
-                System.out.println("3 - Editar Quantidade");
-                System.out.println("4 - Editar Número de Faixas");
-                System.out.println("5 - Editar Categoria");
-                System.out.println("6 - Editar Data");
-                System.out.println("7 - Editar Faixa Etária");
-                System.out.println("8 - Editar Produtora");
-                System.out.println("9 - Menu Anterior");
+                System.out.println("1 - Editar título");
+                System.out.println("2 - Editar autor");
+                System.out.println("3 - Editar quantidade");
+                System.out.println("4 - Editar número de faixas");
+                System.out.println("5 - Editar categoria");
+                System.out.println("6 - Editar data");
+                System.out.println("7 - Editar faixa etária");
+                System.out.println("8 - Editar produtora");
+                System.out.println("9 - Menu anterior");
 
 
                 opcao = ler.nextInt();
