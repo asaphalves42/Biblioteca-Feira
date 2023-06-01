@@ -27,9 +27,13 @@ public class ViewFuncaoRemoverSocios {
                 if (socioParaRemover.isEmpty()) {
                     System.out.println("Não existem sócios listados!\n");
                 } else {
+                    ArrayList<Integer> numerosMecanograficosValidos = new ArrayList<>();
+
                     for (Socio socio : socioParaRemover) {
                         System.out.println(socio.toString());
+                        numerosMecanograficosValidos.add(socio.getNumMecanografico());
                     }
+
                     int numSocio = leInt("Insira o número mecanográfico do sócio que deseja remover (ou digite 'sair' para sair):");
 
                     // Verificar se o usuário digitou "sair" e, se sim, sair do loop
@@ -38,13 +42,17 @@ public class ViewFuncaoRemoverSocios {
                         continue;
                     }
 
-                    boolean removido = gestor.removerSocio(numSocio);
-
-                    if (removido) {
-                        System.out.println("Não foi possível remover o sócio, existe uma reserva associada!\n");
+                    if (!numerosMecanograficosValidos.contains(numSocio)) {
+                        System.out.println("O número mecanográfico inserido não corresponde a nenhum sócio da lista!\n");
                     } else {
-                        System.out.println("Sócio removido com sucesso!\n");
-                        sair = true;  // Sócio removido com sucesso, então sair do loop
+                        boolean removido = gestor.removerSocio(numSocio);
+
+                        if (removido) {
+                            System.out.println("Não foi possível remover o sócio, existe uma reserva associada!\n");
+                        } else {
+                            System.out.println("Sócio removido com sucesso!\n");
+                            sair = true;  // Sócio removido com sucesso, então sair do loop
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -52,7 +60,4 @@ public class ViewFuncaoRemoverSocios {
             }
         }
     }
-
 }
-
-
