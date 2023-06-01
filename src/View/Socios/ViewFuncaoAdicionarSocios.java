@@ -32,7 +32,7 @@ public class ViewFuncaoAdicionarSocios {
 
             String morada = "";
             while (morada.trim().isEmpty()) {
-                morada = leStr("Introduza morada: ");
+                morada = leStr("Introduza morada (Caso pretenda sair, digite 'sair')");
                 if (morada.equalsIgnoreCase("sair")) {
                     sair = true;
                     break;
@@ -53,7 +53,12 @@ public class ViewFuncaoAdicionarSocios {
 
             int telefone = 0;
             while (telefone < 100000000 || telefone > 999999999) {
-                telefone = leInt("Introduza o nr de telefone (9 dígitos): ");
+                telefone = leInt("Introduza o nr de telefone (9 dígitos) (Caso pretenda sair, digite 'sair') : ");
+                String telefone2 = String.valueOf(telefone);
+                if (telefone2.equalsIgnoreCase("Sair")){
+                    sair = true;
+                    break;
+                }
                 if (telefone < 100000000 || telefone > 999999999) {
                     System.out.println("Por favor, introduza um número de telefone com 9 dígitos!");
                 }
