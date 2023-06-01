@@ -14,7 +14,14 @@ public class ViewFuncaoRemoverSocios {
 
         while (!sair) {
             try {
-                String nomeSocio = leStr("Insira o nome do sócio:");
+                String nomeSocio = leStr("Insira o nome do sócio (ou digite 'sair' para sair):");
+
+                // Verificar se o usuário digitou "sair" e, se sim, sair do loop
+                if (nomeSocio.equalsIgnoreCase("sair")) {
+                    sair = true;
+                    continue;
+                }
+
                 ArrayList<Socio> socioParaRemover = gestor.pesquisarSocioPorNome(nomeSocio);
 
                 if (socioParaRemover.isEmpty()) {
@@ -23,7 +30,13 @@ public class ViewFuncaoRemoverSocios {
                     for (Socio socio : socioParaRemover) {
                         System.out.println(socio.toString());
                     }
-                    int numSocio = leInt("Insira o número mecanográfico do sócio que deseja remover:");
+                    int numSocio = leInt("Insira o número mecanográfico do sócio que deseja remover (ou digite 'sair' para sair):");
+
+                    // Verificar se o usuário digitou "sair" e, se sim, sair do loop
+                    if (numSocio == -1) {
+                        sair = true;
+                        continue;
+                    }
 
                     boolean removido = gestor.removerSocio(numSocio);
 
@@ -39,6 +52,7 @@ public class ViewFuncaoRemoverSocios {
             }
         }
     }
+
 }
 
 
