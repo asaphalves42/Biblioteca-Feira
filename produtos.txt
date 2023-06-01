@@ -1,1 +1,2 @@
 1|Livro|teste|45|Asaph|1|1999-02-10|teste|teste|
+2|CD|testecd|45|Asaph|1|2020-05-10|testecd|testecd|
