@@ -107,7 +107,6 @@ public class ControllerAutores {
 
     public boolean removerAutor(int idAutor) {
         boolean autorAssociadoLivro = false;
-
         // Verifica se o autor está associado a algum livro
         for (Produto livro : produtos) {
             if (Objects.equals(livro.getAutor().getId(), idAutor)) {
@@ -115,11 +114,11 @@ public class ControllerAutores {
                 break;
             }
         }
-
         if (autorAssociadoLivro) {
             // O autor está associado a um livro, não é possível removê-lo
             return false;
         } else {
+
             // Remove o autor da lista de autores
             int index = -1;
             for (int i = 0; i < autores.size(); i++) {

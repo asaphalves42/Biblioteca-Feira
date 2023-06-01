@@ -18,6 +18,14 @@
     </orderEntry>
 <<<<<<< HEAD
     <orderEntry type="module-library" exported="">
+<<<<<<< HEAD
+=======
+    <orderEntry type="module-library">
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/email/commons-email-1.5.jar!/" />
+=======
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/src/libs/commons-email-1.5.jar!/" />
@@ -27,6 +35,7 @@
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/email/commons-email-1.5.jar!/" />
 >>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
+>>>>>>> c8234b3b39a790754a4d24a1917a6090e3d0a200
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -34,6 +43,14 @@
     </orderEntry>
 <<<<<<< HEAD
     <orderEntry type="module-library" exported="">
+<<<<<<< HEAD
+=======
+    <orderEntry type="module-library">
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/email/mail-1.4.7.jar!/" />
+=======
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/src/libs/mail-1.4.7.jar!/" />
@@ -43,6 +60,7 @@
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/email/mail-1.4.7.jar!/" />
 >>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
+>>>>>>> c8234b3b39a790754a4d24a1917a6090e3d0a200
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -50,6 +68,14 @@
     </orderEntry>
 <<<<<<< HEAD
     <orderEntry type="module-library" exported="">
+<<<<<<< HEAD
+=======
+    <orderEntry type="module-library">
+>>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/sqljdbc_12.2.0.0_ptb/sqljdbc_12.2/ptb/mssql-jdbc-12.2.0.jre8.jar!/" />
+=======
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/src/libs/mssql-jdbc-12.2.0.jre8.jar!/" />
@@ -68,6 +94,7 @@
         <CLASSES>
           <root url="jar://$USER_HOME$/Downloads/sqljdbc_12.2.0.0_ptb/sqljdbc_12.2/ptb/mssql-jdbc-12.2.0.jre8.jar!/" />
 >>>>>>> 6bf76805a0b009ea5b111ae55a6ae6b20e5dbd9b
+>>>>>>> c8234b3b39a790754a4d24a1917a6090e3d0a200
         </CLASSES>
         <JAVADOC />
         <SOURCES />
