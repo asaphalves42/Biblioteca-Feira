@@ -43,8 +43,10 @@ public class ControllerReservas {
                     
                     if(value_split[3].equalsIgnoreCase("null")){
                         date = null;
-                    }else{
-                        date = LocalDate.parse(value_split[3]);
+                    } else if (value_split[4].equalsIgnoreCase("null")){
+                        date = null;
+                    } else{
+                        date = LocalDate.parse(value_split[4]);
                     }
                     Reserva nova = new Reserva(value_split[0], socio, produtos, LocalDate.parse(value_split[3]),date);
 
