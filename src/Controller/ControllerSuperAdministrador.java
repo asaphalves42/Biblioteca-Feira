@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Administrador;
 import Model.SuperAdministrador;
-import Model.Utilizador;
 import Utilidades.GestorFicheiros;
 
 import java.util.ArrayList;
@@ -87,6 +86,7 @@ public class ControllerSuperAdministrador {
         }
         return false;
     }
+
     public boolean autenticarSuperAdministrador(String email, String password) {
         if (validarEmail(email)) {
             for (SuperAdministrador superadministrador : superadministrador) {
@@ -97,23 +97,5 @@ public class ControllerSuperAdministrador {
         }
         return false;
     }
-
-
-
-
-
-
-
-
-
-
-    public boolean validarAdministrador(String email, String password){
-        boolean validacao=true;
-        if((email.equalsIgnoreCase("admin@admin.com")&& password.equalsIgnoreCase("admin"))){
-
-        }else
-            validacao=false;
-
-        return validacao;
-    }
 }
+
