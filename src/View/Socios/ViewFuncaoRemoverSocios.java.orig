@@ -42,8 +42,16 @@ public class ViewFuncaoRemoverSocios {
                         continue;
                     }
 
+<<<<<<< HEAD
+                    boolean removido = gestor.removerSocio(numSocio);
+
+                    if (removido) {
+                        System.out.println("Não foi possível remover o sócio, existe uma reserva associada!\n");
+
+=======
                     if (!numerosMecanograficosValidos.contains(numSocio)) {
                         System.out.println("O número mecanográfico inserido não corresponde a nenhum sócio da lista!\n");
+>>>>>>> c8234b3b39a790754a4d24a1917a6090e3d0a200
                     } else {
                         boolean removido = gestor.removerSocio(numSocio);
 
