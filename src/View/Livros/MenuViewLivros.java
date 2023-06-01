@@ -108,9 +108,8 @@ public class MenuViewLivros {
                 System.out.println("7 - Data de publicacao");
                 System.out.println("8 - Faixa etaria");
                 System.out.println("9 - Editora");
-                System.out.println("10 - ISBN");
-                System.out.println("11 - Gravar");
-                System.out.println("12 - Menu anterior");
+                System.out.println("10 - Gravar");
+                System.out.println("11 - Menu anterior");
 
                 opcao = ler.nextInt();
                 ler.nextLine();
