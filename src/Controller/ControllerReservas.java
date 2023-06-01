@@ -44,9 +44,9 @@ public class ControllerReservas {
                     if(value_split[3].equalsIgnoreCase("null")){
                         date = null;
                     }else{
-                        date = LocalDate.parse(value_split[4]);
+                        date = LocalDate.parse(value_split[3]);
                     }
-                    Reserva nova = new Reserva(value_split[0], socio, produtos, LocalDate.parse(value_split[4]),date);
+                    Reserva nova = new Reserva(value_split[0], socio, produtos, LocalDate.parse(value_split[3]),date);
 
                     if(date!= null){
                         nova.setDevolvido(true);

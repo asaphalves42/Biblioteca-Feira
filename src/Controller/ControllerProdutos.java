@@ -35,11 +35,14 @@ public class ControllerProdutos {
                         // se é do tipo livro, vamos ter que procurar no ficheiro de livros a linha correspondente
                         String[] value_split_livro = null;
                         Autor autor = null;
+                        Categoria categoria = null;
                         for (String linhaLivro : linhasLivro) {
                             if (linhaLivro.startsWith(value_split_produto[0])) {
                                 value_split_livro = linha.split("\\|");
                                 String autorLido = value_split_produto[4];
+                                int idCategoria = Integer.parseInt(value_split_produto[5]);
                                 autor = controllerAutores.pesquisarAutorPorNomeTESTE(autorLido);
+                                categoria = controllerCategorias.pesquisarCategoriaPorId(idCategoria);
                             }
                         }
 
@@ -49,7 +52,7 @@ public class ControllerProdutos {
                                 value_split_produto[2],
                                 Integer.parseInt(value_split_produto[3]),
                                 autor,
-                                new Categoria(0, value_split_produto[5]),
+                                categoria,
                                 LocalDate.parse(value_split_produto[6]),
                                 value_split_produto[7],
                                 value_split_produto[8],
@@ -104,7 +107,7 @@ public class ControllerProdutos {
             conteudoProduto += aux.getTitulo() + "|"; //2
             conteudoProduto += aux.getQuantidade() + "|"; // 3
             conteudoProduto += aux.getAutor().getNome() + "|"; // 4
-            conteudoProduto += aux.getCategoria().getNome() + "|";// 5
+            conteudoProduto += aux.getCategoria().getId() + "|";// 5
             conteudoProduto += formated_date + "|";// 6
             conteudoProduto += aux.getFaixaEtaria() + "|"; // 7
             conteudoProduto += aux.getEditora() + "|" + "\n";  // 8
