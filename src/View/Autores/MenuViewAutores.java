@@ -39,7 +39,7 @@ public class MenuViewAutores {
                     case 3 -> menuPesquisarAutores();
                     case 4 -> editar.editarAutor(gestor);
                     case 5 -> remover.removerAutorPorNome(gestor);
-                    case 6 -> gestor.gravarAutorParaFicheiro();
+                    case 6 -> gestor.gravarAutorParaBaseDados();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

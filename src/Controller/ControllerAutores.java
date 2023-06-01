@@ -2,8 +2,11 @@ package Controller;
 
 import Model.Autor;
 import Model.Produto;
+import Utilidades.BaseDados;
 import Utilidades.GestorFicheiros;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ import static Controller.ControllerProdutos.produtos;
 
 public class ControllerAutores {
     public static ArrayList<Autor> autores = new ArrayList<>();
-
+    public static ArrayList<Integer> eliminados = new ArrayList<Integer>();
     public void lerAutorDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Autores.txt");
 
@@ -45,11 +48,65 @@ public class ControllerAutores {
     }
 
 
+    // lista com os identificadores dos registos eliminados. utilizado durante o processo de gravação
+
+
+    public void lerAutorDeBaseDados() {
+
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+            ResultSet resultado = basedados.Selecao("select * from autor");
+
+            while (resultado.next()){
+                // enquanto existirem registos, vou ler 1 a 1
+                Autor aux = new Autor(resultado.getInt("id"),
+                        resultado.getString("nome"),
+                        resultado.getString("morada"),
+                        resultado.getDate("data_nascimento").toLocalDate());
+                autores.add(aux);
+            }
+            basedados.Desligar();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void gravarAutorParaBaseDados() {
+
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            //insere ou atualizar os registos
+            for (Autor aux : autores) {
+                if (aux.getPendenteGravacao()) {
+                    basedados.Executar("DELETE FROM autor where id = " + aux.getId());
+                    basedados.Executar("INSERT INTO autor (id, nome, morada, data_nascimento) " +
+                            " values ('" + aux.getId() + "', '" + aux.getNome() + "', '" + aux.getMorada() + "', '"+aux.getDataDeNascimento().format(formatter)+"')");
+                }
+            }
+
+            //eliminar registos que foram apagados
+            if (eliminados.size() > 0){
+                for (Integer aux : eliminados) {
+                    basedados.Executar("DELETE FROM autor where id = " + aux);
+                }
+                eliminados.clear(); //apago o array porque já foi processado
+            }
+
+            basedados.Desligar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     public boolean adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
 
         Autor autor = new Autor(nome, morada, dataDeNascimento);
-
+        autor.setPendenteGravacao(true);
         autores.add(autor);
 
         return true;
@@ -68,6 +125,7 @@ public class ControllerAutores {
                 autor.setNome(nome);
                 autor.setMorada(morada);
                 autor.setDataDeNascimento(dataDeNascimento);
+                autor.setPendenteGravacao(true);
 
                 return true;
             }
@@ -89,6 +147,14 @@ public class ControllerAutores {
         for (Autor nome : autores) {
             if (nomeInserido.equalsIgnoreCase(nome.getNome())) {
                 autor= nome;
+                return autor;
+            }
+        }
+        return null;
+    }
+    public Autor pesquisarAutorPorIdBD(int idInserido) {
+        for (Autor autor : autores) {
+            if (idInserido == autor.getId()) {
                 return autor;
             }
         }
@@ -128,6 +194,7 @@ public class ControllerAutores {
                 }
             }
             if (index != -1) {
+                this.eliminados.add(idAutor);
                 autores.remove(index);
                 return true;
             } else {

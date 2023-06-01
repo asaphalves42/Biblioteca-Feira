@@ -45,7 +45,9 @@ public class ViewAplicacao {
         lerEgravarProdutos = new ControllerProdutos(lerEgravarAutores, lerEgravarCategoria);
         lerEGravarReservas = new ControllerReservas(lerEgravarSocios, lerEgravarProdutos);
 
-        //ler dados ficheiro
+        /*
+        Leitura base de dados ficheiros
+
         lerSuperAdministradorDeFicheiro.lerSuperAdministradorDeFicheiro();
         lerAdministradorDeFicheiro.lerAdministradorDeFicheiro();
         lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro();
@@ -54,6 +56,20 @@ public class ViewAplicacao {
         lerEgravarProdutos.lerProdutosDeFicheiro();
         lerEgravarSocios.lerSociosDoFicheiro();
         lerEGravarReservas.lerReservaFicheiro();
+
+       /*
+
+        /*
+        Leitura base de dados SQL
+         */
+
+        //ler base dados
+        lerEgravarCategoria.lerBaseDadosCategoria();
+        lerEgravarAutores.lerAutorDeBaseDados();
+        lerEgravarProdutos.lerBaseDadosProdutos();
+        lerEgravarSocios.lerSociosDeBaseDados();
+
+        lerEGravarReservas.lerReservasDeBaseDados();
 
         realizarLogin = new ViewFuncaoRealizarLogin(lerUtilizadorDeFicheiro);
         loginadministrador = new ViewLoginAdministrador(lerAdministradorDeFicheiro);
@@ -224,11 +240,11 @@ public class ViewAplicacao {
                         menuSocios.menuSocios();
                     }
                     case 7 -> {
-                        lerEgravarProdutos.gravarProdutosParaFicheiro();
-                        lerEgravarAutores.gravarAutorParaFicheiro();
-                        lerEgravarSocios.gravarSociosParaFicheiro();
-                        lerEgravarCategoria.gravarFicheiroCategoria();
-                        lerEGravarReservas.gravarReservasParaFicheiro();
+                        lerEgravarProdutos.gravarBaseDadosProdutos();
+                        lerEgravarAutores.gravarAutorParaBaseDados();
+                        lerEgravarSocios.gravarSociosParaBaseDados();
+                        lerEgravarCategoria.gravarCategoriParaBaseDados();
+                        lerEGravarReservas.gravarReservasParaBaseDados();
                         System.exit(0);
                     }
 
