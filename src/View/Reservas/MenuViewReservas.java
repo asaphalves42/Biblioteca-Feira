@@ -53,7 +53,7 @@ public class MenuViewReservas {
                     case 4 -> cancelar.cancelarReserva(gerirReservas);
                     case 5 -> editar.editarReserva(gerirReservas, gerirProdutos, gerirSocios);
                     case 6 -> pesquisar.pesquisarReservaPorId(gerirReservas);
-                    case 7 -> gerirReservas.gravarReservasParaFicheiro();
+                    case 7 -> gerirReservas.gravarReservasParaBaseDados();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

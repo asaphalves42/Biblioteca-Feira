@@ -66,7 +66,7 @@ public class MenuViewCD {
                     case 5:
                         pesquisarCD();
                     case 6:
-                        gestor.gravarProdutosParaFicheiro();
+                        gestor.gravarBaseDadosProdutos();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

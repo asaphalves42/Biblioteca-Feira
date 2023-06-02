@@ -2,7 +2,6 @@ package View.Socios;
 
 
 import Controller.ControllerSocios;
-import View.ViewAplicacao;
 
 import java.util.InputMismatchException;
 
@@ -16,7 +15,6 @@ public class MenuViewSocios {
     ViewFuncaoEditarSocios editarSocios = new ViewFuncaoEditarSocios();
     ViewFuncaoRemoverSocios removerSocios = new ViewFuncaoRemoverSocios();
     ViewFuncaoPesquisarSocio pesquisarSocio = new ViewFuncaoPesquisarSocio();
-    ViewAplicacao app = new ViewAplicacao();
 
     public void menuSocios() {
         int opcao;
@@ -57,7 +55,7 @@ public class MenuViewSocios {
                     this.menuPesquisarSocios();
                     break;
                 case 6:
-                    gestorSocio.gravarSociosParaFicheiro();
+                    gestorSocio.gravarSociosParaBaseDados();
                     break;
             }
         } while (opcao != 7);

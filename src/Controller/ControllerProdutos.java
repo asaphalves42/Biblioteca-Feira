@@ -367,22 +367,10 @@ public class ControllerProdutos {
     }
 
     public boolean removerProduto(int idProdutoRemover) {
-        ArrayList<Reserva> reservasTodas = ControllerReservas.reservas;
-        ArrayList<Reserva> reservasNaoEntregues = new ArrayList<>();
-
-        if(reservasTodas.isEmpty()) {
-            return false;
-        }
-
-        for (Reserva reserva : reservasTodas) {
-            if(reserva.getDataDeDevolucao() == null){
-                reservasNaoEntregues.add(reserva);
-            }
-        }
 
         boolean encontrou = false;
         // Percorrer as reservas para ver se encontra o produto
-        for (Reserva reserva : reservasNaoEntregues) {
+        for (Reserva reserva : ControllerReservas.reservas) {
             for (Produto produtoEscolhido : reserva.getProdutos()) {
                 if (idProdutoRemover == produtoEscolhido.getId()) {
                     encontrou = true;
@@ -394,8 +382,9 @@ public class ControllerProdutos {
         // Remover o produto se não estiver em nenhuma reserva
         if (!encontrou) {
             // Remover o produto da lista de produtos
-            eliminados.add(idProdutoRemover);
+
             produtos.removeIf(produto -> idProdutoRemover == produto.getId());
+            eliminados.add(idProdutoRemover);
 
         }
 

@@ -63,13 +63,15 @@ public class ViewAplicacao {
         Leitura base de dados SQL
          */
 
-        //ler base dados
         lerEgravarCategoria.lerBaseDadosCategoria();
         lerEgravarAutores.lerAutorDeBaseDados();
         lerEgravarProdutos.lerBaseDadosProdutos();
         lerEgravarSocios.lerSociosDeBaseDados();
-
         lerEGravarReservas.lerReservasDeBaseDados();
+
+        lerSuperAdministradorDeFicheiro.lerSuperAdministradorDeFicheiro();
+        lerAdministradorDeFicheiro.lerAdministradorDeFicheiro();
+        lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro();
 
         realizarLogin = new ViewFuncaoRealizarLogin(lerUtilizadorDeFicheiro);
         loginadministrador = new ViewLoginAdministrador(lerAdministradorDeFicheiro);
