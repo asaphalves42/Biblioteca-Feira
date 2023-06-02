@@ -2,11 +2,7 @@ package View.CD;
 
 import Controller.ControllerProdutos;
 import Model.CD;
-import Model.Produto;
 
-import java.util.ArrayList;
-
-import static Utilidades.Leitura.leInt;
 import static Utilidades.Leitura.leStr;
 
 public class ViewRemoverCd {
@@ -16,32 +12,30 @@ public class ViewRemoverCd {
 
         while (!sair) {
             try {
-                String tituloCD = leStr("Insira o título do CD (ou 'sair' para voltar ao menu anterior): ");
-                if (tituloCD.equalsIgnoreCase("sair")) {
-                    sair = true;  // Exit the loop and go back to the previous menu
-                } else {
-                    ArrayList<CD> cdsParaRemover = gestor.pesquisarCDPorTitulo(tituloCD);
-
-                    if (cdsParaRemover.isEmpty()) {
-                        System.out.println("Não existem CDs no stock!\n");
-                    } else {
-                        for (Produto CD : cdsParaRemover) {
-                            System.out.println(CD);
-                        }
-                        int idCDRemover = leInt("Insira o ID do CD que deseja remover: ");
-
-                        boolean removido = gestor.removerProduto(idCDRemover);
-
-                        if (removido) {
-                            System.out.println("Não foi possível remover!\n");
-                        } else {
-                            System.out.println("CD removido com sucesso!\n");
-                            sair = true;  // CD removido com sucesso, então sair do loop
-                        }
-                    }
+                for (CD cds : gestor.listarProdutosCd()) {
+                    System.out.println(cds);
                 }
+
+                String input = leStr("Insira o ID do CD que deseja remover (digite '0' para sair):");
+                if (input.equals("0")) {
+                    break;
+                }
+
+                int idCDRemover = Integer.parseInt(input);
+
+                boolean removido = gestor.removerProduto(idCDRemover);
+
+                if (removido) {
+                    System.out.println("Não foi possível remover!\n");
+                } else {
+                    System.out.println("CD removido com sucesso!\n");
+                    sair = true;  // CD removido com sucesso, então sair do loop
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Erro: Você deve inserir um número válido!\n");
+                break;
             } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao remover o CD: " + e.getMessage() + "\n");
+                System.out.println("Ocorreu um erro -> " + e.getMessage() + "\n");
             }
         }
     }

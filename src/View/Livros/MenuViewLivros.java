@@ -122,7 +122,7 @@ public class MenuViewLivros {
                     case 7 -> editar.editarPorData(gestor);
                     case 8 -> editar.editarFaixaEtaria(gestor);
                     case 9 -> editar.editarEditora(gestor);
-                    case 10 -> gestor.gravarProdutosParaFicheiro();
+                    case 10 -> gestor.gravarBaseDadosProdutos();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

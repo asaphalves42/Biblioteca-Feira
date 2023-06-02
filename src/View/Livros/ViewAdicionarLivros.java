@@ -108,6 +108,11 @@ public class ViewAdicionarLivros {
 
             // adicionar categorias puxando da lista de categorias
 
+            for (Categoria cat : gestorCategoria.listarCategorias()) {
+                System.out.println(cat.getNome());
+                System.out.println(" ");
+            }
+
             String categoria;
             Categoria categoriaEncontrada = null;
 

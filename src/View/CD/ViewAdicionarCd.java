@@ -95,6 +95,10 @@ public class ViewAdicionarCd {
 
             // adicionar categorias puxando da lista de categorias
 
+            for (Categoria cat : gestorCategoria.listarCategorias()) {
+                System.out.println(cat.getNome());
+            }
+
             String categoria;
             Categoria categoriaEncontrada = null;
 
