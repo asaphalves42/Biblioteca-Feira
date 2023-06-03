@@ -23,7 +23,7 @@ public class ViewRemoverCategoria {
                 if (remover) {
                     System.out.println("Categoria removida com sucesso!\n");
                 } else {
-                    System.out.println("Categoria não encontrada ou está associada a um livro, não foi possível remover!\n");
+                    System.out.println("Categoria não encontrada ou está associada a um produto, não foi possível remover!\n");
                 }
 
                 sair = true; // Sai do loop após a execução bem-sucedida

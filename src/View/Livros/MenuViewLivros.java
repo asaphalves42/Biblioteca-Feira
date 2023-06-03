@@ -3,7 +3,6 @@ package View.Livros;
 import Controller.ControllerAutores;
 import Controller.ControllerCategoria;
 import Controller.ControllerProdutos;
-import View.Categoria.MenuViewCategoria;
 
 import java.util.InputMismatchException;
 
@@ -24,7 +23,6 @@ public class MenuViewLivros {
     ViewFuncaoRemoverLivros eliminar = new ViewFuncaoRemoverLivros();
     ViewFuncaoEditarLivros editar = new ViewFuncaoEditarLivros();
     ViewFuncaoPesquisarLivros pesquisar = new ViewFuncaoPesquisarLivros();
-    MenuViewCategoria categoria = new MenuViewCategoria();
 
     public void menuLivros2() {
         int opcao;
@@ -80,7 +78,7 @@ public class MenuViewLivros {
                     case 3 -> this.menuLivros3();
                     case 4 -> eliminar.eliminarLivroPorTitulo(gestor);
                     case 5 -> this.menuLivros2();
-                    case 6 -> gestor.gravarProdutosParaFicheiro();
+                    case 6 -> gestor.gravarBaseDadosProdutos();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
@@ -124,7 +122,7 @@ public class MenuViewLivros {
                     case 7 -> editar.editarPorData(gestor);
                     case 8 -> editar.editarFaixaEtaria(gestor);
                     case 9 -> editar.editarEditora(gestor);
-                    case 10 -> gestor.gravarProdutosParaFicheiro();
+                    case 10 -> gestor.gravarBaseDadosProdutos();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

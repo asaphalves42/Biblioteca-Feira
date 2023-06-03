@@ -1,8 +1,11 @@
 package Controller;
 
 import Model.*;
+import Utilidades.BaseDados;
 import Utilidades.GestorFicheiros;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -132,6 +135,101 @@ public class ControllerProdutos {
         GestorFicheiros.gravarFicheiro("livros.txt", conteudoLivro);
         GestorFicheiros.gravarFicheiro("cd.txt", conteudoCD);
     }
+
+    public void lerBaseDadosProdutos() {
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+            ResultSet resultado = basedados.Selecao("select * from produto");
+
+            while(resultado.next()){
+                Produto aux;
+
+                // enquanto existirem registos, vou ler 1 a 1
+                if (resultado.getString("tipo").equalsIgnoreCase(TipoProduto.CD.toString())) {
+                    aux = new CD(
+                            resultado.getInt("id"),
+                            resultado.getString("titulo"),
+                            resultado.getInt("quantidade"),
+                            this.controllerAutores.pesquisarAutorPorIdBD(resultado.getInt("id_autor")),
+                            this.controllerCategorias.pesquisarCategoriaPorId(resultado.getInt("id_categoria")),
+                            resultado.getDate("data_publicacao").toLocalDate(),
+                            resultado.getString("faixa_etaria"),
+                            resultado.getString("editora"),
+                            resultado.getInt("capitulos")
+                    );
+                    produtos.add(aux);
+                } else if (resultado.getString("tipo").equalsIgnoreCase(TipoProduto.Livro.toString())){
+                    aux = new Livro(
+                            resultado.getInt("id"),
+                            resultado.getString("titulo"),
+                            resultado.getInt("quantidade"),
+                            this.controllerAutores.pesquisarAutorPorIdBD(resultado.getInt("id_autor")),
+                            this.controllerCategorias.pesquisarCategoriaPorId(resultado.getInt("id_categoria")),
+                            resultado.getDate("data_publicacao").toLocalDate(),
+                            resultado.getString("faixa_etaria"),
+                            resultado.getString("editora"),
+                            resultado.getString("subtitulo"),
+                            resultado.getString("isbn"),
+                            resultado.getInt("paginas")
+                    );
+                    produtos.add(aux);
+                }
+
+            }
+            basedados.Desligar();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void gravarBaseDadosProdutos(){
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+            //insere ou atualizar os registos
+            for (Produto aux : produtos) {
+                if (aux.getPendenteGravacao()) {
+                    basedados.Executar("DELETE FROM produto where id = " + aux.getId());
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");;
+                    //campos comuns
+                    String campos = "id, tipo, titulo, quantidade, id_autor, id_categoria, data_publicacao, faixa_etaria, editora,";
+                    String valores = aux.getId() + ",  '" + aux.getTipo().toString() + "', '" + aux.getTitulo() + "', " + aux.getQuantidade() + ", " + aux.getAutor().getId() + "," + aux.getCategoria().getId() + ", " +
+                            "'" + aux.getDataDePublicacao().format(formatter) + "', '" + aux.getFaixaEtaria() + "', '" + aux.getEditora() + "',";
+
+                    // campos especificos
+                    if (aux.getTipo() == TipoProduto.CD){
+                        CD aux1 = (CD)aux;
+                        campos +=  "capitulos";
+                        valores +=  aux1.getNumCapitulos();
+                    } else if (aux.getTipo() == TipoProduto.Livro) {
+                        Livro aux1 = (Livro)aux;
+                        campos += "subtitulo, isbn, paginas";
+                        valores +=  "'" + aux1.getSubtitulo() + "', '" + aux1.getISBN() + "', " + aux1.getNumDePaginas();
+                    }
+
+                    // executar o SCRIPT na base de dados
+                    basedados.Executar("INSERT INTO produto " +
+                            "(" + campos + ")" +
+                            " values " +
+                            "(" + valores +")");
+                }
+            }
+
+            //eliminar registos que foram apagados
+            if (eliminados.size() > 0){
+                for (Integer aux : eliminados) {
+                    basedados.Executar("DELETE FROM produto where id = '" + aux + "'");
+                }
+                eliminados.clear(); //apago o array porque já foi processado
+            }
+
+            basedados.Desligar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     /*
 
@@ -269,22 +367,10 @@ public class ControllerProdutos {
     }
 
     public boolean removerProduto(int idProdutoRemover) {
-        ArrayList<Reserva> reservasTodas = ControllerReservas.reservas;
-        ArrayList<Reserva> reservasNaoEntregues = new ArrayList<>();
-
-        if(reservasTodas.isEmpty()) {
-            return false;
-        }
-
-        for (Reserva reserva : reservasTodas) {
-            if(reserva.getDataDeDevolucao() == null){
-                reservasNaoEntregues.add(reserva);
-            }
-        }
 
         boolean encontrou = false;
         // Percorrer as reservas para ver se encontra o produto
-        for (Reserva reserva : reservasNaoEntregues) {
+        for (Reserva reserva : ControllerReservas.reservas) {
             for (Produto produtoEscolhido : reserva.getProdutos()) {
                 if (idProdutoRemover == produtoEscolhido.getId()) {
                     encontrou = true;
@@ -296,7 +382,9 @@ public class ControllerProdutos {
         // Remover o produto se não estiver em nenhuma reserva
         if (!encontrou) {
             // Remover o produto da lista de produtos
+
             produtos.removeIf(produto -> idProdutoRemover == produto.getId());
+            eliminados.add(idProdutoRemover);
 
         }
 

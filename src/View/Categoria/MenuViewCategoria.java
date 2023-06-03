@@ -33,7 +33,7 @@ public class MenuViewCategoria {
                     case 1 -> adicionarCategoria.adicionarCategoria(gestorCategoria);
                     case 2 -> removerCategoria.removerCategoria(gestorCategoria);
                     case 3 -> listar.listarCategorias(gestorCategoria);
-                    case 4 -> gestorCategoria.gravarFicheiroCategoria();
+                    case 4 -> gestorCategoria.gravarCategoriParaBaseDados();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

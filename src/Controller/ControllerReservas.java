@@ -3,8 +3,11 @@ package Controller;
 import Model.Produto;
 import Model.Reserva;
 import Model.Socio;
+import Utilidades.BaseDados;
 import Utilidades.GestorFicheiros;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -95,6 +98,84 @@ public class ControllerReservas {
             conteudo += formated_date1 + "\n";
         }
         GestorFicheiros.gravarFicheiro("reservas.txt", conteudo);
+    }
+
+    public void lerReservasDeBaseDados() {
+
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+            ResultSet resultado = basedados.Selecao("select * from reserva");
+
+            while (resultado.next()){
+
+                ResultSet resultadoProdutosReserva = basedados.Selecao("select * from reserva_produtos where id_reserva = " + resultado.getInt("id"));
+                ArrayList<Produto> produtos = new ArrayList<Produto>();
+
+                while (resultadoProdutosReserva.next()) {
+                    produtos.add(controllerProdutos.pesquisarProdutoPorId(resultadoProdutosReserva.getInt("id_produto")));
+                }
+
+                // enquanto existirem registos, vou ler 1 a 1
+                Reserva aux = new Reserva(
+                        resultado.getString("id"),
+                        controllerSocios.pesquisarSocioPorNumMecanografico(resultado.getInt("id_socio")),
+                        produtos,
+                        resultado.getDate("data_inicio").toLocalDate(),
+                        resultado.getDate("data_fim") == null ? null :  resultado.getDate("data_fim").toLocalDate()); // a data pode ser nula então tem que fazer um if
+                reservas.add(aux);
+            }
+            basedados.Desligar();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void gravarReservasParaBaseDados() {
+
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            //insere ou atualizar os registos
+            for (Reserva aux : reservas) {
+                if (aux.getPendenteGravacao()) {
+                    //apago a reserva
+                    basedados.Executar("DELETE FROM reserva_produtos where id_reserva = '" + aux.getIdDaReserva() +"'");
+                    basedados.Executar("DELETE FROM reserva where id = " + aux.getIdDaReserva());
+
+                    String devolucao = "";
+                    if (aux.getDataDeDevolucao() == null){
+                        devolucao = "null";
+                    }else{
+                        devolucao = "'"+ aux.getDataDeDevolucao().format(formatter) +"'";
+                    }
+                    //insiro a reserva
+                    basedados.Executar("INSERT INTO reserva (id, id_socio, data_inicio, data_fim) " +
+                            " values ('" + aux.getIdDaReserva() + "', '" + aux.getSocio().getNumMecanografico() + "', '"+aux.getDataReserva().format(formatter)+"', "+devolucao+")");
+
+                    for (Produto produto: aux.getProdutos()){
+                        basedados.Executar("INSERT INTO reserva_produtos (id_reserva, id_produto) " +
+                                " values ('" + aux.getIdDaReserva() + "', '" + produto.getId()+"')");
+
+                    }
+                }
+            }
+
+            //eliminar registos que foram apagados
+            if (eliminados.size() > 0){
+                for (String aux : eliminados) {
+                    basedados.Executar("DELETE FROM reserva_produtos where id = " + aux);
+                    basedados.Executar("DELETE FROM reserva where id = " + aux);
+                }
+                eliminados.clear(); //apago o array porque já foi processado
+            }
+
+            basedados.Desligar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
