@@ -32,6 +32,7 @@ public class ViewAplicacao {
     ControllerLogin lerUtilizadorDeFicheiro;
     ControllerAdministrador lerAdministradorDeFicheiro;
     ControllerSuperAdministrador lerSuperAdministradorDeFicheiro;
+    ControllerSatisfacao lerSatisfacaoDeFicheiro;
 
     public void Iniciar() {
 
@@ -39,6 +40,7 @@ public class ViewAplicacao {
         lerUtilizadorDeFicheiro = new ControllerLogin();
         lerAdministradorDeFicheiro = new ControllerAdministrador();
         lerSuperAdministradorDeFicheiro = new ControllerSuperAdministrador();
+        lerSatisfacaoDeFicheiro = new ControllerSatisfacao();
         lerEgravarAutores = new ControllerAutores();
         lerEgravarSocios = new ControllerSocios();
         lerEgravarCategoria = new ControllerCategoria();
@@ -49,6 +51,7 @@ public class ViewAplicacao {
         lerSuperAdministradorDeFicheiro.lerSuperAdministradorDeFicheiro();
         lerAdministradorDeFicheiro.lerAdministradorDeFicheiro();
         lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro();
+        lerSatisfacaoDeFicheiro.lerSatisfacaoDeFicheiro();
         lerEgravarCategoria.lerFicheiroCategoria();
         lerEgravarAutores.lerAutorDeFicheiro();
         lerEgravarProdutos.lerProdutosDeFicheiro();
@@ -194,7 +197,8 @@ public class ViewAplicacao {
                 System.out.println("4 - Autores");
                 System.out.println("5 - Reservas");
                 System.out.println("6 - Sócios");
-                System.out.println("7 - Fechar e gravar");
+                System.out.println("7 - Satisfacoes");
+                System.out.println("8 - Fechar e gravar");
 
                 opcao = ler.nextInt();
 
@@ -224,6 +228,10 @@ public class ViewAplicacao {
                         menuSocios.menuSocios();
                     }
                     case 7 -> {
+                        ControllerSatisfacao controllerSatisfacao = new ControllerSatisfacao();
+                        controllerSatisfacao.listarSatisfacoes();
+                    }
+                    case 8 -> {
                         lerEgravarProdutos.gravarProdutosParaFicheiro();
                         lerEgravarAutores.gravarAutorParaFicheiro();
                         lerEgravarSocios.gravarSociosParaFicheiro();
@@ -240,7 +248,7 @@ public class ViewAplicacao {
                 ler.nextLine();
             }
 
-        } while (opcao != 8);
+        } while (opcao != 9);
     }
 
 
