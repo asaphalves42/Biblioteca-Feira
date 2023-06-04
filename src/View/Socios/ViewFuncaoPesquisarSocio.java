@@ -12,29 +12,54 @@ import static Utilidades.Leitura.leStr;
 public class ViewFuncaoPesquisarSocio {
 
     public void pesquisarSocioPorNome(ControllerSocios gestor) {
+        try {
+            boolean sair = false;
+            do {
+                String nome = leStr("Insira o nome do sócio (Digite 'sair' para sair): ");
 
-        String nome = leStr("Insira o nome do sócio");
+                if (nome.equalsIgnoreCase("sair")) {
+                    sair = true;
+                    break;
+                }
 
-        ArrayList<Socio> socio = gestor.pesquisarSocioPorNome(nome);
+                ArrayList<Socio> socios = gestor.pesquisarSocioPorNome(nome);
 
-        if (socio.isEmpty()) {
-            System.out.println("Socio(a) inexistente!");
-        } else {
-            System.out.println(gestor.pesquisarSocioPorNome(nome));
+                if (socios.isEmpty()) {
+                    System.out.println("Sócio(a) inexistente!");
+                } else {
+                    for (Socio socio : socios) {
+                        System.out.println(socio);
+                    }
+                }
+            } while (!sair);
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao pesquisar o sócio por nome: " + e.getMessage());
         }
     }
 
     public void pesquisarSocioPorNumMecanografico(ControllerSocios gestor) {
 
-        int numMecanografico = leInt("Insira o Id do(a) sócio(a)");
+        try {
+            boolean sair = false;
+            do {
+                int numMecanografico = leInt("Insira o Id do(a) sócio(a) (Digite '0' para sair): ");
 
-        Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+                if (numMecanografico == 0) {
+                    sair = true;
+                    break;
+                }
 
-        if (socio == null) {
-            System.out.println("Socio(a) inexistente!");
-        } else {
-            System.out.println(socio);
+                Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
+
+                if (socio == null) {
+                    System.out.println("Sócio(a) inexistente!");
+                } else {
+                    System.out.println(socio);
+                }
+            } while (!sair);
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao pesquisar o sócio por número mecanográfico: " + e.getMessage());
         }
-
     }
 }
+
