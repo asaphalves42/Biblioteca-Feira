@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public  class Utilizador {
+public  abstract class Utilizador {
 
     public Utilizador(String email, String password) {
         this.email = email;

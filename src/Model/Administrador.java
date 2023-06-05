@@ -1,32 +1,15 @@
 package Model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-
-public  class Administrador {
-
+public class Administrador extends Utilizador {
     public Administrador(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    private String email;
-    private String password;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
+        super(email, password);
     }
 
     @Override
     public String toString() {
         return "Administrador{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                "email='" + getEmail() + '\'' +
+                ", password='" + getPassword() + '\'' +
                 '}';
     }
 }

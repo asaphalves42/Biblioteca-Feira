@@ -1,27 +1,15 @@
 package Model;
 
-public class SuperAdministrador {
-    private String email;
-    private String password;
-
+public class SuperAdministrador extends Utilizador {
     public SuperAdministrador(String email, String password) {
-        this.email = email;
-        this.password = password;
+        super(email, password);
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String toString() {
+        return "SuperAdministrador{" +
+                "email='" + getEmail() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                '}';
     }
 }
