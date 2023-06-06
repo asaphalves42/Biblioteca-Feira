@@ -228,7 +228,11 @@ public class ViewFuncaoEditarSocios {
 
     public void editarTelefoneSocioPorNumMecanografico(ControllerSocios gestor) {
         try {
-            int numMecanografico = leInt("Insira o número mecanográfico do sócio que pretende editar: ");
+            int numMecanografico = leInt("Insira o número mecanográfico do sócio que pretende editar (ou 0 se quer sair): ");
+            if (numMecanografico==0){
+                return;
+            }
+
             Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
             int novoTelefone = 0;
@@ -240,7 +244,10 @@ public class ViewFuncaoEditarSocios {
 
                 do {
                     try {
-                        novoTelefone = leInt("Insira o novo número de telefone: ");
+                        novoTelefone = leInt("Insira o novo número de telefone (ou 0 se quer sair): ");
+                        if (novoTelefone==0){
+                            break;
+                        }
 
                         if (novoTelefone < 100000000 || novoTelefone > 999999999) {
                             System.out.println("Por favor, introduza um número de telefone com 9 dígitos!");
