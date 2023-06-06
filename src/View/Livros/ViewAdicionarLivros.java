@@ -57,9 +57,20 @@ public class ViewAdicionarLivros {
 
             //adicionar autor com autor existente no programa
 
-            ArrayList<Autor> adicionarAutorExistente;
+            ArrayList<Autor> adicionarAutorExistente = null;
             String nomeAutor;
             while (true) {
+                ArrayList<Autor> autoresListados = gestorAutores.listarAutores();
+                String Continuar = leStr("Caso deseja ver todos os autores exitentes  insira um ENTER");
+                if (Continuar.equalsIgnoreCase("")) {
+                    for (Autor autor : autoresListados) {
+                        System.out.println(autor.toString());
+
+                    }
+                } else {
+                    System.out.println("Ocurreu um erro a listar todos os autores! ");
+                    break;
+                }
                 nomeAutor = leStr("Insira o nome do(a) autor(a):");
                 if (nomeAutor.equalsIgnoreCase("sair")) {
                     return;
@@ -108,19 +119,19 @@ public class ViewAdicionarLivros {
 
             // adicionar categorias puxando da lista de categorias
 
+            System.out.println("Categorias   | ID");
             for (Categoria cat : gestorCategoria.listarCategorias()) {
-                System.out.println(cat.getNome());
-                System.out.println(" ");
+                System.out.printf("%-12s | %d%n", cat.getNome(), cat.getId());
             }
 
-            String categoria;
+            int id;
             Categoria categoriaEncontrada = null;
 
-            while(categoriaEncontrada == null){
-                categoria = leStr("Insira a categoria:");
-                categoriaEncontrada = gestorCategoria.pesquisarCategoriaPorNome(categoria);
+            while (categoriaEncontrada == null) {
+                id = leIntPositivo("Insira a categoria pelo ID:");
+                categoriaEncontrada = gestorCategoria.pesquisarCategoriaPorId(id);
 
-                if(categoriaEncontrada == null){
+                if (categoriaEncontrada == null) {
                     System.out.println("Categoria não encontrada!");
                     System.out.println(" ");
                 }

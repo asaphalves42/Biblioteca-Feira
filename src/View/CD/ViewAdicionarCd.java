@@ -56,7 +56,10 @@ public class ViewAdicionarCd {
                     }
                 } else {
                     System.out.println("Ocurreu um erro a listar todos os autores! ");
+                    break;
                 }
+
+
                 nomeAutor = leStr("Insira o nome do(a) autor(a):");
                 if (nomeAutor.equalsIgnoreCase("sair")) {
                     return;
@@ -66,18 +69,17 @@ public class ViewAdicionarCd {
                 if (autoresListados.isEmpty()) {
                     System.out.println("Não existem autores registados\n");
                 }
-                    adicionarAutorExistente = gestorAutores.pesquisarAutorPorNome(nomeAutor);
+                adicionarAutorExistente = gestorAutores.pesquisarAutorPorNome(nomeAutor);
 
-                    if (adicionarAutorExistente.isEmpty()) {
-                        System.out.println("Não existem autores com esse nome!");
-                        System.out.println(" ");
-                    } else {
+                if (adicionarAutorExistente.isEmpty()) {
+                    System.out.println("Não existem autores com esse nome!");
+                    System.out.println(" ");
+                }/* else {
                         for (Autor autor : adicionarAutorExistente) {
                             System.out.println(autor.toString());
                         }
                         break;
-                    }
-                }
+                    }*/
 
 
                 int idAdicionarAutor = 0;
@@ -170,12 +172,12 @@ public class ViewAdicionarCd {
                 } else {
                     System.out.println("Ocorreu um erro ao adicionar o CD!\n");
                 }
-            }while (sair);
+            }
 
-        }
+        } while (sair);
     }
 
-
+}
 
 
 
