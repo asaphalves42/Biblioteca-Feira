@@ -18,6 +18,18 @@ public class ViewEfetuarReservaLivro {
         Socio socioSelecionado = null;
 
         while (socioSelecionado == null) {
+            ArrayList<Socio> SociosListados = gerirSocios.listarSocio();
+            String Continuar = leStr("Caso deseja ver todos os Sócios exitentes  insira um ENTER");
+            if (Continuar.equalsIgnoreCase("")) {
+                for (Socio Socio : SociosListados) {
+                    System.out.println(Socio.toString());
+
+                }
+
+            }else{
+                System.out.println("Ouve um erro a listar todos os Sócios exitentes");
+                break;
+            }
             String nomeSocio = leStr("Insira o nome do sócio:");
             ArrayList<Socio> socioExistente = gerirSocios.pesquisarSocioPorNome(nomeSocio);
 
