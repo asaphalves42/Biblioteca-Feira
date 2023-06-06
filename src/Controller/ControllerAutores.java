@@ -17,6 +17,7 @@ import static Controller.ControllerProdutos.produtos;
 public class ControllerAutores {
     public static ArrayList<Autor> autores = new ArrayList<>();
     public static ArrayList<Integer> eliminados = new ArrayList<Integer>();
+
     public void lerAutorDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Autores.txt");
 
@@ -58,7 +59,7 @@ public class ControllerAutores {
             basedados.Ligar();
             ResultSet resultado = basedados.Selecao("select * from autor");
 
-            while (resultado.next()){
+            while (resultado.next()) {
                 // enquanto existirem registos, vou ler 1 a 1
                 Autor aux = new Autor(resultado.getInt("id"),
                         resultado.getString("nome"),
@@ -71,6 +72,7 @@ public class ControllerAutores {
             throw new RuntimeException(e);
         }
     }
+
     public void gravarAutorParaBaseDados() {
 
         try {
@@ -83,12 +85,12 @@ public class ControllerAutores {
                 if (aux.getPendenteGravacao()) {
                     basedados.Executar("DELETE FROM autor where id = " + aux.getId());
                     basedados.Executar("INSERT INTO autor (id, nome, morada, data_nascimento) " +
-                            " values ('" + aux.getId() + "', '" + aux.getNome() + "', '" + aux.getMorada() + "', '"+aux.getDataDeNascimento().format(formatter)+"')");
+                            " values ('" + aux.getId() + "', '" + aux.getNome() + "', '" + aux.getMorada() + "', '" + aux.getDataDeNascimento().format(formatter) + "')");
                 }
             }
 
             //eliminar registos que foram apagados
-            if (eliminados.size() > 0){
+            if (eliminados.size() > 0) {
                 for (Integer aux : eliminados) {
                     basedados.Executar("DELETE FROM autor where id = " + aux);
                 }
@@ -100,7 +102,6 @@ public class ControllerAutores {
             throw new RuntimeException(e);
         }
     }
-
 
 
     public boolean adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
@@ -142,16 +143,31 @@ public class ControllerAutores {
         }
         return nomeAutor;
     }
+
     public Autor pesquisarAutorPorNomeTESTE(String nomeInserido) {
         Autor autor;
         for (Autor nome : autores) {
             if (nomeInserido.equalsIgnoreCase(nome.getNome())) {
-                autor= nome;
+                autor = nome;
                 return autor;
             }
         }
         return null;
     }
+
+    public Autor listarAutorPorNomeEncontrado(String nomeInserido) {
+
+        ArrayList<Autor> autoresEncontrados = new ArrayList<>();
+        for (Autor autor : autores) {
+            if (autores.contains(nomeInserido)) {
+                autoresEncontrados.add(autor);
+            }
+        }
+        System.out.println(autoresEncontrados);
+
+        return null;
+    }
+
     public Autor pesquisarAutorPorIdBD(int idInserido) {
         for (Autor autor : autores) {
             if (idInserido == autor.getId()) {

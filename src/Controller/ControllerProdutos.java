@@ -285,6 +285,19 @@ public class ControllerProdutos {
         return produtoDoAutor;
 
     }
+    public Autor listarAutorPorNomeEncontrado(String nomeInserido) {
+
+        ArrayList<Produto> autoresEncontrados = new ArrayList<>();
+        for (Produto autor : produtos) {
+            if (produtos.contains(nomeInserido)) {
+                autoresEncontrados.add(autor);
+            }
+        }
+        System.out.println(autoresEncontrados);
+
+        return null;
+
+    }
 
     public Produto pesquisarProdutoPorId(int IdInserido) {
         for (Produto produto : produtos) {
@@ -305,6 +318,17 @@ public class ControllerProdutos {
         return categoriaLivros;
 
     }
+    public ArrayList<CD> pesquisarCDidCategoria(int id){
+        ArrayList<CD> categoriaCD =new ArrayList<>();
+        for (Produto categoria : produtos){
+            if (id==categoria.getCategoria().getId()){
+                categoriaCD.add((CD) categoria);
+            }
+        }
+        return categoriaCD;
+
+    }
+
 
     public Produto pesquisarLivroISBN(String ISBNinserido) {
         for (Produto produto : produtos) {
