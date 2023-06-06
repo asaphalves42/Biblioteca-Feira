@@ -186,13 +186,14 @@ public class ViewFuncaoEditarSocios {
                         boolean dataValida = false;
                         LocalDate novaDataDeNascimento = null;
 
-                        while (!dataValida) {
+                        if (!dataValida) {
                             try {
                                 System.out.println("Digite a data de nascimento do sócio (Digite 'sair' para sair): ");
                                 ValidacaoData validarData = new ValidacaoData();
                                 novaDataDeNascimento = validarData.LerData2();
+                                String valiStr=String.valueOf(novaDataDeNascimento);
 
-                                if (novaDataDeNascimento == null) {
+                                if (valiStr.equalsIgnoreCase("sair")) {
                                     sair = true;
                                     break;
                                 }

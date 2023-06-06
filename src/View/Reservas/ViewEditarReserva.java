@@ -18,6 +18,10 @@ public class ViewEditarReserva {
 
         System.out.println("Caso pretenda sair, digite 'sair'");
         String idReserva = leStr("Insira o Id da reserva que pretende editar:");
+        if (idReserva.equalsIgnoreCase("sair")) {
+            sair = true;
+            return;
+        }
         Reserva editReservas = gestorReserva.pesquisarReservaPorId(idReserva);
 
         if (editReservas == null) {

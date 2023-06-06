@@ -7,8 +7,8 @@ import static Utilidades.Leitura.leStr;
 
 public class ViewPesquisarReservaPorId {
     public void pesquisarReservaPorId(ControllerReservas gestorReservas){
-        String idInserido = leStr("Insira o ID do reserva a ser pesquisado: ");
-        idInserido = leStr("Introduza o id da reserva (ou sair se quer sair: ");
+
+        String idInserido = leStr("Introduza o id da reserva (ou sair se quer sair): ");
         if (idInserido.equalsIgnoreCase("sair")) {
             return;
         }
