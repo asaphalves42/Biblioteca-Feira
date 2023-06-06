@@ -15,10 +15,15 @@ import static Utilidades.Leitura.leStr;
 public class ViewEfetuarReservaCD {
 
     private Socio selecionarSocioExistente(ControllerSocios gerirReservas) {
+        boolean sair=true;
         Socio socioSelecionado = null;
 
         while (socioSelecionado == null) {
-            String nomeSocio = leStr("Insira o nome do sócio:");
+            String nomeSocio = leStr("Insira o nome do sócio (ou sair se quer sair):");
+            if (nomeSocio.equalsIgnoreCase("sair")) {
+                sair = true;
+                break;
+            }
             ArrayList<Socio> socioExistente = gerirReservas.pesquisarSocioPorNome(nomeSocio);
 
             if (socioExistente.isEmpty()) {
@@ -29,7 +34,11 @@ public class ViewEfetuarReservaCD {
                     System.out.println(socio.toString());//listo o sócio
                 }
 
-                int numMecanografico = leInt("Insira o número mecanográfico do sócio:");
+                int numMecanografico = leInt("Insira o número mecanográfico do sócio (ou 0 se quer sair):");
+                if (numMecanografico==0) {
+                    sair = true;
+                    break;
+                }
 
                 for (Socio idSocio : socioExistente) {
                     if (numMecanografico == idSocio.getNumMecanografico()) {
@@ -46,11 +55,15 @@ public class ViewEfetuarReservaCD {
     }
 
     private CD selecionarProdutoDisponivel(ControllerProdutos gerirProdutos) {
+        boolean sair = false;
         CD cdSelecionado = null;
 
         while (cdSelecionado == null) {
-            String tituloDoCd = leStr("Digite o título do cd:");
-
+            String tituloDoCd = leStr("Digite o título do cd (ou sair se quer sair):");
+            if (tituloDoCd.equalsIgnoreCase("sair")) {
+                sair = true;
+                break;
+            }
 
             ArrayList<CD> cdsDisponiveis = gerirProdutos.pesquisarCDPorTitulo(tituloDoCd);
 
@@ -62,7 +75,7 @@ public class ViewEfetuarReservaCD {
                     System.out.println(cd.toString());
                 }
 
-                String idCDStr = leStr("Insira o ID do cd que deseja reservar:");
+                String idCDStr = leStr("Insira o ID do cd que deseja reservar (ou sair se quer sair):");
 
                 if (idCDStr.equalsIgnoreCase("sair")) {
                     break; // Sair do loop while

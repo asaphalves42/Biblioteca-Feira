@@ -12,7 +12,7 @@ import static Utilidades.Leitura.*;
 
 public class ViewEditarReserva {
     public void editarReserva(ControllerReservas gestorReserva, ControllerProdutos gestorProdutos, ControllerSocios gestorSocios) {
-
+        boolean sair=true;
         ViewEfetuarReservaLivro efetuarReservaLivro = new ViewEfetuarReservaLivro();
         ViewEfetuarReservaCD efetuarReservaCD = new ViewEfetuarReservaCD();
 
@@ -29,7 +29,12 @@ public class ViewEditarReserva {
             }
         }
 
-        int idProduto = leInt("Insira o ID produto que pretende trocar:");
+        int idProduto = leInt("Insira o ID produto que pretende trocar (ou 0 se pretende sair):");
+
+        if (idProduto==0) {
+            sair = true;
+            return;
+        }
         boolean devolvido = gestorReserva.devolverProduto(idReserva, idProduto);
 
         if (devolvido)

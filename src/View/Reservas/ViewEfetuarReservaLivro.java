@@ -17,6 +17,7 @@ public class ViewEfetuarReservaLivro {
     private Socio selecionarSocioExistente(ControllerSocios gerirSocios) {
         Socio socioSelecionado = null;
 
+
         while (socioSelecionado == null) {
             ArrayList<Socio> SociosListados = gerirSocios.listarSocio();
             String Continuar = leStr("Caso deseja ver todos os Sócios exitentes  insira um ENTER");
@@ -30,7 +31,11 @@ public class ViewEfetuarReservaLivro {
                 System.out.println("Ouve um erro a listar todos os Sócios exitentes");
                 break;
             }
+
             String nomeSocio = leStr("Insira o nome do sócio:");
+            if (nomeSocio.equalsIgnoreCase("sair")) {
+                break;
+            }
             ArrayList<Socio> socioExistente = gerirSocios.pesquisarSocioPorNome(nomeSocio);
 
             if (socioExistente.isEmpty()) {
@@ -41,7 +46,10 @@ public class ViewEfetuarReservaLivro {
                     System.out.println(socio.toString());//listo o sócio
                 }
 
-                int numMecanografico = leInt("Insira o número mecanográfico do sócio:");
+                int numMecanografico = leInt("Insira o número mecanográfico do sócio (ou 0 se quer sair:");
+                if (numMecanografico==0) {
+                    break;
+                }
 
                 for (Socio idSocio : socioExistente) {
                     if (numMecanografico == idSocio.getNumMecanografico()) {
@@ -74,7 +82,7 @@ public class ViewEfetuarReservaLivro {
                     System.out.println(livro.toString());
                 }
 
-                String idLivroStr = leStr("Insira o ID do livro que deseja reservar:");
+                String idLivroStr = leStr("Insira o ID do livro que deseja reservar:");;
 
                 if (idLivroStr.equalsIgnoreCase("sair")) {
                     break; // Sair do loop while

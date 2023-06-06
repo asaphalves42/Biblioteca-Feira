@@ -8,9 +8,14 @@ import static Utilidades.Leitura.leStr;
 public class ViewCancelarReserva {
 
     public void cancelarReserva(ControllerReservas gestorReserva) {
-
-        String idReserva = leStr("Insira o id da reserva a ser cancelada: ");
+        boolean sair=false;
+        String idReserva = leStr("Insira o id da reserva a ser cancelada ou sair para sair: ");
         Reserva locReserva = gestorReserva.pesquisarReservaPorId(idReserva);
+
+        if (idReserva.equalsIgnoreCase("sair")) {
+            sair = true;
+            return;
+        }
 
         if (locReserva == null) {
             System.out.println("Reserva não encontrada!");
