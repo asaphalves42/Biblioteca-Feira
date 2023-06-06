@@ -68,7 +68,7 @@ public class ViewAdicionarLivros {
 
                     }
                 } else {
-                    System.out.println("Ocurreu um erro a listar todos os autores! ");
+                    System.out.println("Ocorreu um erro a listar todos os autores! ");
                     break;
                 }
                 nomeAutor = leStr("Insira o nome do(a) autor(a):");
@@ -128,7 +128,11 @@ public class ViewAdicionarLivros {
             Categoria categoriaEncontrada = null;
 
             while (categoriaEncontrada == null) {
-                id = leIntPositivo("Insira a categoria pelo ID:");
+                id = leIntPositivo("Insira a categoria pelo ID ou 0 para sair:");
+                if (id==0) {
+                    sair = true;
+                    break;
+                }
                 categoriaEncontrada = gestorCategoria.pesquisarCategoriaPorId(id);
 
                 if (categoriaEncontrada == null) {

@@ -55,14 +55,15 @@ public class ViewAdicionarCd {
 
                     }
                 } else {
-                    System.out.println("Ocurreu um erro a listar todos os autores! ");
+                    System.out.println("Ocorreu um erro a listar todos os autores! ");
                     break;
                 }
 
 
                 nomeAutor = leStr("Insira o nome do(a) autor(a):");
                 if (nomeAutor.equalsIgnoreCase("sair")) {
-                    return;
+                    break;
+
                 }
                 gestorCds.listarAutorPorNomeEncontrado(nomeAutor);
 
