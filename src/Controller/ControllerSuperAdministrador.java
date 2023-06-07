@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Administrador;
 import Model.SuperAdministrador;
+import Model.Utilizador;
 import Utilidades.GestorFicheiros;
 
 import java.util.ArrayList;
@@ -27,13 +28,13 @@ public class ControllerSuperAdministrador {
 
 
     public void lerAdministradorDeFicheiro() {
-        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Administradores.txt");
+        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Utilizadores.txt");
 
         for (String linha : linhas) {
             if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
 
-                Administrador aux = new Administrador(value_split[0], value_split[1]);
+                Administrador aux = new Administrador(value_split[0], value_split[1],value_split[2]);
                 administradores.add(aux);
             }
         }
@@ -56,14 +57,15 @@ public class ControllerSuperAdministrador {
         String conteudo = "";
         for (Administrador aux : administradores) {
             conteudo += aux.getEmail() + "|";
-            conteudo += aux.getPassword() + "\n";
+            conteudo += aux.getPassword() + "|";
+            conteudo+= aux.getId() + "\n";
         }
-        GestorFicheiros.gravarFicheiro("Administradores.txt", conteudo);
+        GestorFicheiros.gravarFicheiro("Utilizadores.txt", conteudo);
     }
 
-    public static boolean adicionarAdministrador(String email, String password) {
+    public static boolean adicionarAdministrador(String email, String password, String id) {
         if (validarEmail(email)) {
-            Administrador administrador = new Administrador(email, password);
+            Administrador administrador = new Administrador(email, password,id);
             administradores.add(administrador);
             return true;
         }
@@ -86,7 +88,6 @@ public class ControllerSuperAdministrador {
         }
         return false;
     }
-
     public boolean autenticarSuperAdministrador(String email, String password) {
         if (validarEmail(email)) {
             for (SuperAdministrador superadministrador : superadministrador) {
@@ -97,5 +98,23 @@ public class ControllerSuperAdministrador {
         }
         return false;
     }
-}
 
+
+
+
+
+
+
+
+
+
+    public boolean validarAdministrador(String email, String password){
+        boolean validacao=true;
+        if((email.equalsIgnoreCase("admin@admin.com")&& password.equalsIgnoreCase("admin"))){
+
+        }else
+            validacao=false;
+
+        return validacao;
+    }
+}

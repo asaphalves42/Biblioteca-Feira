@@ -17,15 +17,7 @@ public class ControllerLogin {
 
     }
 
-    public ArrayList<Utilizador> pesquisarUtilizadorPorEmail(String emailinserido) {
-        ArrayList<Utilizador> utilizadoresEncontrados = new ArrayList<>();
-        for (Utilizador utilizador : utilizadores) {
-            if (emailinserido == utilizador.getEmail()) {
-                utilizadoresEncontrados.add(utilizador);
-            }
-        }
-        return utilizadoresEncontrados;
-    }
+
     public void lerUtilizadorDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Utilizadores.txt");
 
@@ -33,7 +25,7 @@ public class ControllerLogin {
             if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
 
-                Utilizador aux = new Utilizador(value_split[0], value_split[1]);
+                Utilizador aux = new Utilizador(value_split[0], value_split[1],value_split[2]);
                 utilizadores.add(aux);
             }
         }
@@ -46,16 +38,17 @@ public class ControllerLogin {
         String conteudo = "";
         for (Utilizador aux : utilizadores) {
             conteudo += aux.getEmail() + "|";
-            conteudo += aux.getPassword() + "\n";
+            conteudo += aux.getPassword() + "|";
+            conteudo += aux.getId() + "\n";
         }
         GestorFicheiros.gravarFicheiro("Utilizadores.txt", conteudo);
     }
 
 
 
-    public static boolean adicionarUtilizador(String email, String password) {
+    public static boolean adicionarUtilizador(String email, String password,String id) {
         if (validarEmail(email)) {
-            Utilizador utilizador = new Utilizador(email, password);
+            Utilizador utilizador = new Utilizador(email, password,id);
             utilizadores.add(utilizador);
             return true;
         }
@@ -92,6 +85,9 @@ public class ControllerLogin {
         }
         return false;
     }
+
+
+
 
 
 }

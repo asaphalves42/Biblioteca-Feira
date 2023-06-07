@@ -7,14 +7,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public  abstract class Utilizador {
+public  class Utilizador {
 
-    public Utilizador(String email, String password) {
+    public Utilizador(String email, String password,String id) {
         this.email = email;
         this.password = password;
+        this.id = id;
     }
 
     private String email;
+    private String id;
     private String password;
 
     public String getEmail() {
@@ -31,5 +33,13 @@ public  abstract class Utilizador {
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

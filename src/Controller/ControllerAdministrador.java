@@ -22,13 +22,13 @@ public class ControllerAdministrador {
         return false;
     }
     public void lerAdministradorDeFicheiro() {
-        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Administradores.txt");
+        ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Utilizadores.txt");
 
         for (String linha : linhas) {
             if (!linha.isEmpty()) {
                 String[] value_split = linha.split("\\|");
 
-                Administrador aux = new Administrador(value_split[0], value_split[1]);
+                Administrador aux = new Administrador(value_split[0], value_split[1],value_split[2]);
                 administradores.add(aux);
             }
         }

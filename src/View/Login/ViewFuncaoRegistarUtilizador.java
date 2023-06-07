@@ -16,7 +16,7 @@ public class ViewFuncaoRegistarUtilizador {
 
         String password = leStr("Password :");
 
-        boolean adicionado = ControllerLogin.adicionarUtilizador(email, password);
+        boolean adicionado = ControllerLogin.adicionarUtilizador(email, password,Integer.toString(1));
 
         if(adicionado){
             System.out.println("Utilizador registado com sucesso!");

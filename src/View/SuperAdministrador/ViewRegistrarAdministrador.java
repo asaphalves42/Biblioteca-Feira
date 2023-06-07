@@ -18,7 +18,7 @@ public class ViewRegistrarAdministrador {
             String email = leStr("Email :");
 
             String password = leStr("Password :");
-            boolean adicionado = ControllerSuperAdministrador.adicionarAdministrador(email, password);
+            boolean adicionado = ControllerSuperAdministrador.adicionarAdministrador(email, password,Integer.toString(2));
 
             if(adicionado){
                 System.out.println("Administrador registado com sucesso!");
