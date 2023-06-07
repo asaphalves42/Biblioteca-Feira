@@ -59,34 +59,24 @@ public class ViewAdicionarLivros {
 
             ArrayList<Autor> adicionarAutorExistente = null;
             String nomeAutor;
-            while (true) {
-                ArrayList<Autor> autoresListados = gestorAutores.listarAutores();
-                String Continuar = leStr("Caso deseja ver todos os autores exitentes  insira um ENTER");
-                if (Continuar.equalsIgnoreCase("")) {
-                    for (Autor autor : autoresListados) {
-                        System.out.println(autor.toString());
 
-                    }
-                } else {
-                    System.out.println("Ocorreu um erro a listar todos os autores! ");
-                    break;
-                }
-                nomeAutor = leStr("Insira o nome do(a) autor(a):");
-                if (nomeAutor.equalsIgnoreCase("sair")) {
-                    return;
-                }
-                adicionarAutorExistente = gestorAutores.pesquisarAutorPorNome(nomeAutor);
-
-                if (adicionarAutorExistente.isEmpty()) {
-                    System.out.println("Não existem autores com esse nome!");
-                    System.out.println(" ");
-                } else {
-                    for (Autor autor : adicionarAutorExistente) {
-                        System.out.println(autor.toString());
-                    }
-                    break;
-                }
+            ArrayList<Autor> autoresListados = gestorAutores.listarAutores();
+            for (Autor autor : autoresListados) {
+                System.out.println(autor.toString());
             }
+            nomeAutor = leStr("Insira o nome do(a) autor(a):");
+            if (nomeAutor.equalsIgnoreCase("sair")) {
+                return;
+            }
+            adicionarAutorExistente = gestorAutores.pesquisarAutorPorNome(nomeAutor);
+
+            if (adicionarAutorExistente.isEmpty()) {
+                System.out.println("Não existem autores com esse nome!");
+                System.out.println(" ");
+                break;
+            }
+
+
 
 
             int idAdicionarAutor = 0;

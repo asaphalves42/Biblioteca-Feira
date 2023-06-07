@@ -143,7 +143,7 @@ public class MenuViewCD {
                         editarNumFaixas.editarNumFaixas(gestor);
                         break;
                     case 5:
-                        editarPorCategoriaCD.editarPorCategoriaCD(gestor);
+                        editarPorCategoriaCD.editarPorCategoriaCD(gestor,gestorCategorias);
                         break;
                     case 6:
                         editarPorDataCD.editarPorDataCD(gestor);

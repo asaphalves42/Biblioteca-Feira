@@ -5,5 +5,8 @@ public enum TipoProduto {
     //facilita na adição de produtos
 
     CD,
-    Livro
+    Livro,
+    Jornal,
+    Revista
+
 }

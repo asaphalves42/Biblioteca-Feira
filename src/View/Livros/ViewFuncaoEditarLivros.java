@@ -1,6 +1,8 @@
 package View.Livros;
 
 import Controller.ControllerProdutos;
+import Controller.ControllerCategoria;
+import Model.Categoria;
 import Model.Livro;
 import Model.Produto;
 import Utilidades.ValidacaoData;
@@ -265,7 +267,7 @@ public class ViewFuncaoEditarLivros {
         }
     }
 
-    public void editarPorCategoria(ControllerProdutos gestor) {
+    public void editarPorCategoria(ControllerProdutos gestor,ControllerCategoria gestorCategoria) {
         ArrayList<Livro> livrosParaEditar;
 
         while (true) {
@@ -295,14 +297,36 @@ public class ViewFuncaoEditarLivros {
             if (idEditarCategoriaStr.equalsIgnoreCase("sair")) {
                 return;
             }
-            int idEditarCategoria = Integer.parseInt(idEditarCategoriaStr);
 
-            String novaCategoria = leStr("Insira o novo nome da Categoria (ou 'sair' para encerrar):");
-            if (novaCategoria.equalsIgnoreCase("sair")) {
-                return;
+            System.out.println("Categorias   | ID");
+            for (Categoria cat : gestorCategoria.listarCategorias()) {
+                System.out.printf("%-12s | %d%n", cat.getNome(), cat.getId());
             }
 
-            boolean categoriaEditada = gestor.editarCategoriaProduto(idEditarCategoria, novaCategoria);
+            int id = -1;
+            Categoria categoriaEncontrada = null;
+
+            while (categoriaEncontrada == null) {
+                id = leIntPositivo("Escolha o ID da categoria pela qual quer trocar (ou 0 para sair):");
+                if (id==0) {
+                    break;
+                }
+                categoriaEncontrada = gestorCategoria.pesquisarCategoriaPorId(id);
+
+                if (categoriaEncontrada == null) {
+                    System.out.println("Categoria não encontrada!");
+                    System.out.println(" ");
+                }
+            }
+
+            int idEditarCategoria = Integer.parseInt(idEditarCategoriaStr);
+
+            //String novaCategoria = leStr("Insira o novo nome da Categoria (ou 'sair' para encerrar):");
+            //if (novaCategoria.equalsIgnoreCase("sair")) {
+            //    return;
+            //}
+
+            boolean categoriaEditada = gestor.editarCategoriaProdutoID(idEditarCategoria, id);
 
             if (categoriaEditada) {
                 System.out.println("Livro editado com sucesso!");

@@ -1,7 +1,9 @@
 package View.CD;
 
+import Controller.ControllerCategoria;
 import Controller.ControllerProdutos;
 import Model.CD;
+import Model.Categoria;
 import Model.Produto;
 import Utilidades.ValidacaoData;
 
@@ -26,7 +28,7 @@ public class ViewEditarCd {
                 cdsParaEditar = gestor.pesquisarCDPorTitulo(tituloCD);
 
                 if (cdsParaEditar.isEmpty()) {
-                    System.out.println("Não existem livros com este título!");
+                    System.out.println("Não existem CDs com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto CD : cdsParaEditar) {
@@ -83,7 +85,7 @@ public class ViewEditarCd {
         }
 
         if (cdsParaEditar != null) {
-            int idEditarQuantidade = leInt("Insira o id do livro que quer editar: ");
+            int idEditarQuantidade = leInt("Insira o id do CD que quer editar: ");
             int novaQuantidade = leIntPositivo("Insira a nova quantidade:");
 
             boolean quantidadeEditada = gestor.editarQuantidadeProduto(idEditarQuantidade, novaQuantidade);
@@ -103,7 +105,7 @@ public class ViewEditarCd {
 
         while (true) {
             try {
-                String tituloCD = leStr("Insira o CD do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
+                String tituloCD = leStr("Insira o titulo do CD que quer editar (ou 'sair' para voltar ao menu anterior):");
 
                 if (tituloCD.equalsIgnoreCase("sair")) {
                     break;  // Sair do loop e retornar ao menu anterior
@@ -126,7 +128,7 @@ public class ViewEditarCd {
         }
 
         if (!cdsParaEditar.isEmpty()) {
-            int idEditarAutor = leInt("Insira o id do livro que quer editar: ");
+            int idEditarAutor = leInt("Insira o id do autor que quer editar: ");
 
             String novoNomeAutor = leStr("Insira o novo nome do autor: ");
 
@@ -185,9 +187,10 @@ public class ViewEditarCd {
         }
     }
 
+
 // As demais funções seguem a mesma estrutura de adição do bloco try-catch e da opção "sair"
 
-    public void editarPorCategoriaCD(ControllerProdutos gestor) {
+    public void editarPorCategoriaCD(ControllerProdutos gestor, ControllerCategoria gestorCategoria) {
         ArrayList<CD> cdsParaEditar = new ArrayList<>();
 
         while (true) {
@@ -215,18 +218,51 @@ public class ViewEditarCd {
         }
 
         if (!cdsParaEditar.isEmpty()) {
-            int idEditarCategoria = leInt("Insira o id do CD que quer editar: ");
+            try {
+                String idEditarCategoriaStr = leStr("Insira o id do CD que quer editar (ou 'sair' para encerrar):");
+                if (idEditarCategoriaStr.equalsIgnoreCase("sair")) {
+                    return;
+                }
 
-            String novaCategoria = leStr("Insira o novo nome da Categoria: ");
+                System.out.println("Categorias   | ID");
+                for (Categoria cat : gestorCategoria.listarCategorias()) {
+                    System.out.printf("%-12s | %d%n", cat.getNome(), cat.getId());
+                }
 
-            boolean categoriaEditada = gestor.editarCategoriaProduto(idEditarCategoria, novaCategoria);
+                int id = -1;
+                Categoria categoriaEncontrada = null;
 
-            if (categoriaEditada) {
-                System.out.println("CD editado com sucesso!");
-                System.out.println(" ");
-            } else {
-                System.out.println("Categoria não existe!");
-                System.out.println(" ");
+                while (categoriaEncontrada == null) {
+                    id = leIntPositivo("Escolha o ID da categoria pela qual quer trocar (ou 0 para sair):");
+                    if (id == 0) {
+                        break;
+                    }
+                    categoriaEncontrada = gestorCategoria.pesquisarCategoriaPorId(id);
+
+                    if (categoriaEncontrada == null) {
+                        System.out.println("Categoria não encontrada!");
+                        System.out.println(" ");
+                    }
+                }
+
+                int idEditarCategoria = Integer.parseInt(idEditarCategoriaStr);
+
+                //String novaCategoria = leStr("Insira o novo nome da Categoria (ou 'sair' para encerrar):");
+                //if (novaCategoria.equalsIgnoreCase("sair")) {
+                //    return;
+                //}
+
+                boolean categoriaEditada = gestor.editarCategoriaProdutoID(idEditarCategoria, id);
+
+                if (categoriaEditada) {
+                    System.out.println("Livro editado com sucesso!");
+                    System.out.println(" ");
+                } else {
+                    System.out.println("Categoria não existe!");
+                    System.out.println(" ");
+                }
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro ao editar o livro. Por favor, tente novamente.");
             }
         }
     }
@@ -290,7 +326,7 @@ public class ViewEditarCd {
                 cdsParaEditar = gestor.pesquisarCDPorTitulo(tituloCD);
 
                 if (cdsParaEditar.isEmpty()) {
-                    System.out.println("Não existem livros com este título!");
+                    System.out.println("Não existem CDs com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto CD : cdsParaEditar) {
@@ -361,7 +397,4 @@ public class ViewEditarCd {
             }
         }
     }
-
-
-
 }

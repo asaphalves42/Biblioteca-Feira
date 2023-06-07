@@ -118,7 +118,7 @@ public class MenuViewLivros {
                     case 3 -> editar.editarQuantidade(gestor);
                     case 4 -> editar.editarLivrosPorAutor(gestor);
                     case 5 -> editar.editarNumPaginas(gestor);
-                    case 6 -> editar.editarPorCategoria(gestor);
+                    case 6 -> editar.editarPorCategoria(gestor,gestorCategorias);
                     case 7 -> editar.editarPorData(gestor);
                     case 8 -> editar.editarFaixaEtaria(gestor);
                     case 9 -> editar.editarEditora(gestor);

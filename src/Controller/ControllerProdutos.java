@@ -142,7 +142,7 @@ public class ControllerProdutos {
             basedados.Ligar();
             ResultSet resultado = basedados.Selecao("select * from produto");
 
-            while(resultado.next()){
+            while (resultado.next()) {
                 Produto aux;
 
                 // enquanto existirem registos, vou ler 1 a 1
@@ -159,7 +159,7 @@ public class ControllerProdutos {
                             resultado.getInt("capitulos")
                     );
                     produtos.add(aux);
-                } else if (resultado.getString("tipo").equalsIgnoreCase(TipoProduto.Livro.toString())){
+                } else if (resultado.getString("tipo").equalsIgnoreCase(TipoProduto.Livro.toString())) {
                     aux = new Livro(
                             resultado.getInt("id"),
                             resultado.getString("titulo"),
@@ -183,7 +183,7 @@ public class ControllerProdutos {
         }
     }
 
-    public void gravarBaseDadosProdutos(){
+    public void gravarBaseDadosProdutos() {
         try {
             BaseDados basedados = new BaseDados();
             basedados.Ligar();
@@ -191,33 +191,34 @@ public class ControllerProdutos {
             for (Produto aux : produtos) {
                 if (aux.getPendenteGravacao()) {
                     basedados.Executar("DELETE FROM produto where id = " + aux.getId());
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    ;
                     //campos comuns
                     String campos = "id, tipo, titulo, quantidade, id_autor, id_categoria, data_publicacao, faixa_etaria, editora,";
                     String valores = aux.getId() + ",  '" + aux.getTipo().toString() + "', '" + aux.getTitulo() + "', " + aux.getQuantidade() + ", " + aux.getAutor().getId() + "," + aux.getCategoria().getId() + ", " +
                             "'" + aux.getDataDePublicacao().format(formatter) + "', '" + aux.getFaixaEtaria() + "', '" + aux.getEditora() + "',";
 
                     // campos especificos
-                    if (aux.getTipo() == TipoProduto.CD){
-                        CD aux1 = (CD)aux;
-                        campos +=  "capitulos";
-                        valores +=  aux1.getNumCapitulos();
+                    if (aux.getTipo() == TipoProduto.CD) {
+                        CD aux1 = (CD) aux;
+                        campos += "capitulos";
+                        valores += aux1.getNumCapitulos();
                     } else if (aux.getTipo() == TipoProduto.Livro) {
-                        Livro aux1 = (Livro)aux;
+                        Livro aux1 = (Livro) aux;
                         campos += "subtitulo, isbn, paginas";
-                        valores +=  "'" + aux1.getSubtitulo() + "', '" + aux1.getISBN() + "', " + aux1.getNumDePaginas();
+                        valores += "'" + aux1.getSubtitulo() + "', '" + aux1.getISBN() + "', " + aux1.getNumDePaginas();
                     }
 
                     // executar o SCRIPT na base de dados
                     basedados.Executar("INSERT INTO produto " +
                             "(" + campos + ")" +
                             " values " +
-                            "(" + valores +")");
+                            "(" + valores + ")");
                 }
             }
 
             //eliminar registos que foram apagados
-            if (eliminados.size() > 0){
+            if (eliminados.size() > 0) {
                 for (Integer aux : eliminados) {
                     basedados.Executar("DELETE FROM produto where id = '" + aux + "'");
                 }
@@ -259,6 +260,26 @@ public class ControllerProdutos {
         return cds;
     }
 
+    public ArrayList<Jornal> listarProdutosJornal() {
+        ArrayList<Jornal> jornais = new ArrayList<>();
+        for (Produto produtoJornal : produtos) {
+            if (produtoJornal.getTipo() == TipoProduto.Jornal) {
+                jornais.add((Jornal) produtoJornal);
+            }
+        }
+        return jornais;
+    }
+
+    public ArrayList<Revista> listarProdutosRevistas() {
+        ArrayList<Revista> revistas = new ArrayList<>();
+        for (Produto produtoRevistas : produtos) {
+            if (produtoRevistas.getTipo() == TipoProduto.Revista) {
+                revistas.add((Revista) produtoRevistas);
+            }
+
+        }
+        return revistas;
+    }
     /*
 
     Funções de pesquisa
@@ -269,7 +290,7 @@ public class ControllerProdutos {
         ArrayList<Livro> livrosTitulo = new ArrayList<>();
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Livro && tituloInserido.equalsIgnoreCase(produto.getTitulo())) {
-                livrosTitulo.add((Livro)produto);
+                livrosTitulo.add((Livro) produto);
             }
         }
         return livrosTitulo;
@@ -283,8 +304,8 @@ public class ControllerProdutos {
             }
         }
         return produtoDoAutor;
-
     }
+
     public Autor listarAutorPorNomeEncontrado(String nomeInserido) {
 
         ArrayList<Produto> autoresEncontrados = new ArrayList<>();
@@ -318,10 +339,11 @@ public class ControllerProdutos {
         return categoriaLivros;
 
     }
-    public ArrayList<CD> pesquisarCDidCategoria(int id){
-        ArrayList<CD> categoriaCD =new ArrayList<>();
-        for (Produto categoria : produtos){
-            if (id==categoria.getCategoria().getId()){
+
+    public ArrayList<CD> pesquisarCDidCategoria(int id) {
+        ArrayList<CD> categoriaCD = new ArrayList<>();
+        for (Produto categoria : produtos) {
+            if (id == categoria.getCategoria().getId()) {
                 categoriaCD.add((CD) categoria);
             }
         }
@@ -471,7 +493,23 @@ public class ControllerProdutos {
         return false;
     }
 
-    public boolean editarDataDePublicacaoProduto(int idEditarProduto, LocalDate novaData) {
+    public boolean editarCategoriaProdutoID(int idEditarProduto, int idNovaCategoria) {
+        Categoria categoriaEncontrada = this.controllerCategorias.pesquisarCategoriaPorId(idNovaCategoria);
+        if (categoriaEncontrada == null) {
+            return false;
+        }
+        for (Produto produto : produtos) {
+            if (idEditarProduto == produto.getId()) {
+                produto.setCategoria(this.controllerCategorias.pesquisarCategoriaPorId(idNovaCategoria));
+                produto.setPendenteGravacao(true);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public boolean editarDataDePublicacaoProduto ( int idEditarProduto, LocalDate novaData){
         for (Produto produto : produtos) {
             if (idEditarProduto == produto.getId()) {
                 produto.setDataDePublicacao(novaData);
@@ -481,6 +519,8 @@ public class ControllerProdutos {
         }
         return false;
     }
+
+
 
     public boolean editarEditoraProduto(int idEditarProduto, String novaEditora) {
         for (Produto produto : produtos) {
