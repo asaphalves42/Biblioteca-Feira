@@ -85,6 +85,14 @@ public class ControllerLogin {
         }
         return false;
     }
+    public static String obterIDUtilizador(String email, String password) {
+        for (Utilizador utilizador : utilizadores) {
+            if (utilizador.getEmail().equalsIgnoreCase(email) && utilizador.getPassword().equals(password)) {
+                return utilizador.getId();
+            }
+        }
+        return null;
+    }
 
 
 

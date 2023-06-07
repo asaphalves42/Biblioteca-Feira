@@ -10,3 +10,16 @@ asaph@lindo.com|123|2
 asaphrei@gmail.com|123|2
 naoseiteste@adm.pt|123|2
 usertest@gmail.com|112|1
+teste@gmail.com|112|1
+lol@gmail.com|112|1
+naosei@gmail.com|jatedisse|2
+naosei@gmail.com|jatedisse|2
+naoseinada@gmail.com|111|2
+teste@gmail.com|teste|2
+ola@gmail.com|1|2
+adminnovo@hotmail.pt|naoseiadminnovo|2
+asaph@lindo.com|123|2
+asaphrei@gmail.com|123|2
+naoseiteste@adm.pt|123|2
+usertest@gmail.com|112|1
+userid1@gmail.com|user|1

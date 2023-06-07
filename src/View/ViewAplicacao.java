@@ -13,6 +13,7 @@ import View.Socios.MenuViewSocios;
 import View.SuperAdministrador.ViewSuperAdministrador;
 
 import java.util.InputMismatchException;
+import java.util.Objects;
 
 import static Utilidades.Leitura.leStr;
 import static Utilidades.Leitura.ler;
@@ -39,6 +40,7 @@ public class ViewAplicacao {
         lerUtilizadorDeFicheiro = new ControllerLogin();
         lerAdministradorDeFicheiro = new ControllerAdministrador();
         lerSuperAdministradorDeFicheiro = new ControllerSuperAdministrador();
+
         lerEgravarAutores = new ControllerAutores();
         lerEgravarSocios = new ControllerSocios();
         lerEgravarCategoria = new ControllerCategoria();
@@ -83,10 +85,12 @@ public class ViewAplicacao {
 
         // Iniciar o sistema
 
-        menuInicialLogin();
+        //menuInicialLogin();
+        menuUtilizador();
 
     }
-    public void menuInicialLogin() {
+    /*
+public void menuInicialLogin() {
         int opcao;
 
         do {
@@ -143,6 +147,37 @@ public class ViewAplicacao {
             }
         } while (opcao != 5);
     }
+     */
+    public void menuUtilizador() {
+      String email= leStr("Email");
+
+        String password= leStr("Password");
+
+        lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro(); // Chamar o método para ler os utilizadores do ficheiro
+
+        String id = ControllerLogin.obterIDUtilizador(email, password);
+
+
+        if (id != null) {
+            // Menu do Utilizador
+            if (id.equals("1")) {
+                // Menu para utilizadores com ID 1
+                System.out.println("Bem-vindo, Utilizador (ID 1)!\n");
+                menuPrincipal();
+            } else if (id.equals("2")) {
+                // Menu para utilizadores com ID 2
+                System.out.println("Bem-vindo, Utilizador (ID 2)!\n");
+                menuAdministracao();
+            } else {
+                System.out.println("ID de Utilizador desconhecido. Voltando ao menu inicial.\n");
+
+            }
+        } else {
+            System.out.println("Credenciais inválidas. Voltando ao menu inicial.\n");
+
+        }
+    }
+
 
     public void menuAdministracao() {
 
@@ -175,10 +210,12 @@ public class ViewAplicacao {
                         String resposta = leStr("Deseja guardar os utilizadores registados  ?");
                         if(resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")){
                             lerUtilizadorDeFicheiro.gravarUtilizadorParaFicheiro();
-                            menuInicialLogin();
+
+                            System.exit(0);
+                            //menuInicialLogin();
 
                         }else{
-                            menuInicialLogin();
+                           // menuInicialLogin();
                         }
 
                         break;
