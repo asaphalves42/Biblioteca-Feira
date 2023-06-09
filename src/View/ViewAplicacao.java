@@ -2,45 +2,36 @@ package View;
 
 
 import Controller.*;
+import Model.TipoUtilizador;
 import Utilidades.MensagemBoasVindas;
 import View.Autores.MenuViewAutores;
 import View.CD.MenuViewCD;
 import View.Categoria.MenuViewCategoria;
+import View.Funcionario.MenuViewRegistarFuncionario;
 import View.Livros.MenuViewLivros;
 import View.Login.*;
 import View.Reservas.MenuViewReservas;
 import View.Socios.MenuViewSocios;
-import View.SuperAdministrador.ViewSuperAdministrador;
 
+import java.sql.SQLException;
 import java.util.InputMismatchException;
-import java.util.Objects;
 
-import static Utilidades.Leitura.leStr;
 import static Utilidades.Leitura.ler;
 
 public class ViewAplicacao {
     public ViewAplicacao() {
     }
-
-    private ViewFuncaoRealizarLogin realizarLogin;
-    private ViewLoginAdministrador loginadministrador;
-    private ViewLoginSuperAdministrador loginsuperadministrador;
     ControllerAutores lerEgravarAutores;
     ControllerProdutos lerEgravarProdutos;
     ControllerSocios lerEgravarSocios;
     ControllerCategoria lerEgravarCategoria;
     ControllerReservas lerEGravarReservas;
-    ControllerLogin lerUtilizadorDeFicheiro;
-    ControllerAdministrador lerAdministradorDeFicheiro;
-    ControllerSuperAdministrador lerSuperAdministradorDeFicheiro;
-
+    ControllerLogin lerUtilizadorDaBaseDados;
+    ViewLogin viewLogin = new ViewLogin();
     public void Iniciar() {
 
         //iniciar controllers
-        lerUtilizadorDeFicheiro = new ControllerLogin();
-        lerAdministradorDeFicheiro = new ControllerAdministrador();
-        lerSuperAdministradorDeFicheiro = new ControllerSuperAdministrador();
-
+        lerUtilizadorDaBaseDados = new ControllerLogin();
         lerEgravarAutores = new ControllerAutores();
         lerEgravarSocios = new ControllerSocios();
         lerEgravarCategoria = new ControllerCategoria();
@@ -70,14 +61,8 @@ public class ViewAplicacao {
         lerEgravarProdutos.lerBaseDadosProdutos();
         lerEgravarSocios.lerSociosDeBaseDados();
         lerEGravarReservas.lerReservasDeBaseDados();
+        lerUtilizadorDaBaseDados.lerUtilizadoresDaBaseDeDados();
 
-        lerSuperAdministradorDeFicheiro.lerSuperAdministradorDeFicheiro();
-        lerAdministradorDeFicheiro.lerAdministradorDeFicheiro();
-        lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro();
-
-        realizarLogin = new ViewFuncaoRealizarLogin(lerUtilizadorDeFicheiro);
-        loginadministrador = new ViewLoginAdministrador(lerAdministradorDeFicheiro);
-        loginsuperadministrador = new ViewLoginSuperAdministrador(lerSuperAdministradorDeFicheiro);
 
         MensagemBoasVindas.textoInicial();
         MensagemBoasVindas.mensagemBoasVindas();
@@ -85,139 +70,77 @@ public class ViewAplicacao {
 
         // Iniciar o sistema
 
-        //menuInicialLogin();
-        menuUtilizador();
+        menuLogin();
 
     }
-    /*
-public void menuInicialLogin() {
+    public void menuLogin() {
+
         int opcao;
 
         do {
-            System.out.println("## Que funções deseja desempenhar? ##");
+            System.out.println("## Login ##");
             System.out.println("------------------------");
-            System.out.println("1 - Super Administrador");
-            System.out.println("2 - Sub - Administrador");
-            System.out.println("3 - Bibliotecário");
-            System.out.println("4 - Sair");
+
+            System.out.println("1 - Login");
+            System.out.println("2 - Registrar-se");
+            System.out.println("3 - Sair ");
 
             try {
+
                 opcao = ler.nextInt();
                 ler.nextLine(); // Limpar o buffer do scanner
 
                 switch (opcao) {
-                    case 1:
-                        boolean loginSuperBemSucedido = loginsuperadministrador.realizarLogin();
-                        if (loginSuperBemSucedido) {
-                            ViewSuperAdministrador superadministrador = new ViewSuperAdministrador();
-                            superadministrador.menuSuperAdministrador();
-                        }else {
-                            System.out.println("Credenciais inválidas. Por favor, tente novamente.");
-                        }
-                        break;
-                    case 2:
-
-                        boolean loginBemSucedido = loginadministrador.realizarLogin();
-                        if (loginBemSucedido) {
-                            menuAdministracao();
-                        } else {
-                            System.out.println("Credenciais inválidas. Por favor, tente novamente.");
-                        }
-                        break;
-
-                    case 3:
-                        boolean loginbemsucedidobiliotecario = realizarLogin.realizarLogin();
-                        if(loginbemsucedidobiliotecario){
+                    case 1 -> {
+                        if(viewLogin.verificarLogin() == TipoUtilizador.Administrador) {
+                            menuAdm();
+                        }else if(viewLogin.verificarLogin() == TipoUtilizador.Bibliotecario){
                             menuPrincipal();
-                        }else {
-                            System.out.println("Credenciais inválidas. Por favor, tente novamente.");
+                        }else if(viewLogin.verificarLogin() == TipoUtilizador.Socio){
+                            menuSocio();
+                        } else if(viewLogin.verificarLogin() == TipoUtilizador.Default){
+                            System.out.println("Erro ao realizar login!\n");
                         }
-
-                        break;
-                    case 4:
-                        System.exit(0);
-                    default:
-                        System.out.println("Por favor, insira uma opção válida.");
-                        break;
+                    }
+                    case 2 -> { RegistarSocio registar = new RegistarSocio();
+                        registar.registarSocio(lerUtilizadorDaBaseDados);
+                    }
+                    case 3 -> System.exit(0);
+                    default -> System.out.println("Por favor, insira uma opção válida.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } while (opcao != 5);
-    }
-     */
-    public void menuUtilizador() {
-      String email= leStr("Email");
-
-        String password= leStr("Password");
-
-        lerUtilizadorDeFicheiro.lerUtilizadorDeFicheiro(); // Chamar o método para ler os utilizadores do ficheiro
-
-        String id = ControllerLogin.obterIDUtilizador(email, password);
-
-
-        if (id != null) {
-            // Menu do Utilizador
-            if (id.equals("1")) {
-                // Menu para utilizadores com ID 1
-                System.out.println("Bem-vindo, Utilizador (ID 1)!\n");
-                menuPrincipal();
-            } else if (id.equals("2")) {
-                // Menu para utilizadores com ID 2
-                System.out.println("Bem-vindo, Utilizador (ID 2)!\n");
-                menuAdministracao();
-            } else {
-                System.out.println("ID de Utilizador desconhecido. Voltando ao menu inicial.\n");
-
-            }
-        } else {
-            System.out.println("Credenciais inválidas. Voltando ao menu inicial.\n");
-
-        }
+        } while (opcao != 4);
     }
 
-
-    public void menuAdministracao() {
+    public void menuSocio() {
 
         int opcao;
 
         do {
-            System.out.println("## Sistema de Administração ##");
+            System.out.println("## Sócios ##");
             System.out.println("------------------------");
-            System.out.println("1 - Registar Utilizador");
-            System.out.println("2 - Eliminar Utilizador");
-            System.out.println("3 - Aceder à Libraria");
-            System.out.println("4 - Sair");
+
+            System.out.println("1 - Consultar reservas");
+            System.out.println("2 - Consultar produtos");
+            System.out.println("3 - Sair ");
 
             try {
                 opcao = ler.nextInt();
                 ler.nextLine(); // Limpar o buffer do scanner
 
                 switch (opcao) {
-                    case 1:
-                        ViewFuncaoRegistarUtilizador registarutilizador = new ViewFuncaoRegistarUtilizador();
-                        registarutilizador.registarUtilizador();
+                    case 1:// Consultar reservas
                         break;
                     case 2:
-                        ViewFuncaoRemoverUtilizador removerutilizador = new ViewFuncaoRemoverUtilizador();
-                        removerutilizador.apagarUtilizador();
+                        //consultar produtos
                         break;
-                    case 3:
-                        menuPrincipal();
-                    case 4:
-                        String resposta = leStr("Deseja guardar os utilizadores registados  ?");
-                        if(resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")){
-                            lerUtilizadorDeFicheiro.gravarUtilizadorParaFicheiro();
-
-                            System.exit(0);
-                            //menuInicialLogin();
-
-                        }else{
-                           // menuInicialLogin();
-                        }
-
+                    case 3:System.exit(0);
                         break;
                     default:
                         System.out.println("Por favor, insira uma opção válida.");
@@ -228,12 +151,76 @@ public void menuInicialLogin() {
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 5);
+        } while (opcao != 4);
     }
+    public void menuAdm() {
 
+        int opcao;
 
+        do {
+            try {
+                System.out.println("## Menu principal ##");
+                System.out.println("Selecione uma opcao:");
+                System.out.println("1 - Livros");
+                System.out.println("2 - CD'S");
+                System.out.println("3 - Categorias");
+                System.out.println("4 - Autores");
+                System.out.println("5 - Reservas");
+                System.out.println("6 - Sócios");
+                System.out.println("7 - Registar funcionários");
+                System.out.println("8 - Fechar e gravar");
 
+                opcao = ler.nextInt();
 
+                switch (opcao) {
+                    case 1 -> {
+                        MenuViewLivros mostrarMenu = new MenuViewLivros(lerEgravarProdutos, lerEgravarCategoria, lerEgravarAutores);
+                        mostrarMenu.menuLivros();
+                    }
+                    case 2 -> {
+                        MenuViewCD mostrarMenu = new MenuViewCD(lerEgravarProdutos, lerEgravarCategoria, lerEgravarAutores);
+                        mostrarMenu.menuCds();
+                    }
+                    case 3 -> {
+                        MenuViewCategoria mostrarMenu = new MenuViewCategoria();
+                        mostrarMenu.menuCategoria();
+                    }
+                    case 4 -> {
+                        MenuViewAutores mostraMenu = new MenuViewAutores();
+                        mostraMenu.menuAutores();
+                    }
+                    case 5 -> {
+                        MenuViewReservas mostrarMenuReservas = new MenuViewReservas(lerEGravarReservas, lerEgravarProdutos, lerEgravarSocios);
+                        mostrarMenuReservas.menuReservas();
+                    }
+                    case 6 -> {
+                        MenuViewSocios menuSocios = new MenuViewSocios();
+                        menuSocios.menuSocios();
+                    }
+                    case 7 -> {
+                        MenuViewRegistarFuncionario menuFunc = new MenuViewRegistarFuncionario();
+                        menuFunc.menuRegistarFunc(lerUtilizadorDaBaseDados);
+
+                    }
+                    case 8 -> {
+                        lerEgravarProdutos.gravarBaseDadosProdutos();
+                        lerEgravarAutores.gravarAutorParaBaseDados();
+                        lerEgravarSocios.gravarSociosParaBaseDados();
+                        lerEgravarCategoria.gravarCategoriParaBaseDados();
+                        lerEGravarReservas.gravarReservasParaBaseDados();
+                        System.exit(0);
+                    }
+
+                    default -> System.out.println("Por favor, insira uma opção válida numérica.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira uma opção válida numérica.");
+                opcao = 0;
+                ler.nextLine();
+            }
+
+        } while (opcao != 9);
+    }
 
     public void menuPrincipal() {
 
