@@ -48,14 +48,14 @@ public class Jornal extends Produto {
 
     @Override
     public String toString() {
-        return "Jornal{" +
+        return "Jornal[" +
                 "titulo='" + this.getTitulo() + '\'' +
                 ", subtitulo='" + this.getSubtitulo() + '\'' +
                 ", numeroPaginas='" + this.getNumeroPaginas() + '\'' +
                 ", dataPublicacao='" + this.getDataDePublicacao() + '\'' +
                 ", editora='" + getEditora() + '\'' +
                 ", quantidade='" + this.getQuantidade() + '\'' +
-                '}';
+                ']';
     }
 
 
