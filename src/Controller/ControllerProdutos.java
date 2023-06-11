@@ -411,15 +411,16 @@ public class ControllerProdutos {
         produtos.add(CD);
         return true;
     }
-    public boolean adicionarJornais(int id, String titulo, String subtitulo, int quantidade, Autor nomeAutor, Categoria categoria, int numeroPaginas, LocalDate dataPublicacao, String editora) {
-        Produto Jornal = new Jornal(0, titulo, subtitulo,quantidade,nomeAutor,categoria, numeroPaginas,dataPublicacao,editora);
+    public boolean adicionarJornais(String titulo, String subtitulo,int quantidade, int numeroPaginas,LocalDate dataPublicacao, String editora) {
+
+        Produto Jornal = new Jornal(0,titulo,subtitulo,quantidade,numeroPaginas,dataPublicacao,editora);
         //Jornal.setPedenteGravacao(true);
         produtos.add(Jornal);
         return true;
     }
 
-    public boolean adicionarRevistas(int id, String titulo, String subtitulo, int quantidade, Autor nomeAutor, Categoria categoria, int numeroPaginas, LocalDate dataPublicacao, String editora){
-        Produto Revista =new Revista(0, titulo, subtitulo,quantidade,nomeAutor,categoria, numeroPaginas,dataPublicacao,editora);
+    public boolean adicionarRevistas(String titulo, String subtitulo,int quantidade, int numeroPaginas,LocalDate dataPublicacao, String editora) {
+        Produto Revista =new Revista(0,titulo,subtitulo,quantidade,numeroPaginas,dataPublicacao,editora);
         //Revista.setPedenteGravacao(true);
         produtos.add(Revista);
         return true;
@@ -624,6 +625,16 @@ public class ControllerProdutos {
         }
         return false;
     }
+    public boolean editarSubTituloDoJornal(int idEditarProduto, String subTituloNovo) {
+        for (Produto produto : produtos) {
+            if (produto.getTipo() == TipoProduto.Jornal && idEditarProduto == produto.getId()) {
+                ((Livro) produto).setSubtitulo(subTituloNovo);
+                produto.setPendenteGravacao(true);
+                return true;
+            }
+        }
+        return false;
+    }
     public ArrayList<Revista> pesquisarRevistaPorAutor(String AutorDoJornal) {
         ArrayList<Revista> RevistasAutor = new ArrayList<>();
         for (Produto produto : produtos) {
@@ -659,7 +670,17 @@ public class ControllerProdutos {
         }
         return RevistasTitulos;
     }
-    
+    public boolean editarSubTituloRevista(int idEditarProduto, String subTituloNovo) {
+        for (Produto produto : produtos) {
+            if (produto.getTipo() == TipoProduto.Revista && idEditarProduto == produto.getId()) {
+                ((Livro) produto).setSubtitulo(subTituloNovo);
+                produto.setPendenteGravacao(true);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
 

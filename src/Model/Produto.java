@@ -31,6 +31,11 @@ public abstract class Produto {
 
     private boolean pendenteGravacao; //indicador que informa se o registo é novo ou alterado e precisa de ser gravado na base de dados
 
+    public Produto(int id, String titulo, String subtitulo, int quantidade, LocalDate dataPublicacao, String editora) {
+        this(id,titulo,quantidade,null,null,dataPublicacao,subtitulo,null);
+        this.pendenteGravacao = true;
+    }
+
     public void decrementarQuantidade(){
         if(quantidade > 0){
             quantidade--;

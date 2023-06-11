@@ -3,8 +3,8 @@ package Model;
 import java.time.LocalDate;
 
 public class Revista extends Produto {
-    public Revista(int id, String titulo, String subtitulo, int quantidade, Autor nomeAutor, Categoria categoria, int numeroPaginas, LocalDate dataPublicacao, String editora) {
-        super(id, titulo, quantidade, nomeAutor, categoria, dataPublicacao, subtitulo, editora);
+    public Revista(int id, String titulo, String subtitulo,int numeroPaginas, int quantidade, LocalDate dataPublicacao, String editora) {
+        super(id, titulo, subtitulo ,quantidade,dataPublicacao, editora);
         this.numeroPaginas = numeroPaginas;
         quantidade = 1;
 

@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 
 public class Jornal extends Produto {
-    public Jornal(int id, String titulo, String subtitulo, int quantidade, Autor nomeAutor, Categoria categoria, int numeroPaginas, LocalDate dataPublicacao, String editora) {
-        super(id, titulo, quantidade, nomeAutor, categoria, dataPublicacao, subtitulo, editora);
-        this.numeroPaginas = numeroPaginas;
+    public Jornal(int id, String titulo, String subtitulo,int numeroPaginas, int quantidade, LocalDate dataPublicacao, String editora) {
+        super(id, titulo, subtitulo ,quantidade,dataPublicacao, editora);
+        this.numeroPaginas = this.numeroPaginas;
         quantidade = 1;
 
     }
