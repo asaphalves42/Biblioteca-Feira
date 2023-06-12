@@ -6,7 +6,7 @@ import Model.Revista;
 import static Utilidades.Leitura.leStr;
 
 public class ViewRemoverRevistas {
-    public void eliminarJornalporTitulo(ControllerProdutos gestor) {
+    public void eliminarRevistaPorTitulo(ControllerProdutos gestor) {
         boolean sair = false;
 
         while (!sair) {

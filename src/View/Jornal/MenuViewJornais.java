@@ -78,7 +78,7 @@ public class MenuViewJornais {
 
         do {
             try {
-                System.out.println("## Jornal's ##");
+                System.out.println("## Jornal ##");
                 System.out.println("------------------------");
                 System.out.println("1 - Pesquisar Jornais por título");
                 System.out.println("2 - Pesquisar Jornais por editora");
@@ -110,7 +110,7 @@ public class MenuViewJornais {
 
         do {
             try {
-                System.out.println("## Jornal's Editar por: ##");
+                System.out.println("## Jornal Editar por: ##");
                 System.out.println("------------------------");
                 System.out.println("1 - Editar Título");
                 System.out.println("2 - Editar Subtiulo");

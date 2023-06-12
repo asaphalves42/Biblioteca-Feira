@@ -1,8 +1,5 @@
 package Model;
 
-import java.time.LocalDate;
-
-
 //**public class ArtigoCientifico extends Produto {
    /** public ArtigoCientifico(int id, String titulo,Autor autor,String resumo, PalavraChave palavra,int numeroPaginas, int quantidade, LocalDate dataPublicacao){
         super(id,titulo,quantidade, autor, dataPublicacao,palavra, numeroPaginas);
@@ -51,4 +48,4 @@ import java.time.LocalDate;
                 "Quantidade: " + this.getQuantidade() + "\n" +
                 ']'+ "----------------------------------------------------";
     }*/
-}
+

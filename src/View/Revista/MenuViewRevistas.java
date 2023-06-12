@@ -1,47 +1,46 @@
 package View.Revista;
 
 import Controller.ControllerProdutos;
-import View.Jornal.*;
 
 import java.util.InputMismatchException;
 
 import static Utilidades.Leitura.ler;
 
 public class MenuViewRevistas {
-    public MenuViewJornais (ControllerProdutos controllerProdutos) {
+    public MenuViewRevistas (ControllerProdutos controllerProdutos) {
         this.gestor=controllerProdutos;
     }
     ControllerProdutos gestor;
-    ViewAdicionarJornal adicionarJornal=new ViewAdicionarJornal();
-    ViewListarJornal listarJornal=new ViewListarJornal();
-    ViewEditarJornal editarJornal=new ViewEditarJornal();
+    ViewAdicionarRevistas adicionarRevista=new ViewAdicionarRevistas();
+    ViewListarRevistas listarRevistas=new ViewListarRevistas();
+    ViewEditarRevistas editarRevistas=new ViewEditarRevistas();
 
-    ViewPesquisarJornal pesquisarJornal=new ViewPesquisarJornal();
+    ViewPesquisarRevistas pesquisarRevistas=new ViewPesquisarRevistas();
 
-    ViewRemoverJornal removerJornal=new ViewRemoverJornal();
+    ViewRemoverRevistas removerRevistas=new ViewRemoverRevistas();
 
-    ViewEditarJornal editarJornalPorTitulo=new ViewEditarJornal();
-    ViewEditarJornal editarJornalPorSubtitulo=new ViewEditarJornal();
+    ViewEditarRevistas editarRevistasPorTitulo=new ViewEditarRevistas();
+    ViewEditarRevistas editarRevistasPorSubtitulo=new ViewEditarRevistas();
 
-    ViewEditarJornal editarJornalEditora=new ViewEditarJornal();
+    ViewEditarRevistas editarRevistasEditora=new ViewEditarRevistas();
 
-    ViewEditarJornal editarNumPaginasJornal = new ViewEditarJornal();
-    ViewEditarJornal editarPorDataJornal=new ViewEditarJornal();
+    ViewEditarRevistas editarNumPaginasRevistas = new ViewEditarRevistas();
+    ViewEditarRevistas editarPorDataRevistas=new ViewEditarRevistas();
 
-    ViewEditarJornal editarEditarJornal = new ViewEditarJornal();
+    ViewEditarRevistas editarEditarRevistas = new ViewEditarRevistas();
 
-    public void menuJornais() {
+    public void menuRevistas() {
         int opcao;
 
         do {
             try {
-                System.out.println("## Jornais ##");
+                System.out.println("## Revistas ##");
                 System.out.println("------------------------");
-                System.out.println("1 - Adicionar Jornal");
-                System.out.println("2 - Listar Jornal's");
-                System.out.println("3 - Editar Jornal");
-                System.out.println("4 - Remover Jornal");
-                System.out.println("5 - Pesquisar Jornal");
+                System.out.println("1 - Adicionar Revista");
+                System.out.println("2 - Listar Revista");
+                System.out.println("3 - Editar Revista");
+                System.out.println("4 - Remover Revista");
+                System.out.println("5 - Pesquisar Revista");
                 System.out.println("6 - Gravar");
                 System.out.println("7 - Menu anterior");
 
@@ -50,19 +49,19 @@ public class MenuViewRevistas {
 
                 switch (opcao) {
                     case 1:
-                        adicionarJornal.MenuAdicionarJornal(gestor);
+                        adicionarRevista.MenuAdicionarRevista(gestor);
                         break;
                     case 2:
-                        listarJornal.listarTodosOsJornais(gestor);
+                        listarRevistas.listarTodasAsRevistas(gestor);
                         break;
                     case 3: //editar Jornais
-                        editarJornal();
+                        editarRevistas();
                         break;
                     case 4: //remover Jornais
-                        removerJornal.eliminarJornalporTitulo(gestor);
+                        removerRevistas.eliminarRevistaPorTitulo(gestor);
                         break;
                     case 5:
-                        pesquisarJornal();
+                        pesquisarRevistas();
                     case 6:
                         gestor.gravarBaseDadosProdutos();
                 }
@@ -74,15 +73,15 @@ public class MenuViewRevistas {
         } while (opcao != 7);
     }
 
-    public void pesquisarJornal() {
+    public void pesquisarRevistas() {
         int opcao;
 
         do {
             try {
-                System.out.println("## Jornal's ##");
+                System.out.println("## Revistas's ##");
                 System.out.println("------------------------");
-                System.out.println("1 - Pesquisar Jornais por título");
-                System.out.println("2 - Pesquisar Jornais por editora");
+                System.out.println("1 - Pesquisar Revistas por título");
+                System.out.println("2 - Pesquisar Revistas por editora");
                 System.out.println("3 - Menu Anterior");
 
 
@@ -91,10 +90,10 @@ public class MenuViewRevistas {
 
                 switch (opcao) {
                     case 1:
-                        pesquisarJornal.JornalPorTitulo(gestor);
+                        pesquisarRevistas.RevistaPorTitulo(gestor);
                         break;
                     case 2:
-                        pesquisarJornal.JornalPorEditora(gestor);
+                        pesquisarRevistas.RevistaPorEditora(gestor);
                         break;
                 }
             } catch (InputMismatchException e) {
@@ -106,12 +105,12 @@ public class MenuViewRevistas {
 
     }
 
-    public void editarJornal() {
+    public void editarRevistas() {
         int opcao;
 
         do {
             try {
-                System.out.println("## Jornal's Editar por: ##");
+                System.out.println("## Revistas Editar por: ##");
                 System.out.println("------------------------");
                 System.out.println("1 - Editar Título");
                 System.out.println("2 - Editar Subtiulo");
@@ -126,19 +125,19 @@ public class MenuViewRevistas {
 
                 switch (opcao) {
                     case 1:
-                        editarJornal.editarJornalPorTitulo(gestor);
+                        editarRevistas.editarRevistaPorTitulo(gestor);
                         break;
                     case 2:
-                        editarJornal.editarJornalPorSubTitulo(gestor);
+                        editarRevistas.editarRevistaPorSubTitulo(gestor);
                         break;
                     case 3:
-                        editarJornal.editarNumPaginasJornal(gestor);
+                        editarRevistas.editarNumPaginasRevista(gestor);
                         break;
                     case 4:
-                        editarJornal.editarPorDataJornal(gestor);
+                        editarRevistas.editarPorDataRevista(gestor);
                         break;
                     case 5:
-                        editarJornal.editarEditoraJornal(gestor);
+                        editarRevistas.editarEditoraRevista(gestor);
 
 
                 }
