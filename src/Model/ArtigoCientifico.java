@@ -2,9 +2,10 @@ package Model;
 
 import java.time.LocalDate;
 
-public class ArtigoCientifico extends Produto {
-    public ArtigoCientifico(int id, String titulo,Autor autor,String resumo, PalavraChave palavrachave,int numeroPaginas, int quantidade, LocalDate dataPublicacao){
-        super(id,titulo,quantidade, autor, dataPublicacao, palavrachave, numeroPaginas);
+
+//**public class ArtigoCientifico extends Produto {
+   /** public ArtigoCientifico(int id, String titulo,Autor autor,String resumo, PalavraChave palavra,int numeroPaginas, int quantidade, LocalDate dataPublicacao){
+        super(id,titulo,quantidade, autor, dataPublicacao,palavra, numeroPaginas);
             this.numeroPaginas=numeroPaginas;
             this.resumo=resumo;
 
@@ -43,11 +44,11 @@ public class ArtigoCientifico extends Produto {
                 "ID: " +this.getId() + "\n" +
                 "Titulo: "+this.getTitulo() + "\n" +
                 "Autor: "+this.getAutor() + "\n" +
-                "Palavras Chaves: "+ getPalavraschave() + "\n" +
+                "Palavras Chaves: "+ this.getPalavraChave.getPalavra() + "\n" +
                 "Resumo: " + this.getResumo() + '\'' +
                 "Numero de Paginas: " + this.getNumeroPaginas() + "\n" +
                 "Data de Publicacao: " + this.getDataDePublicacao() + "\n" +
                 "Quantidade: " + this.getQuantidade() + "\n" +
                 ']'+ "----------------------------------------------------";
-    }
+    }*/
 }

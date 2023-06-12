@@ -36,7 +36,7 @@ public abstract class Produto {
         this.pendenteGravacao = true;
     }
 
-    public Produto(int id, String titulo, int quantidade, Autor autor, LocalDate dataPublicacao, palavraschave palavrachave, int numeroPaginas) {
+    public Produto(int id, String titulo, int quantidade, Autor autor, LocalDate dataPublicacao, PalavraChave palavra, int numeroPaginas) {
         this(id,titulo,quantidade,null,null,dataPublicacao,null,null);
         this.pendenteGravacao = true;
     }
