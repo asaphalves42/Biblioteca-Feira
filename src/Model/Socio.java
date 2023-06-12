@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class Socio extends Pessoa {
 
+
+
     public Socio(String nome, String morada, LocalDate dataDeNascimento, int telefone){
         super(nome, morada, dataDeNascimento);
         this.numMecanografico = ++ultimoNumMecanografico;

@@ -1,24 +1,23 @@
 package View.Login;
 
 import Controller.ControllerLogin;
-import Controller.ControllerLogin;
+import Model.TipoUtilizador;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.sql.SQLException;
+
+import static Utilidades.Leitura.leStr;
 
 public class ViewLogin {
+    ControllerLogin controller = new ControllerLogin();
 
-    private ControllerLogin controllerLogin;
-    private Scanner scanner;
+    public TipoUtilizador verificarLogin() throws SQLException {
 
-    public ViewLogin(ControllerLogin controller) {
-        this.controllerLogin = controller;
-        this.scanner = new Scanner(System.in);
+        String username = leStr("Insira o e-mail:");
+
+        String password = leStr("Insira a palavra-passe:");
+
+        return controller.verificarLogin(username, password);
+
     }
-
-
-
-
-
 
 }

@@ -1,21 +1,36 @@
 package Model;
+public abstract class Utilizador {
 
 
 
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-
-public  class Utilizador {
-
-    public Utilizador(String email, String password) {
+    public Utilizador(String email, String password,int id) {
         this.email = email;
         this.password = password;
+        this.id = id;
+
+        if(id>proxID){
+            proxID = id;
+        }
+        if(id==0){
+            this.id=++proxID;
+        }
     }
 
-    private String email;
-    private String password;
+    public Utilizador(String email, String password,int id, boolean pendente) {
+        this(email, password, id);
+        this.pendenteGravacao = pendente;
+
+    }
+
+    private boolean pendenteGravacao;
+    private final String email;
+    private int id;
+    private final String password;
+    private static int proxID;
+    public boolean getPendenteGravacao() { return pendenteGravacao; }
+    public void setPendenteGravacao(boolean pendenteGravacao) {
+        this.pendenteGravacao = pendenteGravacao;
+    }
 
     public String getEmail() {
         return email;
@@ -32,4 +47,13 @@ public  class Utilizador {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public abstract TipoUtilizador getTipo();
 }
