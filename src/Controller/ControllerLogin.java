@@ -6,8 +6,11 @@ import Utilidades.BaseDados;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import Controller.*;
+
 
 public class ControllerLogin {
+    ControllerEmail controlleremail = new ControllerEmail();
     public static ArrayList<Utilizador> utilizadores = new ArrayList<>();
     public static ArrayList<Integer> eliminados = new ArrayList<Integer>();
 
@@ -119,7 +122,7 @@ public class ControllerLogin {
         gravarUtilizadorParaBaseDados();
 
         //enviar o email automatico
-
+      //  controlleremail.enviarEmail(username ,"Envio Credenciais entrada", "O seu email para dar login na nossa biblioteca é o seguinte" +username +"e a sua password é a seguinte"+password);
         return true;
     }
 

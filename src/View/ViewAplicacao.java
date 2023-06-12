@@ -104,6 +104,7 @@ public class ViewAplicacao {
                     }
                     case 2 -> { RegistarSocio registar = new RegistarSocio();
                         registar.registarSocio(lerUtilizadorDaBaseDados);
+
                     }
                     case 3 -> System.exit(0);
                     default -> System.out.println("Por favor, insira uma opção válida.");
