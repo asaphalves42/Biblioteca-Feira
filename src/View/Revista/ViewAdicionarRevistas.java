@@ -44,7 +44,7 @@ public class ViewAdicionarRevistas {
                 break;
             }
 
-            System.out.println("Digite a data de lançamento da Revista: ");
+            System.out.println("Digite a data de lançamento da revista: ");
             ValidacaoData validarData = new ValidacaoData();
             LocalDate dataDePublicacao = validarData.LerData2();
 
@@ -71,7 +71,7 @@ public class ViewAdicionarRevistas {
             boolean adicionado = gestorRevistas.adicionarRevistas(titulo,subtitulo,quantidade,numeroPaginas,dataDePublicacao,editora);
 
             if (adicionado) {
-                System.out.println("CD " + titulo + " adicionado com sucesso!");
+                System.out.println("Revista " + titulo + " adicionada com sucesso!");
                 System.out.println(" ");
             } else {
                 System.out.println("Ocorreu um erro ao adicionar a Revista!\n");

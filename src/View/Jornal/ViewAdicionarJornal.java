@@ -71,7 +71,7 @@ public class ViewAdicionarJornal {
                 boolean adicionado = gestorJornais.adicionarJornais(titulo,subtitulo,quantidade,numeroPaginas,dataDePublicacao,editora);
 
                 if (adicionado) {
-                    System.out.println("CD " + titulo + " adicionado com sucesso!");
+                    System.out.println("Jornal " + titulo + " adicionado com sucesso!");
                     System.out.println(" ");
                 } else {
                     System.out.println("Ocorreu um erro ao adicionar o Jornal!\n");

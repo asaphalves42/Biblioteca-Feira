@@ -46,14 +46,14 @@ public class ViewEditarJornal {
 
         while (true) {
             try {
-                String tituloJornal = leStr("Insira o título do Jornal que quer editar (ou 'sair' para encerrar):");
+                String tituloJornal = leStr("Insira o título do jornal que quer editar (ou 'sair' para encerrar):");
                 if (tituloJornal.equalsIgnoreCase("sair")) {
                     return;
                 }
                 jornaisParaEditar = gestor.pesquisarJornalPorTitulo(tituloJornal);
 
                 if (jornaisParaEditar.isEmpty()) {
-                    System.out.println("Não existem Jornals com este título!");
+                    System.out.println("Não existem jornals com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto jornal : jornaisParaEditar) {
@@ -62,12 +62,12 @@ public class ViewEditarJornal {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao pesquisar os Jornals. Por favor, tente novamente.");
+                System.out.println("Ocorreu um erro ao pesquisar os jornais. Por favor, tente novamente.");
             }
         }
 
         try {
-            String idJornalStr = leStr("Insira o id do Jornal que quer editar (ou 'sair' para encerrar):");
+            String idJornalStr = leStr("Insira o id do jornal que quer editar (ou 'sair' para encerrar):");
             if (idJornalStr.equalsIgnoreCase("sair")) {
                 return;
             }
@@ -95,7 +95,7 @@ public class ViewEditarJornal {
 
         while (true) {
             try {
-                String tituloJornal = leStr("Insira o título do Jornal que quer editar (ou 'sair' para encerrar):");
+                String tituloJornal = leStr("Insira o título do jornal que quer editar (ou 'sair' para encerrar):");
                 if (tituloJornal.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -111,12 +111,12 @@ public class ViewEditarJornal {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao pesquisar os Jornais. Por favor, tente novamente.");
+                System.out.println("Ocorreu um erro ao pesquisar os jornais. Por favor, tente novamente.");
             }
         }
 
         try {
-            String idEditarNumPaginasStr = leStr("Insira o id do Jornal que quer editar (ou 'sair' para encerrar):");
+            String idEditarNumPaginasStr = leStr("Insira o id do jornal que quer editar (ou 'sair' para encerrar):");
             if (idEditarNumPaginasStr.equalsIgnoreCase("sair")) {
                 return;
             }
@@ -137,7 +137,7 @@ public class ViewEditarJornal {
                 System.out.println(" ");
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao editar o Jornal. Por favor, tente novamente.");
+            System.out.println("Ocorreu um erro ao editar o jornal. Por favor, tente novamente.");
         }
     }
     public void editarPorDataJornal(ControllerProdutos gestor) {
@@ -145,14 +145,14 @@ public class ViewEditarJornal {
 
         while (true) {
             try {
-                String tituloJornal = leStr("Insira o título do Jornal que quer editar (ou 'sair' para encerrar):");
+                String tituloJornal = leStr("Insira o título do jornal que quer editar (ou 'sair' para encerrar):");
                 if (tituloJornal.equalsIgnoreCase("sair")) {
                     return;
                 }
                 jornaisParaEditar = gestor.pesquisarJornalPorTitulo(tituloJornal);
 
                 if (jornaisParaEditar.isEmpty()) {
-                    System.out.println("Não existem Jornais com este título!");
+                    System.out.println("Não existem jornais com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto jornal : jornaisParaEditar) {
@@ -161,18 +161,18 @@ public class ViewEditarJornal {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao pesquisar os Jornais. Por favor, tente novamente.");
+                System.out.println("Ocorreu um erro ao pesquisar os jornais. Por favor, tente novamente.");
             }
         }
 
         try {
-            String idEditarDataStr = leStr("Insira o id do Jornal que quer editar (ou 'sair' para encerrar):");
+            String idEditarDataStr = leStr("Insira o id do jornal que quer editar (ou 'sair' para encerrar):");
             if (idEditarDataStr.equalsIgnoreCase("sair")) {
                 return;
             }
             int idEditarData = Integer.parseInt(idEditarDataStr);
 
-            System.out.println("Digite a nova data de publicação do Jornal (ou 'sair' para encerrar): ");
+            System.out.println("Digite a nova data de publicação do jornal (ou 'sair' para encerrar): ");
             ValidacaoData validarData = new ValidacaoData();
             LocalDate novaDataDePublicacao = validarData.LerData2();
             if (novaDataDePublicacao == null) {
@@ -189,7 +189,7 @@ public class ViewEditarJornal {
                 System.out.println(" ");
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao editar o Jornal. Por favor, tente novamente.");
+            System.out.println("Ocorreu um erro ao editar o jornal. Por favor, tente novamente.");
         }
     }
     public void editarEditoraJornal(ControllerProdutos gestor) {

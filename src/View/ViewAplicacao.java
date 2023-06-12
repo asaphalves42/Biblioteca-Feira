@@ -8,9 +8,12 @@ import View.Autores.MenuViewAutores;
 import View.CD.MenuViewCD;
 import View.Categoria.MenuViewCategoria;
 import View.Funcionario.MenuViewRegistarFuncionario;
+import View.Jornal.MenuViewJornais;
 import View.Livros.MenuViewLivros;
-import View.Login.*;
+import View.Login.RegistarSocio;
+import View.Login.ViewLogin;
 import View.Reservas.MenuViewReservas;
+import View.Revista.MenuViewRevistas;
 import View.Socios.MenuViewSocios;
 
 import java.sql.SQLException;
@@ -164,12 +167,15 @@ public class ViewAplicacao {
                 System.out.println("Selecione uma opcao:");
                 System.out.println("1 - Livros");
                 System.out.println("2 - CD'S");
-                System.out.println("3 - Categorias");
-                System.out.println("4 - Autores");
-                System.out.println("5 - Reservas");
-                System.out.println("6 - Sócios");
-                System.out.println("7 - Registar funcionários");
-                System.out.println("8 - Fechar e gravar");
+                System.out.println("3 - Jornais");
+                System.out.println("4 - Revistas");
+                System.out.println("5 - Categorias");
+                System.out.println("6 - Autores");
+                System.out.println("7 - Reservas");
+                System.out.println("8 - Sócios");
+                System.out.println("9 - Registar funcionários");
+                System.out.println("10- Fechar e gravar");
+                System.out.println("11 - Sair");
 
                 opcao = ler.nextInt();
 
@@ -182,28 +188,36 @@ public class ViewAplicacao {
                         MenuViewCD mostrarMenu = new MenuViewCD(lerEgravarProdutos, lerEgravarCategoria, lerEgravarAutores);
                         mostrarMenu.menuCds();
                     }
-                    case 3 -> {
+                    case 3->{
+                        MenuViewJornais mostrarMenu = new MenuViewJornais(lerEgravarProdutos);
+                        mostrarMenu.menuJornais();
+                    }
+                    case 4 -> {
+                        MenuViewRevistas mostrarMenu= new MenuViewRevistas(lerEgravarProdutos);
+                        mostrarMenu.menuRevistas();
+                    }
+                    case 5 -> {
                         MenuViewCategoria mostrarMenu = new MenuViewCategoria();
                         mostrarMenu.menuCategoria();
                     }
-                    case 4 -> {
+                    case 6 -> {
                         MenuViewAutores mostraMenu = new MenuViewAutores();
                         mostraMenu.menuAutores();
                     }
-                    case 5 -> {
+                    case 7 -> {
                         MenuViewReservas mostrarMenuReservas = new MenuViewReservas(lerEGravarReservas, lerEgravarProdutos, lerEgravarSocios);
                         mostrarMenuReservas.menuReservas();
                     }
-                    case 6 -> {
+                    case 8 -> {
                         MenuViewSocios menuSocios = new MenuViewSocios();
                         menuSocios.menuSocios();
                     }
-                    case 7 -> {
+                    case 9 -> {
                         MenuViewRegistarFuncionario menuFunc = new MenuViewRegistarFuncionario();
                         menuFunc.menuRegistarFunc(lerUtilizadorDaBaseDados);
-
                     }
-                    case 8 -> {
+
+                    case 10 -> {
                         lerEgravarProdutos.gravarBaseDadosProdutos();
                         lerEgravarAutores.gravarAutorParaBaseDados();
                         lerEgravarSocios.gravarSociosParaBaseDados();
@@ -220,7 +234,7 @@ public class ViewAplicacao {
                 ler.nextLine();
             }
 
-        } while (opcao != 9);
+        } while (opcao != 11);
     }
 
     public void menuPrincipal() {
@@ -233,11 +247,14 @@ public class ViewAplicacao {
                 System.out.println("Selecione uma opcao:");
                 System.out.println("1 - Livros");
                 System.out.println("2 - CD'S");
-                System.out.println("3 - Categorias");
-                System.out.println("4 - Autores");
-                System.out.println("5 - Reservas");
-                System.out.println("6 - Sócios");
-                System.out.println("7 - Fechar e gravar");
+                System.out.println("3 - Jornais");
+                System.out.println("4 - Revistas");
+                System.out.println("5 - Categorias");
+                System.out.println("6 - Autores");
+                System.out.println("7 - Reservas");
+                System.out.println("8 - Sócios");
+                System.out.println("9 - Fechar e gravar");
+                System.out.println("10 - Sair");
 
                 opcao = ler.nextInt();
 
@@ -250,23 +267,31 @@ public class ViewAplicacao {
                         MenuViewCD mostrarMenu = new MenuViewCD(lerEgravarProdutos, lerEgravarCategoria, lerEgravarAutores);
                         mostrarMenu.menuCds();
                     }
-                    case 3 -> {
+                    case 3->{
+                        MenuViewJornais mostrarMenu = new MenuViewJornais(lerEgravarProdutos);
+                        mostrarMenu.menuJornais();
+                    }
+                    case 4 -> {
+                        MenuViewRevistas mostrarMenu= new MenuViewRevistas(lerEgravarProdutos);
+                        mostrarMenu.menuRevistas();
+                    }
+                    case 5 -> {
                         MenuViewCategoria mostrarMenu = new MenuViewCategoria();
                         mostrarMenu.menuCategoria();
                     }
-                    case 4 -> {
+                    case 6 -> {
                         MenuViewAutores mostraMenu = new MenuViewAutores();
                         mostraMenu.menuAutores();
                     }
-                    case 5 -> {
+                    case 7 -> {
                         MenuViewReservas mostrarMenuReservas = new MenuViewReservas(lerEGravarReservas, lerEgravarProdutos, lerEgravarSocios);
                         mostrarMenuReservas.menuReservas();
                     }
-                    case 6 -> {
+                    case 8 -> {
                         MenuViewSocios menuSocios = new MenuViewSocios();
                         menuSocios.menuSocios();
                     }
-                    case 7 -> {
+                    case 9 -> {
                         lerEgravarProdutos.gravarBaseDadosProdutos();
                         lerEgravarAutores.gravarAutorParaBaseDados();
                         lerEgravarSocios.gravarSociosParaBaseDados();
@@ -283,7 +308,7 @@ public class ViewAplicacao {
                 ler.nextLine();
             }
 
-        } while (opcao != 8);
+        } while (opcao != 10);
     }
 
 

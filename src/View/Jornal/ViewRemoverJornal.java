@@ -27,7 +27,7 @@ public class ViewRemoverJornal {
                 if (removido) {
                     System.out.println("Não foi possível remover!\n");
                 } else {
-                    System.out.println("CD removido com sucesso!\n");
+                    System.out.println("Jornal removido com sucesso!\n");
                     sair = true;  // CD removido com sucesso, então sair do loop
                 }
             } catch (NumberFormatException e) {
