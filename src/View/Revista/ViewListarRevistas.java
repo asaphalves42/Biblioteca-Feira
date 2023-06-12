@@ -7,7 +7,7 @@ import Model.Revista;
 import java.util.ArrayList;
 
 public class ViewListarRevistas {
-    public void listarTodosAsRevistas(ControllerProdutos gestor) {
+    public void listarTodasAsRevistas(ControllerProdutos gestor) {
         try {
             ArrayList<Revista> revistasListadas = gestor.listarProdutosRevistas();
 

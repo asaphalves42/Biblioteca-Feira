@@ -32,7 +32,7 @@ public class ViewRemoverCd {
                     sair = true;  // CD removido com sucesso, então sair do loop
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Erro: Você deve inserir um número válido!\n");
+                System.out.println("Erro: Insira um número válido!\n");
                 break;
             } catch (Exception e) {
                 System.out.println("Ocorreu um erro -> " + e.getMessage() + "\n");

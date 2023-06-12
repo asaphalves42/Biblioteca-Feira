@@ -411,16 +411,17 @@ public class ControllerProdutos {
         produtos.add(CD);
         return true;
     }
-    public boolean adicionarJornais(String titulo, String subtitulo,int quantidade, int numeroPaginas,LocalDate dataPublicacao, String editora) {
 
-        Produto Jornal = new Jornal(0,titulo,subtitulo,quantidade,numeroPaginas,dataPublicacao,editora);
+    public boolean adicionarJornais(String titulo, String subtitulo, int quantidade, int numeroPaginas, LocalDate dataPublicacao, String editora) {
+
+        Produto Jornal = new Jornal(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora);
         //Jornal.setPedenteGravacao(true);
         produtos.add(Jornal);
         return true;
     }
 
-    public boolean adicionarRevistas(String titulo, String subtitulo,int quantidade, int numeroPaginas,LocalDate dataPublicacao, String editora) {
-        Produto Revista =new Revista(0,titulo,subtitulo,quantidade,numeroPaginas,dataPublicacao,editora);
+    public boolean adicionarRevistas(String titulo, String subtitulo, int quantidade, int numeroPaginas, LocalDate dataPublicacao, String editora) {
+        Produto Revista = new Revista(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora);
         //Revista.setPedenteGravacao(true);
         produtos.add(Revista);
         return true;
@@ -523,7 +524,7 @@ public class ControllerProdutos {
     }
 
 
-    public boolean editarDataDePublicacaoProduto ( int idEditarProduto, LocalDate novaData){
+    public boolean editarDataDePublicacaoProduto(int idEditarProduto, LocalDate novaData) {
         for (Produto produto : produtos) {
             if (idEditarProduto == produto.getId()) {
                 produto.setDataDePublicacao(novaData);
@@ -533,7 +534,6 @@ public class ControllerProdutos {
         }
         return false;
     }
-
 
 
     public boolean editarEditoraProduto(int idEditarProduto, String novaEditora) {
@@ -592,6 +592,7 @@ public class ControllerProdutos {
         }
         return false;
     }
+
     public ArrayList<Jornal> pesquisarJornalPorTitulo(String tituloDoJornal) {
         ArrayList<Jornal> JornaisTitulos = new ArrayList<>();
         for (Produto produto : produtos) {
@@ -603,6 +604,7 @@ public class ControllerProdutos {
         }
         return JornaisTitulos;
     }
+
     public ArrayList<Jornal> pesquisarJornalPorAutor(String AutorDoJornal) {
         ArrayList<Jornal> JornaisAutor = new ArrayList<>();
         for (Produto produto : produtos) {
@@ -614,6 +616,19 @@ public class ControllerProdutos {
         }
         return JornaisAutor;
     }
+
+    public ArrayList<Jornal> pesquisarJornalPorEditora(String EditoraDoJornal) {
+        ArrayList<Jornal> JornaisEditora = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto.getTipo() == TipoProduto.Jornal) {
+                if (EditoraDoJornal.equalsIgnoreCase(produto.getEditora())) {
+                    JornaisEditora.add((Jornal) produto);
+                }
+            }
+        }
+        return JornaisEditora;
+    }
+
     public boolean editarNumPaginasJornal(int idEditarProduto, int numPaginas) {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Jornal && idEditarProduto == produto.getId()) {
@@ -679,6 +694,17 @@ public class ControllerProdutos {
             }
         }
         return false;
+    }
+    public ArrayList<Revista> pesquisarRevistaPorEditora(String EditoraDaRevista) {
+        ArrayList<Revista> RevistasEditora = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto.getTipo() == TipoProduto.Revista) {
+                if (EditoraDaRevista.equalsIgnoreCase(produto.getEditora())) {
+                    RevistasEditora.add((Revista) produto);
+                }
+            }
+        }
+        return RevistasEditora;
     }
 
 

@@ -47,14 +47,14 @@ public class Revista extends Produto {
 
     @Override
     public String toString() {
-        return "Revista{" +
-                "titulo='" + this.getTitulo() + '\'' +
-                ", subtitulo='" + this.getSubtitulo() + '\'' +
-                ", numeroPaginas='" + this.getNumeroPaginas() + '\'' +
-                ", dataPublicacao='" + this.getDataDePublicacao() + '\'' +
-                ", editora='" + getEditora() + '\'' +
-                ", quantidade='" + this.getQuantidade() + '\'' +
-                '}';
+        return " [ " +
+                "Titulo: " + this.getTitulo() + '\'' +
+                "Subtitulo: " + this.getSubtitulo() + '\'' +
+                "Numero de Paginas: " + this.getNumeroPaginas() + '\'' +
+                "DataPublicacao: " + this.getDataDePublicacao() + '\'' +
+                "Editora: " + getEditora() + '\'' +
+                "Quantidade: " + this.getQuantidade() + '\'' +
+                ']'+ "----------------------------------------------------";
     }
 
 

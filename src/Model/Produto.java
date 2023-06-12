@@ -36,6 +36,13 @@ public abstract class Produto {
         this.pendenteGravacao = true;
     }
 
+    public Produto(int id, String titulo, int quantidade, Autor autor, LocalDate dataPublicacao, palavraschave palavrachave, int numeroPaginas) {
+        this(id,titulo,quantidade,null,null,dataPublicacao,null,null);
+        this.pendenteGravacao = true;
+    }
+
+
+
     public void decrementarQuantidade(){
         if(quantidade > 0){
             quantidade--;
