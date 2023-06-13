@@ -31,6 +31,7 @@ public class ViewAplicacao {
     ControllerReservas lerEGravarReservas;
     ControllerLogin lerUtilizadorDaBaseDados;
     ViewLogin viewLogin = new ViewLogin();
+
     public void Iniciar() {
 
         //iniciar controllers
@@ -107,6 +108,7 @@ public class ViewAplicacao {
                     }
                     case 2 -> { RegistarSocio registar = new RegistarSocio();
                         registar.registarSocio(lerUtilizadorDaBaseDados);
+
 
                     }
                     case 3 -> System.exit(0);

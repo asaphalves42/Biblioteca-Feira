@@ -10,10 +10,10 @@ import Controller.*;
 
 
 public class ControllerLogin {
-    ControllerEmail controlleremail = new ControllerEmail();
+    //ControllerEmail controlleremail = new ControllerEmail(Email email);
     public static ArrayList<Utilizador> utilizadores = new ArrayList<>();
     public static ArrayList<Integer> eliminados = new ArrayList<Integer>();
-
+ControllerEmail controlleremail= new ControllerEmail();
     public void lerUtilizadoresDaBaseDeDados() {
         try {
             BaseDados basedados = new BaseDados();
@@ -122,7 +122,7 @@ public class ControllerLogin {
         gravarUtilizadorParaBaseDados();
 
         //enviar o email automatico
-      //  controlleremail.enviarEmail(username ,"Envio Credenciais entrada", "O seu email para dar login na nossa biblioteca é o seguinte" +username +"e a sua password é a seguinte"+password);
+
         return true;
     }
 
