@@ -1,2 +1,4 @@
-package View.Consultas;public class ViewDevolver {
+package View.Consultas;
+
+public class ViewDevolver {
 }

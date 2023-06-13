@@ -1,2 +1,4 @@
-package View.Consultas;public class ViewConsultar {
+package View.Consultas;
+
+public class ViewConsultar {
 }
