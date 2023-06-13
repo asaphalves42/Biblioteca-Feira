@@ -1,18 +1,22 @@
 package Model;
 
-//**public class ArtigoCientifico extends Produto {
-   /** public ArtigoCientifico(int id, String titulo,Autor autor,String resumo, PalavraChave palavra,int numeroPaginas, int quantidade, LocalDate dataPublicacao){
-        super(id,titulo,quantidade, autor, dataPublicacao,palavra, numeroPaginas);
-            this.numeroPaginas=numeroPaginas;
-            this.resumo=resumo;
+import java.time.LocalDate;
+
+public class ArtigoCientifico extends Produto {
+
+
+    public ArtigoCientifico(int id, String titulo, Autor autor, String resumo, PalavraChave palavra, int numeroPaginas, int quantidade, LocalDate dataPublicacao) {
+        super(id, titulo, quantidade, autor, dataPublicacao, palavra, numeroPaginas);
+        this.numeroPaginas = numeroPaginas;
+        this.resumo = resumo;
 
     }
+
     private String resumo;
 
     public String getResumo() {
         return resumo;
     }
-
 
 
     public void setResumo(String resumo) {
@@ -37,15 +41,16 @@ package Model;
 
     @Override
     public String toString() {
-        return getTipo()+" [ " +  "\n" +
-                "ID: " +this.getId() + "\n" +
-                "Titulo: "+this.getTitulo() + "\n" +
-                "Autor: "+this.getAutor() + "\n" +
-                "Palavras Chaves: "+ this.getPalavraChave.getPalavra() + "\n" +
+        return getTipo() + " [ " + "\n" +
+                "ID: " + this.getId() + "\n" +
+                "Titulo: " + this.getTitulo() + "\n" +
+                "Autor: " + this.getAutor() + "\n" +
+                "Palavras Chaves: " + PalavraChave.palavrachave + "\n" +
                 "Resumo: " + this.getResumo() + '\'' +
                 "Numero de Paginas: " + this.getNumeroPaginas() + "\n" +
                 "Data de Publicacao: " + this.getDataDePublicacao() + "\n" +
                 "Quantidade: " + this.getQuantidade() + "\n" +
-                ']'+ "----------------------------------------------------";
-    }*/
+                ']' + "----------------------------------------------------";
+    }
+}
 

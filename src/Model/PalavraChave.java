@@ -1,22 +1,18 @@
 package Model;
 
 public class PalavraChave {
-    private String palavrachave;
+    public static String palavrachave;
     private static int proximoId = 0;
     private int id;
     private boolean pendenteGravacao;
 
     public String getPalavrachave() {
+
         return palavrachave;
     }
-
-    public void setPalavrachave(String palavrachave) {
-        this.palavrachave = palavrachave;
-    }
-
     public static int getProximoId() {
-        return proximoId;
-    }
+            return proximoId;
+        }
 
     public static void setProximoId(int proximoId) {
         PalavraChave.proximoId = proximoId;
