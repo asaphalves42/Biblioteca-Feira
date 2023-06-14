@@ -638,7 +638,6 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Revista && idEditarProduto == produto.getId()) {
                 ((Revista) produto).setNumeroPaginas(numPaginas);
-                ((Revista) produto).setNumeroPaginas(numPaginas);
                 produto.setPendenteGravacao(true);
                 return true;
             }

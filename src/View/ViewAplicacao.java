@@ -178,7 +178,7 @@ public class ViewAplicacao {
                 System.out.println("7 - Reservas");
                 System.out.println("8 - Sócios");
                 System.out.println("9 - Registar funcionários");
-                System.out.println("10- Fechar e gravar");
+                System.out.println("10 - Fechar e gravar");
                 System.out.println("11 - Sair");
 
                 opcao = ler.nextInt();

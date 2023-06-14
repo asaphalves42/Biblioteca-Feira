@@ -8,8 +8,7 @@ import Utilidades.ValidacaoData;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static Utilidades.Leitura.leIntPositivo;
-import static Utilidades.Leitura.leStr;
+import static Utilidades.Leitura.*;
 
 public class ViewEditarRevistas {
     public void editarRevistaPorTitulo(ControllerProdutos gestor) {
@@ -28,8 +27,21 @@ public class ViewEditarRevistas {
                     System.out.println("Não existem revistas com este título!");
                     System.out.println(" ");
                 } else {
-                    for (Produto revista : revistasParaEditar) {
+                    for (Revista revista : revistasParaEditar) {
                         System.out.println(revista);
+                    }
+
+                    int idEditarTitulo = leInt("Insira o ID da revista que quer editar: ");
+                    String tituloNovo = leStr("Insira o novo título:");
+
+                    boolean tituloEditado = gestor.editarTituloDoProduto(idEditarTitulo, tituloNovo);
+
+                    if (tituloEditado) {
+                        System.out.println("Revista editada com sucesso!");
+                        System.out.println(" ");
+                    } else {
+                        System.out.println("Revista não encontrada!");
+                        System.out.println(" ");
                     }
                     break;
                 }
@@ -39,8 +51,9 @@ public class ViewEditarRevistas {
                 System.out.println(" ");
             }
         }
-
     }
+
+
     public void editarRevistaPorSubTitulo(ControllerProdutos gestor) {
         ArrayList<Revista> revistasParaEditar;
 
@@ -224,7 +237,7 @@ public class ViewEditarRevistas {
             }
             int idEditarEditora = Integer.parseInt(idEditarEditoraStr);
 
-            String novaEditora = leStr("Insira a nova editora (ou 'sair' para encerrar):");
+            String novaEditora = leStr("Insira a nova editora (ou 'sair' para voltar ao menu anterior):");
             if (novaEditora.equalsIgnoreCase("sair")) {
                 return;
             }
