@@ -19,7 +19,7 @@ public class ViewFuncaoEditarLivros {
 
         while (true) {
             try {
-                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para encerrar):");
+                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
                 if (tituloLivro.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -67,7 +67,7 @@ public class ViewFuncaoEditarLivros {
 
         while (true) {
             try {
-                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para encerrar):");
+                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
                 if (tituloLivro.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -88,12 +88,12 @@ public class ViewFuncaoEditarLivros {
         }
 
         try {
-            String idLivroStr = leStr("Insira o id do livro que quer editar (ou 'sair' para encerrar):");
+            String idLivroStr = leStr("Insira o id do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
             if (idLivroStr.equalsIgnoreCase("sair")) {
                 return;
             }
             int idEditarSubTitulo = Integer.parseInt(idLivroStr);
-            String subTituloNovo = leStr("Insira o novo subtítulo (ou 'sair' para encerrar):");
+            String subTituloNovo = leStr("Insira o novo subtítulo (ou 'sair' para voltar ao menu anterior):");
             if (subTituloNovo.equalsIgnoreCase("sair")) {
                 return;
             }
@@ -118,7 +118,7 @@ public class ViewFuncaoEditarLivros {
 
         while (true) {
             try {
-                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para encerrar):");
+                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
                 if (tituloLivro.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -139,13 +139,13 @@ public class ViewFuncaoEditarLivros {
         }
 
         try {
-            String idEditarQuantidadeStr = leStr("Insira o id do livro que quer editar (ou 'sair' para encerrar):");
+            String idEditarQuantidadeStr = leStr("Insira o id do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
             if (idEditarQuantidadeStr.equalsIgnoreCase("sair")) {
                 return;
             }
             int idEditarQuantidade = Integer.parseInt(idEditarQuantidadeStr);
 
-            String novaQuantidadeStr = leStr("Insira a nova quantidade (ou 'sair' para encerrar):");
+            String novaQuantidadeStr = leStr("Insira a nova quantidade (ou 'sair' para voltar ao menu anterior):");
             if (novaQuantidadeStr.equalsIgnoreCase("sair")) {
                 return;
             }
@@ -170,7 +170,7 @@ public class ViewFuncaoEditarLivros {
 
         while (true) {
             try {
-                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para encerrar):");
+                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
                 if (tituloLivro.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -191,13 +191,13 @@ public class ViewFuncaoEditarLivros {
         }
 
         try {
-            String idEditarAutorStr = leStr("Insira o id do livro que quer editar (ou 'sair' para encerrar):");
+            String idEditarAutorStr = leStr("Insira o id do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
             if (idEditarAutorStr.equalsIgnoreCase("sair")) {
                 return;
             }
             int idEditarAutor = Integer.parseInt(idEditarAutorStr);
 
-            String novoNomeAutor = leStr("Insira o novo nome do autor (ou 'sair' para encerrar):");
+            String novoNomeAutor = leStr("Insira o novo nome do autor (ou 'sair' para voltar ao menu anterior):");
             if (novoNomeAutor.equalsIgnoreCase("sair")) {
                 return;
             }
@@ -221,7 +221,7 @@ public class ViewFuncaoEditarLivros {
 
         while (true) {
             try {
-                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para encerrar):");
+                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
                 if (tituloLivro.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -242,13 +242,13 @@ public class ViewFuncaoEditarLivros {
         }
 
         try {
-            String idEditarNumPaginasStr = leStr("Insira o id do livro que quer editar (ou 'sair' para encerrar):");
+            String idEditarNumPaginasStr = leStr("Insira o id do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
             if (idEditarNumPaginasStr.equalsIgnoreCase("sair")) {
                 return;
             }
             int idEditarNumPaginas = Integer.parseInt(idEditarNumPaginasStr);
 
-            int novaQuantidade = leIntPositivo("Insira o novo número de páginas (ou 'sair' para encerrar):");
+            int novaQuantidade = leIntPositivo("Insira o novo número de páginas (ou 'sair' para voltar ao menu anterior):");
             if (novaQuantidade == -1) {
                 return;
             }
@@ -272,7 +272,7 @@ public class ViewFuncaoEditarLivros {
 
         while (true) {
             try {
-                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para encerrar):");
+                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
                 if (tituloLivro.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -293,7 +293,7 @@ public class ViewFuncaoEditarLivros {
         }
 
         try {
-            String idEditarCategoriaStr = leStr("Insira o id do livro que quer editar (ou 'sair' para encerrar):");
+            String idEditarCategoriaStr = leStr("Insira o id do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
             if (idEditarCategoriaStr.equalsIgnoreCase("sair")) {
                 return;
             }
@@ -346,7 +346,7 @@ public class ViewFuncaoEditarLivros {
 
         while (true) {
             try {
-                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para encerrar):");
+                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
                 if (tituloLivro.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -367,13 +367,13 @@ public class ViewFuncaoEditarLivros {
         }
 
         try {
-            String idEditarDataStr = leStr("Insira o id do livro que quer editar (ou 'sair' para encerrar):");
+            String idEditarDataStr = leStr("Insira o id do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
             if (idEditarDataStr.equalsIgnoreCase("sair")) {
                 return;
             }
             int idEditarData = Integer.parseInt(idEditarDataStr);
 
-            System.out.println("Digite a nova data de publicação do livro (ou 'sair' para encerrar): ");
+            System.out.println("Digite a nova data de publicação do livro (ou 'sair' para voltar ao menu anterior): ");
             ValidacaoData validarData = new ValidacaoData();
             LocalDate novaDataDePublicacao = validarData.LerData2();
             if (novaDataDePublicacao == null) {
@@ -399,7 +399,7 @@ public class ViewFuncaoEditarLivros {
 
         while (true) {
             try {
-                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para encerrar):");
+                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
                 if (tituloLivro.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -420,13 +420,13 @@ public class ViewFuncaoEditarLivros {
         }
 
         try {
-            String idEditarFaixaStr = leStr("Insira o id do livro que quer editar (ou 'sair' para encerrar):");
+            String idEditarFaixaStr = leStr("Insira o id do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
             if (idEditarFaixaStr.equalsIgnoreCase("sair")) {
                 return;
             }
             int idEditarFaixa = Integer.parseInt(idEditarFaixaStr);
 
-            String novaFaixaEtaria = leStr("Insira a nova faixa etária (ou 'sair' para encerrar):");
+            String novaFaixaEtaria = leStr("Insira a nova faixa etária (ou 'sair' para voltar ao menu anterior):");
             if (novaFaixaEtaria.equalsIgnoreCase("sair")) {
                 return;
             }
@@ -450,7 +450,7 @@ public class ViewFuncaoEditarLivros {
 
         while (true) {
             try {
-                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para encerrar):");
+                String tituloLivro = leStr("Insira o título do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
                 if (tituloLivro.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -471,13 +471,13 @@ public class ViewFuncaoEditarLivros {
         }
 
         try {
-            String idEditarEditoraStr = leStr("Insira o id do livro que quer editar (ou 'sair' para encerrar):");
+            String idEditarEditoraStr = leStr("Insira o id do livro que quer editar (ou 'sair' para voltar ao menu anterior):");
             if (idEditarEditoraStr.equalsIgnoreCase("sair")) {
                 return;
             }
             int idEditarEditora = Integer.parseInt(idEditarEditoraStr);
 
-            String novaEditora = leStr("Insira a nova editora (ou 'sair' para encerrar):");
+            String novaEditora = leStr("Insira a nova editora (ou 'sair' para voltar ao menu anterior):");
             if (novaEditora.equalsIgnoreCase("sair")) {
                 return;
             }
