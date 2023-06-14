@@ -1,4 +1,4 @@
-/*package Model;
+package Model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,8 +11,10 @@ public class Consulta {
 
     private LocalDate dataDeDevolucao;
 
-    private boolean devolvido;
+    private LocalDate dataReserva;
 
+    private boolean devolvido;
+    public String idConsulta;
     private boolean pendenteGravacao; //indicador que informa se o registo é novo ou alterado e precisa de ser gravado na base de dados
 
     public String getIdConsulta() {
@@ -120,4 +122,3 @@ public class Consulta {
 
 }
 
-*/
