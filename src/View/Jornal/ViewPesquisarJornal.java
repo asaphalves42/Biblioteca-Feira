@@ -23,7 +23,7 @@ public class ViewPesquisarJornal {
                 System.out.println(gestor.pesquisarLivroPorTitulo(tituloInserido));
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao pesquisar o jornal por título. Por favor, tente novamente.");
+            System.out.println("Ocorreu um erro ao pesquisar o jornal. Por favor, tente novamente.");
         }
     }
     public void JornalPorEditora(ControllerProdutos gestor) {
@@ -41,7 +41,7 @@ public class ViewPesquisarJornal {
                 System.out.println(gestor.pesquisarJornalPorEditora(tituloInserido));
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao pesquisar o jornal por título. Por favor, tente novamente.");
+            System.out.println("Ocorreu um erro ao pesquisar o jornal. Por favor, tente novamente.");
         }
     }
 

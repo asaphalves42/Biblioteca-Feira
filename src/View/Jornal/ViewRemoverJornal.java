@@ -15,7 +15,7 @@ public class ViewRemoverJornal {
                     System.out.println(jornais);
                 }
 
-                String input = leStr("Insira o ID do Jornal que deseja remover (digite '0' para sair):");
+                String input = leStr("Insira o ID do jornal que deseja remover (digite '0' para sair):");
                 if (input.equals("0")) {
                     break;
                 }

@@ -17,7 +17,7 @@ public class ViewEditarRevistas {
 
         while (true) {
             try {
-                String tituloRevista = leStr("Insira o título do Revista que quer editar (ou 'sair' para encerrar):");
+                String tituloRevista = leStr("Insira o título da revista que quer editar (ou 'sair' para encerrar):");
                 if (tituloRevista.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -25,7 +25,7 @@ public class ViewEditarRevistas {
                 revistasParaEditar = gestor.pesquisarRevistaPorTitulo(tituloRevista);
 
                 if (revistasParaEditar.isEmpty()) {
-                    System.out.println("Não existem Revistas com este título!");
+                    System.out.println("Não existem revistas com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto revista : revistasParaEditar) {
@@ -46,7 +46,7 @@ public class ViewEditarRevistas {
 
         while (true) {
             try {
-                String tituloRevista = leStr("Insira o título do Revista que quer editar (ou 'sair' para encerrar):");
+                String tituloRevista = leStr("Insira o título da revista que quer editar (ou 'sair' para encerrar):");
                 if (tituloRevista.equalsIgnoreCase("sair")) {
                     return;
                 }
@@ -62,12 +62,12 @@ public class ViewEditarRevistas {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao pesquisar os Revistas. Por favor, tente novamente.");
+                System.out.println("Ocorreu um erro ao pesquisar os revistas. Por favor, tente novamente.");
             }
         }
 
         try {
-            String idRevistaStr = leStr("Insira o id do Revista que quer editar (ou 'sair' para encerrar):");
+            String idRevistaStr = leStr("Insira o id da revista que quer editar (ou 'sair' para encerrar):");
             if (idRevistaStr.equalsIgnoreCase("sair")) {
                 return;
             }
@@ -80,14 +80,14 @@ public class ViewEditarRevistas {
             boolean tituloEditado = gestor.editarSubTituloRevista(idEditarSubTitulo, subTituloNovo);
 
             if (tituloEditado) {
-                System.out.println("Revista editado com sucesso!");
+                System.out.println("Revista editada com sucesso!");
                 System.out.println(" ");
             } else {
-                System.out.println("Revista não encontrado!");
+                System.out.println("Revista não encontrada!");
                 System.out.println(" ");
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao editar o Revista. Por favor, tente novamente.");
+            System.out.println("Ocorreu um erro ao editar a revista. Por favor, tente novamente.");
         }
     }
     public void editarNumPaginasRevista(ControllerProdutos gestor) {
@@ -95,14 +95,14 @@ public class ViewEditarRevistas {
 
         while (true) {
             try {
-                String tituloRevista = leStr("Insira o título do Revista que quer editar (ou 'sair' para encerrar):");
+                String tituloRevista = leStr("Insira o título da revista que quer editar (ou 'sair' para encerrar):");
                 if (tituloRevista.equalsIgnoreCase("sair")) {
                     return;
                 }
                 revistasParaEditar = gestor.pesquisarRevistaPorTitulo(tituloRevista);
 
                 if (revistasParaEditar.isEmpty()) {
-                    System.out.println("Não existem Revistas com este título!");
+                    System.out.println("Não existem revistas com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto revista : revistasParaEditar) {
@@ -111,12 +111,12 @@ public class ViewEditarRevistas {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao pesquisar os Revistas. Por favor, tente novamente.");
+                System.out.println("Ocorreu um erro ao pesquisar as revistas. Por favor, tente novamente.");
             }
         }
 
         try {
-            String idEditarNumPaginasStr = leStr("Insira o id do Revista que quer editar (ou 'sair' para encerrar):");
+            String idEditarNumPaginasStr = leStr("Insira o id da revista que quer editar (ou 'sair' para encerrar):");
             if (idEditarNumPaginasStr.equalsIgnoreCase("sair")) {
                 return;
             }
@@ -130,14 +130,14 @@ public class ViewEditarRevistas {
             boolean quantidadeEditada = gestor.editarNumPaginasRevista(idEditarNumPaginas, novaQuantidade);
 
             if (quantidadeEditada) {
-                System.out.println("Revista editado com sucesso!");
+                System.out.println("Revista editada com sucesso!");
                 System.out.println(" ");
             } else {
-                System.out.println("Revista não encontrado!");
+                System.out.println("Revista não encontrada!");
                 System.out.println(" ");
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao editar o Revista. Por favor, tente novamente.");
+            System.out.println("Ocorreu um erro ao editar a revista. Por favor, tente novamente.");
         }
     }
     public void editarPorDataRevista(ControllerProdutos gestor) {
@@ -145,14 +145,14 @@ public class ViewEditarRevistas {
 
         while (true) {
             try {
-                String tituloRevista = leStr("Insira o título do Revista que quer editar (ou 'sair' para encerrar):");
+                String tituloRevista = leStr("Insira o título da revista que quer editar (ou 'sair' para encerrar):");
                 if (tituloRevista.equalsIgnoreCase("sair")) {
                     return;
                 }
                 revistasParaEditar = gestor.pesquisarRevistaPorTitulo(tituloRevista);
 
                 if (revistasParaEditar.isEmpty()) {
-                    System.out.println("Não existem Revistas com este título!");
+                    System.out.println("Não existem revistas com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto revista : revistasParaEditar) {
@@ -161,18 +161,18 @@ public class ViewEditarRevistas {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao pesquisar os Revistas. Por favor, tente novamente.");
+                System.out.println("Ocorreu um erro ao pesquisar as revistas. Por favor, tente novamente.");
             }
         }
 
         try {
-            String idEditarDataStr = leStr("Insira o id do Revista que quer editar (ou 'sair' para encerrar):");
+            String idEditarDataStr = leStr("Insira o id da revista que quer editar (ou 'sair' para encerrar):");
             if (idEditarDataStr.equalsIgnoreCase("sair")) {
                 return;
             }
             int idEditarData = Integer.parseInt(idEditarDataStr);
 
-            System.out.println("Digite a nova data de publicação do Revista (ou 'sair' para encerrar): ");
+            System.out.println("Digite a nova data de publicação da revista (ou 'sair' para encerrar): ");
             ValidacaoData validarData = new ValidacaoData();
             LocalDate novaDataDePublicacao = validarData.LerData2();
             if (novaDataDePublicacao == null) {
@@ -182,14 +182,14 @@ public class ViewEditarRevistas {
             boolean dataEditada = gestor.editarDataDePublicacaoProduto(idEditarData, novaDataDePublicacao);
 
             if (dataEditada) {
-                System.out.println("Revista editado com sucesso!");
+                System.out.println("Revista editada com sucesso!");
                 System.out.println(" ");
             } else {
-                System.out.println("Revista não encontrado!");
+                System.out.println("Revista não encontrada!");
                 System.out.println(" ");
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao editar o Revista. Por favor, tente novamente.");
+            System.out.println("Ocorreu um erro ao editar a revista. Por favor, tente novamente.");
         }
     }
     public void editarEditoraRevista(ControllerProdutos gestor) {
@@ -197,14 +197,14 @@ public class ViewEditarRevistas {
 
         while (true) {
             try {
-                String tituloRevista = leStr("Insira o título do Revista que quer editar (ou 'sair' para encerrar):");
+                String tituloRevista = leStr("Insira o título da revista que quer editar (ou 'sair' para encerrar):");
                 if (tituloRevista.equalsIgnoreCase("sair")) {
                     return;
                 }
                 revistasParaEditar = gestor.pesquisarRevistaPorTitulo(tituloRevista);
 
                 if (revistasParaEditar.isEmpty()) {
-                    System.out.println("Não existem Revistas com este título!");
+                    System.out.println("Não existem revistas com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto revista : revistasParaEditar) {
@@ -213,12 +213,12 @@ public class ViewEditarRevistas {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao pesquisar os Revistas. Por favor, tente novamente.");
+                System.out.println("Ocorreu um erro ao pesquisar as revista. Por favor, tente novamente.");
             }
         }
 
         try {
-            String idEditarEditoraStr = leStr("Insira o id do Revista que quer editar (ou 'sair' para encerrar):");
+            String idEditarEditoraStr = leStr("Insira o id da revista que quer editar (ou 'sair' para encerrar):");
             if (idEditarEditoraStr.equalsIgnoreCase("sair")) {
                 return;
             }
@@ -232,14 +232,14 @@ public class ViewEditarRevistas {
             boolean editoraEditada = gestor.editarEditoraProduto(idEditarEditora, novaEditora);
 
             if (editoraEditada) {
-                System.out.println("Revista editado com sucesso!");
+                System.out.println("Revista editada com sucesso!");
                 System.out.println(" ");
             } else {
-                System.out.println("Revista não encontrado!");
+                System.out.println("Revista não encontrada!");
                 System.out.println(" ");
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao editar o Revista. Por favor, tente novamente.");
+            System.out.println("Ocorreu um erro ao editar a revista. Por favor, tente novamente.");
         }
     }
 }

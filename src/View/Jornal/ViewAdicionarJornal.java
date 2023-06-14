@@ -44,7 +44,7 @@ public class ViewAdicionarJornal {
                 break;
             }
 
-                System.out.println("Digite a data de lançamento do Jornal: ");
+                System.out.println("Digite a data de lançamento do jornal: ");
                 ValidacaoData validarData = new ValidacaoData();
                 LocalDate dataDePublicacao = validarData.LerData2();
 

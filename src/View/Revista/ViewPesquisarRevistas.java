@@ -18,12 +18,12 @@ public class ViewPesquisarRevistas {
             ArrayList<Revista> revistas = gestor.pesquisarRevistaPorTitulo(tituloInserido);
 
             if (revistas.isEmpty()) {
-                System.out.println("Jornal não existente!");
+                System.out.println("Revista não existente!");
             } else {
                 System.out.println(gestor.pesquisarRevistaPorTitulo(tituloInserido));
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao pesquisar a revista por título. Por favor, tente novamente.");
+            System.out.println("Ocorreu um erro ao pesquisar a revista. Por favor, tente novamente.");
         }
     }
     public void RevistaPorEditora(ControllerProdutos gestor) {
@@ -36,12 +36,12 @@ public class ViewPesquisarRevistas {
             ArrayList<Revista> revistas = gestor.pesquisarRevistaPorEditora(tituloInserido);
 
             if (revistas.isEmpty()) {
-                System.out.println("Jornal não existente!");
+                System.out.println("Revista não existente!");
             } else {
                 System.out.println(gestor.pesquisarRevistaPorEditora(tituloInserido));
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao pesquisar a revista por título. Por favor, tente novamente.");
+            System.out.println("Ocorreu um erro ao pesquisar a revista. Por favor, tente novamente.");
         }
     }
 

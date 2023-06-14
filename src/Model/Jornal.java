@@ -4,10 +4,11 @@ import java.time.LocalDate;
 
 
 public class Jornal extends Produto {
-    public Jornal(int id, String titulo, String subtitulo,int numeroPaginas, int quantidade, LocalDate dataPublicacao, String editora) {
+    public Jornal(int id, String titulo, String subtitulo,int quantidade, int numeroPaginas,LocalDate dataPublicacao, String editora) {
         super(id, titulo, subtitulo ,quantidade,dataPublicacao, editora);
-        this.numeroPaginas = this.numeroPaginas;
-        quantidade = 1;
+        this.numeroPaginas = numeroPaginas;
+        this.subtitulo = subtitulo;
+        this.editora = editora;
 
     }
 
@@ -48,16 +49,16 @@ public class Jornal extends Produto {
 
     @Override
     public String toString() {
-        return getTipo()+ " [ " + "\n" +
-                "ID: " + this.getId() + " " + "\n" +
-                "Titulo: " + this.getTitulo() + '\'' +
-                "Subtitulo: " + this.getSubtitulo() + '\'' +
-                "NumeroPaginas: " + this.getNumeroPaginas() + '\'' +
-                "Data de Publicacao: " + this.getDataDePublicacao() + '\'' +
-                "Editora: " + getEditora() + '\'' +
-                "Quantidade: " + this.getQuantidade() + '\'' +
-                ']'+ "----------------------------------------------------";
+        return getTipo() + " [ " + "\n" +
+                "ID: " + this.getId() + "\n" +
+                "Titulo: " + this.getTitulo() +  "\n" +
+                "Subtítulo: " + this.getSubtitulo() + "\n" +
+                "Número de páginas: " + this.getNumeroPaginas() + "\n" +
+                "Data de publicação: " + this.getDataDePublicacao() + "\n" +
+                "Editora: " + getEditora() + "\n" +
+                "Quantidade: " + this.getQuantidade() + " ] " + "\n" +
+                "----------------------------------------------------";
     }
 
-
 }
+

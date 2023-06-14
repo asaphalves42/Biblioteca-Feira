@@ -19,15 +19,6 @@ public class MenuViewRevistas {
 
     ViewRemoverRevistas removerRevistas=new ViewRemoverRevistas();
 
-    ViewEditarRevistas editarRevistasPorTitulo=new ViewEditarRevistas();
-    ViewEditarRevistas editarRevistasPorSubtitulo=new ViewEditarRevistas();
-
-    ViewEditarRevistas editarRevistasEditora=new ViewEditarRevistas();
-
-    ViewEditarRevistas editarNumPaginasRevistas = new ViewEditarRevistas();
-    ViewEditarRevistas editarPorDataRevistas=new ViewEditarRevistas();
-
-    ViewEditarRevistas editarEditarRevistas = new ViewEditarRevistas();
 
     public void menuRevistas() {
         int opcao;
@@ -36,11 +27,11 @@ public class MenuViewRevistas {
             try {
                 System.out.println("## Revistas ##");
                 System.out.println("------------------------");
-                System.out.println("1 - Adicionar Revista");
-                System.out.println("2 - Listar Revista");
-                System.out.println("3 - Editar Revista");
-                System.out.println("4 - Remover Revista");
-                System.out.println("5 - Pesquisar Revista");
+                System.out.println("1 - Adicionar revista");
+                System.out.println("2 - Listar revista");
+                System.out.println("3 - Editar revista");
+                System.out.println("4 - Remover revista");
+                System.out.println("5 - Pesquisar revista");
                 System.out.println("6 - Gravar");
                 System.out.println("7 - Menu anterior");
 
@@ -54,10 +45,10 @@ public class MenuViewRevistas {
                     case 2:
                         listarRevistas.listarTodasAsRevistas(gestor);
                         break;
-                    case 3: //editar Jornais
+                    case 3:
                         editarRevistas();
                         break;
-                    case 4: //remover Jornais
+                    case 4:
                         removerRevistas.eliminarRevistaPorTitulo(gestor);
                         break;
                     case 5:
@@ -80,8 +71,8 @@ public class MenuViewRevistas {
             try {
                 System.out.println("## Revistas's ##");
                 System.out.println("------------------------");
-                System.out.println("1 - Pesquisar Revistas por título");
-                System.out.println("2 - Pesquisar Revistas por editora");
+                System.out.println("1 - Pesquisar revistas por título");
+                System.out.println("2 - Pesquisar revistas por editora");
                 System.out.println("3 - Menu Anterior");
 
 
@@ -112,11 +103,11 @@ public class MenuViewRevistas {
             try {
                 System.out.println("## Revistas Editar por: ##");
                 System.out.println("------------------------");
-                System.out.println("1 - Editar Título");
-                System.out.println("2 - Editar Subtiulo");
-                System.out.println("3 - Editar Numero de paginas");
-                System.out.println("4 - Editar Data");
-                System.out.println("5 - Editar Editora");
+                System.out.println("1 - Editar título");
+                System.out.println("2 - Editar subtiulo");
+                System.out.println("3 - Editar número de páginas");
+                System.out.println("4 - Editar data");
+                System.out.println("5 - Editar editora");
                 System.out.println("6 - Menu anterior");
 
 

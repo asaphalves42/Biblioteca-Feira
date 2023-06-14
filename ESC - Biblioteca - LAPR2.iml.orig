@@ -10,31 +10,13 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/commons-email-1.5.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/mail-1.4.7.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/src/libs/mssql-jdbc-12.2.0.jre8.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/src/libs/mssql-jdbc-12.2.0.jre11.jar!/" />
@@ -55,6 +37,9 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
+<<<<<<< HEAD
+          <root url="jar://$MODULE_DIR$/src/libs/javax.activation-1.1.0.v201105071233.jar!/" />
+=======
           <root url="jar://$MODULE_DIR$/libs/email/mail-1.4.7.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -74,6 +59,7 @@
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Downloads/sqljdbc_12.2.0.0_ptb/sqljdbc_12.2/ptb/mssql-jdbc-12.2.0.jre8.jar!/" />
+>>>>>>> 7e90f4c40ec52a2ae1aa4b6aa68e1b072d1eccd5
         </CLASSES>
         <JAVADOC />
         <SOURCES />

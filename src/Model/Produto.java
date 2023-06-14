@@ -2,6 +2,23 @@ package Model;
 
 import java.time.LocalDate;
 public abstract class Produto {
+
+    public Produto(int id, String titulo, String subtitulo, int quantidade, LocalDate dataPublicacao, String editora) {
+        this.id = id;
+        this.titulo = titulo;
+        this.quantidade = quantidade;
+        this.dataDePublicacao = dataPublicacao;
+
+        this.editora = editora;
+
+        if (id > proximoId){
+            proximoId = id;
+        }
+        if (id == 0){
+            this.id = ++proximoId;
+        }
+    }
+
     public Produto(int id , String titulo, int quantidade, Autor nomeAutor, Categoria categoria, LocalDate dataDePublicacao, String faixaEtaria, String editora) {
         this.id = id;
         this.titulo = titulo;
@@ -31,15 +48,6 @@ public abstract class Produto {
 
     private boolean pendenteGravacao; //indicador que informa se o registo é novo ou alterado e precisa de ser gravado na base de dados
 
-    public Produto(int id, String titulo, String subtitulo, int quantidade, LocalDate dataPublicacao, String editora) {
-        this(id,titulo,quantidade,null,null,dataPublicacao,subtitulo,null);
-        this.pendenteGravacao = true;
-    }
-
-    public Produto(int id, String titulo, int quantidade, Autor autor, LocalDate dataPublicacao, PalavraChave palavra, int numeroPaginas) {
-        this(id,titulo,quantidade,null,null,dataPublicacao,null,null);
-        this.pendenteGravacao = true;
-    }
 
 
 
