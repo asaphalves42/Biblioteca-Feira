@@ -48,7 +48,8 @@ public abstract class Produto {
 
     private boolean pendenteGravacao; //indicador que informa se o registo é novo ou alterado e precisa de ser gravado na base de dados
 
-
+    public Produto(int id, String titulo, int quantidade, Autor autor, LocalDate dataPublicacao, PalavraChave palavra, int numeroPaginas) {
+    }
 
 
     public void decrementarQuantidade(){

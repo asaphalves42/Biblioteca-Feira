@@ -387,7 +387,6 @@ public class ControllerProdutos {
     }
 
     public boolean adicionarJornais(String titulo, String subtitulo, int quantidade, int numeroPaginas, LocalDate dataPublicacao, String editora) {
-
         Produto jornal = new Jornal(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora);
         //jornal.setPedenteGravacao(true);
         produtos.add(jornal);

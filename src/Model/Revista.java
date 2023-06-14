@@ -42,18 +42,19 @@ public class Revista extends Produto {
 
     @Override
     public TipoProduto getTipo() {
-        return TipoProduto.Jornal;
+        return TipoProduto.Revista;
     }
 
     @Override
     public String toString() {
-        return getTipo() + " [ " +
-                "Titulo: " + this.getTitulo() + '\n' +
-                "Subtítulo: " + this.getSubtitulo() + '\n' +
-                "Numero de páginas: " + this.getNumeroPaginas() + '\n' +
-                "Data da publicação: " + this.getDataDePublicacao() + '\n' +
-                "Editora: " + getEditora() + '\n' +
-                "Quantidade: " + this.getQuantidade() + "] " + '\n' +
+        return getTipo() + " [ " + "\n" +
+                "ID: " + this.getId() + "\n" +
+                "Titulo: " + this.getTitulo() +  "\n" +
+                "Subtítulo: " + this.getSubtitulo() + "\n" +
+                "Número de páginas: " + this.getNumeroPaginas() + "\n" +
+                "Data de publicação: " + this.getDataDePublicacao() + "\n" +
+                "Editora: " + getEditora() + "\n" +
+                "Quantidade: " + this.getQuantidade() + " ] " + "\n" +
                 "----------------------------------------------------";
     }
 

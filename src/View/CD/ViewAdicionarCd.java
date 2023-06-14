@@ -38,22 +38,24 @@ public class ViewAdicionarCd {
             int quantidade = leIntPositivo("Introduza a quantidade: ");
             System.out.println();
 
-            int NumCapitulos = leIntPositivo("Introduza o número de capítulos: ");
+            int NumCapitulos = leIntPositivo("Introduza o número de faixas: ");
             System.out.println();
 
-            // Adicionar autor existente no programa
+            //adicionar autor com autor existente no programa
+
+            ArrayList<Autor> adicionarAutorExistente = gestorAutores.listarAutores();
+
             ArrayList<Autor> autoresListados = gestorAutores.listarAutores();
-            System.out.println("Autores disponíveis: ");
+
             for (Autor autor : autoresListados) {
                 System.out.println(autor.toString());
             }
 
             int idAdicionarAutor = 0;
             while (true) {
-                String inputId = leStr("Insira o ID do autor que deseja adicionar (ou 'sair' para cancelar): ");
+                String inputId = leStr("Insira o Id do(a) autor(a) que quer adicionar: ");
 
                 if (inputId.equalsIgnoreCase("sair")) {
-                    sair = true;
                     break;
                 } else {
                     try {
@@ -67,21 +69,24 @@ public class ViewAdicionarCd {
 
             Autor autorAdicionado = null;
             if (idAdicionarAutor > 0) {
-                for (Autor autor : autoresListados) {
+                for (Autor autor : adicionarAutorExistente) {
                     if (autor.getId() == idAdicionarAutor) {
                         autorAdicionado = autor;
                         break;
                     }
                 }
+                if (autorAdicionado != null) {
+                    System.out.println("Autor(a) adicionado(a) com sucesso!");
+                    System.out.println(" ");
+                } else {
+                    System.out.println("Autor(a) não encontrado(a).");
+                    System.out.println(" ");
+                }
             }
 
-            if (autorAdicionado == null) {
-                System.out.println("Autor não encontrado ou seleção cancelada!\n");
-                continue;
-            }
+            // adicionar categorias puxando da lista de categorias
 
-            // Adicionar categorias puxando da lista de categorias
-            System.out.println("Categorias disponíveis: ");
+            System.out.println("Categorias   | ID");
             for (Categoria cat : gestorCategoria.listarCategorias()) {
                 System.out.printf("%-12s | %d%n", cat.getNome(), cat.getId());
             }
@@ -90,12 +95,16 @@ public class ViewAdicionarCd {
             Categoria categoriaEncontrada = null;
 
             while (categoriaEncontrada == null) {
-                id = leIntPositivo("Insira o ID da categoria:");
+                id = leIntPositivo("Insira a categoria pelo ID ou 0 para sair:\n");
+                if (id==0) {
+                    sair = true;
+                    break;
+                }
                 categoriaEncontrada = gestorCategoria.pesquisarCategoriaPorId(id);
 
                 if (categoriaEncontrada == null) {
                     System.out.println("Categoria não encontrada!");
-                    System.out.println();
+                    System.out.println(" ");
                 }
             }
 

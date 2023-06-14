@@ -57,27 +57,13 @@ public class ViewAdicionarLivros {
 
             //adicionar autor com autor existente no programa
 
-            ArrayList<Autor> adicionarAutorExistente = null;
-            String nomeAutor;
+            ArrayList<Autor> adicionarAutorExistente = gestorAutores.listarAutores();
 
             ArrayList<Autor> autoresListados = gestorAutores.listarAutores();
+
             for (Autor autor : autoresListados) {
                 System.out.println(autor.toString());
             }
-            nomeAutor = leStr("Insira o nome do(a) autor(a):");
-            if (nomeAutor.equalsIgnoreCase("sair")) {
-                return;
-            }
-            adicionarAutorExistente = gestorAutores.pesquisarAutorPorNome(nomeAutor);
-
-            if (adicionarAutorExistente.isEmpty()) {
-                System.out.println("Não existem autores com esse nome!");
-                System.out.println(" ");
-                break;
-            }
-
-
-
 
             int idAdicionarAutor = 0;
             while (true) {
@@ -103,8 +89,13 @@ public class ViewAdicionarLivros {
                         break;
                     }
                 }
-                System.out.println("Autor(a) adicionado(a) com sucesso!");
-                System.out.println(" ");
+                if (autorAdicionado != null) {
+                    System.out.println("Autor(a) adicionado(a) com sucesso!");
+                    System.out.println(" ");
+                } else {
+                    System.out.println("Autor(a) não encontrado(a).");
+                    System.out.println(" ");
+                }
             }
 
             // adicionar categorias puxando da lista de categorias
@@ -118,7 +109,7 @@ public class ViewAdicionarLivros {
             Categoria categoriaEncontrada = null;
 
             while (categoriaEncontrada == null) {
-                id = leIntPositivo("Insira a categoria pelo ID ou 0 para sair:");
+                id = leIntPositivo("Insira a categoria pelo ID ou 0 para sair:\n");
                 if (id==0) {
                     sair = true;
                     break;
@@ -130,7 +121,6 @@ public class ViewAdicionarLivros {
                     System.out.println(" ");
                 }
             }
-
 
             System.out.println("Digite a data de publicação do livro: ");
             ValidacaoData validarData = new ValidacaoData();
