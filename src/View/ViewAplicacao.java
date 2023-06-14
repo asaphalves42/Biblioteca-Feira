@@ -146,7 +146,7 @@ public class ViewAplicacao {
                     case 1:// Consultar reservas
                         break;
                     case 2:
-                        //consultar produtos
+                        menuSocio2();
                         break;
                     case 3:System.exit(0);
                         break;
@@ -161,6 +161,48 @@ public class ViewAplicacao {
             }
         } while (opcao != 4);
     }
+
+    public void menuSocio2() {
+
+        int opcao;
+
+        do {
+            System.out.println("## Consultar ##");
+            System.out.println("------------------------");
+
+            System.out.println("1 - Jornal");
+            System.out.println("2 - Revistas");
+            System.out.println("3 - Artigos científicos ");
+            System.out.println("4 - Sair ");
+
+            try {
+                opcao = ler.nextInt();
+                ler.nextLine(); // Limpar o buffer do scanner
+
+                switch (opcao) {
+                    case 1:// Consulta jornais
+                        break;
+                    case 2:
+                        //consultar revistas
+                        break;
+                    case 3: //consultar artigos científicos
+
+                        break;
+                    case 4:System.exit(0);
+                        break;
+                    default:
+                        System.out.println("Por favor, insira uma opção válida.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira uma opção válida numérica.");
+                opcao = 0;
+                ler.nextLine();
+            }
+        } while (opcao != 5);
+    }
+
+
     public void menuAdm() {
 
         int opcao;
