@@ -1,7 +1,7 @@
 package Model;
 
 import java.time.LocalDate;
-
+/*
 public class ArtigoCientifico extends Produto {
 
 
@@ -53,4 +53,4 @@ public class ArtigoCientifico extends Produto {
                 ']' + "----------------------------------------------------";
     }
 }
-
+*/

@@ -57,27 +57,13 @@ public class ViewAdicionarLivros {
 
             //adicionar autor com autor existente no programa
 
-            ArrayList<Autor> adicionarAutorExistente = null;
-            String nomeAutor;
+            ArrayList<Autor> adicionarAutorExistente = gestorAutores.listarAutores();
 
             ArrayList<Autor> autoresListados = gestorAutores.listarAutores();
+
             for (Autor autor : autoresListados) {
                 System.out.println(autor.toString());
             }
-            nomeAutor = leStr("Insira o nome do(a) autor(a):");
-            if (nomeAutor.equalsIgnoreCase("sair")) {
-                return;
-            }
-            adicionarAutorExistente = gestorAutores.pesquisarAutorPorNome(nomeAutor);
-
-            if (adicionarAutorExistente.isEmpty()) {
-                System.out.println("Não existem autores com esse nome!");
-                System.out.println(" ");
-                break;
-            }
-
-
-
 
             int idAdicionarAutor = 0;
             while (true) {
@@ -103,8 +89,13 @@ public class ViewAdicionarLivros {
                         break;
                     }
                 }
-                System.out.println("Autor(a) adicionado(a) com sucesso!");
-                System.out.println(" ");
+                if (autorAdicionado != null) {
+                    System.out.println("Autor(a) adicionado(a) com sucesso!");
+                    System.out.println(" ");
+                } else {
+                    System.out.println("Autor(a) não encontrado(a).");
+                    System.out.println(" ");
+                }
             }
 
             // adicionar categorias puxando da lista de categorias
