@@ -14,90 +14,75 @@ import static Utilidades.Leitura.leStr;
 
 public class ViewEfetuarReservaCD {
 
-    private Socio selecionarSocioExistente(ControllerSocios gerirReservas) {
-        boolean sair=true;
+    private Socio selecionarSocioExistente(ControllerSocios gerirSocios) {
         Socio socioSelecionado = null;
 
         while (socioSelecionado == null) {
-            String nomeSocio = leStr("Insira o nome do sócio (ou sair se quer sair):");
-            if (nomeSocio.equalsIgnoreCase("sair")) {
-                sair = true;
+            ArrayList<Socio> sociosListados = gerirSocios.listarSocio();
+
+            for (Socio socio : sociosListados) {
+                System.out.println(socio.toString());
+            }
+
+            int numMecanografico = leInt("Insira o número mecanográfico do sócio (ou 0 se quer sair):");
+
+            if (numMecanografico == 0) {
                 break;
             }
-            ArrayList<Socio> socioExistente = gerirReservas.pesquisarSocioPorNome(nomeSocio);
 
-            if (socioExistente.isEmpty()) {
-                System.out.println("Não existem sócios com esse nome!");
-                System.out.println(" ");
-            } else {
-                for (Socio socio : socioExistente) {
-                    System.out.println(socio.toString());//listo o sócio
-                }
+            boolean numeroCorreto = false;
 
-                int numMecanografico = leInt("Insira o número mecanográfico do sócio (ou 0 se quer sair):");
-                if (numMecanografico==0) {
-                    sair = true;
+            for (Socio socio : sociosListados) {
+                if (numMecanografico == socio.getNumMecanografico()) {
+                    socioSelecionado = socio;
+                    numeroCorreto = true;
                     break;
                 }
+            }
 
-                for (Socio idSocio : socioExistente) {
-                    if (numMecanografico == idSocio.getNumMecanografico()) {
-                        socioSelecionado = idSocio;
-                        break;
-                    } else {
-                        System.out.println("Número mecanográfico incorreto! Tente novamente! ");
-                        System.out.println(" ");
-                    }
-                }
+            if (!numeroCorreto) {
+                System.out.println("Número mecanográfico incorreto! Tente novamente.");
+                System.out.println();
             }
         }
+
         return socioSelecionado;
     }
-
     private CD selecionarProdutoDisponivel(ControllerProdutos gerirProdutos) {
-        boolean sair = false;
         CD cdSelecionado = null;
 
         while (cdSelecionado == null) {
-            String tituloDoCd = leStr("Digite o título do cd (ou sair se quer sair):");
-            if (tituloDoCd.equalsIgnoreCase("sair")) {
-                sair = true;
-                break;
+            for (CD cd : gerirProdutos.listarProdutosCd()) {
+                System.out.println(cd.toString());
             }
 
-            ArrayList<CD> cdsDisponiveis = gerirProdutos.pesquisarCDPorTitulo(tituloDoCd);
+            String idCDStr = leStr("Insira o ID do CD que deseja reservar (ou 'sair' se quiser sair):");
 
-            if (cdsDisponiveis.isEmpty()) {
-                System.out.println("Não existem cd's disponíveis!");
-                System.out.println(" ");
-            } else {
-                for (CD cd : cdsDisponiveis) {
-                    System.out.println(cd.toString());
-                }
+            if (idCDStr.equalsIgnoreCase("sair")) {
+                break; // Sair do loop while
+            }
 
-                String idCDStr = leStr("Insira o ID do cd que deseja reservar (ou sair se quer sair):");
+            try {
+                int idCD = Integer.parseInt(idCDStr);
 
-                if (idCDStr.equalsIgnoreCase("sair")) {
-                    break; // Sair do loop while
-                }
-
-                try {
-                    int idLivro = Integer.parseInt(idCDStr);
-
-                    for (CD cd : cdsDisponiveis) {
-                        if (cd.getId() == idLivro) {
-                            cdSelecionado = cd;
-                            break;
-                        }
+                for (CD cd : gerirProdutos.listarProdutosCd()) {
+                    if (cd.getId() == idCD) {
+                        cdSelecionado = cd;
+                        break;
                     }
-                } catch (NumberFormatException e) {
-                    System.out.println("ID do cd inválido! Tente novamente.");
                 }
+
+                if (cdSelecionado == null) {
+                    System.out.println("ID do CD inválido! Tente novamente.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Formato inválido! Tente novamente.");
             }
         }
 
         return cdSelecionado;
     }
+
 
     public void efetuarReserva(ControllerReservas gerirReservas, ControllerProdutos gerirProdutos, ControllerSocios gerirSocios, Socio socio) {
 

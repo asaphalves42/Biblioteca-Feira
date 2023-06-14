@@ -17,89 +17,69 @@ public class ViewEfetuarReservaLivro {
     private Socio selecionarSocioExistente(ControllerSocios gerirSocios) {
         Socio socioSelecionado = null;
 
-
         while (socioSelecionado == null) {
-            ArrayList<Socio> SociosListados = gerirSocios.listarSocio();
-            String Continuar = leStr("Caso deseja ver todos os Sócios exitentes  insira um ENTER");
-            if (Continuar.equalsIgnoreCase("")) {
-                for (Socio Socio : SociosListados) {
-                    System.out.println(Socio.toString());
+            ArrayList<Socio> sociosListados = gerirSocios.listarSocio();
 
-                }
+            for (Socio socio : sociosListados) {
+                System.out.println(socio.toString());
+            }
 
-            }else{
-                System.out.println("Ouve um erro a listar todos os Sócios exitentes");
+            int numMecanografico = leInt("Insira o número mecanográfico do sócio (ou 0 se quer sair):");
+
+            if (numMecanografico == 0) {
                 break;
             }
 
-            String nomeSocio = leStr("Insira o nome do sócio:");
-            if (nomeSocio.equalsIgnoreCase("sair")) {
-                break;
-            }
-            ArrayList<Socio> socioExistente = gerirSocios.pesquisarSocioPorNome(nomeSocio);
+            boolean numeroCorreto = false;
 
-            if (socioExistente.isEmpty()) {
-                System.out.println("Não existem sócios com esse nome!");
-                System.out.println(" ");
-            } else {
-                for (Socio socio : socioExistente) {
-                    System.out.println(socio.toString());//listo o sócio
-                }
-
-                int numMecanografico = leInt("Insira o número mecanográfico do sócio (ou 0 se quer sair:");
-                if (numMecanografico==0) {
+            for (Socio socio : sociosListados) {
+                if (numMecanografico == socio.getNumMecanografico()) {
+                    socioSelecionado = socio;
+                    numeroCorreto = true;
                     break;
                 }
+            }
 
-                for (Socio idSocio : socioExistente) {
-                    if (numMecanografico == idSocio.getNumMecanografico()) {
-                        socioSelecionado = idSocio;
-                        break;
-                    } else {
-                        System.out.println("Número mecanográfico incorreto! Tente novamente! ");
-                        System.out.println(" ");
-                    }
-                }
+            if (!numeroCorreto) {
+                System.out.println("Número mecanográfico incorreto! Tente novamente.");
+                System.out.println();
             }
         }
+
         return socioSelecionado;
     }
+
+
 
     private Livro selecionarProdutoDisponivel(ControllerProdutos gerirProdutos) {
         Livro livroSelecionado = null;
 
         while (livroSelecionado == null) {
-            String tituloDoLivro = leStr("Digite o título do livro:");
+            for (Livro livro : gerirProdutos.listarProdutosLivros()) {
+                System.out.println(livro.toString());
+            }
 
+            String idLivroStr = leStr("Insira o ID do livro que deseja reservar (ou 'sair' para sair):");
 
-            ArrayList<Livro> livrosDisponiveis = gerirProdutos.pesquisarLivroPorTitulo(tituloDoLivro);
+            if (idLivroStr.equalsIgnoreCase("sair")) {
+                break; // Sair do loop while
+            }
 
-            if (livrosDisponiveis.isEmpty()) {
-                System.out.println("Não existem exemplares disponíveis desse livro!");
-                System.out.println(" ");
-            } else {
-                for (Livro livro : livrosDisponiveis) {
-                    System.out.println(livro.toString());
-                }
+            try {
+                int idLivro = Integer.parseInt(idLivroStr);
 
-                String idLivroStr = leStr("Insira o ID do livro que deseja reservar:");;
-
-                if (idLivroStr.equalsIgnoreCase("sair")) {
-                    break; // Sair do loop while
-                }
-
-                try {
-                    int idLivro = Integer.parseInt(idLivroStr);
-
-                    for (Livro livro : livrosDisponiveis) {
-                        if (livro.getId() == idLivro) {
-                            livroSelecionado = livro;
-                            break;
-                        }
+                for (Livro livro : gerirProdutos.listarProdutosLivros()) {
+                    if (livro.getId() == idLivro) {
+                        livroSelecionado = livro;
+                        break;
                     }
-                } catch (NumberFormatException e) {
+                }
+
+                if (livroSelecionado == null) {
                     System.out.println("ID do livro inválido! Tente novamente.");
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Formato inválido! Tente novamente.");
             }
         }
 

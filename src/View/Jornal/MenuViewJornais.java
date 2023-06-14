@@ -19,15 +19,6 @@ public class MenuViewJornais {
 
     ViewRemoverJornal removerJornal=new ViewRemoverJornal();
 
-    ViewEditarJornal editarJornalPorTitulo=new ViewEditarJornal();
-    ViewEditarJornal editarJornalPorSubtitulo=new ViewEditarJornal();
-
-    ViewEditarJornal editarJornalEditora=new ViewEditarJornal();
-
-    ViewEditarJornal editarNumPaginasJornal = new ViewEditarJornal();
-    ViewEditarJornal editarPorDataJornal=new ViewEditarJornal();
-    
-    ViewEditarJornal editarEditarJornal = new ViewEditarJornal();
 
     public void menuJornais() {
         int opcao;

@@ -16,7 +16,7 @@ public class ViewListarRevistas {
                 System.out.println(" ");
             } else {
                 for (Produto revista : revistasListadas) {
-                    System.out.println(revista);
+                    System.out.println(revista.toString());
                 }
             }
         } catch (Exception e) {
