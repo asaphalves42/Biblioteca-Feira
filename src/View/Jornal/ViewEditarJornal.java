@@ -38,9 +38,34 @@ public class ViewEditarJornal {
                 System.out.println("Por favor, tente novamente.");
                 System.out.println(" ");
             }
+
+            try {
+                String idRevistaStr = leStr("Insira o id do jornal que quer editar (ou 'sair' para encerrar):");
+                if (idRevistaStr.equalsIgnoreCase("sair")) {
+                    return;
+                }
+                int idEditarSubTitulo = Integer.parseInt(idRevistaStr);
+                String subTituloNovo = leStr("Insira o novo título (ou 'sair' para encerrar):");
+                if (subTituloNovo.equalsIgnoreCase("sair")) {
+                    return;
+                }
+
+                boolean tituloEditado = gestor.editarTituloDoProduto(idEditarSubTitulo, subTituloNovo);
+
+                if (tituloEditado) {
+                    System.out.println("Jornal editada com sucesso!");
+                    System.out.println(" ");
+                } else {
+                    System.out.println("Jornal não encontrado!");
+                    System.out.println(" ");
+                }
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro ao editar o jornal. Por favor, tente novamente.");
+            }
         }
 
-    }
+        }
+
     public void editarJornalPorSubTitulo(ControllerProdutos gestor) {
         ArrayList<Jornal> jornaisParaEditar;
 

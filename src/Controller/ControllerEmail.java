@@ -1,11 +1,8 @@
 package Controller;
 
-import Model.SocioUtilizador;
-import Model.Utilizador;
-
 import javax.mail.*;
-import javax.mail.internet.*;
-
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class ControllerEmail {
@@ -21,7 +18,7 @@ public class ControllerEmail {
 
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("engenheirosemcurso@gmail.com", "sxlxgahggetejdhs");
+                return new PasswordAuthentication("engenheirosemcurso@gmail.com", "fhhjuclsiiqefslx");
             }
         });
 
@@ -29,7 +26,7 @@ public class ControllerEmail {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("Isto é o assunto");
+            message.setSubject("Credenciais de acesso Biblioteca Santa Maria da Feira!");
 
             // Corpo do email em HTML com tabela
             String htmlContent = "<html><body>" +

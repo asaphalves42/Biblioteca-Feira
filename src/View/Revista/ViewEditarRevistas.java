@@ -79,6 +79,7 @@ public class ViewEditarRevistas {
             }
         }
 
+
         try {
             String idRevistaStr = leStr("Insira o id da revista que quer editar (ou 'sair' para encerrar):");
             if (idRevistaStr.equalsIgnoreCase("sair")) {
