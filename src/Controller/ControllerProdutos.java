@@ -396,7 +396,7 @@ public class ControllerProdutos {
 
     public boolean adicionarRevistas(String titulo, String subtitulo, int quantidade, int numeroPaginas, LocalDate dataPublicacao, String editora) {
         Produto revista = new Revista(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora);
-        //Revista.setPedenteGravacao(true);
+        //revista.setPedenteGravacao(true);
         produtos.add(revista);
         return true;
     }

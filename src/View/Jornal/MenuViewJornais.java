@@ -27,11 +27,11 @@ public class MenuViewJornais {
             try {
                 System.out.println("## Jornais ##");
                 System.out.println("------------------------");
-                System.out.println("1 - Adicionar Jornal");
-                System.out.println("2 - Listar Jornal's");
-                System.out.println("3 - Editar Jornal");
-                System.out.println("4 - Remover Jornal");
-                System.out.println("5 - Pesquisar Jornal");
+                System.out.println("1 - Adicionar jornal");
+                System.out.println("2 - Listar jornais");
+                System.out.println("3 - Editar jornais");
+                System.out.println("4 - Remover jornais");
+                System.out.println("5 - Pesquisar jornais");
                 System.out.println("6 - Gravar");
                 System.out.println("7 - Menu anterior");
 
@@ -103,11 +103,11 @@ public class MenuViewJornais {
             try {
                 System.out.println("## Jornal Editar por: ##");
                 System.out.println("------------------------");
-                System.out.println("1 - Editar Título");
-                System.out.println("2 - Editar Subtiulo");
-                System.out.println("3 - Editar Numero de paginas");
-                System.out.println("4 - Editar Data");
-                System.out.println("5 - Editar Editora");
+                System.out.println("1 - Editar título");
+                System.out.println("2 - Editar subtiulo");
+                System.out.println("3 - Editar número de páginas");
+                System.out.println("4 - Editar data");
+                System.out.println("5 - Editar editora");
                 System.out.println("6 - Menu anterior");
 
 
