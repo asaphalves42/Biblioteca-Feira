@@ -16,7 +16,7 @@ public class ViewFuncaoEditarAutor {
 
         boolean sair = false;
         do {
-            int idAutor = leInt("Insira o Id do(a) autor(a) que quer editar");
+            int idAutor = leInt("Insira o Id do(a) autor(a) que quer editar (ou 'sair' para voltar ao menu anterior):");
             ArrayList<Autor> autorEditar = gestor.pesquisarAutorPorId(idAutor);
 
             if (autorEditar == null) {

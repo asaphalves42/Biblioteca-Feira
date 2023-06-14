@@ -21,7 +21,7 @@ public class ControllerEmail {
 
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("engenheirosemcurso@gmail.com", "sxlxgahggetejdhs");
+                return new PasswordAuthentication("engenheirosemcurso@gmail.com", "lswpbtasoilawqkn");
             }
         });
 
