@@ -1,15 +1,11 @@
 package View.Satisfacao;
 
 import Controller.ControllerSatisfacao;
-import static Utilidades.Leitura.leStr;
-import static Utilidades.Leitura.ler;
 
-import java.util.Scanner;
+import static Utilidades.Leitura.leStr;
 
 public class ViewSatisfacao {
     private ControllerSatisfacao controllerSatisfacao = new ControllerSatisfacao();
-
-
 
     public void obterSatisfacao(String idReserva) {
         System.out.println("## Formulário de Satisfação ##");
