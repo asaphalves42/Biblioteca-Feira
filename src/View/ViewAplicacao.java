@@ -96,13 +96,15 @@ public class ViewAplicacao {
 
                 switch (opcao) {
                     case 1 -> {
-                        if(viewLogin.verificarLogin() == TipoUtilizador.Administrador) {
+                        TipoUtilizador tipoUtilizador = viewLogin.verificarLogin();
+
+                        if (tipoUtilizador == TipoUtilizador.Administrador) {
                             menuAdm();
-                        }else if(viewLogin.verificarLogin() == TipoUtilizador.Bibliotecario){
+                        } else if (tipoUtilizador == TipoUtilizador.Bibliotecario) {
                             menuPrincipal();
-                        }else if(viewLogin.verificarLogin() == TipoUtilizador.Socio){
+                        } else if (tipoUtilizador == TipoUtilizador.Socio) {
                             menuSocio();
-                        } else if(viewLogin.verificarLogin() == TipoUtilizador.Default){
+                        } else if (tipoUtilizador == TipoUtilizador.Default) {
                             System.out.println("Erro ao realizar login!\n");
                         }
                     }

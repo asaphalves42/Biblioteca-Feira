@@ -121,7 +121,7 @@ ControllerEmail controlleremail= new ControllerEmail();
         utilizadores.add(adicionarSocio);
         gravarUtilizadorParaBaseDados();
 
-        //enviar o email automatico
+
 
         return true;
     }
