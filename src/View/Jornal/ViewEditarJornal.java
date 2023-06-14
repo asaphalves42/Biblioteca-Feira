@@ -78,7 +78,7 @@ public class ViewEditarJornal {
                 jornaisParaEditar = gestor.pesquisarJornalPorTitulo(tituloJornal);
 
                 if (jornaisParaEditar.isEmpty()) {
-                    System.out.println("Não existem jornals com este título!");
+                    System.out.println("Não existem jornais com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto jornal : jornaisParaEditar) {

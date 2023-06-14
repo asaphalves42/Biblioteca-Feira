@@ -80,12 +80,8 @@ public class MenuViewRevistas {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1:
-                        pesquisarRevistas.RevistaPorTitulo(gestor);
-                        break;
-                    case 2:
-                        pesquisarRevistas.RevistaPorEditora(gestor);
-                        break;
+                    case 1 -> pesquisarRevistas.revistaPorTitulo(gestor);
+                    case 2 -> pesquisarRevistas.revistaPorEditora(gestor);
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
@@ -115,22 +111,11 @@ public class MenuViewRevistas {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1:
-                        editarRevistas.editarRevistaPorTitulo(gestor);
-                        break;
-                    case 2:
-                        editarRevistas.editarRevistaPorSubTitulo(gestor);
-                        break;
-                    case 3:
-                        editarRevistas.editarNumPaginasRevista(gestor);
-                        break;
-                    case 4:
-                        editarRevistas.editarPorDataRevista(gestor);
-                        break;
-                    case 5:
-                        editarRevistas.editarEditoraRevista(gestor);
-
-
+                    case 1 -> editarRevistas.editarRevistaPorTitulo(gestor);
+                    case 2 -> editarRevistas.editarRevistaPorSubTitulo(gestor);
+                    case 3 -> editarRevistas.editarNumPaginasRevista(gestor);
+                    case 4 -> editarRevistas.editarPorDataRevista(gestor);
+                    case 5 -> editarRevistas.editarEditoraRevista(gestor);
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

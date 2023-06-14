@@ -270,40 +270,14 @@ public class ControllerReservas {
                 }
                 Socio socio = reserva.getSocio();
                 socio.resetQuantidade();
-                reservas.remove(reserva);
                 eliminados.add(reserva.getIdDaReserva());
+                reservas.remove(reserva);
                 return true;
             }
         }
         return false;
     }
 
-    public boolean editarReservaAlterarProduto(String idReserva, int idProduto, int idNovoProduto) {
-        boolean encontrou = false;
-        Reserva reserva = this.pesquisarReservaPorId(idReserva);
-        if (reserva != null) {
-            for (Produto produto : reserva.getProdutos()) {
-                if (produto.getId() == idProduto) {
-                    reserva.getProdutos().remove(produto);
-                    reserva.setPendenteGravacao(true);
-                    produto.aumentarQuantidade();
-                    encontrou = true;
-                    break;
-                }
-            }
-            if (encontrou) {
-                Produto novoProduto = controllerProdutos.pesquisarProdutoPorId(idNovoProduto);
-                if (novoProduto != null) {
-                    if (novoProduto.getQuantidade() > 0){
-                        reserva.getProdutos().add(novoProduto);
-                        novoProduto.decrementarQuantidade();
-                        reserva.setPendenteGravacao(true);
-                    }
-                }
-            }
-        }
-        return encontrou;
-    }
 }
 
 

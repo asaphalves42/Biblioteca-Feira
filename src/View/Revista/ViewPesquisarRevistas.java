@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import static Utilidades.Leitura.leStr;
 
 public class ViewPesquisarRevistas {
-    public void RevistaPorTitulo(ControllerProdutos gestor) {
+    public void revistaPorTitulo(ControllerProdutos gestor) {
         try {
             String tituloInserido = leStr("Insira o título da revista (ou 'sair' para encerrar):");
             if (tituloInserido.equalsIgnoreCase("sair")) {
@@ -26,7 +26,7 @@ public class ViewPesquisarRevistas {
             System.out.println("Ocorreu um erro ao pesquisar a revista. Por favor, tente novamente.");
         }
     }
-    public void RevistaPorEditora(ControllerProdutos gestor) {
+    public void revistaPorEditora(ControllerProdutos gestor) {
         try {
             String tituloInserido = leStr("Insira a editora da revista (ou 'sair' para encerrar):");
             if (tituloInserido.equalsIgnoreCase("sair")) {

@@ -16,10 +16,9 @@ public class RegistarSocio {
 
         if(adicionado){
             controlleremail.enviarEmail(username, password);
-            System.out.println("Registado com sucesso");
+            System.out.println("Registado com sucesso!\n");
         } else {
-            System.out.println("Falha ao registar-se");
+            System.out.println("Falha ao registar-se\n");
         }
-
     }
 }

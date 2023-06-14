@@ -155,18 +155,6 @@ public class ControllerAutores {
         return null;
     }
 
-    public Autor listarAutorPorNomeEncontrado(String nomeInserido) {
-
-        ArrayList<Autor> autoresEncontrados = new ArrayList<>();
-        for (Autor autor : autores) {
-            if (autores.contains(nomeInserido)) {
-                autoresEncontrados.add(autor);
-            }
-        }
-        System.out.println(autoresEncontrados);
-
-        return null;
-    }
 
     public Autor pesquisarAutorPorIdBD(int idInserido) {
         for (Autor autor : autores) {
@@ -210,7 +198,7 @@ public class ControllerAutores {
                 }
             }
             if (index != -1) {
-                this.eliminados.add(idAutor);
+                eliminados.add(idAutor);
                 autores.remove(index);
                 return true;
             } else {
