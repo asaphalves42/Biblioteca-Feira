@@ -109,6 +109,7 @@ public class ControllerAutores {
         Autor autor = new Autor(nome, morada, dataDeNascimento);
         autor.setPendenteGravacao(true);
         autores.add(autor);
+        gravarAutorParaBaseDados();
 
         return true;
     }
@@ -127,7 +128,7 @@ public class ControllerAutores {
                 autor.setMorada(morada);
                 autor.setDataDeNascimento(dataDeNascimento);
                 autor.setPendenteGravacao(true);
-
+                gravarAutorParaBaseDados();
                 return true;
             }
         }
@@ -200,13 +201,18 @@ public class ControllerAutores {
             if (index != -1) {
                 eliminados.add(idAutor);
                 autores.remove(index);
+                gravarAutorParaBaseDados();
                 return true;
             } else {
                 // O autor não foi encontrado na lista de autores
                 return false;
+
             }
+
         }
     }
+
+
 
 }
 

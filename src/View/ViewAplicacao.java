@@ -7,6 +7,7 @@ import Utilidades.MensagemBoasVindas;
 import View.Autores.MenuViewAutores;
 import View.CD.MenuViewCD;
 import View.Categoria.MenuViewCategoria;
+import View.Consultas.ViewConsultarJornal;
 import View.Funcionario.MenuViewRegistarFuncionario;
 import View.Jornal.MenuViewJornais;
 import View.Livros.MenuViewLivros;
@@ -180,7 +181,9 @@ public class ViewAplicacao {
                 ler.nextLine(); // Limpar o buffer do scanner
 
                 switch (opcao) {
-                    case 1:// Consulta jornais
+                    case 1:
+                        ViewConsultarJornal consultarJornal= new ViewConsultarJornal();
+                        consultarJornal.consultarJornal(lerEgravarProdutos);
                         break;
                     case 2:
                         //consultar revistas

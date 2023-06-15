@@ -45,7 +45,7 @@ public class ViewFuncaoAdicionarSocios {
                     break;
                 }
 
-                System.out.println("Insira a data de nascimento do sócio:");
+                System.out.println("Insira a data de nascimento do sócio (dd/MM/yyyy):");
                 ValidacaoData validarData = new ValidacaoData();
                 LocalDate dataDeNascimento = validarData.LerData2();
 

@@ -44,7 +44,7 @@ public class ViewAdicionarRevistas {
                 break;
             }
 
-            System.out.println("Digite a data de lançamento da revista: ");
+            System.out.println("Digite a data de lançamento da revista (dd/MM/yyyy): ");
             ValidacaoData validarData = new ValidacaoData();
             LocalDate dataDePublicacao = validarData.LerData2();
 

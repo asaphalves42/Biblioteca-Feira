@@ -203,6 +203,7 @@ public class ControllerReservas {
             produtoSelecionado.decrementarQuantidade();
             if (!reservaExiste) {
                 reservas.add(reservaAux);
+                gravarReservasParaBaseDados();
             }
             return true;
         }
@@ -231,6 +232,7 @@ public class ControllerReservas {
         if (reserva.getSocio() != null) {
             reserva.getSocio().resetQuantidade();
         }
+        gravarReservasParaBaseDados();
         return true;
     }
 
@@ -242,6 +244,7 @@ public class ControllerReservas {
                     produto.aumentarQuantidade();
                     reserva.getProdutos().remove(produto);
                     reserva.setPendenteGravacao(true);
+                    gravarReservasParaBaseDados();
                     return true;
                 }
             }
@@ -272,6 +275,7 @@ public class ControllerReservas {
                 socio.resetQuantidade();
                 eliminados.add(reserva.getIdDaReserva());
                 reservas.remove(reserva);
+                gravarReservasParaBaseDados();
                 return true;
             }
         }

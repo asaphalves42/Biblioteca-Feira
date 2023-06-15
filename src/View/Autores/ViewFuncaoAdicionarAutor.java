@@ -46,7 +46,7 @@ public class ViewFuncaoAdicionarAutor {
             }
 
             if (!sair) {
-                System.out.println("Insira a data de nascimento do autor: ");
+                System.out.println("Insira a data de nascimento do autor (dd/MM/yyyy): ");
                 ValidacaoData validarData = new ValidacaoData();
                 LocalDate dataDeNascimento = validarData.LerData2();
 

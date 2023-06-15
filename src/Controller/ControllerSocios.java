@@ -105,6 +105,7 @@ public class ControllerSocios {
         Socio socio = new Socio(nome, morada, dataDeNascimento, telefone);
         socio.setPendenteGravacao(true);
         socios.add(socio);
+        gravarSociosParaBaseDados();
         return true;
     }
 
@@ -121,6 +122,7 @@ public class ControllerSocios {
                 socio.setDataDeNascimento(dataDeNascimento);
                 socio.setTelefone(telefone);
                 socio.setPendenteGravacao(true);
+                gravarSociosParaBaseDados();
                 return true;
             }
         }
@@ -132,6 +134,7 @@ public class ControllerSocios {
             if (numMecanografico == (socio.getNumMecanografico())) {
                 socio.setNome(nome);
                 socio.setPendenteGravacao(true);
+                gravarSociosParaBaseDados();
                 return true;
             }
         }
@@ -143,6 +146,7 @@ public class ControllerSocios {
             if (numMecanografico==(socio.getNumMecanografico())) {
                 socio.setMorada(novaMorada);
                 socio.setPendenteGravacao(true);
+                gravarSociosParaBaseDados();
                 return true;
             }
         }
@@ -154,6 +158,7 @@ public class ControllerSocios {
             if (numMecanografico==(socio.getNumMecanografico())) {
                 socio.setDataDeNascimento(novaDataDeNascimento);
                 socio.setPendenteGravacao(true);
+                gravarSociosParaBaseDados();
                 return true;
             }
         }
@@ -165,6 +170,7 @@ public class ControllerSocios {
             if (numMecanografico == (socio.getNumMecanografico())) {
                 socio.setTelefone(novaTelefone);
                 socio.setPendenteGravacao(true);
+                gravarSociosParaBaseDados();
                 return true;
             }
         }
@@ -207,6 +213,7 @@ public class ControllerSocios {
             //expressão lambda "removeIf"
             eliminados.add(numMecanografico);
             socios.removeIf(socio -> numMecanografico == (socio.getNumMecanografico()));
+            gravarSociosParaBaseDados();
         }
         return encontrouReserva;
     }

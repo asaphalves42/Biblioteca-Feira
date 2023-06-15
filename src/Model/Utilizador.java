@@ -1,8 +1,6 @@
 package Model;
 public abstract class Utilizador {
 
-
-
     public Utilizador(String email, String password,int id) {
         this.email = email;
         this.password = password;

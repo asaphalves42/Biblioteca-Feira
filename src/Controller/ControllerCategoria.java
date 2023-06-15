@@ -101,6 +101,7 @@ public class ControllerCategoria {
         Categoria adicionarCategoria = new Categoria(0, nomeCategoria);
         adicionarCategoria.setPendenteGravacao(true);
         categorias.add(adicionarCategoria);
+        gravarCategoriParaBaseDados();
 
         return true;
     }
@@ -137,6 +138,7 @@ public class ControllerCategoria {
             // Remove a categoria da lista de categorias
             eliminados.add(categoriaEncontrada.getId());
             categorias.remove(categoriaEncontrada);
+            gravarCategoriParaBaseDados();
             return true;
         }
         return false; // A categoria não foi encontrada

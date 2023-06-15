@@ -122,7 +122,7 @@ public class ViewAdicionarLivros {
                 }
             }
 
-            System.out.println("Digite a data de publicação do livro: ");
+            System.out.println("Digite a data de publicação do livro (dd/MM/yyyy): ");
             ValidacaoData validarData = new ValidacaoData();
             LocalDate dataDePublicacao = validarData.LerData2();
 

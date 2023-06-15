@@ -183,7 +183,7 @@ public class ControllerProdutos {
         }
     }
 
-    public void gravarBaseDadosProdutos() {
+    public void gravarBaseDadosProdutos(){
         try {
             BaseDados basedados = new BaseDados();
             basedados.Ligar();
@@ -191,34 +191,33 @@ public class ControllerProdutos {
             for (Produto aux : produtos) {
                 if (aux.getPendenteGravacao()) {
                     basedados.Executar("DELETE FROM produto where id = " + aux.getId());
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    ;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");;
                     //campos comuns
                     String campos = "id, tipo, titulo, quantidade, id_autor, id_categoria, data_publicacao, faixa_etaria, editora,";
                     String valores = aux.getId() + ",  '" + aux.getTipo().toString() + "', '" + aux.getTitulo() + "', " + aux.getQuantidade() + ", " + aux.getAutor().getId() + "," + aux.getCategoria().getId() + ", " +
                             "'" + aux.getDataDePublicacao().format(formatter) + "', '" + aux.getFaixaEtaria() + "', '" + aux.getEditora() + "',";
 
                     // campos especificos
-                    if (aux.getTipo() == TipoProduto.CD) {
-                        CD aux1 = (CD) aux;
-                        campos += "capitulos";
-                        valores += aux1.getNumCapitulos();
+                    if (aux.getTipo() == TipoProduto.CD){
+                        CD aux1 = (CD)aux;
+                        campos +=  "capitulos";
+                        valores +=  aux1.getNumCapitulos();
                     } else if (aux.getTipo() == TipoProduto.Livro) {
-                        Livro aux1 = (Livro) aux;
+                        Livro aux1 = (Livro)aux;
                         campos += "subtitulo, isbn, paginas";
-                        valores += "'" + aux1.getSubtitulo() + "', '" + aux1.getISBN() + "', " + aux1.getNumDePaginas();
+                        valores +=  "'" + aux1.getSubtitulo() + "', '" + aux1.getISBN() + "', " + aux1.getNumDePaginas();
                     }
 
                     // executar o SCRIPT na base de dados
                     basedados.Executar("INSERT INTO produto " +
                             "(" + campos + ")" +
                             " values " +
-                            "(" + valores + ")");
+                            "(" + valores +")");
                 }
             }
 
             //eliminar registos que foram apagados
-            if (eliminados.size() > 0) {
+            if (eliminados.size() > 0){
                 for (Integer aux : eliminados) {
                     basedados.Executar("DELETE FROM produto where id = '" + aux + "'");
                 }
@@ -230,7 +229,6 @@ public class ControllerProdutos {
             throw new RuntimeException(e);
         }
     }
-
 
     /*
 
@@ -376,6 +374,7 @@ public class ControllerProdutos {
         Produto livro = new Livro(0, titulo, quantidade, autorAdicionado, categorias, dataDePublicacao, faixaEtaria, editora, subtitulo, ISBN, numDePaginas);
         livro.setPendenteGravacao(true);
         produtos.add(livro);
+        gravarBaseDadosProdutos();
         return true;
     }
 
@@ -383,6 +382,7 @@ public class ControllerProdutos {
         Produto CD = new CD(0, titulo, quantidade, autorAdicionado, categoriaEncontrada, dataDePublicacao, faixaEtaria, editora, numCapitulos);
         CD.setPendenteGravacao(true);
         produtos.add(CD);
+        gravarBaseDadosProdutos();
         return true;
     }
 
@@ -390,6 +390,7 @@ public class ControllerProdutos {
         Produto jornal = new Jornal(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora);
         //jornal.setPedenteGravacao(true);
         produtos.add(jornal);
+        gravarBaseDadosProdutos();
         return true;
     }
 
@@ -397,6 +398,7 @@ public class ControllerProdutos {
         Produto revista = new Revista(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora);
         //revista.setPedenteGravacao(true);
         produtos.add(revista);
+        gravarBaseDadosProdutos();
         return true;
     }
 
@@ -419,6 +421,7 @@ public class ControllerProdutos {
 
             produtos.removeIf(produto -> idProdutoRemover == produto.getId());
             eliminados.add(idProdutoRemover);
+            gravarBaseDadosProdutos();
 
         }
 
@@ -430,6 +433,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idProdutoEditar == produto.getId()) {
                 produto.setTitulo(tituloNovo);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -440,6 +444,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idEditarQuantidade == produto.getId()) {
                 produto.setQuantidade(novaQuantidade);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -460,7 +465,9 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idEditarProduto == produto.getId()) {
                 produto.setAutor(autorEncontrado);
+                gravarBaseDadosProdutos();
                 return true;
+
             }
         }
         return false;
@@ -490,6 +497,7 @@ public class ControllerProdutos {
             if (idEditarProduto == produto.getId()) {
                 produto.setCategoria(this.controllerCategorias.pesquisarCategoriaPorId(idNovaCategoria));
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -502,6 +510,7 @@ public class ControllerProdutos {
             if (idEditarProduto == produto.getId()) {
                 produto.setDataDePublicacao(novaData);
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -514,6 +523,7 @@ public class ControllerProdutos {
             if (idEditarProduto == produto.getId()) {
                 produto.setEditora(novaEditora);
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -525,6 +535,7 @@ public class ControllerProdutos {
             if (idEditarProduto == produto.getId()) {
                 produto.setFaixaEtaria(novaFaixaEtaria);
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -538,6 +549,7 @@ public class ControllerProdutos {
             if (produto.getTipo() == TipoProduto.Livro && idEditarProduto == produto.getId()) {
                 ((Livro) produto).setNumDePaginas(numPaginas);
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -549,6 +561,7 @@ public class ControllerProdutos {
             if (produto.getTipo() == TipoProduto.CD && idEditarProduto == produto.getId()) {
                 ((CD) produto).setNumCapitulos(numFaixas);
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -560,6 +573,7 @@ public class ControllerProdutos {
             if (produto.getTipo() == TipoProduto.Livro && idEditarProduto == produto.getId()) {
                 ((Livro) produto).setSubtitulo(subTituloNovo);
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -595,6 +609,7 @@ public class ControllerProdutos {
             if (produto.getTipo() == TipoProduto.Jornal && idEditarProduto == produto.getId()) {
                 ((Jornal) produto).setNumeroPaginas(numPaginas);
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -605,6 +620,7 @@ public class ControllerProdutos {
             if (produto.getTipo() == TipoProduto.Jornal && idEditarProduto == produto.getId()) {
                 ((Jornal) produto).setSubtitulo(subTituloNovo);
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -616,6 +632,7 @@ public class ControllerProdutos {
             if (produto.getTipo() == TipoProduto.Revista && idEditarProduto == produto.getId()) {
                 ((Revista) produto).setNumeroPaginas(numPaginas);
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }
@@ -638,6 +655,7 @@ public class ControllerProdutos {
             if (produto.getTipo() == TipoProduto.Revista && idEditarProduto == produto.getId()) {
                 ((Revista) produto).setSubtitulo(subTituloNovo);
                 produto.setPendenteGravacao(true);
+                gravarBaseDadosProdutos();
                 return true;
             }
         }

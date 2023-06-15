@@ -108,7 +108,7 @@ public class ViewAdicionarCd {
                 }
             }
 
-            System.out.println("Digite a data de lançamento do CD: ");
+            System.out.println("Digite a data de lançamento do CD (dd/MM/yyyy): ");
             ValidacaoData validarData = new ValidacaoData();
             LocalDate dataDePublicacao = validarData.LerData2();
 
