@@ -33,7 +33,7 @@ public class ViewDevolverProdutoReserva {
 
                 String resposta = leStr("Deseja responder a um formulário de devolução do livro? (S/N)");
                 if (resposta.equalsIgnoreCase("s") || resposta.equalsIgnoreCase("sim")) {
-                    view.obterSatisfacao(idDaReserva);
+                    view.obterSatisfacao(controllerReservas, idDaReserva);
 
                 }
 

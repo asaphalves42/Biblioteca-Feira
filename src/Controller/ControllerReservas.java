@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Produto;
 import Model.Reserva;
+import Model.Satisfacao;
 import Model.Socio;
 import Utilidades.BaseDados;
 import Utilidades.GestorFicheiros;
@@ -116,6 +117,7 @@ public class ControllerReservas {
                     produtos.add(controllerProdutos.pesquisarProdutoPorId(resultadoProdutosReserva.getInt("id_produto")));
                 }
 
+
                 // enquanto existirem registos, vou ler 1 a 1
                 Reserva aux = new Reserva(
                         resultado.getString("id"),
@@ -123,6 +125,16 @@ public class ControllerReservas {
                         produtos,
                         resultado.getDate("data_inicio").toLocalDate(),
                         resultado.getDate("data_fim") == null ? null :  resultado.getDate("data_fim").toLocalDate()); // a data pode ser nula então tem que fazer um if
+
+
+                ResultSet resultadoSatisfacaoReserva = basedados.Selecao("select * from reserva_satisfacao where id_reserva = " + resultado.getInt("id"));
+                while (resultadoSatisfacaoReserva.next()) {
+                    aux.setSatisfacao(
+                            new Satisfacao(String.valueOf(resultadoSatisfacaoReserva.getInt("nota")),
+                            resultadoSatisfacaoReserva.getString("mensagem"))
+                    );
+                }
+
                 reservas.add(aux);
             }
             basedados.Desligar();
@@ -142,6 +154,7 @@ public class ControllerReservas {
             for (Reserva aux : reservas) {
                 if (aux.getPendenteGravacao()) {
                     //apago a reserva
+                    basedados.Executar("DELETE FROM reserva_satisfacao where id_reserva = '" + aux.getIdDaReserva() +"'");
                     basedados.Executar("DELETE FROM reserva_produtos where id_reserva = '" + aux.getIdDaReserva() +"'");
                     basedados.Executar("DELETE FROM reserva where id = " + aux.getIdDaReserva());
 
@@ -154,6 +167,11 @@ public class ControllerReservas {
                     //insiro a reserva
                     basedados.Executar("INSERT INTO reserva (id, id_socio, data_inicio, data_fim) " +
                             " values ('" + aux.getIdDaReserva() + "', '" + aux.getSocio().getNumMecanografico() + "', '"+aux.getDataReserva().format(formatter)+"', "+devolucao+")");
+
+                    if(aux.getSatisfacao() != null) {
+                        basedados.Executar("INSERT INTO reserva_satisfacao (id_reserva, nota, mensagem) " +
+                                " values ('" + aux.getIdDaReserva() + "', '" + aux.getSatisfacao().getNota() + "', '" + aux.getSatisfacao().getObservacao() + "')");
+                    }
 
                     for (Produto produto: aux.getProdutos()){
                         basedados.Executar("INSERT INTO reserva_produtos (id_reserva, id_produto) " +
@@ -204,6 +222,8 @@ public class ControllerReservas {
             if (!reservaExiste) {
                 reservas.add(reservaAux);
                 gravarReservasParaBaseDados();
+                controllerProdutos.gravarBaseDadosProduto(produtoSelecionado, true);
+                controllerSocios.gravarSociosParaBaseDados(socioSelecionado, true);
             }
             return true;
         }
@@ -219,6 +239,12 @@ public class ControllerReservas {
         return null;
     }
 
+    public boolean adicionarSatisfacao(String nota, String observacao, String idReserva) {
+        Reserva reserva = pesquisarReservaPorId(idReserva);
+        reserva.setSatisfacao(new Satisfacao(nota, observacao));
+        return true;
+    }
+
     public boolean devolverReserva(String idDaReserva, LocalDate dataDeDevolucao) {
 
         Reserva reserva = pesquisarReservaPorId(idDaReserva);
@@ -227,12 +253,15 @@ public class ControllerReservas {
         reserva.setPendenteGravacao(true);
         for (Produto produto : reserva.getProdutos()) {
             produto.aumentarQuantidade();
+            controllerProdutos.gravarBaseDadosProduto(produto, true);
+            gravarReservasParaBaseDados();
         }
 
         if (reserva.getSocio() != null) {
             reserva.getSocio().resetQuantidade();
+            controllerSocios.gravarSociosParaBaseDados(reserva.getSocio(), true);
         }
-        gravarReservasParaBaseDados();
+
         return true;
     }
 
@@ -244,6 +273,7 @@ public class ControllerReservas {
                     produto.aumentarQuantidade();
                     reserva.getProdutos().remove(produto);
                     reserva.setPendenteGravacao(true);
+                    controllerProdutos.gravarBaseDadosProduto(produto, true);
                     gravarReservasParaBaseDados();
                     return true;
                 }
@@ -276,6 +306,7 @@ public class ControllerReservas {
                 eliminados.add(reserva.getIdDaReserva());
                 reservas.remove(reserva);
                 gravarReservasParaBaseDados();
+                controllerSocios.gravarSociosParaBaseDados(socio, true);
                 return true;
             }
         }

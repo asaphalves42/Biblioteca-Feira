@@ -1,14 +1,9 @@
 package Model;
 
 public class Bibliotecario extends Utilizador {
-    private boolean pendenteGravacao;
 
-    public boolean isPendenteGravacao() {
-        return pendenteGravacao;
-    }
-
-    public void setPendenteGravacao(boolean pendenteGravacao) {
-        this.pendenteGravacao = pendenteGravacao;
+    public Bibliotecario(String email, String password, int id, boolean pendente) {
+        super(email, password, id, pendente);
     }
 
     public Bibliotecario(String email, String password, int id) {

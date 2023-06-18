@@ -2,6 +2,7 @@ package View.Socios;
 
 
 import Controller.ControllerSocios;
+import View.Login.RegistarSocio;
 
 import java.util.InputMismatchException;
 
@@ -16,6 +17,7 @@ public class MenuViewSocios {
     ViewFuncaoRemoverSocios removerSocios = new ViewFuncaoRemoverSocios();
     ViewFuncaoPesquisarSocio pesquisarSocio = new ViewFuncaoPesquisarSocio();
 
+
     public void menuSocios() {
         int opcao;
 
@@ -27,8 +29,7 @@ public class MenuViewSocios {
             System.out.println("3 - Editar socios");
             System.out.println("4 - Remover socios");
             System.out.println("5 - Pesquisar socios");
-            System.out.println("6 - Gravar");
-            System.out.println("7 - Menu anterior");
+            System.out.println("6 - Menu anterior");
 
             try {
                 opcao = ler.nextInt();
@@ -39,26 +40,13 @@ public class MenuViewSocios {
             }
 
             switch (opcao) {
-                case 1:
-                    adSocio.adicionarSocios(gestorSocio);
-                    break;
-                case 2:
-                    listarSocio.listarTodosOsSocios(gestorSocio);
-                    break;
-                case 3:
-                    this.menuEditarSociosPorNumMecanografico();
-                    break;
-                case 4:
-                    removerSocios.removerSocioPorNumMecanografico((gestorSocio));
-                    break;
-                case 5:
-                    this.menuPesquisarSocios();
-                    break;
-                case 6:
-                    gestorSocio.gravarSociosParaBaseDados();
-                    break;
+                case 1 -> adSocio.adicionarSocios(gestorSocio);
+                case 2 -> listarSocio.listarTodosOsSocios(gestorSocio);
+                case 3 -> this.menuEditarSociosPorNumMecanografico();
+                case 4 -> removerSocios.removerSocioPorNumMecanografico((gestorSocio));
+                case 5 -> this.menuPesquisarSocios();
             }
-        } while (opcao != 7);
+        } while (opcao != 6);
     }
 
     public void menuPesquisarSocios() {
@@ -81,12 +69,8 @@ public class MenuViewSocios {
             }
 
             switch (opcao) {
-                case 1:
-                    pesquisarSocio.pesquisarSocioPorNumMecanografico(gestorSocio);
-                    break;
-                case 2:
-                    pesquisarSocio.pesquisarSocioPorNome(gestorSocio);
-                    break;
+                case 1 -> pesquisarSocio.pesquisarSocioPorNumMecanografico(gestorSocio);
+                case 2 -> pesquisarSocio.pesquisarSocioPorNome(gestorSocio);
             }
         } while (opcao != 3);
     }

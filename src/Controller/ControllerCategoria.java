@@ -15,7 +15,6 @@ import static Controller.ControllerProdutos.produtos;
 
 public class ControllerCategoria {
     public static ArrayList<Categoria> categorias = new ArrayList<>();
-    public static ArrayList<Integer> eliminados = new ArrayList<Integer>();
 
     public void lerFicheiroCategoria() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("categorias.txt");
@@ -62,30 +61,49 @@ public class ControllerCategoria {
         }
     }
 
-    public void gravarCategoriParaBaseDados(){
+    public void gravarCategoriaParaBaseDados(Categoria categoria, boolean atualizacao){
         try {
             BaseDados basedados = new BaseDados();
             basedados.Ligar();
-            //insere ou atualizar os registos
-            for (Categoria aux : categorias) {
-                if (aux.getPendenteGravacao()) {
-                    basedados.Executar("DELETE FROM categoria where id = " + aux.getId()); //deve ser alterado para o ID quando existir;
-                    basedados.Executar("INSERT INTO categoria (id, nome) values (" + aux.getId() + ", '" + aux.getNome() + "')");
-                }
+
+            String script = "";
+            if (atualizacao) {
+                script = "UPDATE categoria set nome = '@02', where id = @01";
+            }
+            else
+            {
+                script = "INSERT INTO categoria (id, nome)" +
+                        " VALUES (@01, '@02')";
             }
 
-            //eliminar registos que foram apagados
-            if (eliminados.size() > 0){
-                for (Integer aux : eliminados) {
-                    basedados.Executar("DELETE FROM categoria where id = '" + aux + "'");
-                }
-                eliminados.clear(); //apago o array porque já foi processado
+            script = script.replace("@01", String.valueOf(categoria.getId()));
+            script = script.replace("@02", categoria.getNome());
+
+            for (int i = 30; i > 0; i--) {
+                script = script.replace("'@"+String.format("%02d", i)+"'", "NULL");
+                script = script.replace("@"+String.format("%02d", i), "NULL");
             }
+
+            // executar o SCRIPT na base de dados
+            basedados.Executar(script);
+            basedados.Desligar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removerAutorBaseDados(int idCategoria){
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+
+            basedados.Executar("DELETE FROM categoria where id = '" +idCategoria + "'");
 
             basedados.Desligar();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
     }
 
 
@@ -101,7 +119,7 @@ public class ControllerCategoria {
         Categoria adicionarCategoria = new Categoria(0, nomeCategoria);
         adicionarCategoria.setPendenteGravacao(true);
         categorias.add(adicionarCategoria);
-        gravarCategoriParaBaseDados();
+        gravarCategoriaParaBaseDados(adicionarCategoria, false);
 
         return true;
     }
@@ -136,9 +154,8 @@ public class ControllerCategoria {
             }
 
             // Remove a categoria da lista de categorias
-            eliminados.add(categoriaEncontrada.getId());
             categorias.remove(categoriaEncontrada);
-            gravarCategoriParaBaseDados();
+            removerAutorBaseDados(idCategoria);
             return true;
         }
         return false; // A categoria não foi encontrada

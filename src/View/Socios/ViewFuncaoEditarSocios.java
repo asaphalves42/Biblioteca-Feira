@@ -106,7 +106,7 @@ public class ViewFuncaoEditarSocios {
                     Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
 
                     if (socio == null) {
-                        System.out.println("Não existem sócios com esse número");
+                        System.out.println("Não existem sócios com esse número!");
                         System.out.println(" ");
                     } else {
                         String novoNome = "";
@@ -141,7 +141,7 @@ public class ViewFuncaoEditarSocios {
     }
 
     public void editarMoradaSocioPorNumMecanografico(ControllerSocios gestor) {
-        int numMecanografico = leInt("Insira o número mecanográfico do sócio que pretende editar");
+        int numMecanografico = leInt("Insira o número mecanográfico do sócio que pretende editar:");
         Socio socio = gestor.pesquisarSocioPorNumMecanografico(numMecanografico);
         String novaMorada;
         if (socio == null) {
@@ -151,15 +151,15 @@ public class ViewFuncaoEditarSocios {
         } else {
             novaMorada = "";
             while (novaMorada.trim().equals("")) {
-                novaMorada = leStr("Insira a nova morada do sócio");
+                novaMorada = leStr("Insira a nova morada do sócio:");
             }
         }
         boolean editado = gestor.editarSocioPorMorada(numMecanografico, novaMorada);
         if (editado) {
-            System.out.println("Sócio editado com sucesso");
+            System.out.println("Sócio editado com sucesso!");
             System.out.println(" ");
         } else {
-            System.out.println("Sócio não editado");
+            System.out.println("Sócio não editado!");
             System.out.println(" ");
         }
     }

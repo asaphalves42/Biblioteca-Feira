@@ -111,3 +111,19 @@ GO
 ALTER TABLE [dbo].[reserva_produtos]  WITH CHECK ADD FOREIGN KEY([id_reserva])
 REFERENCES [dbo].[reserva] ([id])
 GO
+/****** Object:  Table [dbo].[tipo_produto]    Script Date: 17/06/2023 14:30:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tipo_produto](
+	[id] [int] NOT NULL,
+	[nome] [varchar](100) NULL,
+ CONSTRAINT [pk_tipo_produto] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO

@@ -1,7 +1,6 @@
 package Controller;
 
-import Model.Autor;
-import Model.Produto;
+import Model.*;
 import Utilidades.BaseDados;
 import Utilidades.GestorFicheiros;
 
@@ -16,7 +15,6 @@ import static Controller.ControllerProdutos.produtos;
 
 public class ControllerAutores {
     public static ArrayList<Autor> autores = new ArrayList<>();
-    public static ArrayList<Integer> eliminados = new ArrayList<Integer>();
 
     public void lerAutorDeFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("Autores.txt");
@@ -48,10 +46,6 @@ public class ControllerAutores {
         GestorFicheiros.gravarFicheiro("Autores.txt", conteudo);
     }
 
-
-    // lista com os identificadores dos registos eliminados. utilizado durante o processo de gravação
-
-
     public void lerAutorDeBaseDados() {
 
         try {
@@ -73,29 +67,46 @@ public class ControllerAutores {
         }
     }
 
-    public void gravarAutorParaBaseDados() {
-
+    public void gravarAutorParaBaseDados(Autor autor, boolean atualizacao) {
         try {
             BaseDados basedados = new BaseDados();
             basedados.Ligar();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-            //insere ou atualizar os registos
-            for (Autor aux : autores) {
-                if (aux.getPendenteGravacao()) {
-                    basedados.Executar("DELETE FROM autor where id = " + aux.getId());
-                    basedados.Executar("INSERT INTO autor (id, nome, morada, data_nascimento) " +
-                            " values ('" + aux.getId() + "', '" + aux.getNome() + "', '" + aux.getMorada() + "', '" + aux.getDataDeNascimento().format(formatter) + "')");
-                }
+            String script = "";
+            if (atualizacao) {
+                script = "UPDATE autor set nome = '@02', morada = '@03', data_nascimento = '@04' where id = @01";
+            }
+            else
+            {
+                script = "INSERT INTO autor (id, nome, morada, data_nascimento)" +
+                        " VALUES (@01, '@02', '@03', '@04')";
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");;
+
+            script = script.replace("@01", String.valueOf(autor.getId()));
+            script = script.replace("@02", autor.getNome());
+            script = script.replace("@03",  autor.getMorada());
+            script = script.replace("@04",  autor.getDataDeNascimento().format(formatter));
+
+            for (int i = 30; i > 0; i--) {
+                script = script.replace("'@"+String.format("%02d", i)+"'", "NULL");
+                script = script.replace("@"+String.format("%02d", i), "NULL");
             }
 
-            //eliminar registos que foram apagados
-            if (eliminados.size() > 0) {
-                for (Integer aux : eliminados) {
-                    basedados.Executar("DELETE FROM autor where id = " + aux);
-                }
-                eliminados.clear(); //apago o array porque já foi processado
-            }
+            // executar o SCRIPT na base de dados
+            basedados.Executar(script);
+            basedados.Desligar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removerAutorBaseDados(int idAutor){
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+
+            basedados.Executar("DELETE FROM autor where id = '" +idAutor + "'");
 
             basedados.Desligar();
         } catch (Exception e) {
@@ -103,13 +114,11 @@ public class ControllerAutores {
         }
     }
 
-
     public boolean adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
 
         Autor autor = new Autor(nome, morada, dataDeNascimento);
-        autor.setPendenteGravacao(true);
         autores.add(autor);
-        gravarAutorParaBaseDados();
+        gravarAutorParaBaseDados(autor, false);
 
         return true;
     }
@@ -127,8 +136,7 @@ public class ControllerAutores {
                 autor.setNome(nome);
                 autor.setMorada(morada);
                 autor.setDataDeNascimento(dataDeNascimento);
-                autor.setPendenteGravacao(true);
-                gravarAutorParaBaseDados();
+                gravarAutorParaBaseDados(autor, true);
                 return true;
             }
         }
@@ -199,9 +207,8 @@ public class ControllerAutores {
                 }
             }
             if (index != -1) {
-                eliminados.add(idAutor);
                 autores.remove(index);
-                gravarAutorParaBaseDados();
+                removerAutorBaseDados(idAutor);
                 return true;
             } else {
                 // O autor não foi encontrado na lista de autores
@@ -211,9 +218,6 @@ public class ControllerAutores {
 
         }
     }
-
-
-
 }
 
 

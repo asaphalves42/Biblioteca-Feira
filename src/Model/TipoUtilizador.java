@@ -1,8 +1,8 @@
 package Model;
 
 public enum TipoUtilizador {
-    Bibliotecario(1),
-    Administrador(2),
+    Bibliotecario(2),
+    Administrador(1),
 
     Socio(3),
     Default(0);

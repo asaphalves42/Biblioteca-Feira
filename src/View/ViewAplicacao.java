@@ -11,7 +11,6 @@ import View.Consultas.ViewConsultarJornal;
 import View.Funcionario.MenuViewRegistarFuncionario;
 import View.Jornal.MenuViewJornais;
 import View.Livros.MenuViewLivros;
-import View.Login.RegistarSocio;
 import View.Login.ViewLogin;
 import View.Reservas.MenuViewReservas;
 import View.Revista.MenuViewRevistas;
@@ -87,8 +86,7 @@ public class ViewAplicacao {
             System.out.println("------------------------");
 
             System.out.println("1 - Login");
-            System.out.println("2 - Registrar-se");
-            System.out.println("3 - Sair ");
+            System.out.println("2 - Sair ");
 
             try {
 
@@ -109,12 +107,7 @@ public class ViewAplicacao {
                             System.out.println("Erro ao realizar login!\n");
                         }
                     }
-                    case 2 -> { RegistarSocio registar = new RegistarSocio();
-                        registar.registarSocio(lerUtilizadorDaBaseDados);
-
-
-                    }
-                    case 3 -> System.exit(0);
+                    case 2 -> System.exit(0);
                     default -> System.out.println("Por favor, insira uma opção válida.");
                 }
             } catch (InputMismatchException e) {
@@ -124,7 +117,7 @@ public class ViewAplicacao {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-        } while (opcao != 4);
+        } while (opcao != 3);
     }
 
     public void menuSocio() {
@@ -173,7 +166,6 @@ public class ViewAplicacao {
 
             System.out.println("1 - Jornal");
             System.out.println("2 - Revistas");
-            System.out.println("3 - Artigos científicos ");
             System.out.println("4 - Sair ");
 
             try {
@@ -188,10 +180,7 @@ public class ViewAplicacao {
                     case 2:
                         //consultar revistas
                         break;
-                    case 3: //consultar artigos científicos
-
-                        break;
-                    case 4:System.exit(0);
+                    case 3:System.exit(0);
                         break;
                     default:
                         System.out.println("Por favor, insira uma opção válida.");
@@ -202,7 +191,7 @@ public class ViewAplicacao {
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 5);
+        } while (opcao != 4);
     }
 
 
@@ -223,8 +212,7 @@ public class ViewAplicacao {
                 System.out.println("7 - Reservas");
                 System.out.println("8 - Sócios");
                 System.out.println("9 - Registar funcionários");
-                System.out.println("10 - Fechar e gravar");
-                System.out.println("11 - Sair");
+                System.out.println("10 - Sair");
 
                 opcao = ler.nextInt();
 
@@ -267,11 +255,6 @@ public class ViewAplicacao {
                     }
 
                     case 10 -> {
-                        lerEgravarProdutos.gravarBaseDadosProdutos();
-                        lerEgravarAutores.gravarAutorParaBaseDados();
-                        lerEgravarSocios.gravarSociosParaBaseDados();
-                        lerEgravarCategoria.gravarCategoriParaBaseDados();
-                        lerEGravarReservas.gravarReservasParaBaseDados();
                         System.exit(0);
                     }
 
@@ -302,8 +285,7 @@ public class ViewAplicacao {
                 System.out.println("6 - Autores");
                 System.out.println("7 - Reservas");
                 System.out.println("8 - Sócios");
-                System.out.println("9 - Fechar e gravar");
-                System.out.println("10 - Sair");
+                System.out.println("9 - Sair");
 
                 opcao = ler.nextInt();
 
@@ -341,11 +323,6 @@ public class ViewAplicacao {
                         menuSocios.menuSocios();
                     }
                     case 9 -> {
-                        lerEgravarProdutos.gravarBaseDadosProdutos();
-                        lerEgravarAutores.gravarAutorParaBaseDados();
-                        lerEgravarSocios.gravarSociosParaBaseDados();
-                        lerEgravarCategoria.gravarCategoriParaBaseDados();
-                        lerEGravarReservas.gravarReservasParaBaseDados();
                         System.exit(0);
                     }
 

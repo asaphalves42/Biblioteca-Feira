@@ -41,8 +41,7 @@ public class MenuViewReservas {
                 System.out.println("4 - Cancelar reservas");
                 System.out.println("5 - Editar reserva");
                 System.out.println("6 - Pesquisar reserva");
-                System.out.println("7 - Gravar");
-                System.out.println("8 - Menu anterior");
+                System.out.println("7 - Menu anterior");
 
                 opcao = ler.nextInt();
 
@@ -53,14 +52,14 @@ public class MenuViewReservas {
                     case 4 -> cancelar.cancelarReserva(gerirReservas);
                     case 5 -> editar.editarReserva(gerirReservas, gerirProdutos, gerirSocios);
                     case 6 -> pesquisar.pesquisarReservaPorId(gerirReservas);
-                    case 7 -> gerirReservas.gravarReservasParaBaseDados();
+
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 8);
+        } while (opcao != 7);
     }
 
     public void menuReservas2() {

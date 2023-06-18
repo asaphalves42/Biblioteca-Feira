@@ -22,8 +22,7 @@ public class MenuViewCategoria {
                 System.out.println("1 - Adicionar");
                 System.out.println("2 - Remover");
                 System.out.println("3 - Listar");
-                System.out.println("4 - Gravar");
-                System.out.println("5 - Menu anterior");
+                System.out.println("4 - Menu anterior");
 
 
                 opcao = ler.nextInt();
@@ -33,13 +32,12 @@ public class MenuViewCategoria {
                     case 1 -> adicionarCategoria.adicionarCategoria(gestorCategoria);
                     case 2 -> removerCategoria.removerCategoria(gestorCategoria);
                     case 3 -> listar.listarCategorias(gestorCategoria);
-                    case 4 -> gestorCategoria.gravarCategoriParaBaseDados();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 5);
+        } while (opcao != 4);
     }
 }

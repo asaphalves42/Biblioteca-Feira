@@ -22,7 +22,6 @@ public class ControllerProdutos {
     }
 
     public static ArrayList<Produto> produtos = new ArrayList<>();
-    public static ArrayList<Integer> eliminados = new ArrayList<Integer>();
 
     public void lerProdutosDeFicheiro() {
         ArrayList<String> linhasProduto = GestorFicheiros.LerFicheiro("produtos.txt");
@@ -143,10 +142,10 @@ public class ControllerProdutos {
             ResultSet resultado = basedados.Selecao("select * from produto");
 
             while (resultado.next()) {
-                Produto aux;
+                Produto aux=null;
 
                 // enquanto existirem registos, vou ler 1 a 1
-                if (resultado.getString("tipo").equalsIgnoreCase(TipoProduto.CD.toString())) {
+                if (resultado.getString("id_tipo").equalsIgnoreCase("1")) {
                     aux = new CD(
                             resultado.getInt("id"),
                             resultado.getString("titulo"),
@@ -158,8 +157,7 @@ public class ControllerProdutos {
                             resultado.getString("editora"),
                             resultado.getInt("capitulos")
                     );
-                    produtos.add(aux);
-                } else if (resultado.getString("tipo").equalsIgnoreCase(TipoProduto.Livro.toString())) {
+                } else if (resultado.getString("id_tipo").equalsIgnoreCase("2")) {
                     aux = new Livro(
                             resultado.getInt("id"),
                             resultado.getString("titulo"),
@@ -173,9 +171,38 @@ public class ControllerProdutos {
                             resultado.getString("isbn"),
                             resultado.getInt("paginas")
                     );
-                    produtos.add(aux);
+                } else if (resultado.getString("id_tipo").equalsIgnoreCase("3")) {
+                    aux = new Jornal(
+                            resultado.getInt("id"),
+                            resultado.getString("titulo"),
+                            resultado.getString("subtitulo"),
+                            resultado.getInt("quantidade"),
+                            resultado.getInt("paginas"),
+                            resultado.getDate("data_publicacao").toLocalDate(),
+                            resultado.getString("editora")
+                    );
+                } else if (resultado.getString("id_tipo").equalsIgnoreCase("4")) {
+                    aux = new Revista(
+                            resultado.getInt("id"),
+                            resultado.getString("titulo"),
+                            resultado.getString("subtitulo"),
+                            resultado.getInt("quantidade"),
+                            resultado.getInt("paginas"),
+                            resultado.getDate("data_publicacao").toLocalDate(),
+                            resultado.getString("editora")
+                    );
+                } else if (resultado.getString("id_tipo").equalsIgnoreCase("5")) {
+                    /*aux = new Revista(
+                            resultado.getInt("id"),
+                            resultado.getString("titulo"),
+                            resultado.getString("subtitulo"),
+                            resultado.getInt("quantidade"),
+                            resultado.getInt("paginas"),
+                            resultado.getDate("data_publicacao").toLocalDate(),
+                            resultado.getString("editora")
+                    );*/
                 }
-
+                produtos.add(aux);
             }
             basedados.Desligar();
         } catch (SQLException e) {
@@ -183,46 +210,82 @@ public class ControllerProdutos {
         }
     }
 
-    public void gravarBaseDadosProdutos(){
+    public void gravarBaseDadosProduto(Produto produto, boolean atualizacao){
         try {
             BaseDados basedados = new BaseDados();
             basedados.Ligar();
-            //insere ou atualizar os registos
-            for (Produto aux : produtos) {
-                if (aux.getPendenteGravacao()) {
-                    basedados.Executar("DELETE FROM produto where id = " + aux.getId());
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");;
-                    //campos comuns
-                    String campos = "id, tipo, titulo, quantidade, id_autor, id_categoria, data_publicacao, faixa_etaria, editora,";
-                    String valores = aux.getId() + ",  '" + aux.getTipo().toString() + "', '" + aux.getTitulo() + "', " + aux.getQuantidade() + ", " + aux.getAutor().getId() + "," + aux.getCategoria().getId() + ", " +
-                            "'" + aux.getDataDePublicacao().format(formatter) + "', '" + aux.getFaixaEtaria() + "', '" + aux.getEditora() + "',";
 
-                    // campos especificos
-                    if (aux.getTipo() == TipoProduto.CD){
-                        CD aux1 = (CD)aux;
-                        campos +=  "capitulos";
-                        valores +=  aux1.getNumCapitulos();
-                    } else if (aux.getTipo() == TipoProduto.Livro) {
-                        Livro aux1 = (Livro)aux;
-                        campos += "subtitulo, isbn, paginas";
-                        valores +=  "'" + aux1.getSubtitulo() + "', '" + aux1.getISBN() + "', " + aux1.getNumDePaginas();
-                    }
+            String script = "";
+            if (atualizacao) {
+                script = "UPDATE produto set titulo = '@02', quantidade = @03, id_autor = @04, id_categoria = @05, data_publicacao = '@06', faixa_etaria = '@07', editora = '@08', " +
+                        " subtitulo = '@09', isbn = '@10', paginas = '@11' , capitulos = @12, id_tipo = @13 where id = @01";
+            }
+            else
+            {
+                script = "INSERT INTO produto (id, titulo, quantidade, id_autor, id_categoria, data_publicacao, faixa_etaria, editora, subtitulo, isbn, paginas, capitulos, id_tipo)" +
+                        " VALUES (@01, '@02', @03, @04, @05, '@06', '@07', '@08', '@09', '@10', '@11', @12, @13)";
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");;
 
-                    // executar o SCRIPT na base de dados
-                    basedados.Executar("INSERT INTO produto " +
-                            "(" + campos + ")" +
-                            " values " +
-                            "(" + valores +")");
-                }
+            if (produto.getAutor() == null) {
+                script = script.replace("@04", "NULL");
+            } else {
+                script = script.replace("@04", String.valueOf(produto.getAutor().getId()));
             }
 
-            //eliminar registos que foram apagados
-            if (eliminados.size() > 0){
-                for (Integer aux : eliminados) {
-                    basedados.Executar("DELETE FROM produto where id = '" + aux + "'");
-                }
-                eliminados.clear(); //apago o array porque já foi processado
+            if(produto.getCategoria() == null) {
+                script = script.replace("@05", "NULL");
+            } else {
+                script = script.replace("@05", String.valueOf(produto.getCategoria().getId()));
             }
+
+            script = script.replace("@01", String.valueOf(produto.getId()));
+            script = script.replace("@02", produto.getTitulo());
+            script = script.replace("@03", String.valueOf(produto.getQuantidade()));
+            script = script.replace("@04", String.valueOf(produto.getAutor().getId()));
+            script = script.replace("@05", String.valueOf(produto.getCategoria().getId()));
+            script = script.replace("@06", produto.getDataDePublicacao().format(formatter));
+            script = script.replace("@07", produto.getFaixaEtaria());
+            script = script.replace("@08", produto.getEditora());
+            script = script.replace("@13", String.valueOf(produto.getTipo().getValue()));
+
+            // campos especificos
+            if (produto.getTipo() == TipoProduto.CD){
+                CD aux1 = (CD)produto;
+                script = script.replace("@12",  String.valueOf(aux1.getNumCapitulos()));
+            } else if (produto.getTipo() == TipoProduto.Livro) {
+                Livro aux1 = (Livro)produto;
+                script = script.replace("@09",  aux1.getSubtitulo());
+                script = script.replace("@10",  aux1.getISBN());
+                script = script.replace("@11",  String.valueOf(aux1.getNumDePaginas()));
+            } else if (produto.getTipo() == TipoProduto.Jornal) {
+                Jornal aux1 = (Jornal)produto;
+                script = script.replace("@09",  aux1.getSubtitulo());
+                script = script.replace("@11",  String.valueOf(aux1.getNumeroPaginas()));
+            } else if (produto.getTipo() == TipoProduto.Revista) {
+                Revista aux1 = (Revista) produto;
+                script = script.replace("@09",  aux1.getSubtitulo());
+                script = script.replace("@11",  String.valueOf(aux1.getNumeroPaginas()));
+            }
+            for (int i = 30; i > 0; i--) {
+                script = script.replace("'@"+String.format("%02d", i)+"'", "NULL");
+                script = script.replace("@"+String.format("%02d", i), "NULL");
+            }
+
+            // executar o SCRIPT na base de dados
+            basedados.Executar(script);
+            basedados.Desligar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removerBaseDadosProduto(int idProduto){
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+
+            basedados.Executar("DELETE FROM produto where id = '" +idProduto + "'");
 
             basedados.Desligar();
         } catch (Exception e) {
@@ -231,11 +294,7 @@ public class ControllerProdutos {
     }
 
     /*
-
-
     Funções de listagem
-
-
      */
 
     public ArrayList<Livro> listarProdutosLivros() {
@@ -372,33 +431,29 @@ public class ControllerProdutos {
     public boolean adicionarLivros(String titulo, String subtitulo, int quantidade, int numDePaginas, Autor
             autorAdicionado, Categoria categorias, LocalDate dataDePublicacao, String faixaEtaria, String editora, String ISBN) {
         Produto livro = new Livro(0, titulo, quantidade, autorAdicionado, categorias, dataDePublicacao, faixaEtaria, editora, subtitulo, ISBN, numDePaginas);
-        livro.setPendenteGravacao(true);
         produtos.add(livro);
-        gravarBaseDadosProdutos();
+        gravarBaseDadosProduto(livro, false);
         return true;
     }
 
     public boolean adicionarCDS(String titulo, int quantidade, int numCapitulos, Autor autorAdicionado, Categoria categoriaEncontrada, LocalDate dataDePublicacao, String faixaEtaria, String editora) {
         Produto CD = new CD(0, titulo, quantidade, autorAdicionado, categoriaEncontrada, dataDePublicacao, faixaEtaria, editora, numCapitulos);
-        CD.setPendenteGravacao(true);
         produtos.add(CD);
-        gravarBaseDadosProdutos();
+        gravarBaseDadosProduto(CD, false);
         return true;
     }
 
     public boolean adicionarJornais(String titulo, String subtitulo, int quantidade, int numeroPaginas, LocalDate dataPublicacao, String editora) {
         Produto jornal = new Jornal(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora);
-        //jornal.setPedenteGravacao(true);
         produtos.add(jornal);
-        gravarBaseDadosProdutos();
+        gravarBaseDadosProduto(jornal, false);
         return true;
     }
 
     public boolean adicionarRevistas(String titulo, String subtitulo, int quantidade, int numeroPaginas, LocalDate dataPublicacao, String editora) {
         Produto revista = new Revista(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora);
-        //revista.setPedenteGravacao(true);
         produtos.add(revista);
-        gravarBaseDadosProdutos();
+        gravarBaseDadosProduto(revista,false);
         return true;
     }
 
@@ -420,9 +475,7 @@ public class ControllerProdutos {
             // Remover o produto da lista de produtos
 
             produtos.removeIf(produto -> idProdutoRemover == produto.getId());
-            eliminados.add(idProdutoRemover);
-            gravarBaseDadosProdutos();
-
+            removerBaseDadosProduto(idProdutoRemover);
         }
 
         return encontrou;
@@ -433,7 +486,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idProdutoEditar == produto.getId()) {
                 produto.setTitulo(tituloNovo);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -444,7 +497,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idEditarQuantidade == produto.getId()) {
                 produto.setQuantidade(novaQuantidade);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -465,7 +518,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idEditarProduto == produto.getId()) {
                 produto.setAutor(autorEncontrado);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
 
             }
@@ -481,7 +534,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idEditarProduto == produto.getId()) {
                 produto.setCategoria(categoriaEncontrada);
-                produto.setPendenteGravacao(true);
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -496,8 +549,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idEditarProduto == produto.getId()) {
                 produto.setCategoria(this.controllerCategorias.pesquisarCategoriaPorId(idNovaCategoria));
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -509,8 +561,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idEditarProduto == produto.getId()) {
                 produto.setDataDePublicacao(novaData);
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -522,8 +573,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idEditarProduto == produto.getId()) {
                 produto.setEditora(novaEditora);
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -534,8 +584,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (idEditarProduto == produto.getId()) {
                 produto.setFaixaEtaria(novaFaixaEtaria);
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -548,8 +597,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Livro && idEditarProduto == produto.getId()) {
                 ((Livro) produto).setNumDePaginas(numPaginas);
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -560,8 +608,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.CD && idEditarProduto == produto.getId()) {
                 ((CD) produto).setNumCapitulos(numFaixas);
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -572,8 +619,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Livro && idEditarProduto == produto.getId()) {
                 ((Livro) produto).setSubtitulo(subTituloNovo);
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -608,8 +654,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Jornal && idEditarProduto == produto.getId()) {
                 ((Jornal) produto).setNumeroPaginas(numPaginas);
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -619,8 +664,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Jornal && idEditarProduto == produto.getId()) {
                 ((Jornal) produto).setSubtitulo(subTituloNovo);
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -631,8 +675,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Revista && idEditarProduto == produto.getId()) {
                 ((Revista) produto).setNumeroPaginas(numPaginas);
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }
@@ -654,8 +697,7 @@ public class ControllerProdutos {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Revista && idEditarProduto == produto.getId()) {
                 ((Revista) produto).setSubtitulo(subTituloNovo);
-                produto.setPendenteGravacao(true);
-                gravarBaseDadosProdutos();
+                gravarBaseDadosProduto(produto, true);
                 return true;
             }
         }

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class ControllerSocios {
     public static ArrayList<Socio> socios = new ArrayList<>();
-    public static ArrayList<Integer> eliminados = new ArrayList<Integer>();
 
     public void lerSociosDoFicheiro() {
         ArrayList<String> linhas = GestorFicheiros.LerFicheiro("socios.txt");
@@ -70,28 +69,48 @@ public class ControllerSocios {
         }
     }
 
-    public void gravarSociosParaBaseDados(){
+
+    public void gravarSociosParaBaseDados(Socio socio, boolean atualizacao){
         try {
             BaseDados basedados = new BaseDados();
             basedados.Ligar();
-            //insere ou atualizar os registos
+
+            String script = "";
+            if (atualizacao) {
+                script = "UPDATE socio set nome = '@02', morada = '@03', data_nascimento = '@04', telefone = @05 where id = @01";
+            }
+            else
+            {
+                script = "INSERT INTO socio (id, nome, morada, data_nascimento, telefone)" +
+                        " VALUES (@01, '@02', '@03', '@04', @05)";
+            }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");;
-            for (Socio aux : socios) {
-                if (aux.getPendenteGravacao()) {
-                    basedados.Executar("DELETE FROM socio where id = " + aux.getNumMecanografico());
-                    basedados.Executar("INSERT INTO socio " +
-                            "(id, nome, morada, data_nascimento, telefone) values " +
-                            "(" + aux.getNumMecanografico() + ", '" + aux.getNome() + "', '" + aux.getMorada() + "', '" + aux.getDataDeNascimento().format(formatter) + "', '" + aux.getTelefone() + "' )");
-                }
+
+            script = script.replace("@01", String.valueOf(socio.getNumMecanografico()));
+            script = script.replace("@02", socio.getNome());
+            script = script.replace("@03",  socio.getMorada());
+            script = script.replace("@04",  socio.getDataDeNascimento().format(formatter));
+            script = script.replace("@05",  String.valueOf(socio.getTelefone()));
+
+            for (int i = 30; i > 0; i--) {
+                script = script.replace("'@"+String.format("%02d", i)+"'", "NULL");
+                script = script.replace("@"+String.format("%02d", i), "NULL");
             }
 
-            //eliminar registos que foram apagados
-            if (eliminados.size() > 0){
-                for (Integer aux : eliminados) {
-                    basedados.Executar("DELETE FROM socio where id = '" + aux + "'");
-                }
-                eliminados.clear(); //apago o array porque já foi processado
-            }
+            // executar o SCRIPT na base de dados
+            basedados.Executar(script);
+            basedados.Desligar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removerSocioBaseDados(int idSocio){
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+
+            basedados.Executar("DELETE FROM socio where id = '" +idSocio + "'");
 
             basedados.Desligar();
         } catch (Exception e) {
@@ -103,9 +122,8 @@ public class ControllerSocios {
     public boolean adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
 
         Socio socio = new Socio(nome, morada, dataDeNascimento, telefone);
-        socio.setPendenteGravacao(true);
         socios.add(socio);
-        gravarSociosParaBaseDados();
+        gravarSociosParaBaseDados(socio, false);
         return true;
     }
 
@@ -121,8 +139,7 @@ public class ControllerSocios {
                 socio.setMorada(morada);
                 socio.setDataDeNascimento(dataDeNascimento);
                 socio.setTelefone(telefone);
-                socio.setPendenteGravacao(true);
-                gravarSociosParaBaseDados();
+                gravarSociosParaBaseDados(socio, true);
                 return true;
             }
         }
@@ -133,8 +150,7 @@ public class ControllerSocios {
         for (Socio socio : socios) {
             if (numMecanografico == (socio.getNumMecanografico())) {
                 socio.setNome(nome);
-                socio.setPendenteGravacao(true);
-                gravarSociosParaBaseDados();
+                gravarSociosParaBaseDados(socio, true);
                 return true;
             }
         }
@@ -145,8 +161,7 @@ public class ControllerSocios {
         for (Socio socio : socios) {
             if (numMecanografico==(socio.getNumMecanografico())) {
                 socio.setMorada(novaMorada);
-                socio.setPendenteGravacao(true);
-                gravarSociosParaBaseDados();
+                gravarSociosParaBaseDados(socio, true);
                 return true;
             }
         }
@@ -157,8 +172,7 @@ public class ControllerSocios {
         for (Socio socio : socios) {
             if (numMecanografico==(socio.getNumMecanografico())) {
                 socio.setDataDeNascimento(novaDataDeNascimento);
-                socio.setPendenteGravacao(true);
-                gravarSociosParaBaseDados();
+                gravarSociosParaBaseDados(socio, true);
                 return true;
             }
         }
@@ -169,8 +183,7 @@ public class ControllerSocios {
         for (Socio socio : socios) {
             if (numMecanografico == (socio.getNumMecanografico())) {
                 socio.setTelefone(novaTelefone);
-                socio.setPendenteGravacao(true);
-                gravarSociosParaBaseDados();
+                gravarSociosParaBaseDados(socio, true);
                 return true;
             }
         }
@@ -211,9 +224,8 @@ public class ControllerSocios {
             // percorrer os sócios para encontrar o sócio a ser removido
             //função sugerida pelo intelij que usa a função lambda "removeIf" para remover os sócios que não possuem reservas
             //expressão lambda "removeIf"
-            eliminados.add(numMecanografico);
             socios.removeIf(socio -> numMecanografico == (socio.getNumMecanografico()));
-            gravarSociosParaBaseDados();
+            removerSocioBaseDados(numMecanografico);
         }
         return encontrouReserva;
     }

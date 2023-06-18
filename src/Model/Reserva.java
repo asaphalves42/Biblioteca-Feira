@@ -7,6 +7,9 @@ import java.util.Random;
 public class Reserva {
     private Socio socio;
     private ArrayList<Produto> produtos = new ArrayList<>();
+
+    private Satisfacao satisfacao;
+
     private LocalDate dataReserva;
     private final String idDaReserva;
 
@@ -96,6 +99,14 @@ public class Reserva {
             return nomes;
         }
         return "";
+    }
+
+    public void setSatisfacao(Satisfacao satisfacao) {
+        this.satisfacao = satisfacao;
+    }
+
+    public Satisfacao getSatisfacao() {
+        return satisfacao;
     }
 
     public boolean getPendenteGravacao() { return pendenteGravacao; }

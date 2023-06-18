@@ -32,8 +32,7 @@ public class MenuViewJornais {
                 System.out.println("3 - Editar jornais");
                 System.out.println("4 - Remover jornais");
                 System.out.println("5 - Pesquisar jornais");
-                System.out.println("6 - Gravar");
-                System.out.println("7 - Menu anterior");
+                System.out.println("6 - Menu anterior");
 
                 opcao = ler.nextInt();
                 ler.nextLine();
@@ -53,15 +52,13 @@ public class MenuViewJornais {
                         break;
                     case 5:
                         pesquisarJornal();
-                    case 6:
-                        gestor.gravarBaseDadosProdutos();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 7);
+        } while (opcao != 6);
     }
 
     public void pesquisarJornal() {

@@ -66,8 +66,7 @@ public class MenuViewLivros {
                 System.out.println("3 - Editar livros");
                 System.out.println("4 - Remover livros");
                 System.out.println("5 - Pesquisar livros");
-                System.out.println("6 - Gravar");
-                System.out.println("7 - Menu anterior");
+                System.out.println("6 - Menu anterior");
 
                 opcao = ler.nextInt();
                 ler.nextLine();
@@ -78,14 +77,13 @@ public class MenuViewLivros {
                     case 3 -> this.menuLivros3();
                     case 4 -> eliminar.eliminarLivroPorTitulo(gestor);
                     case 5 -> this.menuLivros2();
-                    case 6 -> gestor.gravarBaseDadosProdutos();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 7);
+        } while (opcao != 6);
     }
 
     public void menuLivros3() {
@@ -106,8 +104,7 @@ public class MenuViewLivros {
                 System.out.println("7 - Data de publicacao");
                 System.out.println("8 - Faixa etaria");
                 System.out.println("9 - Editora");
-                System.out.println("10 - Gravar");
-                System.out.println("11 - Menu anterior");
+                System.out.println("10 - Menu anterior");
 
                 opcao = ler.nextInt();
                 ler.nextLine();
@@ -122,13 +119,12 @@ public class MenuViewLivros {
                     case 7 -> editar.editarPorData(gestor);
                     case 8 -> editar.editarFaixaEtaria(gestor);
                     case 9 -> editar.editarEditora(gestor);
-                    case 10 -> gestor.gravarBaseDadosProdutos();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 11);
+        } while (opcao != 10);
     }
 }

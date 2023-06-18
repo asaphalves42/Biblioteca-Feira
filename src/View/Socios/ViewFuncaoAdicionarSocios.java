@@ -1,13 +1,18 @@
 package View.Socios;
 
+import Controller.ControllerLogin;
 import Controller.ControllerSocios;
 import Utilidades.ValidacaoData;
+import View.Login.RegistarSocio;
 
 import java.time.LocalDate;
 
-import static Utilidades.Leitura.*;
+import static Utilidades.Leitura.leInt;
+import static Utilidades.Leitura.leStr;
 
 public class ViewFuncaoAdicionarSocios {
+    RegistarSocio registarSocio = new RegistarSocio();
+    public ControllerLogin gestorLogin = new ControllerLogin();
 
     public void adicionarSocios(ControllerSocios gestorSocio) {
         boolean sair = false;
@@ -62,17 +67,25 @@ public class ViewFuncaoAdicionarSocios {
                     }
                 }
 
-                boolean adicionado = gestorSocio.adicionarSocio(nome, morada, dataDeNascimento, telefone);
+                boolean registado = registarSocio.registarSocio(gestorLogin);
 
-                if (adicionado) {
-                    System.out.println("Sócio " + nome + " adicionado com sucesso!");
-                    System.out.println(" ");
-                } else {
-                    System.out.println("Ocorreu um erro ao adicionar o sócio!\n");
+                if (registado) {
+                    boolean adicionado = gestorSocio.adicionarSocio(nome, morada, dataDeNascimento, telefone);
+
+                    if (adicionado) {
+                        System.out.println("Sócio " + nome + " adicionado com sucesso!");
+                        System.out.println(" ");
+                    } else {
+                        System.out.println("Ocorreu um erro ao adicionar o sócio!\n");
+                    }
                 }
-            } catch (Exception e) {
+                }catch (Exception e) {
                 System.out.println("Ocorreu um erro ao adicionar o sócio: " + e.getMessage());
-            }
+
+
+                }
+
+
 
         } while (!sair);
     }

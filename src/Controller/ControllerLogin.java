@@ -6,14 +6,12 @@ import Utilidades.BaseDados;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Controller.*;
 
 
 public class ControllerLogin {
-    //ControllerEmail controlleremail = new ControllerEmail(Email email);
+
     public static ArrayList<Utilizador> utilizadores = new ArrayList<>();
-    public static ArrayList<Integer> eliminados = new ArrayList<Integer>();
-ControllerEmail controlleremail= new ControllerEmail();
+
     public void lerUtilizadoresDaBaseDeDados() {
         try {
             BaseDados basedados = new BaseDados();
@@ -41,15 +39,17 @@ ControllerEmail controlleremail= new ControllerEmail();
                             resultado.getString("senha"),
                             resultado.getInt("id_utilizador")
                     );
+
                     utilizadores.add(aux);
                 } else if (idRole == 3) {
+
                     aux = new SocioUtilizador(
                             resultado.getString("username"),
                             resultado.getString("senha"),
                             resultado.getInt("id_utilizador")
 
                     );
-
+                    utilizadores.add(aux);
                 }
             }
             basedados.Desligar();
@@ -71,13 +71,6 @@ ControllerEmail controlleremail= new ControllerEmail();
                 }
             }
 
-            // Eliminar registros que foram apagados
-            if (!eliminados.isEmpty()) {
-                for (Integer aux : eliminados) {
-                    basedados.Executar("DELETE FROM Utilizador WHERE id = " + aux);
-                }
-                eliminados.clear(); // Apago o array porque já foi processado
-            }
 
             basedados.Desligar();
         } catch (Exception e) {
@@ -85,6 +78,42 @@ ControllerEmail controlleremail= new ControllerEmail();
         }
     }
 
+    public void gravarUtilizadorParaBaseDadosTESTE(Utilizador util, boolean atualizacao) {
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+
+            String script = "";
+            if (atualizacao) {
+                script = "UPDATE Utilizador SET username = '@01', senha = '@02', id_role = @03";
+            } else {
+                script = "INSERT INTO Utilizador (username, senha, id_role) " +
+                        "VALUES ('@01', '@02', @03)";
+            }
+
+            script = script.replace("@01", util.getEmail());
+            script = script.replace("@02", util.getPassword());
+
+            if (util instanceof Bibliotecario) {
+                script = script.replace("@03", String.valueOf(TipoUtilizador.Bibliotecario.getValue()));
+            } else if (util instanceof SocioUtilizador) {
+                script = script.replace("@03", String.valueOf(TipoUtilizador.Socio.getValue()));
+            } else if (util instanceof Administrador) {
+                script = script.replace("@03", String.valueOf(TipoUtilizador.Administrador.getValue()));
+            }
+
+            for (int i = 30; i > 0; i--) {
+                script = script.replace("'@" + String.format("%02d", i) + "'", "NULL");
+                script = script.replace("@" + String.format("%02d", i), "NULL");
+            }
+
+            // Executar o script na base de dados
+            basedados.Executar(script);
+            basedados.Desligar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     public TipoUtilizador verificarLogin(String email, String password) throws SQLException {
@@ -108,20 +137,17 @@ ControllerEmail controlleremail= new ControllerEmail();
     }
 
     public boolean adicionarFuncionario(String username, String password){
-        Bibliotecario adicionarUtil = new Bibliotecario(username, password,0);
-        adicionarUtil.setPendenteGravacao(true);
+        Utilizador adicionarUtil = new Bibliotecario(username, password,0, true);
         utilizadores.add(adicionarUtil);
+        gravarUtilizadorParaBaseDadosTESTE(adicionarUtil, false);
 
         return true;
     }
 
     public boolean adicionarSocio(String username,String password ){
-        SocioUtilizador adicionarSocio = new SocioUtilizador(username,password, 0, true);
-
+        Utilizador adicionarSocio = new SocioUtilizador(username,password, 0, true);
         utilizadores.add(adicionarSocio);
-        gravarUtilizadorParaBaseDados();
-
-
+        gravarUtilizadorParaBaseDadosTESTE(adicionarSocio,false);
 
         return true;
     }

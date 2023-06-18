@@ -28,8 +28,7 @@ public class MenuViewAutores {
                 System.out.println("3 - Pesquisar autor");
                 System.out.println("4 - Editar autores");
                 System.out.println("5 - Remover autores");
-                System.out.println("6 - Gravar");
-                System.out.println("7 - Menu anterior");
+                System.out.println("6 - Menu anterior");
 
                 opcao = ler.nextInt();
 
@@ -39,14 +38,13 @@ public class MenuViewAutores {
                     case 3 -> menuPesquisarAutores();
                     case 4 -> editar.editarAutor(gestor);
                     case 5 -> remover.removerAutorPorNome(gestor);
-                    case 6 -> gestor.gravarAutorParaBaseDados();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 7);
+        } while (opcao != 6);
     }
 
     public void menuPesquisarAutores() {

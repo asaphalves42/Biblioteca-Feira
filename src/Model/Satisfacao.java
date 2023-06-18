@@ -3,12 +3,10 @@ package Model;
 public class Satisfacao {
     private String nota;
     private String observacao;
-    private String idReserva;
 
-    public Satisfacao(String nota, String observacao, String idReserva) {
+    public Satisfacao(String nota, String observacao) {
         this.nota = nota;
         this.observacao = observacao;
-        this.idReserva = idReserva;
     }
 
     public String getNota() {
@@ -19,20 +17,12 @@ public class Satisfacao {
         return observacao;
     }
 
-    public String getIdReserva() {
-        return idReserva;
-    }
-
-    public void setIdReserva(String idReserva) {
-        this.idReserva = idReserva;
-    }
 
     @Override
     public String toString() {
         return "Satisfacao{" +
                 "nota=" + nota +
                 ", observacao='" + observacao + '\'' +
-                ", idReserva='" + idReserva + '\'' +
                 '}';
     }
 }

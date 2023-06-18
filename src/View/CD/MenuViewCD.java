@@ -44,36 +44,26 @@ public class MenuViewCD {
                 System.out.println("3 - Editar cd");
                 System.out.println("4 - Remover cd");
                 System.out.println("5 - Pesquisar cd");
-                System.out.println("6 - Gravar");
-                System.out.println("7 - Menu anterior");
+                System.out.println("6 - Menu anterior");
 
                 opcao = ler.nextInt();
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1:
-                        adicionarCDS.MenuAdicionarCd(gestor, gestorCategorias, gestorAutores);
-                        break;
-                    case 2:
-                        listarCDS.listarCDS(gestor);
-                        break;
-                    case 3: //editar cds
-                        editarCD();
-                        break;
-                    case 4: //remover cds
-                        eliminarCDporTitulo.eliminarCDporTitulo(gestor);
-                        break;
-                    case 5:
-                        pesquisarCD();
-                    case 6:
-                        gestor.gravarBaseDadosProdutos();
+                    case 1 -> adicionarCDS.MenuAdicionarCd(gestor, gestorCategorias, gestorAutores);
+                    case 2 -> listarCDS.listarCDS(gestor);
+                    case 3 -> //editar cds
+                            editarCD();
+                    case 4 -> //remover cds
+                            eliminarCDporTitulo.eliminarCDporTitulo(gestor);
+                    case 5 -> pesquisarCD();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
                 opcao = 0;
                 ler.nextLine();
             }
-        } while (opcao != 7);
+        } while (opcao != 6);
     }
 
     public void pesquisarCD() {

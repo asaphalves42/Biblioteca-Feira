@@ -29,11 +29,15 @@ public class ControllerEmail {
             message.setSubject("Credenciais de acesso Biblioteca Santa Maria da Feira!");
 
             // Corpo do email em HTML com tabela
-            String htmlContent = "<html><body>" +
-                    "<table style='border-collapse: collapse;'>" +
-                    "<tr>" +
-                    "<th style='border: 1px solid black; padding: 8px;'>********</th>" +
-                    "<th style='border: 1px solid black; padding: 8px;'>********</th>" +
+            String htmlContent = "<html><body style='font-family: Arial, sans-serif;'>" +
+                    "<div style='background-color: #f2f2f2; padding: 20px;'>" +
+                    "<h1 style='color: #333333;'>Credenciais de acesso à Biblioteca Santa Maria da Feira</h1>" +
+                    "<h2 style='color: #666666;'>Bem-vindo(a) à Biblioteca de Santa Maria da Feira</h2>" +
+                    "</div>" +
+                    "<table style='border-collapse: collapse; margin-top: 20px;'>" +
+                    "<tr style='background-color: #f2f2f2;'>" +
+                    "<th style='border: 1px solid black; padding: 8px;'>Informação</th>" +
+                    "<th style='border: 1px solid black; padding: 8px;'>Detalhes</th>" +
                     "</tr>" +
                     "<tr>" +
                     "<td style='border: 1px solid black; padding: 8px;'><strong>Email</strong></td>" +
