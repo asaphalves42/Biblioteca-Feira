@@ -14,7 +14,7 @@ public class ViewFuncaoRemoverAutor {
         while (!sair) {
             try {
                 ArrayList<Autor> autoresListados = gestor.listarAutores();
-                String Continuar = leStr("Caso deseja ver todos os autores exitentes  insira um ENTER");
+                String Continuar = leStr("Caso deseja ver todos os autores exitentes insira um ENTER");
                 if (Continuar.equalsIgnoreCase("")) {
                     for (Autor autor : autoresListados) {
                         System.out.println(autor.toString());

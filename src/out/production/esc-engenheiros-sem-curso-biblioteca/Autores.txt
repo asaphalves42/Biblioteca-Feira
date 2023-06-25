@@ -1,3 +1,0 @@
-1|camoes|rua do sol|1500-01-01
-2|pedro|rua do sol|2000-04-01
-3|pedro|rua da lua|2000-05-01

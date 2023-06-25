@@ -7,6 +7,7 @@ import static Utilidades.Leitura.leStr;
 public class ViewSatisfacao {
 
     public void obterSatisfacao(ControllerReservas controllerReservas, String idReserva) {
+
         System.out.println("## Formulário de Satisfação ##");
         System.out.println("-----------------------------------");
         System.out.println("Por favor, avalie de 1 a 5, onde:");

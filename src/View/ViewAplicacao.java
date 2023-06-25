@@ -24,6 +24,7 @@ import static Utilidades.Leitura.ler;
 public class ViewAplicacao {
     public ViewAplicacao() {
     }
+
     ControllerAutores lerEgravarAutores;
     ControllerProdutos lerEgravarProdutos;
     ControllerSocios lerEgravarSocios;
@@ -77,6 +78,7 @@ public class ViewAplicacao {
         menuLogin();
 
     }
+
     public void menuLogin() {
 
         int opcao;
@@ -142,7 +144,8 @@ public class ViewAplicacao {
                     case 2:
                         menuSocio2();
                         break;
-                    case 3:System.exit(0);
+                    case 3:
+                        System.exit(0);
                         break;
                     default:
                         System.out.println("Por favor, insira uma opção válida.");
@@ -174,13 +177,14 @@ public class ViewAplicacao {
 
                 switch (opcao) {
                     case 1:
-                        ViewConsultarJornal consultarJornal= new ViewConsultarJornal();
+                        ViewConsultarJornal consultarJornal = new ViewConsultarJornal();
                         consultarJornal.consultarJornal(lerEgravarProdutos);
                         break;
                     case 2:
                         //consultar revistas
                         break;
-                    case 3:System.exit(0);
+                    case 3:
+                        System.exit(0);
                         break;
                     default:
                         System.out.println("Por favor, insira uma opção válida.");
@@ -225,12 +229,12 @@ public class ViewAplicacao {
                         MenuViewCD mostrarMenu = new MenuViewCD(lerEgravarProdutos, lerEgravarCategoria, lerEgravarAutores);
                         mostrarMenu.menuCds();
                     }
-                    case 3->{
+                    case 3 -> {
                         MenuViewJornais mostrarMenu = new MenuViewJornais(lerEgravarProdutos);
                         mostrarMenu.menuJornais();
                     }
                     case 4 -> {
-                        MenuViewRevistas mostrarMenu= new MenuViewRevistas(lerEgravarProdutos);
+                        MenuViewRevistas mostrarMenu = new MenuViewRevistas(lerEgravarProdutos);
                         mostrarMenu.menuRevistas();
                     }
                     case 5 -> {
@@ -298,12 +302,12 @@ public class ViewAplicacao {
                         MenuViewCD mostrarMenu = new MenuViewCD(lerEgravarProdutos, lerEgravarCategoria, lerEgravarAutores);
                         mostrarMenu.menuCds();
                     }
-                    case 3->{
+                    case 3 -> {
                         MenuViewJornais mostrarMenu = new MenuViewJornais(lerEgravarProdutos);
                         mostrarMenu.menuJornais();
                     }
                     case 4 -> {
-                        MenuViewRevistas mostrarMenu= new MenuViewRevistas(lerEgravarProdutos);
+                        MenuViewRevistas mostrarMenu = new MenuViewRevistas(lerEgravarProdutos);
                         mostrarMenu.menuRevistas();
                     }
                     case 5 -> {
@@ -336,8 +340,6 @@ public class ViewAplicacao {
 
         } while (opcao != 10);
     }
-
-
 
 
 }

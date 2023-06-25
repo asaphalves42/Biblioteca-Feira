@@ -6,8 +6,10 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class ControllerEmail {
+
+    // Funções que envia um email personalizado ao utilizador
+
     public void enviarEmail(String username, String password) {
-        String to = username;
         String from = "engenheirosemcurso@gmail.com";
 
         Properties properties = new Properties();
@@ -25,7 +27,7 @@ public class ControllerEmail {
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(username));
             message.setSubject("Credenciais de acesso Biblioteca Santa Maria da Feira!");
 
             // Corpo do email em HTML com tabela

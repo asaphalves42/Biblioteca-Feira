@@ -27,12 +27,13 @@ public class Autor extends Pessoa {
     }
     private int id;
     private static int ultimoId = 0;
-    public int getId() {
-        return id;
+
+    public Autor() {
+        super();
     }
 
-    public String getIdPessoa() {
-        return "A"+id;
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {

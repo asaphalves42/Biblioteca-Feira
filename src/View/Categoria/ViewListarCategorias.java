@@ -9,17 +9,22 @@ import static Controller.ControllerCategoria.categorias;
 
 public class ViewListarCategorias {
     public void listarCategorias(ControllerCategoria gestor) {
+        try {
+            ArrayList<Categoria> categoriaListada = gestor.listarCategorias();
 
-        ArrayList<Categoria> categoriaListada = gestor.listarCategorias();
+            if (categoriaListada.isEmpty()) {
+                System.out.println("Nao existem categorias!\n");
 
-        if(categoriaListada.isEmpty()) {
-            System.out.println("Nao existem categorias!");
-            System.out.println(" ");
-        } else{
-            for(Categoria cat : categorias){
-                System.out.println(cat.toString());
+            } else {
+                for (Categoria cat : categorias) {
+                    System.out.println(cat.toString());
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
     }
 
 }

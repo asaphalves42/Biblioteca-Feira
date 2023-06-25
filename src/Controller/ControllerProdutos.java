@@ -135,6 +135,10 @@ public class ControllerProdutos {
         GestorFicheiros.gravarFicheiro("cd.txt", conteudoCD);
     }
 
+    /*
+    Funções de leitura da base de dados
+     */
+
     public void lerBaseDadosProdutos() {
         try {
             BaseDados basedados = new BaseDados();
@@ -179,7 +183,10 @@ public class ControllerProdutos {
                             resultado.getInt("quantidade"),
                             resultado.getInt("paginas"),
                             resultado.getDate("data_publicacao").toLocalDate(),
-                            resultado.getString("editora")
+                            resultado.getString("editora"),
+                            this.controllerAutores.pesquisarAutorPorIdBD(resultado.getInt("id_autor")),
+                            this.controllerCategorias.pesquisarCategoriaPorId(resultado.getInt("id_categoria")),
+                            resultado.getString("faixa_etaria")
                     );
                 } else if (resultado.getString("id_tipo").equalsIgnoreCase("4")) {
                     aux = new Revista(
@@ -189,10 +196,13 @@ public class ControllerProdutos {
                             resultado.getInt("quantidade"),
                             resultado.getInt("paginas"),
                             resultado.getDate("data_publicacao").toLocalDate(),
-                            resultado.getString("editora")
+                            resultado.getString("editora"),
+                            this.controllerAutores.pesquisarAutorPorIdBD(resultado.getInt("id_autor")),
+                            this.controllerCategorias.pesquisarCategoriaPorId(resultado.getInt("id_categoria")),
+                            resultado.getString("faixa_etaria")
                     );
-                } else if (resultado.getString("id_tipo").equalsIgnoreCase("5")) {
-                    /*aux = new Revista(
+                } else {
+                    resultado.getString("id_tipo");/*aux = new Revista(
                             resultado.getInt("id"),
                             resultado.getString("titulo"),
                             resultado.getString("subtitulo"),
@@ -227,17 +237,6 @@ public class ControllerProdutos {
             }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");;
 
-            if (produto.getAutor() == null) {
-                script = script.replace("@04", "NULL");
-            } else {
-                script = script.replace("@04", String.valueOf(produto.getAutor().getId()));
-            }
-
-            if(produto.getCategoria() == null) {
-                script = script.replace("@05", "NULL");
-            } else {
-                script = script.replace("@05", String.valueOf(produto.getCategoria().getId()));
-            }
 
             script = script.replace("@01", String.valueOf(produto.getId()));
             script = script.replace("@02", produto.getTitulo());
@@ -280,18 +279,7 @@ public class ControllerProdutos {
         }
     }
 
-    public void removerBaseDadosProduto(int idProduto){
-        try {
-            BaseDados basedados = new BaseDados();
-            basedados.Ligar();
 
-            basedados.Executar("DELETE FROM produto where id = '" +idProduto + "'");
-
-            basedados.Desligar();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     /*
     Funções de listagem
@@ -342,6 +330,64 @@ public class ControllerProdutos {
     Funções de pesquisa
 
      */
+
+    public ArrayList<Jornal> pesquisarJornalPorTitulo(String tituloDoJornal) {
+        ArrayList<Jornal> JornaisTitulos = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto.getTipo() == TipoProduto.Jornal) { //Cast instancia do ...
+                if (tituloDoJornal.equalsIgnoreCase(produto.getTitulo())) {
+                    JornaisTitulos.add((Jornal) produto);
+                }
+            }
+        }
+        return JornaisTitulos;
+    }
+
+    public ArrayList<Jornal> pesquisarJornalPorEditora(String EditoraDoJornal) {
+        ArrayList<Jornal> jornaisEditora = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto.getTipo() == TipoProduto.Jornal) {
+                if (EditoraDoJornal.equalsIgnoreCase(produto.getEditora())) {
+                    jornaisEditora.add((Jornal) produto);
+                }
+            }
+        }
+        return jornaisEditora;
+    }
+
+
+    public ArrayList<Revista> pesquisarRevistaPorTitulo(String tituloDaRevista) {
+        ArrayList<Revista> RevistasTitulos = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto.getTipo() == TipoProduto.Revista) { //Cast instancia do ...
+                if (tituloDaRevista.equalsIgnoreCase(produto.getTitulo())) {
+                    RevistasTitulos.add((Revista) produto);
+                }
+            }
+        }
+        return RevistasTitulos;
+    }
+    public boolean editarSubTituloRevista(int idEditarProduto, String subTituloNovo) {
+        for (Produto produto : produtos) {
+            if (produto.getTipo() == TipoProduto.Revista && idEditarProduto == produto.getId()) {
+                ((Revista) produto).setSubtitulo(subTituloNovo);
+                gravarBaseDadosProduto(produto, true);
+                return true;
+            }
+        }
+        return false;
+    }
+    public ArrayList<Revista> pesquisarRevistaPorEditora(String EditoraDaRevista) {
+        ArrayList<Revista> RevistasEditora = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto.getTipo() == TipoProduto.Revista) {
+                if (EditoraDaRevista.equalsIgnoreCase(produto.getEditora())) {
+                    RevistasEditora.add((Revista) produto);
+                }
+            }
+        }
+        return RevistasEditora;
+    }
 
     public ArrayList<Livro> pesquisarLivroPorTitulo(String tituloInserido) {
         ArrayList<Livro> livrosTitulo = new ArrayList<>();
@@ -424,7 +470,7 @@ public class ControllerProdutos {
 
     /*
 
-    Funções dos produtos
+    Funções de adição
 
      */
 
@@ -443,18 +489,35 @@ public class ControllerProdutos {
         return true;
     }
 
-    public boolean adicionarJornais(String titulo, String subtitulo, int quantidade, int numeroPaginas, LocalDate dataPublicacao, String editora) {
-        Produto jornal = new Jornal(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora);
+    public boolean adicionarJornais(String titulo, String subtitulo, int quantidade, int numeroPaginas, LocalDate dataPublicacao, String editora, Autor autor, Categoria categoria, String faixaEtaria) {
+        Produto jornal = new Jornal(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora, autor, categoria,faixaEtaria);
         produtos.add(jornal);
         gravarBaseDadosProduto(jornal, false);
         return true;
     }
 
-    public boolean adicionarRevistas(String titulo, String subtitulo, int quantidade, int numeroPaginas, LocalDate dataPublicacao, String editora) {
-        Produto revista = new Revista(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora);
+    public boolean adicionarRevistas(String titulo, String subtitulo, int quantidade, int numeroPaginas, LocalDate dataPublicacao, String editora, Autor autor, Categoria categoria,String faixaEtaria) {
+        Produto revista = new Revista(0, titulo, subtitulo, quantidade, numeroPaginas, dataPublicacao, editora, autor, categoria, faixaEtaria);
         produtos.add(revista);
         gravarBaseDadosProduto(revista,false);
         return true;
+    }
+
+    /*
+    Funções de remoção
+     */
+
+    public void removerBaseDadosProduto(int idProduto){
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+
+            basedados.Executar("DELETE FROM produto where id = '" +idProduto + "'");
+
+            basedados.Desligar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public boolean removerProduto(int idProdutoRemover) {
@@ -481,6 +544,11 @@ public class ControllerProdutos {
         return encontrou;
     }
 
+    /*
+    Funções de edição
+     */
+
+    //OBS: Algumas funções de edição podiam ser melhoradas ao associar somente ao produto
 
     public boolean editarTituloDoProduto(int idProdutoEditar, String tituloNovo) {
         for (Produto produto : produtos) {
@@ -521,21 +589,6 @@ public class ControllerProdutos {
                 gravarBaseDadosProduto(produto, true);
                 return true;
 
-            }
-        }
-        return false;
-    }
-
-    public boolean editarCategoriaProduto(int idEditarProduto, String novaCategoria) {
-        Categoria categoriaEncontrada = this.controllerCategorias.pesquisarCategoriaPorNome(novaCategoria);
-        if (categoriaEncontrada == null) {
-            return false;
-        }
-        for (Produto produto : produtos) {
-            if (idEditarProduto == produto.getId()) {
-                produto.setCategoria(categoriaEncontrada);
-                gravarBaseDadosProduto(produto, true);
-                return true;
             }
         }
         return false;
@@ -591,7 +644,6 @@ public class ControllerProdutos {
         return false;
     }
 
-    //não fazem parte do produto
 
     public boolean editarNumPaginas(int idEditarProduto, int numPaginas) {
         for (Produto produto : produtos) {
@@ -626,30 +678,6 @@ public class ControllerProdutos {
         return false;
     }
 
-    public ArrayList<Jornal> pesquisarJornalPorTitulo(String tituloDoJornal) {
-        ArrayList<Jornal> JornaisTitulos = new ArrayList<>();
-        for (Produto produto : produtos) {
-            if (produto.getTipo() == TipoProduto.Jornal) { //Cast instancia do ...
-                if (tituloDoJornal.equalsIgnoreCase(produto.getTitulo())) {
-                    JornaisTitulos.add((Jornal) produto);
-                }
-            }
-        }
-        return JornaisTitulos;
-    }
-
-    public ArrayList<Jornal> pesquisarJornalPorEditora(String EditoraDoJornal) {
-        ArrayList<Jornal> jornaisEditora = new ArrayList<>();
-        for (Produto produto : produtos) {
-            if (produto.getTipo() == TipoProduto.Jornal) {
-                if (EditoraDoJornal.equalsIgnoreCase(produto.getEditora())) {
-                    jornaisEditora.add((Jornal) produto);
-                }
-            }
-        }
-        return jornaisEditora;
-    }
-
     public boolean editarNumPaginasJornal(int idEditarProduto, int numPaginas) {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Jornal && idEditarProduto == produto.getId()) {
@@ -660,6 +688,7 @@ public class ControllerProdutos {
         }
         return false;
     }
+
     public boolean editarSubTituloDoJornal(int idEditarProduto, String subTituloNovo) {
         for (Produto produto : produtos) {
             if (produto.getTipo() == TipoProduto.Jornal && idEditarProduto == produto.getId()) {
@@ -682,38 +711,11 @@ public class ControllerProdutos {
         return false;
     }
 
-    public ArrayList<Revista> pesquisarRevistaPorTitulo(String tituloDaRevista) {
-        ArrayList<Revista> RevistasTitulos = new ArrayList<>();
-        for (Produto produto : produtos) {
-            if (produto.getTipo() == TipoProduto.Revista) { //Cast instancia do ...
-                if (tituloDaRevista.equalsIgnoreCase(produto.getTitulo())) {
-                    RevistasTitulos.add((Revista) produto);
-                }
-            }
-        }
-        return RevistasTitulos;
-    }
-    public boolean editarSubTituloRevista(int idEditarProduto, String subTituloNovo) {
-        for (Produto produto : produtos) {
-            if (produto.getTipo() == TipoProduto.Revista && idEditarProduto == produto.getId()) {
-                ((Revista) produto).setSubtitulo(subTituloNovo);
-                gravarBaseDadosProduto(produto, true);
-                return true;
-            }
-        }
-        return false;
-    }
-    public ArrayList<Revista> pesquisarRevistaPorEditora(String EditoraDaRevista) {
-        ArrayList<Revista> RevistasEditora = new ArrayList<>();
-        for (Produto produto : produtos) {
-            if (produto.getTipo() == TipoProduto.Revista) {
-                if (EditoraDaRevista.equalsIgnoreCase(produto.getEditora())) {
-                    RevistasEditora.add((Revista) produto);
-                }
-            }
-        }
-        return RevistasEditora;
-    }
+    /*
+    Funções de pesquisa
+     */
+
+
 
 
 }

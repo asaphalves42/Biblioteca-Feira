@@ -13,26 +13,13 @@ import static Utilidades.Leitura.leStr;
 
 public class ViewEditarJornal {
     public void editarJornalPorTitulo(ControllerProdutos gestor) {
-        ArrayList<Jornal> jornaisParaEditar;
 
         while (true) {
             try {
-                String tituloJornal = leStr("Insira o título do jornal que quer editar (ou 'sair' para encerrar):");
-                if (tituloJornal.equalsIgnoreCase("sair")) {
-                    return;
+                for (Jornal jornal : gestor.listarProdutosJornal()){
+                    System.out.println(jornal);
                 }
 
-                jornaisParaEditar = gestor.pesquisarJornalPorTitulo(tituloJornal);
-
-                if (jornaisParaEditar.isEmpty()) {
-                    System.out.println("Não existem jornais com este título!");
-                    System.out.println(" ");
-                } else {
-                    for (Produto Jornal : jornaisParaEditar) {
-                        System.out.println(Jornal);
-                    }
-                    break;
-                }
             } catch (Exception e) {
                 System.out.println("Ocorreu um erro: " + e.getMessage());
                 System.out.println("Por favor, tente novamente.");
@@ -67,6 +54,44 @@ public class ViewEditarJornal {
         }
 
     public void editarJornalPorSubTitulo(ControllerProdutos gestor) {
+        while (true) {
+            try {
+                for (Jornal jornal : gestor.listarProdutosJornal()) {
+                    System.out.println(jornal);
+                }
+
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro ao pesquisar os jornais. Por favor, tente novamente.");
+            }
+
+
+            try {
+                String idJornalStr = leStr("Insira o id do jornal que quer editar (ou 'sair' para encerrar):");
+                if (idJornalStr.equalsIgnoreCase("sair")) {
+                    return;
+                }
+                int idEditarSubTitulo = Integer.parseInt(idJornalStr);
+                String subTituloNovo = leStr("Insira o novo subtítulo (ou 'sair' para encerrar):");
+                if (subTituloNovo.equalsIgnoreCase("sair")) {
+                    return;
+                }
+
+                boolean tituloEditado = gestor.editarSubTituloDoJornal(idEditarSubTitulo, subTituloNovo);
+
+                if (tituloEditado) {
+                    System.out.println("Jornal editado com sucesso!");
+                    System.out.println(" ");
+                } else {
+                    System.out.println("Jornal não encontrado!");
+                    System.out.println(" ");
+                }
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro ao editar o jornal. Por favor, tente novamente.");
+            }
+        }
+    }
+    public void editarNumPaginasJornal(ControllerProdutos gestor) {
+
         ArrayList<Jornal> jornaisParaEditar;
 
         while (true) {
@@ -79,55 +104,6 @@ public class ViewEditarJornal {
 
                 if (jornaisParaEditar.isEmpty()) {
                     System.out.println("Não existem jornais com este título!");
-                    System.out.println(" ");
-                } else {
-                    for (Produto jornal : jornaisParaEditar) {
-                        System.out.println(jornal);
-                    }
-                    break;
-                }
-            } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao pesquisar os jornais. Por favor, tente novamente.");
-            }
-        }
-
-        try {
-            String idJornalStr = leStr("Insira o id do jornal que quer editar (ou 'sair' para encerrar):");
-            if (idJornalStr.equalsIgnoreCase("sair")) {
-                return;
-            }
-            int idEditarSubTitulo = Integer.parseInt(idJornalStr);
-            String subTituloNovo = leStr("Insira o novo subtítulo (ou 'sair' para encerrar):");
-            if (subTituloNovo.equalsIgnoreCase("sair")) {
-                return;
-            }
-
-            boolean tituloEditado = gestor.editarSubTituloDoJornal(idEditarSubTitulo, subTituloNovo);
-
-            if (tituloEditado) {
-                System.out.println("Jornal editado com sucesso!");
-                System.out.println(" ");
-            } else {
-                System.out.println("Jornal não encontrado!");
-                System.out.println(" ");
-            }
-        } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao editar o jornal. Por favor, tente novamente.");
-        }
-    }
-    public void editarNumPaginasJornal(ControllerProdutos gestor) {
-        ArrayList<Jornal> jornaisParaEditar;
-
-        while (true) {
-            try {
-                String tituloJornal = leStr("Insira o título do jornal que quer editar (ou 'sair' para encerrar):");
-                if (tituloJornal.equalsIgnoreCase("sair")) {
-                    return;
-                }
-                jornaisParaEditar = gestor.pesquisarJornalPorTitulo(tituloJornal);
-
-                if (jornaisParaEditar.isEmpty()) {
-                    System.out.println("Não existem Jornais com este título!");
                     System.out.println(" ");
                 } else {
                     for (Produto jornal : jornaisParaEditar) {

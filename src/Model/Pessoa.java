@@ -15,6 +15,10 @@ public class Pessoa {
 
     private boolean pendenteGravacao; //indicador que informa se o registo é novo ou alterado e precisa de ser gravado na base de dados
 
+    public Pessoa() {
+
+    }
+
     public String getNome() {
         return nome;
     }

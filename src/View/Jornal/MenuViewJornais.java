@@ -38,20 +38,13 @@ public class MenuViewJornais {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1:
-                        adicionarJornal.MenuAdicionarJornal(gestor);
-                        break;
-                    case 2:
-                        listarJornal.listarTodosOsJornais(gestor);
-                        break;
-                    case 3: //editar Jornais
-                        editarJornal();
-                        break;
-                    case 4: //remover Jornais
-                        removerJornal.eliminarJornalporTitulo(gestor);
-                        break;
-                    case 5:
-                        pesquisarJornal();
+                    case 1 -> adicionarJornal.MenuAdicionarJornal(gestor);
+                    case 2 -> listarJornal.listarTodosOsJornais(gestor);
+                    case 3 -> //editar Jornais
+                            editarJornal();
+                    case 4 -> //remover Jornais
+                            removerJornal.eliminarJornalporTitulo(gestor);
+                    case 5 -> pesquisarJornal();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
@@ -77,12 +70,8 @@ public class MenuViewJornais {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1:
-                        pesquisarJornal.JornalPorTitulo(gestor);
-                        break;
-                    case 2:
-                        pesquisarJornal.JornalPorEditora(gestor);
-                        break;
+                    case 1 -> pesquisarJornal.JornalPorTitulo(gestor);
+                    case 2 -> pesquisarJornal.JornalPorEditora(gestor);
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
@@ -112,22 +101,11 @@ public class MenuViewJornais {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1:
-                        editarJornal.editarJornalPorTitulo(gestor);
-                        break;
-                    case 2:
-                        editarJornal.editarJornalPorSubTitulo(gestor);
-                        break;
-                    case 3:
-                        editarJornal.editarNumPaginasJornal(gestor);
-                        break;
-                    case 4:
-                        editarJornal.editarPorDataJornal(gestor);
-                        break;
-                    case 5:
-                        editarJornal.editarEditoraJornal(gestor);
-
-
+                    case 1 -> editarJornal.editarJornalPorTitulo(gestor);
+                    case 2 -> editarJornal.editarJornalPorSubTitulo(gestor);
+                    case 3 -> editarJornal.editarNumPaginasJornal(gestor);
+                    case 4 -> editarJornal.editarPorDataJornal(gestor);
+                    case 5 -> editarJornal.editarEditoraJornal(gestor);
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

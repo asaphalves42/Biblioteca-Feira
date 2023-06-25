@@ -12,6 +12,10 @@ public class ControllerLogin {
 
     public static ArrayList<Utilizador> utilizadores = new ArrayList<>();
 
+    /*
+    Ler e gravar utilizadores para a base de dados
+     */
+
     public void lerUtilizadoresDaBaseDeDados() {
         try {
             BaseDados basedados = new BaseDados();
@@ -58,27 +62,7 @@ public class ControllerLogin {
         }
     }
 
-    public void gravarUtilizadorParaBaseDados() {
-        try {
-            BaseDados basedados = new BaseDados();
-            basedados.Ligar();
-
-            // Inserir ou atualizar registros
-            for (Utilizador aux : utilizadores) {
-                if (aux.getPendenteGravacao()) {
-                    basedados.Executar("DELETE FROM Utilizador WHERE id_utilizador = " + aux.getId());
-                    basedados.Executar("INSERT INTO Utilizador (username, senha, id_role) VALUES ('" + aux.getEmail() + "', '" + aux.getPassword() + "', '" + aux.getTipo().getValue() + "')");
-                }
-            }
-
-
-            basedados.Desligar();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void gravarUtilizadorParaBaseDadosTESTE(Utilizador util, boolean atualizacao) {
+    public void gravarUtilizadorParaBaseDados(Utilizador util, boolean atualizacao) {
         try {
             BaseDados basedados = new BaseDados();
             basedados.Ligar();
@@ -115,8 +99,30 @@ public class ControllerLogin {
         }
     }
 
+    /*
+    Funções de adição
+    */
+
+    public boolean adicionarFuncionario(String username, String password) {
+        Utilizador adicionarUtil = new Bibliotecario(username, password, 0, true);
+        utilizadores.add(adicionarUtil);
+        gravarUtilizadorParaBaseDados(adicionarUtil, false);
+
+        return true;
+    }
+
+    public boolean adicionarSocio(String username, String password) {
+        Utilizador adicionarSocio = new SocioUtilizador(username, password, 0, true);
+        utilizadores.add(adicionarSocio);
+        gravarUtilizadorParaBaseDados(adicionarSocio, false);
+
+        return true;
+    }
+
+    // Verificar o login, baseado no seu "id_role"
 
     public TipoUtilizador verificarLogin(String email, String password) throws SQLException {
+
         BaseDados basedados = new BaseDados();
         basedados.Ligar();
         ResultSet resultado = basedados.Selecao("SELECT * FROM Utilizador WHERE username = '" + email + "' AND senha = '" + password + "'");
@@ -136,21 +142,6 @@ public class ControllerLogin {
         return TipoUtilizador.Default;
     }
 
-    public boolean adicionarFuncionario(String username, String password){
-        Utilizador adicionarUtil = new Bibliotecario(username, password,0, true);
-        utilizadores.add(adicionarUtil);
-        gravarUtilizadorParaBaseDadosTESTE(adicionarUtil, false);
-
-        return true;
-    }
-
-    public boolean adicionarSocio(String username,String password ){
-        Utilizador adicionarSocio = new SocioUtilizador(username,password, 0, true);
-        utilizadores.add(adicionarSocio);
-        gravarUtilizadorParaBaseDadosTESTE(adicionarSocio,false);
-
-        return true;
-    }
 
 }
 

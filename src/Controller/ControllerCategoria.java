@@ -34,7 +34,7 @@ public class ControllerCategoria {
         }
     }
 
-    public void gravarFicheiroCategoria(){
+    public void gravarFicheiroCategoria() {
         String conteudo = "";
         for (Categoria aux : categorias) {
             conteudo += aux.getNome() + "\n";
@@ -44,34 +44,42 @@ public class ControllerCategoria {
         GestorFicheiros.gravarFicheiro("categorias.txt", conteudo);
     }
 
+    /*
+    Leitura e gravação na base de dados
+     */
+
     public void lerBaseDadosCategoria() {
+
         try {
+
             BaseDados basedados = new BaseDados();
             basedados.Ligar();
-            ResultSet resultado = basedados.Selecao("select * from categoria");
+            ResultSet resultado = basedados.Selecao("SELECT * FROM categoria");
 
-            while(resultado.next()){
-                // enquanto existirem registos, vou ler 1 a 1
+            while (resultado.next()) {
+
                 Categoria aux = new Categoria(resultado.getInt("id"), resultado.getString("nome"));
                 categorias.add(aux);
             }
+
             basedados.Desligar();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void gravarCategoriaParaBaseDados(Categoria categoria, boolean atualizacao){
+    public void gravarCategoriaParaBaseDados(Categoria categoria, boolean atualizacao) {
         try {
             BaseDados basedados = new BaseDados();
             basedados.Ligar();
 
             String script = "";
+
             if (atualizacao) {
                 script = "UPDATE categoria set nome = '@02', where id = @01";
-            }
-            else
-            {
+            } // upadate se o boolean for pra atualizar dados, senão insere
+            else {
                 script = "INSERT INTO categoria (id, nome)" +
                         " VALUES (@01, '@02')";
             }
@@ -80,35 +88,33 @@ public class ControllerCategoria {
             script = script.replace("@02", categoria.getNome());
 
             for (int i = 30; i > 0; i--) {
-                script = script.replace("'@"+String.format("%02d", i)+"'", "NULL");
-                script = script.replace("@"+String.format("%02d", i), "NULL");
+                script = script.replace("'@" + String.format("%02d", i) + "'", "NULL"); //loop entre os dados que nao foram inseridos e substituem para "NULL"
+                script = script.replace("@" + String.format("%02d", i), "NULL");
             }
 
             // executar o SCRIPT na base de dados
             basedados.Executar(script);
+
             basedados.Desligar();
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void removerAutorBaseDados(int idCategoria){
-        try {
-            BaseDados basedados = new BaseDados();
-            basedados.Ligar();
+    /*
+    Funções de listagem
+     */
 
-            basedados.Executar("DELETE FROM categoria where id = '" +idCategoria + "'");
-
-            basedados.Desligar();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
+    public ArrayList<Categoria> listarCategorias() {
+        return categorias;
     }
 
+    /*
+    Funções de adição e remoção
+     */
 
-
-    public boolean adicionarCategorias(String nomeCategoria){
+    public boolean adicionarCategorias(String nomeCategoria) {
         // Verificar se a categoria já existe
         for (Categoria categoria : categorias) {
             if (categoria.getNome().equalsIgnoreCase(nomeCategoria)) {
@@ -117,28 +123,27 @@ public class ControllerCategoria {
         }
 
         Categoria adicionarCategoria = new Categoria(0, nomeCategoria);
-        adicionarCategoria.setPendenteGravacao(true);
         categorias.add(adicionarCategoria);
         gravarCategoriaParaBaseDados(adicionarCategoria, false);
 
         return true;
     }
 
-    public Categoria pesquisarCategoriaPorNome(String nomeCategoria){
-        for(Categoria categoria : categorias){
-            if(Objects.equals(categoria.getNome(), nomeCategoria)){
-                return categoria;
-            }
+    public void removerCategoriaBaseDados(int idCategoria) {
+
+        try {
+
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
+
+            basedados.Executar("DELETE FROM categoria where id = '" + idCategoria + "'");
+
+            basedados.Desligar();
+        } catch (Exception e) {
+
+            throw new RuntimeException(e);
         }
-        return null;
-    }
-    public Categoria pesquisarCategoriaPorId(int idCategoria){
-        for(Categoria categoria : categorias){
-            if(categoria.getId() == idCategoria){
-                return categoria;
-            }
-        }
-        return null;
+
     }
 
     public boolean removerCategoria(int idCategoria) {
@@ -155,13 +160,34 @@ public class ControllerCategoria {
 
             // Remove a categoria da lista de categorias
             categorias.remove(categoriaEncontrada);
-            removerAutorBaseDados(idCategoria);
+            removerCategoriaBaseDados(idCategoria);
             return true;
         }
         return false; // A categoria não foi encontrada
     }
 
-    public ArrayList<Categoria> listarCategorias() {
-        return categorias;
+    /*
+    Funções de pesquisa
+     */
+
+    public Categoria pesquisarCategoriaPorNome(String nomeCategoria) {
+        for (Categoria categoria : categorias) {
+            if (Objects.equals(categoria.getNome(), nomeCategoria)) {
+                return categoria;
+            }
+        }
+        return null;
     }
+
+    public Categoria pesquisarCategoriaPorId(int idCategoria) {
+        for (Categoria categoria : categorias) {
+            if (categoria.getId() == idCategoria) {
+                return categoria;
+            }
+        }
+        return null;
+    }
+
+
 }
+

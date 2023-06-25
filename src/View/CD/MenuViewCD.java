@@ -82,12 +82,8 @@ public class MenuViewCD {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1:
-                        CDPorTitulo.cdsPorTitulo(gestor);
-                        break;
-                    case 2:
-                        CDSPorAutor.cdsPorAutor(gestor);
-                        break;
+                    case 1 -> CDPorTitulo.cdsPorTitulo(gestor);
+                    case 2 -> CDSPorAutor.cdsPorAutor(gestor);
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");
@@ -120,31 +116,14 @@ public class MenuViewCD {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1:
-                        editarCDSPorTitulo.editarCDSPorTitulo(gestor);
-                        break;
-                    case 2:
-                        editarCDSPorAutor.editarCDSPorAutor(gestor);
-                        break;
-                    case 3:
-                        editarQuantidadeCD.editarQuantidadeCD(gestor);
-                        break;
-                    case 4:
-                        editarNumFaixas.editarNumFaixas(gestor);
-                        break;
-                    case 5:
-                        editarPorCategoriaCD.editarPorCategoriaCD(gestor,gestorCategorias);
-                        break;
-                    case 6:
-                        editarPorDataCD.editarPorDataCD(gestor);
-                        break;
-                    case 7:
-                        editarFaixaEtariaCD.editarFaixaEtaria(gestor);
-                        break;
-                    case 8:
-                        editarEditoraCD.editarEditoraCD(gestor);
-
-
+                    case 1 -> editarCDSPorTitulo.editarCDSPorTitulo(gestor);
+                    case 2 -> editarCDSPorAutor.editarCDSPorAutor(gestor);
+                    case 3 -> editarQuantidadeCD.editarQuantidadeCD(gestor);
+                    case 4 -> editarNumFaixas.editarNumFaixas(gestor);
+                    case 5 -> editarPorCategoriaCD.editarPorCategoriaCD(gestor, gestorCategorias);
+                    case 6 -> editarPorDataCD.editarPorDataCD(gestor);
+                    case 7 -> editarFaixaEtariaCD.editarFaixaEtaria(gestor);
+                    case 8 -> editarEditoraCD.editarEditoraCD(gestor);
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

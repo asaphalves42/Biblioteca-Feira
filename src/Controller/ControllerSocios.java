@@ -47,6 +47,11 @@ public class ControllerSocios {
         GestorFicheiros.gravarFicheiro("socios.txt", conteudo);
     }
 
+
+    /*
+    Leitura e gravação na base de dados
+     */
+
     public void lerSociosDeBaseDados() {
         try {
             BaseDados basedados = new BaseDados();
@@ -68,8 +73,6 @@ public class ControllerSocios {
             throw new RuntimeException(e);
         }
     }
-
-
     public void gravarSociosParaBaseDados(Socio socio, boolean atualizacao){
         try {
             BaseDados basedados = new BaseDados();
@@ -104,7 +107,32 @@ public class ControllerSocios {
             throw new RuntimeException(e);
         }
     }
+    public ArrayList<Socio> listarSocio() {
+        return socios;
 
+    }
+    /*
+    Funções de remoção
+    */
+    public boolean removerSocio(int numMecanografico) {
+        boolean encontrouReserva = false;
+        // percorrer as reservas para ver se encontra alguma reserva associada ao sócio
+        for (Reserva reserva : ControllerReservas.reservas) {
+            if (numMecanografico == reserva.getSocio().getNumMecanografico()) {
+                encontrouReserva = true;
+                break;
+            }
+        }
+        // não encontrou o sócio a ser removido
+        if (!encontrouReserva) {
+            // percorrer os sócios para encontrar o sócio a ser removido
+            //função sugerida pelo intelij que usa a função lambda "removeIf" para remover os sócios que não possuem reservas
+            //expressão lambda "removeIf"
+            socios.removeIf(socio -> numMecanografico == (socio.getNumMecanografico()));
+            removerSocioBaseDados(numMecanografico);
+        }
+        return encontrouReserva;
+    }
     public void removerSocioBaseDados(int idSocio){
         try {
             BaseDados basedados = new BaseDados();
@@ -118,6 +146,9 @@ public class ControllerSocios {
         }
     }
 
+    /*
+    Funções de adição
+     */
 
     public boolean adicionarSocio(String nome, String morada, LocalDate dataDeNascimento, int telefone) {
 
@@ -127,11 +158,9 @@ public class ControllerSocios {
         return true;
     }
 
-    public ArrayList<Socio> listarSocio() {
-        return socios;
-
-    }
-
+    /*
+    Funções de edição
+     */
     public boolean editarSocio(int numMecanografico, String nome, String morada, LocalDate dataDeNascimento, int telefone) {
         for (Socio socio : socios) {
             if (numMecanografico == (socio.getNumMecanografico())) {
@@ -190,7 +219,9 @@ public class ControllerSocios {
         return false;
     }
 
-
+    /*
+    Funções de pesquisa
+     */
     public ArrayList<Socio> pesquisarSocioPorNome(String nomeInserido) {
         ArrayList<Socio> nomeSocio = new ArrayList<>();
         for (Socio nome : socios) {
@@ -210,24 +241,6 @@ public class ControllerSocios {
         return null;
     }
 
-    public boolean removerSocio(int numMecanografico) {
-        boolean encontrouReserva = false;
-        // percorrer as reservas para ver se encontra alguma reserva associada ao sócio
-        for (Reserva reserva : ControllerReservas.reservas) {
-            if (numMecanografico == reserva.getSocio().getNumMecanografico()) {
-                encontrouReserva = true;
-                break;
-            }
-        }
-        // não encontrou o sócio a ser removido
-        if (!encontrouReserva) {
-            // percorrer os sócios para encontrar o sócio a ser removido
-            //função sugerida pelo intelij que usa a função lambda "removeIf" para remover os sócios que não possuem reservas
-            //expressão lambda "removeIf"
-            socios.removeIf(socio -> numMecanografico == (socio.getNumMecanografico()));
-            removerSocioBaseDados(numMecanografico);
-        }
-        return encontrouReserva;
-    }
+
 
 }

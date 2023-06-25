@@ -5,6 +5,8 @@ import Model.Produto;
 import java.util.ArrayList;
 
 public class ControllerConsultas {
+
+    //Funções por terminar
     public ControllerSocios controllerSocios;
     public ControllerProdutos controllerProdutos;
 

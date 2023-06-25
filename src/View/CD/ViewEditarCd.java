@@ -247,11 +247,6 @@ public class ViewEditarCd {
 
                 int idEditarCategoria = Integer.parseInt(idEditarCategoriaStr);
 
-                //String novaCategoria = leStr("Insira o novo nome da Categoria (ou 'sair' para encerrar):");
-                //if (novaCategoria.equalsIgnoreCase("sair")) {
-                //    return;
-                //}
-
                 boolean categoriaEditada = gestor.editarCategoriaProdutoID(idEditarCategoria, id);
 
                 if (categoriaEditada) {

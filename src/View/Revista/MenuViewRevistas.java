@@ -38,21 +38,11 @@ public class MenuViewRevistas {
                 ler.nextLine();
 
                 switch (opcao) {
-                    case 1:
-                        adicionarRevista.MenuAdicionarRevista(gestor);
-                        break;
-                    case 2:
-                        listarRevistas.listarTodasAsRevistas(gestor);
-                        break;
-                    case 3:
-                        editarRevistas();
-                        break;
-                    case 4:
-                        removerRevistas.eliminarRevistaPorTitulo(gestor);
-                        break;
-                    case 5:
-                        pesquisarRevistas();
-
+                    case 1 -> adicionarRevista.MenuAdicionarRevista(gestor);
+                    case 2 -> listarRevistas.listarTodasAsRevistas(gestor);
+                    case 3 -> editarRevistas();
+                    case 4 -> removerRevistas.eliminarRevistaPorTitulo(gestor);
+                    case 5 -> pesquisarRevistas();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, insira uma opção válida numérica.");

@@ -46,6 +46,10 @@ public class ControllerAutores {
         GestorFicheiros.gravarFicheiro("Autores.txt", conteudo);
     }
 
+    /*
+        Leitura e gravação na base de dados
+    */
+
     public void lerAutorDeBaseDados() {
 
         try {
@@ -75,44 +79,47 @@ public class ControllerAutores {
             String script = "";
             if (atualizacao) {
                 script = "UPDATE autor set nome = '@02', morada = '@03', data_nascimento = '@04' where id = @01";
-            }
-            else
-            {
+            } // upadate se o boolean for pra atualizar dados, senão insere
+            else {
                 script = "INSERT INTO autor (id, nome, morada, data_nascimento)" +
                         " VALUES (@01, '@02', '@03', '@04')";
             }
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            ;
 
             script = script.replace("@01", String.valueOf(autor.getId()));
             script = script.replace("@02", autor.getNome());
-            script = script.replace("@03",  autor.getMorada());
-            script = script.replace("@04",  autor.getDataDeNascimento().format(formatter));
+            script = script.replace("@03", autor.getMorada());
+            script = script.replace("@04", autor.getDataDeNascimento().format(formatter));
 
             for (int i = 30; i > 0; i--) {
-                script = script.replace("'@"+String.format("%02d", i)+"'", "NULL");
-                script = script.replace("@"+String.format("%02d", i), "NULL");
+                script = script.replace("'@" + String.format("%02d", i) + "'", "NULL"); //loop entre os dados que nao foram inseridos e substituem para "NULL"
+                script = script.replace("@" + String.format("%02d", i), "NULL");
             }
 
             // executar o SCRIPT na base de dados
             basedados.Executar(script);
+
             basedados.Desligar();
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void removerAutorBaseDados(int idAutor){
-        try {
-            BaseDados basedados = new BaseDados();
-            basedados.Ligar();
+    /*
+    Funções de listagem
+     */
 
-            basedados.Executar("DELETE FROM autor where id = '" +idAutor + "'");
+    public ArrayList<Autor> listarAutores() {
 
-            basedados.Desligar();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return autores;
+
     }
+
+    /*
+    Funções de adição e remoção
+     */
 
     public boolean adicionarAutores(String nome, String morada, LocalDate dataDeNascimento) {
 
@@ -123,11 +130,59 @@ public class ControllerAutores {
         return true;
     }
 
-    public ArrayList<Autor> listarAutores() {
+    public void removerAutorBaseDados(int idAutor) {
 
-        return autores;
+        try {
+            BaseDados basedados = new BaseDados();
+            basedados.Ligar();
 
+            basedados.Executar("DELETE FROM autor where id = '" + idAutor + "'");
+
+            basedados.Desligar();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    public boolean removerAutor(int idAutor) {
+        boolean autorAssociadoLivro = false;
+        // Verifica se o autor está associado a algum livro
+        for (Produto livro : produtos) {
+            if (Objects.equals(livro.getAutor().getId(), idAutor)) {
+                autorAssociadoLivro = true;
+                break;
+            }
+        }
+        if (autorAssociadoLivro) {
+            // O autor está associado a um livro, não é possível removê-lo
+            return false;
+        } else {
+
+            // Remove o autor da lista de autores
+            int index = -1;
+            for (int i = 0; i < autores.size(); i++) {
+                if (autores.get(i).getId() == idAutor) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index != -1) {
+                autores.remove(index);
+                removerAutorBaseDados(idAutor);
+                return true;
+            } else {
+                // O autor não foi encontrado na lista de autores
+                return false;
+
+            }
+
+        }
+    }
+
+    /*
+    Funções de edição
+     */
 
     public boolean editarAutor(int id, String nome, String morada, LocalDate dataDeNascimento) {
         for (Autor autor : autores) {
@@ -142,6 +197,10 @@ public class ControllerAutores {
         }
         return false;
     }
+
+    /*
+    Funções de pesquisa
+     */
 
     public ArrayList<Autor> pesquisarAutorPorNome(String nomeInserido) {
         ArrayList<Autor> nomeAutor = new ArrayList<>();
@@ -184,40 +243,7 @@ public class ControllerAutores {
         return autoresEncontrados;
     }
 
-    public boolean removerAutor(int idAutor) {
-        boolean autorAssociadoLivro = false;
-        // Verifica se o autor está associado a algum livro
-        for (Produto livro : produtos) {
-            if (Objects.equals(livro.getAutor().getId(), idAutor)) {
-                autorAssociadoLivro = true;
-                break;
-            }
-        }
-        if (autorAssociadoLivro) {
-            // O autor está associado a um livro, não é possível removê-lo
-            return false;
-        } else {
 
-            // Remove o autor da lista de autores
-            int index = -1;
-            for (int i = 0; i < autores.size(); i++) {
-                if (autores.get(i).getId() == idAutor) {
-                    index = i;
-                    break;
-                }
-            }
-            if (index != -1) {
-                autores.remove(index);
-                removerAutorBaseDados(idAutor);
-                return true;
-            } else {
-                // O autor não foi encontrado na lista de autores
-                return false;
-
-            }
-
-        }
-    }
 }
 
 

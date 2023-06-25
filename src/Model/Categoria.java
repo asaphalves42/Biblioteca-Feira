@@ -1,8 +1,6 @@
 package Model;
 
 public class Categoria {
-    private String nome;
-    private boolean pendenteGravacao; //indicador que informa se o registo é novo ou alterado e precisa de ser gravado na base de dados
 
 
     public Categoria(int id, String nome) {
@@ -15,9 +13,17 @@ public class Categoria {
             this.id = ++proximoId;
         }
     }
-
+    private String nome;
     private static int proximoId = 0;
     private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Categoria() {
+
+    }
 
     public String getNome() {
         return nome;
@@ -30,11 +36,7 @@ public class Categoria {
     public int getId() {
         return id;
     }
-    public boolean getPendenteGravacao() { return pendenteGravacao; }
 
-    public void setPendenteGravacao(boolean pendenteGravacao) {
-        this.pendenteGravacao = pendenteGravacao;
-    }
 
     @Override
     public String toString() {
@@ -42,4 +44,6 @@ public class Categoria {
                 "ID: " + id + "\n" +
                 "Nome: " + nome + "]" + "\n";
     }
+
+
 }

@@ -1,6 +1,8 @@
 package View.Revista;
 
 import Controller.ControllerProdutos;
+import Model.Autor;
+import Model.Categoria;
 import Utilidades.ValidacaoData;
 
 import java.time.LocalDate;
@@ -68,7 +70,15 @@ public class ViewAdicionarRevistas {
             int numeroPaginas = leIntPositivo("Introduza o número de páginas: ");
             System.out.println(" ");
 
-            boolean adicionado = gestorRevistas.adicionarRevistas(titulo,subtitulo,quantidade,numeroPaginas,dataDePublicacao,editora);
+            Autor autor = new Autor();
+            autor.setId(2);
+
+            Categoria categoria = new Categoria();
+            categoria.setId(2);
+
+            String faixaEtaria = "Livre";
+
+            boolean adicionado = gestorRevistas.adicionarRevistas(titulo,subtitulo,quantidade,numeroPaginas,dataDePublicacao,editora, autor, categoria,faixaEtaria);
 
             if (adicionado) {
                 System.out.println("Revista " + titulo + " adicionada com sucesso!");

@@ -58,7 +58,7 @@ public class ViewFuncaoAdicionarSocios {
                 while (telefone < 100000000 || telefone > 999999999) {
                     telefone = leInt("Introduza o nr de telefone (9 dígitos) (Caso pretenda sair, digite 'sair') : ");
                     String telefone2 = String.valueOf(telefone);
-                    if (telefone2.equalsIgnoreCase("Sair")){
+                    if (telefone2.equalsIgnoreCase("Sair")) {
                         sair = true;
                         break;
                     }
@@ -79,13 +79,10 @@ public class ViewFuncaoAdicionarSocios {
                         System.out.println("Ocorreu um erro ao adicionar o sócio!\n");
                     }
                 }
-                }catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("Ocorreu um erro ao adicionar o sócio: " + e.getMessage());
 
-
-                }
-
-
+            }
 
         } while (!sair);
     }

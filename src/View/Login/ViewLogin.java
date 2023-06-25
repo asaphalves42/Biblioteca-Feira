@@ -12,6 +12,7 @@ public class ViewLogin {
 
     public TipoUtilizador verificarLogin() throws SQLException {
 
+
         String username = leStr("Insira o e-mail:");
 
         String password = leStr("Insira a palavra-passe:");

@@ -1,6 +1,8 @@
 package View.Jornal;
 
 import Controller.ControllerProdutos;
+import Model.Autor;
+import Model.Categoria;
 import Utilidades.ValidacaoData;
 
 import java.time.LocalDate;
@@ -10,39 +12,41 @@ import static Utilidades.Leitura.leStr;
 
 
 public class ViewAdicionarJornal {
-    public void MenuAdicionarJornal(ControllerProdutos gestorJornais){
-        boolean sair = false;
-        do {
+    public void MenuAdicionarJornal(ControllerProdutos gestorJornais) {
 
-            System.out.println("Caso pretenda sair, digite 'sair'");
-            String titulo = "";
-            while (titulo.trim().isEmpty()) {
-                titulo = leStr("Introduza o titulo: ");
-                if (titulo.equalsIgnoreCase("sair")) {
-                    sair = true;
+        try {
+            boolean sair = false;
+            do {
+
+                System.out.println("Caso pretenda sair, digite 'sair'");
+                String titulo = "";
+                while (titulo.trim().isEmpty()) {
+                    titulo = leStr("Introduza o titulo: ");
+                    if (titulo.equalsIgnoreCase("sair")) {
+                        sair = true;
+                        break;
+                    }
+                    if (titulo.trim().isEmpty()) {
+                        System.out.println("Por favor, introduza um titulo válido!");
+                    }
+                }
+                if (sair) {
                     break;
                 }
-                if (titulo.trim().isEmpty()) {
-                    System.out.println("Por favor, introduza um titulo válido!");
+                String subtitulo = "";
+                while (subtitulo.trim().isEmpty()) {
+                    subtitulo = leStr("Introduza o subtitulo: ");
+                    if (subtitulo.equalsIgnoreCase("sair")) {
+                        sair = true;
+                        break;
+                    }
+                    if (subtitulo.trim().isEmpty()) {
+                        System.out.println("Por favor, introduza um subtitulo válido!");
+                    }
                 }
-            }
-            if (sair) {
-                break;
-            }
-            String subtitulo = "";
-            while (subtitulo.trim().isEmpty()) {
-                subtitulo = leStr("Introduza o subtitulo: ");
-                if (subtitulo.equalsIgnoreCase("sair")) {
-                    sair = true;
+                if (sair) {
                     break;
                 }
-                if (subtitulo.trim().isEmpty()) {
-                    System.out.println("Por favor, introduza um subtitulo válido!");
-                }
-            }
-            if (sair) {
-                break;
-            }
 
                 System.out.println("Digite a data de lançamento do jornal (dd/MM/yyyy): ");
                 ValidacaoData validarData = new ValidacaoData();
@@ -63,12 +67,20 @@ public class ViewAdicionarJornal {
                     break;
                 }
                 //automaticamente a quantidade passa a ser uma unidade
-                int quantidade=1;
+                int quantidade = 1;
 
                 int numeroPaginas = leIntPositivo("Introduza o número de páginas: ");
                 System.out.println(" ");
 
-                boolean adicionado = gestorJornais.adicionarJornais(titulo,subtitulo,quantidade,numeroPaginas,dataDePublicacao,editora);
+                Autor autor = new Autor();
+                autor.setId(2);
+
+                Categoria categoria = new Categoria();
+                categoria.setId(2);
+
+                String faixaEtaria = "Livre";
+
+                boolean adicionado = gestorJornais.adicionarJornais(titulo, subtitulo, quantidade, numeroPaginas, dataDePublicacao, editora, autor, categoria, faixaEtaria);
 
                 if (adicionado) {
                     System.out.println("Jornal " + titulo + " adicionado com sucesso!");
@@ -78,7 +90,12 @@ public class ViewAdicionarJornal {
                 }
 
 
-        } while (sair);
+            } while (sair);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }

@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ControllerReservas {
+
     public static ArrayList<Reserva> reservas = new ArrayList<>();
     public static ArrayList<String> eliminados = new ArrayList<String>();
     public ControllerSocios controllerSocios;
@@ -39,29 +40,29 @@ public class ControllerReservas {
                     String[] idProdutos = value_split[2].split(",");
                     ArrayList<Produto> produtos = new ArrayList<>();
                     for (String idProduto : idProdutos) {
-                        if(idProduto != null && !idProduto.isEmpty()){
+                        if (idProduto != null && !idProduto.isEmpty()) {
                             Produto produto = controllerProdutos.pesquisarProdutoPorId(Integer.parseInt(idProduto));
                             produtos.add(produto);
                         }
                     }
-                    
-                    if(value_split[3].equalsIgnoreCase("null")){
+
+                    if (value_split[3].equalsIgnoreCase("null")) {
                         date = null;
-                    } else if (value_split[4].equalsIgnoreCase("null")){
+                    } else if (value_split[4].equalsIgnoreCase("null")) {
                         date = null;
-                    } else{
+                    } else {
                         date = LocalDate.parse(value_split[4]);
                     }
-                    Reserva nova = new Reserva(value_split[0], socio, produtos, LocalDate.parse(value_split[3]),date);
+                    Reserva nova = new Reserva(value_split[0], socio, produtos, LocalDate.parse(value_split[3]), date);
 
-                    if(date!= null){
+                    if (date != null) {
                         nova.setDevolvido(true);
                         for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associado
                             if (socioLista.getNumMecanografico() == socio.getNumMecanografico()) {//igualo o socio
                                 socioLista.setProdutosReservados(0);//encontro os livros
                             }
                         }
-                    }else{
+                    } else {
                         for (Socio socioLista : ControllerSocios.socios) {//loop na lista de socios, para verificar quantos livros ele tem associado
                             if (socioLista.getNumMecanografico() == socio.getNumMecanografico()) {//igualo o socio
                                 socioLista.setProdutosReservados(produtos.size());//encontro os livros
@@ -81,9 +82,9 @@ public class ControllerReservas {
         for (Reserva aux : reservas) {
             String formated_date = aux.getDataReserva().format(formatter);
 
-            if(aux.getDataDeDevolucao()!= null){
+            if (aux.getDataDeDevolucao() != null) {
                 formated_date1 = aux.getDataDeDevolucao().format(formatter);
-            }else{
+            } else {
                 formated_date1 = null;
             }
 
@@ -101,6 +102,14 @@ public class ControllerReservas {
         GestorFicheiros.gravarFicheiro("reservas.txt", conteudo);
     }
 
+    /*
+    Ler e gravar na base de dados
+     */
+
+    public ArrayList<Reserva> listarReservas() {
+        return reservas;
+    }
+
     public void lerReservasDeBaseDados() {
 
         try {
@@ -108,7 +117,7 @@ public class ControllerReservas {
             basedados.Ligar();
             ResultSet resultado = basedados.Selecao("select * from reserva");
 
-            while (resultado.next()){
+            while (resultado.next()) {
 
                 ResultSet resultadoProdutosReserva = basedados.Selecao("select * from reserva_produtos where id_reserva = " + resultado.getInt("id"));
                 ArrayList<Produto> produtos = new ArrayList<Produto>();
@@ -124,14 +133,14 @@ public class ControllerReservas {
                         controllerSocios.pesquisarSocioPorNumMecanografico(resultado.getInt("id_socio")),
                         produtos,
                         resultado.getDate("data_inicio").toLocalDate(),
-                        resultado.getDate("data_fim") == null ? null :  resultado.getDate("data_fim").toLocalDate()); // a data pode ser nula então tem que fazer um if
+                        resultado.getDate("data_fim") == null ? null : resultado.getDate("data_fim").toLocalDate()); // a data pode ser nula então tem que fazer um if
 
 
                 ResultSet resultadoSatisfacaoReserva = basedados.Selecao("select * from reserva_satisfacao where id_reserva = " + resultado.getInt("id"));
                 while (resultadoSatisfacaoReserva.next()) {
                     aux.setSatisfacao(
                             new Satisfacao(String.valueOf(resultadoSatisfacaoReserva.getInt("nota")),
-                            resultadoSatisfacaoReserva.getString("mensagem"))
+                                    resultadoSatisfacaoReserva.getString("mensagem"))
                     );
                 }
 
@@ -154,35 +163,35 @@ public class ControllerReservas {
             for (Reserva aux : reservas) {
                 if (aux.getPendenteGravacao()) {
                     //apago a reserva
-                    basedados.Executar("DELETE FROM reserva_satisfacao where id_reserva = '" + aux.getIdDaReserva() +"'");
-                    basedados.Executar("DELETE FROM reserva_produtos where id_reserva = '" + aux.getIdDaReserva() +"'");
+                    basedados.Executar("DELETE FROM reserva_satisfacao where id_reserva = '" + aux.getIdDaReserva() + "'");
+                    basedados.Executar("DELETE FROM reserva_produtos where id_reserva = '" + aux.getIdDaReserva() + "'");
                     basedados.Executar("DELETE FROM reserva where id = " + aux.getIdDaReserva());
 
                     String devolucao = "";
-                    if (aux.getDataDeDevolucao() == null){
+                    if (aux.getDataDeDevolucao() == null) {
                         devolucao = "null";
-                    }else{
-                        devolucao = "'"+ aux.getDataDeDevolucao().format(formatter) +"'";
+                    } else {
+                        devolucao = "'" + aux.getDataDeDevolucao().format(formatter) + "'";
                     }
                     //insiro a reserva
                     basedados.Executar("INSERT INTO reserva (id, id_socio, data_inicio, data_fim) " +
-                            " values ('" + aux.getIdDaReserva() + "', '" + aux.getSocio().getNumMecanografico() + "', '"+aux.getDataReserva().format(formatter)+"', "+devolucao+")");
+                            " values ('" + aux.getIdDaReserva() + "', '" + aux.getSocio().getNumMecanografico() + "', '" + aux.getDataReserva().format(formatter) + "', " + devolucao + ")");
 
-                    if(aux.getSatisfacao() != null) {
+                    if (aux.getSatisfacao() != null) {
                         basedados.Executar("INSERT INTO reserva_satisfacao (id_reserva, nota, mensagem) " +
                                 " values ('" + aux.getIdDaReserva() + "', '" + aux.getSatisfacao().getNota() + "', '" + aux.getSatisfacao().getObservacao() + "')");
                     }
 
-                    for (Produto produto: aux.getProdutos()){
+                    for (Produto produto : aux.getProdutos()) {
                         basedados.Executar("INSERT INTO reserva_produtos (id_reserva, id_produto) " +
-                                " values ('" + aux.getIdDaReserva() + "', '" + produto.getId()+"')");
+                                " values ('" + aux.getIdDaReserva() + "', '" + produto.getId() + "')");
 
                     }
                 }
             }
 
             //eliminar registos que foram apagados
-            if (eliminados.size() > 0){
+            if (eliminados.size() > 0) {
                 for (String aux : eliminados) {
                     basedados.Executar("DELETE FROM reserva_produtos where id = " + aux);
                     basedados.Executar("DELETE FROM reserva where id = " + aux);
@@ -196,6 +205,16 @@ public class ControllerReservas {
         }
     }
 
+    /*
+    Funções de adição
+    */
+    public boolean adicionarSatisfacao(String nota, String observacao, String idReserva) {
+        Reserva reserva = pesquisarReservaPorId(idReserva);
+        reserva.setSatisfacao(new Satisfacao(nota, observacao));
+        return true;
+    }
+
+    //Efetuar a reserva
 
     public boolean efetuarReservaProduto(Socio socioSelecionado, Produto produtoSelecionado, LocalDate dataDaReserva) {
 
@@ -239,18 +258,15 @@ public class ControllerReservas {
         return null;
     }
 
-    public boolean adicionarSatisfacao(String nota, String observacao, String idReserva) {
-        Reserva reserva = pesquisarReservaPorId(idReserva);
-        reserva.setSatisfacao(new Satisfacao(nota, observacao));
-        return true;
-    }
+    //devolver a reserva
 
-    public boolean devolverReserva(String idDaReserva, LocalDate dataDeDevolucao) {
+    public boolean devolverReserva(String idDaReserva, LocalDate dataDeDevolucao) { //função usada na devolução dos produtos da reserva
 
         Reserva reserva = pesquisarReservaPorId(idDaReserva);
         reserva.setDataDeDevolucao(dataDeDevolucao);
         reserva.setDevolvido(true);
         reserva.setPendenteGravacao(true);
+
         for (Produto produto : reserva.getProdutos()) {
             produto.aumentarQuantidade();
             controllerProdutos.gravarBaseDadosProduto(produto, true);
@@ -265,7 +281,7 @@ public class ControllerReservas {
         return true;
     }
 
-    public boolean devolverProduto(String IdDaReserva, Integer IdProduto) {
+    public boolean devolverProduto(String IdDaReserva, Integer IdProduto) { //função usada para editar um produto da reserva
         Reserva reserva = pesquisarReservaPorId(IdDaReserva);
         if (reserva != null) {
             for (Produto produto : reserva.getProdutos()) {
@@ -282,20 +298,7 @@ public class ControllerReservas {
         return false;
     }
 
-    public ArrayList<Reserva> listarReservas() {
-        return reservas;
-    }
-
-    public Reserva pesquisarReservaPorId(String idReserva) {
-        for (Reserva reserva : reservas) {
-            if (idReserva.equalsIgnoreCase(reserva.getIdDaReserva())) {
-                return reserva;
-            }
-        }
-        return null;
-    }
-
-    public boolean cancelarReserva(String idReserva) {
+    public boolean cancelarReserva(String idReserva) { //função cancela a reserva
         for (Reserva reserva : reservas) {
             if (idReserva.equalsIgnoreCase(reserva.getIdDaReserva())) {
                 for (Produto produtoReserva : reserva.getProdutos()) {
@@ -312,6 +315,16 @@ public class ControllerReservas {
         }
         return false;
     }
+
+    public Reserva pesquisarReservaPorId(String idReserva) {
+        for (Reserva reserva : reservas) {
+            if (idReserva.equalsIgnoreCase(reserva.getIdDaReserva())) {
+                return reserva;
+            }
+        }
+        return null;
+    }
+
 
 }
 
