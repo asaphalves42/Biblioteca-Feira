@@ -14,6 +14,11 @@ public class ControllerConsultas {
 
     public boolean consultarProdutos(Produto produto){
 
+            if(produto.getQuantidade() == 0){
+                return false;
+            } else {
+
+            }
 
         return true;
     }
