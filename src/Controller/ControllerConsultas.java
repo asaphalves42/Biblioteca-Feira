@@ -13,13 +13,9 @@ public class ControllerConsultas {
     ArrayList<Produto> jornais = new ArrayList<Produto>();
 
     public boolean consultarProdutos(Produto produto){
-
-            if(produto.getQuantidade() == 0){
-                return false;
-            } else {
-
-            }
-
+        if(produto.getQuantidade() == 0){
+            return false;
+        }
         return true;
     }
 }
